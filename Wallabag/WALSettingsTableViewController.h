@@ -1,5 +1,5 @@
 //
-//  WALMasterViewController.h
+//  WALSettingsTableViewController.h
 //  Wallabag
 //
 //  Created by Kevin Meyer on 19.02.14.
@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "WALFeedCallbackDelegate.h"
 
-@interface WALFeedTableViewController : UITableViewController <NSXMLParserDelegate, WALFeedCallbackDelegate>
+@interface WALSettingsTableViewController : UITableViewController
+
+@property (weak) id <WALFeedCallbackDelegate> delegate;
 
 @end

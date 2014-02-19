@@ -8,6 +8,8 @@
 
 #import "WALFeedTableViewController.h"
 #import "WALArticleViewController.h"
+#import "WALSettingsTableViewController.h"
+#import "WALAddArticleTableViewController.h"
 #import "WALArticle.h"
 
 @interface WALFeedTableViewController ()
@@ -20,12 +22,9 @@
 
 - (void)awakeFromNib
 {
-    [super awakeFromNib];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+	self.refreshControl = [[UIRefreshControl alloc] init];
+	[self.refreshControl addTarget:self action:@selector(updateArticles) forControlEvents:UIControlEventValueChanged];
+	[super awakeFromNib];
 	
 	self.articles = [[NSMutableArray alloc] init];
 	[self updateArticles];
@@ -65,6 +64,7 @@
 - (void) updateArticles
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	[self.refreshControl beginRefreshing];
 	
 	NSString *urlString = [NSString stringWithFormat:@"http://wallabag.scheissimweb.de/?feed&type=home&user_id=2&token=i11FbSBeC34bwTM"];
 	
@@ -76,6 +76,9 @@
 						   completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
 	{
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+		[self.refreshControl endRefreshing];
+		
+		[self.articles removeAllObjects];
 		
 		NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
 		xmlParser.delegate = self;
@@ -137,12 +140,32 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"pushToArticle"])
+    if ([[segue identifier] isEqualToString:@"PushToArticle"])
 	{
 		NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
 		[((WALArticleViewController*)segue.destinationViewController) setDetailArticle:self.articles[indexPath.row]];
 		[[self.tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:TRUE];
 	}
+	else if ([[segue identifier] isEqualToString:@"ModalToSettings"])
+	{
+		((WALSettingsTableViewController*)[segue.destinationViewController viewControllers][0]).delegate = self;
+	}
+	else if ([[segue identifier] isEqualToString:@"ModalToAddArticle"])
+	{
+		((WALAddArticleTableViewController*)[segue.destinationViewController viewControllers][0]).delegate = self;
+	}
+}
+
+#pragma mark - Callback Delegates
+
+- (void)callbackFromSettingsController:(WALSettingsTableViewController *)settingsTableViewController withSettings:(id)settings
+{
+	[self.navigationController dismissViewControllerAnimated:true completion:nil];
+}
+
+- (void)callbackFromAddArticleController:(WALAddArticleTableViewController *)addArticleController withURL:(NSURL *)url
+{
+	[self.navigationController dismissViewControllerAnimated:true completion:nil];	
 }
 
 @end
