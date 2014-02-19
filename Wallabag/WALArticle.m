@@ -17,4 +17,22 @@
 	return self;
 }
 
+- (void) setDateWithString:(NSString*) string
+{
+	NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+	NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+	
+	[dateformatter setLocale:usLocale];
+	[dateformatter setDateFormat:@"EEE, dd LLL yyyy HH:mm:ss Z"];
+
+	self.date = [dateformatter dateFromString: string];
+}
+
+- (NSString*) getDateString
+{
+	return [NSDateFormatter localizedStringFromDate:self.date
+										  dateStyle:NSDateFormatterShortStyle
+										  timeStyle:NSDateFormatterShortStyle];
+}
+
 @end

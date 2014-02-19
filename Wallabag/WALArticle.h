@@ -10,6 +10,9 @@
 
 @interface WALArticle : NSObject
 
+- (void) setDateWithString:(NSString*) string;
+- (NSString*) getDateString;
+
 @property (strong) NSString* title;
 @property (strong) NSURL* link;
 @property (strong) NSDate* date;

@@ -22,9 +22,9 @@
 	self.webView.delegate = self;
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-	[super viewDidAppear:animated];
+	[super viewWillAppear:animated];
 	[self configureView];
 }
 
@@ -43,8 +43,19 @@
 
 #pragma mark - WebViewDelegate
 
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	NSLog(@"WebView Error: %@\nWebView Error: %@", error.description, error.localizedFailureReason);
 }
 

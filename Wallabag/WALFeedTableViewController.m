@@ -50,30 +50,32 @@
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
 	cell.textLabel.text = currentArticle.title;
+	cell.detailTextLabel.text = [currentArticle getDateString];
 
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return NO;
+	return 60.0f;
 }
 
 #pragma mark - DataParser
 
 - (void) updateArticles
 {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	
 	NSString *urlString = [NSString stringWithFormat:@"http://wallabag.scheissimweb.de/?feed&type=home&user_id=2&token=i11FbSBeC34bwTM"];
 	
 	NSURL *url = [NSURL URLWithString:urlString];
-	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageAllowedInMemoryOnly timeoutInterval:20.0];
+	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageAllowed timeoutInterval:20.0];
 	
 	[NSURLConnection sendAsynchronousRequest:urlRequest
 									   queue:[NSOperationQueue mainQueue]
 						   completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
 	{
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-		
 		
 		NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
 		xmlParser.delegate = self;
@@ -100,7 +102,7 @@
 	}
 	else if ([elementName isEqualToString:@"title"])
 	{
-		self.parser_currentArticle.title = self.parser_currentString;
+		self.parser_currentArticle.title = [self.parser_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];;
 	}
 	else if ([elementName isEqualToString:@"link"])
 	{
@@ -108,7 +110,7 @@
 	}
 	else if ([elementName isEqualToString:@"pubDate"])
 	{
-		//! @todo Convert String to NSDate
+		[self.parser_currentArticle setDateWithString:self.parser_currentString];
 	}
 	else if ([elementName isEqualToString:@"description"])
 	{
