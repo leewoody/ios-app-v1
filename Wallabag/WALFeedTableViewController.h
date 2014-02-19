@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WALFeedTableViewController : UITableViewController
+@interface WALFeedTableViewController : UITableViewController <NSXMLParserDelegate>
 
 @end

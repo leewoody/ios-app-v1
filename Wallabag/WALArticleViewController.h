@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class WALArticle;
 
-@interface WALArticleViewController : UIViewController
+@interface WALArticleViewController : UIViewController<UIWebViewDelegate>
+
+- (void) setDetailArticle:(WALArticle*) article;
 
 @end
