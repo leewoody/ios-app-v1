@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "WALFeedCallbackDelegate.h"
 
+@class WALSettings;
+
 @interface WALSettingsTableViewController : UITableViewController
 
+- (void) setSettings:(WALSettings*) settings;
 @property (weak) id <WALFeedCallbackDelegate> delegate;
 
 @end

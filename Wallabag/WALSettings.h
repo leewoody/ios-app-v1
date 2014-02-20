@@ -10,4 +10,11 @@
 
 @interface WALSettings : NSObject
 
++ (WALSettings*) settingsFromSavedSettings;
+- (void) saveSettings;
+
+@property (strong) NSURL *wallabagURL;
+@property NSInteger userID;
+@property (strong) NSString *apiToken;
+
 @end

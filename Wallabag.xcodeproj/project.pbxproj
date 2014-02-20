@@ -23,6 +23,7 @@
 		F5877DB118B4E02B009D4EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D9018B4E02B009D4EFE /* UIKit.framework */; };
 		F5877DB918B4E02B009D4EFE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5877DB718B4E02B009D4EFE /* InfoPlist.strings */; };
 		F5877DBB18B4E02B009D4EFE /* WallabagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F5877DBA18B4E02B009D4EFE /* WallabagTests.m */; };
+		F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F59E0CE318B63E2D00744BB1 /* WALSettings.m */; };
 		F5DA910418B51FE8006A0B1A /* WALSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DA910318B51FE8006A0B1A /* WALSettingsTableViewController.m */; };
 		F5DA910718B52002006A0B1A /* WALAddArticleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DA910618B52002006A0B1A /* WALAddArticleTableViewController.m */; };
 		F5DA910A18B56FCE006A0B1A /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = F5DA910918B56FCE006A0B1A /* main.css */; };
@@ -63,6 +64,8 @@
 		F5877DB618B4E02B009D4EFE /* WallabagTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WallabagTests-Info.plist"; sourceTree = "<group>"; };
 		F5877DB818B4E02B009D4EFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F5877DBA18B4E02B009D4EFE /* WallabagTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallabagTests.m; sourceTree = "<group>"; };
+		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
+		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
 		F5DA910218B51FE8006A0B1A /* WALSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettingsTableViewController.h; sourceTree = "<group>"; };
 		F5DA910318B51FE8006A0B1A /* WALSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettingsTableViewController.m; sourceTree = "<group>"; };
 		F5DA910518B52002006A0B1A /* WALAddArticleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALAddArticleTableViewController.h; sourceTree = "<group>"; };
@@ -101,6 +104,8 @@
 			children = (
 				F54E12F118B4EEDB00E89ED1 /* WALArticle.h */,
 				F54E12F218B4EEDB00E89ED1 /* WALArticle.m */,
+				F59E0CE218B63E2D00744BB1 /* WALSettings.h */,
+				F59E0CE318B63E2D00744BB1 /* WALSettings.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -115,15 +120,15 @@
 		F54E12F018B4EACD00E89ED1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F5DA910518B52002006A0B1A /* WALAddArticleTableViewController.h */,
-				F5DA910618B52002006A0B1A /* WALAddArticleTableViewController.m */,
-				F5877DA418B4E02B009D4EFE /* WALArticleViewController.h */,
-				F5877DA518B4E02B009D4EFE /* WALArticleViewController.m */,
-				F5DA910818B52680006A0B1A /* WALFeedCallbackDelegate.h */,
 				F5877DA118B4E02B009D4EFE /* WALFeedTableViewController.h */,
 				F5877DA218B4E02B009D4EFE /* WALFeedTableViewController.m */,
+				F5877DA418B4E02B009D4EFE /* WALArticleViewController.h */,
+				F5877DA518B4E02B009D4EFE /* WALArticleViewController.m */,
+				F5DA910518B52002006A0B1A /* WALAddArticleTableViewController.h */,
+				F5DA910618B52002006A0B1A /* WALAddArticleTableViewController.m */,
 				F5DA910218B51FE8006A0B1A /* WALSettingsTableViewController.h */,
 				F5DA910318B51FE8006A0B1A /* WALSettingsTableViewController.m */,
+				F5DA910818B52680006A0B1A /* WALFeedCallbackDelegate.h */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -309,6 +314,7 @@
 				F5877DA618B4E02B009D4EFE /* WALArticleViewController.m in Sources */,
 				F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */,
 				F5DA910718B52002006A0B1A /* WALAddArticleTableViewController.m in Sources */,
+				F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */,
 				F5DA910418B51FE8006A0B1A /* WALSettingsTableViewController.m in Sources */,
 				F5877DA318B4E02B009D4EFE /* WALFeedTableViewController.m in Sources */,
 			);

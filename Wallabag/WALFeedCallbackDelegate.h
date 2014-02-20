@@ -10,10 +10,11 @@
 
 @class WALSettingsTableViewController;
 @class WALAddArticleTableViewController;
+@class WALSettings;
 
 @protocol WALFeedCallbackDelegate <NSObject>
 
-- (void) callbackFromSettingsController:(WALSettingsTableViewController*) settingsTableViewController withSettings:(id) settings;
+- (void) callbackFromSettingsController:(WALSettingsTableViewController*) settingsTableViewController withSettings:(WALSettings*) settings;
 - (void) callbackFromAddArticleController:(WALAddArticleTableViewController*) addArticleController withURL:(NSURL*) url;
 
 @end

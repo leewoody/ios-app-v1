@@ -190,6 +190,9 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="textFieldValueChanged:" destination="ppI-XI-vIU" eventType="editingChanged" id="iLd-NO-MFB"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -206,6 +209,9 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                                    <connections>
+                                                        <action selector="textFieldValueChanged:" destination="ppI-XI-vIU" eventType="editingChanged" id="rxw-ZL-nqb"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -222,6 +228,9 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="textFieldValueChanged:" destination="ppI-XI-vIU" eventType="editingChanged" id="bgw-7T-7Xs"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -236,10 +245,14 @@
                                 <action selector="cancelButtonPushed:" destination="ppI-XI-vIU" id="Nt6-yJ-gzK"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="qqE-7X-njR"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="qqE-7X-njR">
+                            <connections>
+                                <action selector="doneButtonPushed:" destination="ppI-XI-vIU" id="rVK-0x-sXn"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="apiTokenTextFIeld" destination="irP-Tq-7pY" id="XOw-iH-VfA"/>
+                        <outlet property="apiTokenTextField" destination="irP-Tq-7pY" id="fvy-Nb-4qs"/>
                         <outlet property="urlTextField" destination="XYS-sB-WWu" id="M8c-I0-Qoa"/>
                         <outlet property="userIDTextField" destination="ZUI-D1-IIr" id="YlB-nz-yDS"/>
                     </connections>

@@ -11,11 +11,13 @@
 #import "WALSettingsTableViewController.h"
 #import "WALAddArticleTableViewController.h"
 #import "WALArticle.h"
+#import "WALSettings.h"
 
 @interface WALFeedTableViewController ()
 @property (strong) NSMutableArray* articles;
 @property (strong) NSString* parser_currentString;
 @property (strong) WALArticle* parser_currentArticle;
+@property (strong) WALSettings* settings;
 @end
 
 @implementation WALFeedTableViewController
@@ -30,9 +32,23 @@
 	[super awakeFromNib];
 	
 	self.articles = [[NSMutableArray alloc] init];
-	[self updateArticles];
+	self.settings = [WALSettings settingsFromSavedSettings];
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	
+	if (self.settings)
+	{
+		[self updateArticles];
+	}
+	else
+	{
+		[self performSegueWithIdentifier:@"ModalToSettings" sender:self];
+	}
+
+}
 
 #pragma mark - Table View
 
@@ -70,9 +86,11 @@
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[self.refreshControl beginRefreshing];
 	
-	NSString *urlString = [NSString stringWithFormat:@"http://wallabag.scheissimweb.de/?feed&type=home&user_id=2&token=i11FbSBeC34bwTM"];
-	
+//	NSString *urlString = [NSString stringWithFormat:@"http://wallabag.scheissimweb.de/?feed&type=home&user_id=2&token=i11FbSBeC34bwTM"];
+
+	NSString *urlString = [NSString stringWithFormat:@"%@/?feed&type=home&user_id=%ld&token=%@", [self.settings.wallabagURL absoluteString], (long) self.settings.userID, self.settings.apiToken];
 	NSURL *url = [NSURL URLWithString:urlString];
+		
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageAllowed timeoutInterval:20.0];
 	
 	[NSURLConnection sendAsynchronousRequest:urlRequest
@@ -167,18 +185,26 @@
 	}
 	else if ([[segue identifier] isEqualToString:@"ModalToSettings"])
 	{
-		((WALSettingsTableViewController*)[segue.destinationViewController viewControllers][0]).delegate = self;
+		WALSettingsTableViewController *targetViewController = ((WALSettingsTableViewController*)[segue.destinationViewController viewControllers][0]);
+		targetViewController.delegate = self;
+		[targetViewController setSettings:self.settings];
 	}
 	else if ([[segue identifier] isEqualToString:@"ModalToAddArticle"])
 	{
-		((WALAddArticleTableViewController*)[segue.destinationViewController viewControllers][0]).delegate = self;
+		WALAddArticleTableViewController *targetViewController = ((WALAddArticleTableViewController*)[segue.destinationViewController viewControllers][0]);
+		targetViewController.delegate = self;
 	}
 }
 
 #pragma mark - Callback Delegates
 
-- (void)callbackFromSettingsController:(WALSettingsTableViewController *)settingsTableViewController withSettings:(id)settings
+- (void)callbackFromSettingsController:(WALSettingsTableViewController *)settingsTableViewController withSettings:(WALSettings*)settings
 {
+	if (settings)
+	{
+		self.settings = settings;
+		[self.settings saveSettings];
+	}
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];
 }
 
