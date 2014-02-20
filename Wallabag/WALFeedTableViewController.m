@@ -22,6 +22,7 @@
 
 - (void)awakeFromNib
 {
+	[self.navigationController setToolbarHidden:true];
 	self.refreshControl = [[UIRefreshControl alloc] init];
 	[self.refreshControl addTarget:self action:@selector(updateArticles) forControlEvents:UIControlEventValueChanged];
 	[super awakeFromNib];
@@ -90,7 +91,7 @@
 		else
 		{
 			NSLog(@"Connection Error: %@", connectionError.description);
-			NSLog(@"Status Code: %d", httpResponse.statusCode);
+			NSLog(@"Status Code: %ld", (long)httpResponse.statusCode);
 			NSLog(@"MIME Type: %@", [response MIMEType]);
 		}
 	}];
