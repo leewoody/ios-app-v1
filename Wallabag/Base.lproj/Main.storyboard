@@ -122,7 +122,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Paste link" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XTW-V1-fQY">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Use link from clipboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XTW-V1-fQY">
                                                     <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -144,6 +144,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="kPd-zI-LoK"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="urlTextField" destination="jZt-7Q-OmB" id="G8D-yi-mfV"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7fd-NI-27C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -235,6 +238,11 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="qqE-7X-njR"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="apiTokenTextFIeld" destination="irP-Tq-7pY" id="XOw-iH-VfA"/>
+                        <outlet property="urlTextField" destination="XYS-sB-WWu" id="M8c-I0-Qoa"/>
+                        <outlet property="userIDTextField" destination="ZUI-D1-IIr" id="YlB-nz-yDS"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gzG-Am-nTb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -265,18 +273,6 @@
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                     </webView>
                     <toolbarItems>
-                        <barButtonItem title="&lt;" id="Hrp-eN-8KM">
-                            <connections>
-                                <action selector="browserBackButton:" destination="Ah7-4n-0Wa" id="ufq-5p-39t"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem width="8" style="plain" systemItem="fixedSpace" id="k4k-7A-v6y"/>
-                        <barButtonItem title=">" id="jZT-wU-zQm">
-                            <connections>
-                                <action selector="browserForwardButton:" destination="Ah7-4n-0Wa" id="Zxn-xo-Us6"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem width="26" style="plain" systemItem="fixedSpace" id="xd3-52-fhM"/>
                         <barButtonItem systemItem="refresh" id="lkZ-gk-Qmi">
                             <connections>
                                 <action selector="browserRefreshButton:" destination="Ah7-4n-0Wa" id="NTg-80-XMh"/>

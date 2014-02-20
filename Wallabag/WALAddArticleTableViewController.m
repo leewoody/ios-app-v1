@@ -9,14 +9,31 @@
 #import "WALAddArticleTableViewController.h"
 
 @interface WALAddArticleTableViewController ()
+@property (strong, nonatomic) IBOutlet UITextField *urlTextField;
 - (IBAction)cancelButtonPushed:(id)sender;
 @end
 
 @implementation WALAddArticleTableViewController
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	[self.urlTextField becomeFirstResponder];
+}
 
 - (IBAction)cancelButtonPushed:(id)sender
 {
 	[self.delegate callbackFromAddArticleController:self withURL:nil];
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	[[tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:true];
+	
+	if (indexPath.section == 1 && indexPath.row == 0)
+	{
+		self.urlTextField.text = [[UIPasteboard generalPasteboard] string];
+	}
+}
+
 @end

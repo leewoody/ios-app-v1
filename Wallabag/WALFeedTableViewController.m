@@ -50,8 +50,9 @@
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
 	cell.textLabel.text = currentArticle.title;
+//	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [currentArticle.link absoluteString]];
 	cell.detailTextLabel.text = [currentArticle getDateString];
-
+	
     return cell;
 }
 

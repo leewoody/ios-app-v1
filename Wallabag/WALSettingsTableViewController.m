@@ -10,10 +10,18 @@
 
 @interface WALSettingsTableViewController ()
 - (IBAction)cancelButtonPushed:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *urlTextField;
+@property (weak, nonatomic) IBOutlet UITextField *userIDTextField;
+@property (weak, nonatomic) IBOutlet UITextField *apiTokenTextFIeld;
 @end
 
 @implementation WALSettingsTableViewController
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	[self.urlTextField becomeFirstResponder];
+}
 
 - (IBAction)cancelButtonPushed:(id)sender
 {
