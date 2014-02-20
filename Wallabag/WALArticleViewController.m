@@ -97,5 +97,12 @@
 
 - (IBAction)shareButton:(id)sender
 {
+	NSString *message = [NSString stringWithFormat:@"I just read this article from my Wallabag: %@", self.article.title];
+	NSArray *dataToShare = @[message, self.article.link];
+	
+	UIActivityViewController* activityViewController =
+	[[UIActivityViewController alloc] initWithActivityItems:dataToShare
+									  applicationActivities:nil];
+	[self presentViewController:activityViewController animated:YES completion:^{}];
 }
 @end

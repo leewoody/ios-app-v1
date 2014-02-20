@@ -23,6 +23,8 @@
 - (void)awakeFromNib
 {
 	[self.navigationController setToolbarHidden:true];
+	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavigationBarItem"]];
+	
 	self.refreshControl = [[UIRefreshControl alloc] init];
 	[self.refreshControl addTarget:self action:@selector(updateArticles) forControlEvents:UIControlEventValueChanged];
 	[super awakeFromNib];
