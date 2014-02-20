@@ -32,21 +32,19 @@
 
 - (void) setDetailArticle:(WALArticle*) article
 {
-	NSURL *mainCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"main" ofType:@"css"]];
-	NSURL *ratatatouilleCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ratatouille" ofType:@"css"]];
-	
-	NSString *preHTML = [NSString stringWithFormat:@"<html lang=\"\"><head><meta name=\"viewport\" content=\"initial-scale=1.0\"><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"%@\" media=\"all\"><link rel=\"stylesheet\" href=\"%@\" media=\"all\"><div id=\"main\"><body><div id=\"content\" class=\"w600p center\"><div id=\"article\"><header class=\"mbm\"><h1>%@</h1><p>%@</p></header><article>", ratatatouilleCSSFile, mainCSSFile, article.title, article.link];
-	
-	NSString *postHTML = @"</article></div></div></div></body></html>";
-	
 	self.article = article;
 	self.title = article.title;
-	self.article.content = [NSString stringWithFormat:@"%@%@%@",preHTML, article.content, postHTML];
 }
 
 - (void) configureView
 {
-	[self.webView loadHTMLString:self.article.content baseURL:nil];
+	NSURL *mainCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"main" ofType:@"css"]];
+	NSURL *ratatatouilleCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ratatouille" ofType:@"css"]];
+	
+	NSString *htmlToDisplay = [NSString stringWithFormat:@"<html lang=\"\"><head><meta name=\"viewport\" content=\"initial-scale=1.0\"><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"%@\" media=\"all\"><link rel=\"stylesheet\" href=\"%@\" media=\"all\"><div id=\"main\"><body><div id=\"content\" class=\"w600p center\"><div id=\"article\"><header class=\"mbm\"><h1>%@</h1><p>%@</p></header><article>%@</article></div></div></div></body></html>", ratatatouilleCSSFile, mainCSSFile, self.article.title, self.article.link, self.article.content];
+	
+	
+	[self.webView loadHTMLString:htmlToDisplay baseURL:nil];
 }
 
 #pragma mark - WebViewDelegate

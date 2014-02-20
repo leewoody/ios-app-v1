@@ -78,11 +78,21 @@
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 		[self.refreshControl endRefreshing];
 		
-		[self.articles removeAllObjects];
+		NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
 		
-		NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
-		xmlParser.delegate = self;
-		[xmlParser parse];
+		if (!connectionError && [response.MIMEType isEqualToString:@"application/rss+xml"] && httpResponse.statusCode > 199 && httpResponse.statusCode < 300)
+		{
+			[self.articles removeAllObjects];
+			NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
+			xmlParser.delegate = self;
+			[xmlParser parse];
+		}
+		else
+		{
+			NSLog(@"Connection Error: %@", connectionError.description);
+			NSLog(@"Status Code: %d", httpResponse.statusCode);
+			NSLog(@"MIME Type: %@", [response MIMEType]);
+		}
 	}];
 }
 
@@ -134,6 +144,11 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
 	[self.tableView reloadData];
+}
+
+- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
+{
+	NSLog(@"Parsing Error: %@", parseError.description);
 }
 
 #pragma mark - Segue
