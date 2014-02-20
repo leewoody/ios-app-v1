@@ -170,7 +170,7 @@
         <!--Settings Table View Controller - Settings-->
         <scene sceneID="uUo-fX-ADj">
             <objects>
-                <tableViewController title="Settings" id="ppI-XI-vIU" customClass="WALSettingsTableViewController" sceneMemberID="viewController">
+                <tableViewController id="ppI-XI-vIU" customClass="WALSettingsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="XyT-QU-qIu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

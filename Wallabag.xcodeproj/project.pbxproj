@@ -41,7 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F54CA0E318B6780800A369FF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F54E12F118B4EEDB00E89ED1 /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
 		F54E12F218B4EEDB00E89ED1 /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
 		F5877D8918B4E02B009D4EFE /* Wallabag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wallabag.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +53,7 @@
 		F5877D9A18B4E02B009D4EFE /* Wallabag-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wallabag-Prefix.pch"; sourceTree = "<group>"; };
 		F5877D9B18B4E02B009D4EFE /* WALAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALAppDelegate.h; sourceTree = "<group>"; };
 		F5877D9C18B4E02B009D4EFE /* WALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WALAppDelegate.m; sourceTree = "<group>"; };
+		F5877D9F18B4E02B009D4EFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F5877DA118B4E02B009D4EFE /* WALFeedTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALFeedTableViewController.h; sourceTree = "<group>"; };
 		F5877DA218B4E02B009D4EFE /* WALFeedTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WALFeedTableViewController.m; sourceTree = "<group>"; };
 		F5877DA418B4E02B009D4EFE /* WALArticleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALArticleViewController.h; sourceTree = "<group>"; };
@@ -350,7 +350,7 @@
 		F5877D9E18B4E02B009D4EFE /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F54CA0E318B6780800A369FF /* en */,
+				F5877D9F18B4E02B009D4EFE /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
