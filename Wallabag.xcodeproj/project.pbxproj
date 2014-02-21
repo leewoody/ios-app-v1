@@ -62,6 +62,7 @@
 		F5877DBA18B4E02B009D4EFE /* WallabagTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallabagTests.m; sourceTree = "<group>"; };
 		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
 		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
+		F5C48A3018B7782400E76807 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		F5DA910218B51FE8006A0B1A /* WALSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettingsTableViewController.h; sourceTree = "<group>"; };
 		F5DA910318B51FE8006A0B1A /* WALSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettingsTableViewController.m; sourceTree = "<group>"; };
 		F5DA910518B52002006A0B1A /* WALAddArticleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALAddArticleTableViewController.h; sourceTree = "<group>"; };
@@ -335,6 +336,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F5877D9F18B4E02B009D4EFE /* Base */,
+				F5C48A3018B7782400E76807 /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

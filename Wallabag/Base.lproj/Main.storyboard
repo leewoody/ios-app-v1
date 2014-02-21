@@ -185,11 +185,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://myserver.com/wallabag" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="XYS-sB-WWu">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://example.com/wallabag" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="XYS-sB-WWu">
                                                     <rect key="frame" x="94" y="7" width="206" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <action selector="textFieldValueChanged:" destination="ppI-XI-vIU" eventType="editingChanged" id="iLd-NO-MFB"/>
                                                     </connections>
@@ -215,7 +215,7 @@
                                                     <rect key="frame" x="89" y="7" width="211" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
                                                         <action selector="textFieldValueChanged:" destination="ppI-XI-vIU" eventType="editingChanged" id="rxw-ZL-nqb"/>
                                                     </connections>
@@ -241,7 +241,7 @@
                                                     <rect key="frame" x="94" y="7" width="206" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     <connections>
                                                         <action selector="textFieldValueChanged:" destination="ppI-XI-vIU" eventType="editingChanged" id="bgw-7T-7Xs"/>
                                                     </connections>
