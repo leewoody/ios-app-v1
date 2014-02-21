@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F50B894118B79C8100AA9A6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F50B893D18B79C8100AA9A6C /* Localizable.strings */; };
 		F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = F54E12F218B4EEDB00E89ED1 /* WALArticle.m */; };
 		F5877D8D18B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
 		F5877D8F18B4E02B009D4EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8E18B4E02B009D4EFE /* CoreGraphics.framework */; };
@@ -40,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F50B893E18B79C8100AA9A6C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
+		F50B894718B79DF200AA9A6C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		F50B894818B79FF400AA9A6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F54E12F118B4EEDB00E89ED1 /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
 		F54E12F218B4EEDB00E89ED1 /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
 		F5877D8918B4E02B009D4EFE /* Wallabag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wallabag.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,7 +67,6 @@
 		F5877DBA18B4E02B009D4EFE /* WallabagTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallabagTests.m; sourceTree = "<group>"; };
 		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
 		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
-		F5C48A3018B7782400E76807 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		F5C48A3118B793A100E76807 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F5DA910218B51FE8006A0B1A /* WALSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettingsTableViewController.h; sourceTree = "<group>"; };
 		F5DA910318B51FE8006A0B1A /* WALSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettingsTableViewController.m; sourceTree = "<group>"; };
@@ -99,6 +102,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F50B893C18B79C8100AA9A6C /* de.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				F50B893D18B79C8100AA9A6C /* Localizable.strings */,
+			);
+			path = de.lproj;
+			sourceTree = "<group>";
+		};
 		F54E12EE18B4EAC000E89ED1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +193,7 @@
 		F5877D9318B4E02B009D4EFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F50B893C18B79C8100AA9A6C /* de.lproj */,
 				F5DA910918B56FCE006A0B1A /* main.css */,
 				F5DA910B18B56FD6006A0B1A /* ratatouille.css */,
 				F5877D9418B4E02B009D4EFE /* Wallabag-Info.plist */,
@@ -268,6 +280,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = F5877D8018B4E02B009D4EFE;
 			productRefGroup = F5877D8A18B4E02B009D4EFE /* Products */;
@@ -285,6 +298,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F50B894118B79C8100AA9A6C /* Localizable.strings in Resources */,
 				F5DA910A18B56FCE006A0B1A /* main.css in Resources */,
 				F5DA910C18B56FD6006A0B1A /* ratatouille.css in Resources */,
 				F5877DA818B4E02B009D4EFE /* Images.xcassets in Resources */,
@@ -336,11 +350,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		F50B893D18B79C8100AA9A6C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F50B893E18B79C8100AA9A6C /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		F5877D9E18B4E02B009D4EFE /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F5877D9F18B4E02B009D4EFE /* Base */,
-				F5C48A3018B7782400E76807 /* de */,
+				F50B894718B79DF200AA9A6C /* de */,
+				F50B894818B79FF400AA9A6C /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
