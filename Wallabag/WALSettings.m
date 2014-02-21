@@ -33,6 +33,7 @@
 	[defaults setURL:self.wallabagURL forKey:@"wallabagURL"];
 	[defaults setInteger:self.userID forKey:@"userID"];
 	[defaults setObject:self.apiToken forKey:@"apiToken"];
+	[defaults synchronize];
 }
 
 @end
