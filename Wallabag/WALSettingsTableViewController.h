@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "WALFeedCallbackDelegate.h"
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 @class WALSettings;
 
-@interface WALSettingsTableViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate>
+@interface WALSettingsTableViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 
 - (void) setSettings:(WALSettings*) settings;
 @property (weak) id <WALFeedCallbackDelegate> delegate;

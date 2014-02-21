@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Wallabag. All rights reserved.
 //
 
+#import <sys/utsname.h>
 #import "WALSettingsTableViewController.h"
 #import "WALSettings.h"
 
@@ -78,7 +79,7 @@
 	}
 	else if ([identifier isEqualToString:@"SupportMail"])
 	{
-		//! @todo 
+		[self openFeedbackMailView];
 	}
 	else if ([identifier isEqualToString:@"WallabagTwitter"])
 	{
@@ -155,6 +156,42 @@
 	[textField resignFirstResponder];
 	
 	return YES;
+}
+
+#pragma mark - Mail Composer
+
+- (void) openFeedbackMailView
+{
+	if ([MFMailComposeViewController canSendMail]) {
+		
+		struct utsname systemInfo;
+		uname(&systemInfo);
+		
+		NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+		NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+		NSString *appBuildVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+		NSString *deviceModel = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+		NSString *selectedURL = [self.currentSettings.wallabagURL absoluteString];
+		NSString *seperator = @"--------------------------------";
+		
+		NSString *message = [NSString stringWithFormat:
+							 @"\n\n%@\nApp: %@\nVersion: %@ (Build: %@)\nDevice Model: %@\niOS: %@\nSelected URL: %@\n%@\n",
+							 seperator, appName, appVersion, appBuildVersion, deviceModel, [[UIDevice currentDevice] systemVersion], selectedURL, seperator];
+		
+		MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
+		mailViewController.mailComposeDelegate = self;
+		[mailViewController setToRecipients:[NSArray arrayWithObject:@"wallabag@kevin-meyer.de"]];
+		[mailViewController setSubject:@"Feedback wallabag iOS-App"];
+		[mailViewController setMessageBody:message isHTML:NO];
+		
+		[self presentViewController:mailViewController animated:YES completion:nil];
+	}
+}
+
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

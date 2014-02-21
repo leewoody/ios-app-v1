@@ -22,6 +22,7 @@
 		F5877DB118B4E02B009D4EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D9018B4E02B009D4EFE /* UIKit.framework */; };
 		F5877DBB18B4E02B009D4EFE /* WallabagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F5877DBA18B4E02B009D4EFE /* WallabagTests.m */; };
 		F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F59E0CE318B63E2D00744BB1 /* WALSettings.m */; };
+		F5C48A3218B793A100E76807 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C48A3118B793A100E76807 /* MessageUI.framework */; };
 		F5DA910418B51FE8006A0B1A /* WALSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DA910318B51FE8006A0B1A /* WALSettingsTableViewController.m */; };
 		F5DA910718B52002006A0B1A /* WALAddArticleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DA910618B52002006A0B1A /* WALAddArticleTableViewController.m */; };
 		F5DA910A18B56FCE006A0B1A /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = F5DA910918B56FCE006A0B1A /* main.css */; };
@@ -63,6 +64,7 @@
 		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
 		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
 		F5C48A3018B7782400E76807 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		F5C48A3118B793A100E76807 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F5DA910218B51FE8006A0B1A /* WALSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettingsTableViewController.h; sourceTree = "<group>"; };
 		F5DA910318B51FE8006A0B1A /* WALSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettingsTableViewController.m; sourceTree = "<group>"; };
 		F5DA910518B52002006A0B1A /* WALAddArticleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALAddArticleTableViewController.h; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C48A3218B793A100E76807 /* MessageUI.framework in Frameworks */,
 				F5877D8F18B4E02B009D4EFE /* CoreGraphics.framework in Frameworks */,
 				F5877D9118B4E02B009D4EFE /* UIKit.framework in Frameworks */,
 				F5877D8D18B4E02B009D4EFE /* Foundation.framework in Frameworks */,
@@ -152,6 +155,7 @@
 		F5877D8B18B4E02B009D4EFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F5C48A3118B793A100E76807 /* MessageUI.framework */,
 				F5877D8C18B4E02B009D4EFE /* Foundation.framework */,
 				F5877D8E18B4E02B009D4EFE /* CoreGraphics.framework */,
 				F5877D9018B4E02B009D4EFE /* UIKit.framework */,
