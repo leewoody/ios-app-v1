@@ -55,7 +55,16 @@
 {
 	NSString* identifier = [[tableView cellForRowAtIndexPath:indexPath] reuseIdentifier];
 	
-	if ([identifier isEqualToString:@"Framabag"])
+	if ([identifier isEqualToString:@"FindData"])
+	{
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Help", @"Alert view title: Where can I find user data")
+															message:NSLocalizedString(@"Login to your Wallabag and browse to the configuration.\nFind the \"Feeds\" section together with your user-ID and token.\nYou may have to click \"generate token\" first, if the token is missing.", @"Alert view Info text: where can i find user data")
+														   delegate:self
+												  cancelButtonTitle:NSLocalizedString(@"OK", @"OK-Button tilte alert view: where can i find user data")
+												  otherButtonTitles:NSLocalizedString(@"Open Manual", @"Open Website for detailed user guide where to find user data"), nil];
+		[alertView show];
+	}
+	else if ([identifier isEqualToString:@"Framabag"])
 	{
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://framabag.org"]];
 	}
@@ -99,6 +108,17 @@
 	[[tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:true];
 }
 
+#pragma mark - AlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if (buttonIndex == 1)
+	{
+		//! @todo use iPhone Docu Link!
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://doc.wallabag.org/doku.php?id=users:android_application"]];
+	}
+	
+}
 
 #pragma mark - Button Actions
 
@@ -126,6 +146,15 @@
 - (IBAction)textFieldValueChanged:(id)sender
 {
 	[self updateDoneButton];
+}
+
+#pragma mark - TextField Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	[textField resignFirstResponder];
+	
+	return YES;
 }
 
 @end

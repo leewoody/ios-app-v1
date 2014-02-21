@@ -11,7 +11,7 @@
 
 @class WALSettings;
 
-@interface WALSettingsTableViewController : UITableViewController
+@interface WALSettingsTableViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
 - (void) setSettings:(WALSettings*) settings;
 @property (weak) id <WALFeedCallbackDelegate> delegate;
