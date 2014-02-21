@@ -11,7 +11,6 @@
 		F5877D8D18B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
 		F5877D8F18B4E02B009D4EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8E18B4E02B009D4EFE /* CoreGraphics.framework */; };
 		F5877D9118B4E02B009D4EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D9018B4E02B009D4EFE /* UIKit.framework */; };
-		F5877D9718B4E02B009D4EFE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5877D9518B4E02B009D4EFE /* InfoPlist.strings */; };
 		F5877D9918B4E02B009D4EFE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F5877D9818B4E02B009D4EFE /* main.m */; };
 		F5877D9D18B4E02B009D4EFE /* WALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5877D9C18B4E02B009D4EFE /* WALAppDelegate.m */; };
 		F5877DA018B4E02B009D4EFE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5877D9E18B4E02B009D4EFE /* Main.storyboard */; };
@@ -21,7 +20,6 @@
 		F5877DAF18B4E02B009D4EFE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877DAE18B4E02B009D4EFE /* XCTest.framework */; };
 		F5877DB018B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
 		F5877DB118B4E02B009D4EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D9018B4E02B009D4EFE /* UIKit.framework */; };
-		F5877DB918B4E02B009D4EFE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5877DB718B4E02B009D4EFE /* InfoPlist.strings */; };
 		F5877DBB18B4E02B009D4EFE /* WallabagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F5877DBA18B4E02B009D4EFE /* WallabagTests.m */; };
 		F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F59E0CE318B63E2D00744BB1 /* WALSettings.m */; };
 		F5DA910418B51FE8006A0B1A /* WALSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DA910318B51FE8006A0B1A /* WALSettingsTableViewController.m */; };
@@ -48,7 +46,6 @@
 		F5877D8E18B4E02B009D4EFE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F5877D9018B4E02B009D4EFE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F5877D9418B4E02B009D4EFE /* Wallabag-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Wallabag-Info.plist"; sourceTree = "<group>"; };
-		F5877D9618B4E02B009D4EFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F5877D9818B4E02B009D4EFE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F5877D9A18B4E02B009D4EFE /* Wallabag-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wallabag-Prefix.pch"; sourceTree = "<group>"; };
 		F5877D9B18B4E02B009D4EFE /* WALAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALAppDelegate.h; sourceTree = "<group>"; };
@@ -62,7 +59,6 @@
 		F5877DAD18B4E02B009D4EFE /* WallabagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WallabagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5877DAE18B4E02B009D4EFE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F5877DB618B4E02B009D4EFE /* WallabagTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WallabagTests-Info.plist"; sourceTree = "<group>"; };
-		F5877DB818B4E02B009D4EFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F5877DBA18B4E02B009D4EFE /* WallabagTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallabagTests.m; sourceTree = "<group>"; };
 		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
 		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
@@ -184,7 +180,6 @@
 				F5DA910918B56FCE006A0B1A /* main.css */,
 				F5DA910B18B56FD6006A0B1A /* ratatouille.css */,
 				F5877D9418B4E02B009D4EFE /* Wallabag-Info.plist */,
-				F5877D9518B4E02B009D4EFE /* InfoPlist.strings */,
 				F5877D9818B4E02B009D4EFE /* main.m */,
 				F5877D9A18B4E02B009D4EFE /* Wallabag-Prefix.pch */,
 			);
@@ -204,7 +199,6 @@
 			isa = PBXGroup;
 			children = (
 				F5877DB618B4E02B009D4EFE /* WallabagTests-Info.plist */,
-				F5877DB718B4E02B009D4EFE /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -289,7 +283,6 @@
 				F5DA910A18B56FCE006A0B1A /* main.css in Resources */,
 				F5DA910C18B56FD6006A0B1A /* ratatouille.css in Resources */,
 				F5877DA818B4E02B009D4EFE /* Images.xcassets in Resources */,
-				F5877D9718B4E02B009D4EFE /* InfoPlist.strings in Resources */,
 				F5877DA018B4E02B009D4EFE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,7 +291,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5877DB918B4E02B009D4EFE /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,28 +331,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F5877D9518B4E02B009D4EFE /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F5877D9618B4E02B009D4EFE /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		F5877D9E18B4E02B009D4EFE /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F5877D9F18B4E02B009D4EFE /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F5877DB718B4E02B009D4EFE /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F5877DB818B4E02B009D4EFE /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

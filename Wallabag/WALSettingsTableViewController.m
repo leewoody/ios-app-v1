@@ -38,6 +38,8 @@
 
 - (void)viewDidLoad
 {
+	[super viewDidLoad];
+	
 	if (self.currentSettings.wallabagURL && self.currentSettings.apiToken)
 	{
 		self.urlTextField.text = [self.currentSettings.wallabagURL absoluteString];
@@ -47,11 +49,58 @@
 	[self updateDoneButton];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+#pragma mark - TableView
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[super viewDidAppear:animated];
-	[self.urlTextField becomeFirstResponder];
+	NSString* identifier = [[tableView cellForRowAtIndexPath:indexPath] reuseIdentifier];
+	
+	if ([identifier isEqualToString:@"Framabag"])
+	{
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://framabag.org"]];
+	}
+	else if ([identifier isEqualToString:@"InstallationGuide"])
+	{
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://doc.wallabag.org/doku.php?id=users:begin:install"]];
+	}
+	else if ([identifier isEqualToString:@"WallabagFAQ"])
+	{
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.wallabag.org/frequently-asked-questions/"]];
+	}
+	else if ([identifier isEqualToString:@"SupportMail"])
+	{
+		//! @todo 
+	}
+	else if ([identifier isEqualToString:@"WallabagTwitter"])
+	{
+		NSURL *twitterIRL = [NSURL URLWithString:@"twitter://user?screen_name=wallabagapp"];
+		NSURL *tweetbotIRL = [NSURL URLWithString:@"tweetbot:///user_profile/wallabagapp"];
+		
+		if ([[UIApplication sharedApplication] canOpenURL:tweetbotIRL])
+			[[UIApplication sharedApplication] openURL:tweetbotIRL];
+		
+		else if ([[UIApplication sharedApplication] canOpenURL:twitterIRL])
+			[[UIApplication sharedApplication] openURL:twitterIRL];
+		
+		else
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/wallabagapp"]];
+	}
+	else if ([identifier isEqualToString:@"WallabagFacebook"])
+	{
+		NSURL *facebookIRL = [NSURL URLWithString:@"fb://profile/369698693171294"];
+		
+		if ([[UIApplication sharedApplication] canOpenURL:facebookIRL])
+			[[UIApplication sharedApplication] openURL:facebookIRL];
+
+		else
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/wallabag"]];
+	}
+	
+	[[tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:true];
 }
+
+
+#pragma mark - Button Actions
 
 - (void) updateDoneButton
 {

@@ -32,9 +32,14 @@
 	[self.refreshControl addTarget:self action:@selector(updateArticles) forControlEvents:UIControlEventValueChanged];
 	[super awakeFromNib];
 	
+	//! Disabled Add Article Button!
 	self.navigationItem.rightBarButtonItem = nil;
 	
 	[self loadArticles];
+	if (!self.articles)
+	{
+		self.articles = [NSMutableArray array];
+	}
 	
 	self.settings = [WALSettings settingsFromSavedSettings];
 	
