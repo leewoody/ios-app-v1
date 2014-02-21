@@ -119,9 +119,18 @@
 		}
 		else
 		{
-			NSLog(@"Connection Error: %@", connectionError.description);
+			//NSLog(@"Connection Error: %@", connectionError.description);
 			NSLog(@"Status Code: %ld", (long)httpResponse.statusCode);
 			NSLog(@"MIME Type: %@", [response MIMEType]);
+			
+			if (connectionError)
+				[self informUserConnectionError:connectionError];
+			
+			else if (httpResponse.statusCode < 200 || httpResponse.statusCode > 299)
+				[self informUserWrongServerAddress];
+			
+			else
+				[self informUserWrongAuthentication];
 		}
 	}];
 }
@@ -179,11 +188,11 @@
 	
 	[self saveArticles];
 	[self.tableView reloadData];
-}
-
-- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
-{
-	NSLog(@"Parsing Error: %@", parseError.description);
+	
+	if ([self.articles count] == 0)
+	{
+		[self informUserNoArticlesInFeed];
+	}
 }
 
 #pragma mark - Segue
@@ -216,7 +225,7 @@
 	if (settings)
 	{
 		self.settings = settings;
-		[self.settings saveSettings];
+		[settings saveSettings];
 		[self updateArticles];
 	}
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];
@@ -225,6 +234,53 @@
 - (void)callbackFromAddArticleController:(WALAddArticleTableViewController *)addArticleController withURL:(NSURL *)url
 {
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];	
+}
+
+#pragma mark - Error Handling
+
+- (void) informUserConnectionError:(NSError*) error
+{
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+														message:error.localizedDescription
+													   delegate:nil
+											  cancelButtonTitle:@"OK"
+											  otherButtonTitles: nil];
+	[alertView show];
+}
+
+- (void) informUserWrongServerAddress
+{
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+														message:NSLocalizedString(@"Could not connect to server. Maybe wrong URL?", @"error description: HTTP Status Code not 2xx")
+													   delegate:nil
+											  cancelButtonTitle:@"OK"
+											  otherButtonTitles: nil];
+	[alertView show];
+}
+
+- (void) informUserWrongAuthentication
+{
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+														message:NSLocalizedString(@"Could load feed. Maybe wrong user credentials?", @"error description: response is not a rss feed")
+													   delegate:nil
+											  cancelButtonTitle:@"OK"
+											  otherButtonTitles: nil];
+	[alertView show];
+}
+
+- (void) informUserNoArticlesInFeed
+{
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+														message:NSLocalizedString(@"No unread article in Feed. Get started by adding links to your wallabag.", @"error description: No article in home-feed")
+													   delegate:nil
+											  cancelButtonTitle:@"OK"
+											  otherButtonTitles: nil];
+	[alertView show];
+}
+
+- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
+{
+	NSLog(@"Parsing Error: %@", parseError.description);
 }
 
 #pragma mark - Save Articles

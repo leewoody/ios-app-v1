@@ -29,11 +29,13 @@
 {
 	[super viewWillAppear:animated];
 	[self configureView];
-	[self.navigationController setToolbarHidden:false];
+//	[self.navigationController setToolbarHidden:false];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+	[super viewWillDisappear:animated];
+	
 	[self.navigationController setToolbarHidden:true];
 }
 
