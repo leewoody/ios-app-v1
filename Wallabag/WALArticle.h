@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WALArticle : NSObject
+@interface WALArticle : NSObject <NSCoding>
 
 - (void) setDateWithString:(NSString*) string;
 - (NSString*) getDateString;

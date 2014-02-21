@@ -15,6 +15,7 @@
 
 @interface WALFeedTableViewController ()
 @property (strong) NSMutableArray* articles;
+@property (strong) NSXMLParser* parser;
 @property (strong) NSString* parser_currentString;
 @property (strong) WALArticle* parser_currentArticle;
 @property (strong) WALSettings* settings;
@@ -31,19 +32,21 @@
 	[self.refreshControl addTarget:self action:@selector(updateArticles) forControlEvents:UIControlEventValueChanged];
 	[super awakeFromNib];
 	
-	self.articles = [[NSMutableArray alloc] init];
+	self.navigationItem.rightBarButtonItem = nil;
+	
+	[self loadArticles];
+	
 	self.settings = [WALSettings settingsFromSavedSettings];
+	
+	if (self.settings)
+		[self updateArticles];
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	
-	if (self.settings)
-	{
-		[self updateArticles];
-	}
-	else
+	if (!self.settings)
 	{
 		[self performSegueWithIdentifier:@"ModalToSettings" sender:self];
 	}
@@ -91,7 +94,7 @@
 	NSString *urlString = [NSString stringWithFormat:@"%@/?feed&type=home&user_id=%ld&token=%@", [self.settings.wallabagURL absoluteString], (long) self.settings.userID, self.settings.apiToken];
 	NSURL *url = [NSURL URLWithString:urlString];
 		
-	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageAllowed timeoutInterval:20.0];
+	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:20.0];
 	
 	[NSURLConnection sendAsynchronousRequest:urlRequest
 									   queue:[NSOperationQueue mainQueue]
@@ -105,9 +108,9 @@
 		if (!connectionError && [response.MIMEType isEqualToString:@"application/rss+xml"] && httpResponse.statusCode > 199 && httpResponse.statusCode < 300)
 		{
 			[self.articles removeAllObjects];
-			NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
-			xmlParser.delegate = self;
-			[xmlParser parse];
+			self.parser = [[NSXMLParser alloc] initWithData:data];
+			self.parser.delegate = self;
+			[self.parser parse];
 		}
 		else
 		{
@@ -165,6 +168,11 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
+	self.parser_currentArticle = nil;
+	self.parser_currentString = nil;
+	self.parser = nil;
+	
+	[self saveArticles];
 	[self.tableView reloadData];
 }
 
@@ -204,6 +212,7 @@
 	{
 		self.settings = settings;
 		[self.settings saveSettings];
+		[self updateArticles];
 	}
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];
 }
@@ -211,6 +220,63 @@
 - (void)callbackFromAddArticleController:(WALAddArticleTableViewController *)addArticleController withURL:(NSURL *)url
 {
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];	
+}
+
+#pragma mark - Save Articles
+
+- (void) saveArticles
+{
+	[NSKeyedArchiver archiveRootObject:self.articles toFile:[self pathToSavedArticles]];
+}
+
+- (void) loadArticles
+{
+	self.articles = [NSKeyedUnarchiver unarchiveObjectWithFile:[self pathToSavedArticles]];
+}
+
+- (NSURL*)applicationDataDirectory {
+    NSFileManager* sharedFM = [NSFileManager defaultManager];
+    NSArray* possibleURLs = [sharedFM URLsForDirectory:NSApplicationSupportDirectory
+                                             inDomains:NSUserDomainMask];
+    NSURL* appSupportDir = nil;
+    NSURL* appDirectory = nil;
+    
+    if ([possibleURLs count] >= 1) {
+        // Use the first directory (if multiple are returned)
+        appSupportDir = [possibleURLs objectAtIndex:0];
+    }
+    
+    // If a valid app support directory exists, add the
+    // app's bundle ID to it to specify the final directory.
+    if (appSupportDir) {
+        NSString* appBundleID = [[NSBundle mainBundle] bundleIdentifier];
+        appDirectory = [appSupportDir URLByAppendingPathComponent:appBundleID];
+    }
+    
+    return appDirectory;
+}
+
+- (NSString*) pathToSavedArticles
+{
+	NSURL *applicationSupportURL = [self applicationDataDirectory];
+    
+    if (! [[NSFileManager defaultManager] fileExistsAtPath:[applicationSupportURL path]]){
+		
+        NSError *error = nil;
+        
+        [[NSFileManager defaultManager] createDirectoryAtPath:[applicationSupportURL path]
+                                  withIntermediateDirectories:YES
+                                                   attributes:nil
+                                                        error:&error];
+        
+        if (error){
+            NSLog(@"error creating app support dir: %@", error);
+        }
+        
+    }
+    NSString *path = [[applicationSupportURL path] stringByAppendingPathComponent:@"savedArticles.plist"];
+    
+    return path;
 }
 
 @end

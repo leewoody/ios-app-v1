@@ -35,4 +35,27 @@
 										  timeStyle:NSDateFormatterShortStyle];
 }
 
+#pragma mark - Coder
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+	[aCoder encodeObject:self.title forKey:@"title"];
+	[aCoder encodeObject:self.link forKey:@"link"];
+	[aCoder encodeObject:self.date forKey:@"date"];
+	[aCoder encodeObject:self.content forKey:@"content"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+	if (self = [super init])
+	{
+		self.title = [aDecoder decodeObjectForKey:@"title"];
+		self.link = [aDecoder decodeObjectForKey:@"link"];
+		self.date = [aDecoder decodeObjectForKey:@"date"];
+		self.content = [aDecoder decodeObjectForKey:@"content"];
+	}
+	
+	return self;
+}
+
 @end
