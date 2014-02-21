@@ -104,28 +104,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F50B893C18B79C8100AA9A6C /* de */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = de;
-			path = de.lproj;
-			sourceTree = "<group>";
-		};
-		F50B894C18B7A12300AA9A6C /* en */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = en;
-			sourceTree = "<group>";
-		};
-		F50B894D18B7A12A00AA9A6C /* fr */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = fr;
-			sourceTree = "<group>";
-		};
 		F54E12EE18B4EAC000E89ED1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,9 +188,6 @@
 		F5877D9318B4E02B009D4EFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F50B894C18B7A12300AA9A6C /* en */,
-				F50B893C18B79C8100AA9A6C /* de */,
-				F50B894D18B7A12A00AA9A6C /* fr */,
 				F5DA910918B56FCE006A0B1A /* main.css */,
 				F5DA910B18B56FD6006A0B1A /* ratatouille.css */,
 				F5877D9418B4E02B009D4EFE /* Wallabag-Info.plist */,

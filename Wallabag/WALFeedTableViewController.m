@@ -58,6 +58,11 @@
 
 }
 
+- (void) didReceiveMemoryWarning
+{
+	[self.parser abortParsing];
+}
+
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -77,7 +82,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
 	cell.textLabel.text = currentArticle.title;
 //	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [currentArticle.link absoluteString]];
-	cell.detailTextLabel.text = [currentArticle getDateString];
+//	cell.detailTextLabel.text = [currentArticle getDateString];
+	cell.detailTextLabel.text = @"";
 	
     return cell;
 }
@@ -115,6 +121,7 @@
 			[self.articles removeAllObjects];
 			self.parser = [[NSXMLParser alloc] initWithData:data];
 			self.parser.delegate = self;
+
 			[self.parser parse];
 		}
 		else
@@ -151,6 +158,13 @@
 	{
 		[self.articles addObject:self.parser_currentArticle];
 		self.parser_currentArticle = nil;
+		
+		
+		//! Quick Fix for Memory Errors when parsing too large feeds.
+		if ([self.articles count] > 50)
+		{
+			[parser abortParsing];
+		}
 	}
 	else if ([elementName isEqualToString:@"title"])
 	{
@@ -186,6 +200,11 @@
 	self.parser_currentString = nil;
 	self.parser = nil;
 	
+	[self afterParsingComplete];
+}
+
+- (void) afterParsingComplete
+{
 	[self saveArticles];
 	[self.tableView reloadData];
 	
@@ -281,6 +300,7 @@
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
 	NSLog(@"Parsing Error: %@", parseError.description);
+	[self afterParsingComplete];
 }
 
 #pragma mark - Save Articles
