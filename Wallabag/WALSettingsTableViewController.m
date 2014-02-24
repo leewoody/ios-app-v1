@@ -111,12 +111,17 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-	if (section == 2)
+	if (section == 3)
 	{
-		return @"";
+		NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+		NSString *appBuildVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+		
+		NSString *appInfo = [NSString stringWithFormat:@"Version: %@ (build: %@)\nDeveloped by: Kevin Meyer", appVersion, appBuildVersion];
+		
+		return appInfo;
 	}
 	
-	return @"";
+	return [super tableView:tableView titleForFooterInSection:section];
 }
 
 #pragma mark - AlertView Delegate
