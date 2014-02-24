@@ -23,20 +23,7 @@
 {
 	[super viewDidLoad];
 	self.webView.delegate = self;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-	[super viewWillAppear:animated];
 	[self configureView];
-//	[self.navigationController setToolbarHidden:false];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-	
-	[self.navigationController setToolbarHidden:true];
 }
 
 #pragma mark - Managing the detail item
@@ -78,9 +65,10 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {	
-	if ([[[request URL] absoluteString] isEqualToString:@"about:blank"] && (navigationType != UIWebViewNavigationTypeOther))
+	if (navigationType != UIWebViewNavigationTypeOther)
 	{
-		[self configureView];
+		[[UIApplication sharedApplication] openURL:request.URL];
+		return FALSE;
 	}
 	
 	return true;
