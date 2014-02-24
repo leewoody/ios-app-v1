@@ -52,7 +52,8 @@
 	NSURL *mainCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"main" ofType:@"css"]];
 	NSURL *ratatatouilleCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ratatouille" ofType:@"css"]];
 	
-	NSString *htmlToDisplay = [NSString stringWithFormat:@"<html lang=\"\"><head><meta name=\"viewport\" content=\"initial-scale=1.0\"><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"%@\" media=\"all\"><link rel=\"stylesheet\" href=\"%@\" media=\"all\"><div id=\"main\"><body><div id=\"content\" class=\"w600p center\"><div id=\"article\"><header class=\"mbm\"><h1>%@</h1><p>%@</p></header><article>%@</article></div></div></div></body></html>", ratatatouilleCSSFile, mainCSSFile, self.article.title, self.article.link, self.article.content];
+	NSString *htmlFormat = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"article" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, ratatatouilleCSSFile, mainCSSFile, self.article.title, self.article.link, self.article.content];
 	
 	[self.webView loadHTMLString:htmlToDisplay baseURL:nil];
 }

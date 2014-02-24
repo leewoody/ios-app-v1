@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F50B895218B7A28400AA9A6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F50B895018B7A28400AA9A6C /* Localizable.strings */; };
 		F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = F54E12F218B4EEDB00E89ED1 /* WALArticle.m */; };
+		F57E644E18BB84AD00587DBD /* article.html in Resources */ = {isa = PBXBuildFile; fileRef = F57E644D18BB84AD00587DBD /* article.html */; };
 		F5877D8D18B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
 		F5877D8F18B4E02B009D4EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8E18B4E02B009D4EFE /* CoreGraphics.framework */; };
 		F5877D9118B4E02B009D4EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D9018B4E02B009D4EFE /* UIKit.framework */; };
@@ -48,6 +49,7 @@
 		F50B895518B7A2A000AA9A6C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F54E12F118B4EEDB00E89ED1 /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
 		F54E12F218B4EEDB00E89ED1 /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
+		F57E644D18BB84AD00587DBD /* article.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = article.html; sourceTree = "<group>"; };
 		F5877D8918B4E02B009D4EFE /* Wallabag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wallabag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5877D8C18B4E02B009D4EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F5877D8E18B4E02B009D4EFE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -138,6 +140,17 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		F57E644C18BB828B00587DBD /* HTML Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F57E644D18BB84AD00587DBD /* article.html */,
+				F5DA910918B56FCE006A0B1A /* main.css */,
+				F5DA910B18B56FD6006A0B1A /* ratatouille.css */,
+			);
+			name = "HTML Resources";
+			path = "html-resources";
+			sourceTree = "<group>";
+		};
 		F5877D8018B4E02B009D4EFE = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +193,7 @@
 				F5877D9E18B4E02B009D4EFE /* Main.storyboard */,
 				F50B895018B7A28400AA9A6C /* Localizable.strings */,
 				F5877DA718B4E02B009D4EFE /* Images.xcassets */,
+				F57E644C18BB828B00587DBD /* HTML Resources */,
 				F5877D9318B4E02B009D4EFE /* Supporting Files */,
 			);
 			path = Wallabag;
@@ -188,8 +202,6 @@
 		F5877D9318B4E02B009D4EFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F5DA910918B56FCE006A0B1A /* main.css */,
-				F5DA910B18B56FD6006A0B1A /* ratatouille.css */,
 				F5877D9418B4E02B009D4EFE /* Wallabag-Info.plist */,
 				F5877D9818B4E02B009D4EFE /* main.m */,
 				F5877D9A18B4E02B009D4EFE /* Wallabag-Prefix.pch */,
@@ -223,7 +235,9 @@
 			buildPhases = (
 				F5877D8518B4E02B009D4EFE /* Sources */,
 				F5877D8618B4E02B009D4EFE /* Frameworks */,
+				F5F278AE18B7BCE2000725D5 /* ShellScript */,
 				F5877D8718B4E02B009D4EFE /* Resources */,
+				F5F278AF18B7BEF0000725D5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -298,6 +312,7 @@
 				F5DA910C18B56FD6006A0B1A /* ratatouille.css in Resources */,
 				F5877DA818B4E02B009D4EFE /* Images.xcassets in Resources */,
 				F5877DA018B4E02B009D4EFE /* Main.storyboard in Resources */,
+				F57E644E18BB84AD00587DBD /* article.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +324,35 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F5F278AE18B7BCE2000725D5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Update build number with git hash\nbuildNumber=$(git rev-parse --short HEAD)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+		F5F278AF18B7BEF0000725D5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Reset build number to aviod changes to repository\nbuildNumber=1.0\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F5877D8518B4E02B009D4EFE /* Sources */ = {

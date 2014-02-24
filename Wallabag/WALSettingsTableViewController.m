@@ -109,6 +109,16 @@
 	[[tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:true];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+	if (section == 2)
+	{
+		return @"";
+	}
+	
+	return @"";
+}
+
 #pragma mark - AlertView Delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
