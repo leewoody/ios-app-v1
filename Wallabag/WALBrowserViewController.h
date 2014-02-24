@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WALBrowserViewController : UIViewController <UIWebViewDelegate>
+@interface WALBrowserViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate>
 
 - (void)setStartURL:(NSURL*) startURL;
 

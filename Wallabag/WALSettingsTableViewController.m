@@ -85,9 +85,13 @@
 	{
 		NSURL *twitterIRL = [NSURL URLWithString:@"twitter://user?screen_name=wallabagapp"];
 		NSURL *tweetbotIRL = [NSURL URLWithString:@"tweetbot:///user_profile/wallabagapp"];
+		NSURL *twitterrifficIRL = [NSURL URLWithString:@"twitterrific:///profile?screen_name=Iconfactory"];
 		
 		if ([[UIApplication sharedApplication] canOpenURL:tweetbotIRL])
 			[[UIApplication sharedApplication] openURL:tweetbotIRL];
+		
+		else if ([[UIApplication sharedApplication] canOpenURL:twitterrifficIRL])
+			[[UIApplication sharedApplication] openURL:twitterrifficIRL];
 		
 		else if ([[UIApplication sharedApplication] canOpenURL:twitterIRL])
 			[[UIApplication sharedApplication] openURL:twitterIRL];

@@ -23,6 +23,7 @@
 	self.webView.delegate = self;
 	
 	[self.webView loadRequest:[NSURLRequest requestWithURL:self.initialUrl]];
+	self.title = [self.initialUrl absoluteString];
 }
 
 - (void)setStartURL:(NSURL*) startURL
@@ -51,7 +52,12 @@
 {
 	//! @todo implement and extend functions
 	
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open in Safari", nil];
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+															 delegate:self
+													cancelButtonTitle:NSLocalizedString(@"cancel", nil)
+											   destructiveButtonTitle:nil
+													otherButtonTitles:NSLocalizedString(@"Open in Safari", nil), NSLocalizedString(@"Share link", nil), nil];
+	actionSheet.tag = 1;
 	
 	[actionSheet showFromToolbar:self.navigationController.toolbar];
 }
@@ -84,4 +90,33 @@
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
+
+#pragma mark - ActionSheet Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if (actionSheet.tag == 1)
+	{
+		//NSLog(@"Pressed Button: %ld", (long)buttonIndex);
+		
+		// Open in Safari
+		if (buttonIndex == 0)
+		{
+			[[UIApplication sharedApplication] openURL:self.initialUrl];
+		}
+		// Share link
+		else if (buttonIndex == 1)
+		{
+			NSArray* dataToShare = @[self.title, self.initialUrl];
+			
+			//! @todo add more custom activities
+			
+			UIActivityViewController* activityViewController =
+			[[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+			[self presentViewController:activityViewController animated:YES completion:^{}];
+		}
+	}
+}
+
+
 @end
