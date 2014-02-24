@@ -8,13 +8,12 @@
 
 #import "WALArticleViewController.h"
 #import "WALArticle.h"
+#import "WALBrowserViewController.h"
 
 @interface WALArticleViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-- (IBAction)browserRefreshButton:(id)sender;
-- (IBAction)starButton:(id)sender;
-- (IBAction)shareButton:(id)sender;
-@property (strong) WALArticle* article;
+@property (strong) WALArticle *article;
+@property (strong) NSURL *externalURL;
 @end
 
 @implementation WALArticleViewController
@@ -67,33 +66,23 @@
 {	
 	if (navigationType != UIWebViewNavigationTypeOther)
 	{
-		[[UIApplication sharedApplication] openURL:request.URL];
+		//[[UIApplication sharedApplication] openURL:request.URL];
+		self.externalURL = request.URL;
+		[self performSegueWithIdentifier:@"PushToBrowser" sender:nil];
 		return FALSE;
 	}
 	
 	return true;
 }
 
-#pragma mark - ToolbarButton Actions
+#pragma mark - Segue
 
-- (IBAction)browserRefreshButton:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	[self.webView stopLoading];
-	[self.webView reload];
+	if ([segue.identifier isEqualToString:@"PushToBrowser"])
+	{
+		[((WALBrowserViewController*)segue.destinationViewController) setStartURL:self.externalURL];
+	}
 }
 
-- (IBAction)starButton:(id)sender
-{
-}
-
-- (IBAction)shareButton:(id)sender
-{
-	NSString *message = [NSString stringWithFormat:@"I just read this article from my Wallabag: %@", self.article.title];
-	NSArray *dataToShare = @[message, self.article.link];
-	
-	UIActivityViewController* activityViewController =
-	[[UIActivityViewController alloc] initWithActivityItems:dataToShare
-									  applicationActivities:nil];
-	[self presentViewController:activityViewController animated:YES completion:^{}];
-}
 @end

@@ -25,6 +25,7 @@
 		F5877DBB18B4E02B009D4EFE /* WallabagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F5877DBA18B4E02B009D4EFE /* WallabagTests.m */; };
 		F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F59E0CE318B63E2D00744BB1 /* WALSettings.m */; };
 		F5C48A3218B793A100E76807 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C48A3118B793A100E76807 /* MessageUI.framework */; };
+		F5C9FB5C18BBB8E000083FB3 /* WALBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C9FB5B18BBB8E000083FB3 /* WALBrowserViewController.m */; };
 		F5DA910418B51FE8006A0B1A /* WALSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DA910318B51FE8006A0B1A /* WALSettingsTableViewController.m */; };
 		F5DA910718B52002006A0B1A /* WALAddArticleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DA910618B52002006A0B1A /* WALAddArticleTableViewController.m */; };
 		F5DA910A18B56FCE006A0B1A /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = F5DA910918B56FCE006A0B1A /* main.css */; };
@@ -72,6 +73,8 @@
 		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
 		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
 		F5C48A3118B793A100E76807 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		F5C9FB5A18BBB8E000083FB3 /* WALBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALBrowserViewController.h; sourceTree = "<group>"; };
+		F5C9FB5B18BBB8E000083FB3 /* WALBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALBrowserViewController.m; sourceTree = "<group>"; };
 		F5DA910218B51FE8006A0B1A /* WALSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettingsTableViewController.h; sourceTree = "<group>"; };
 		F5DA910318B51FE8006A0B1A /* WALSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettingsTableViewController.m; sourceTree = "<group>"; };
 		F5DA910518B52002006A0B1A /* WALAddArticleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALAddArticleTableViewController.h; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				F5877DA218B4E02B009D4EFE /* WALFeedTableViewController.m */,
 				F5877DA418B4E02B009D4EFE /* WALArticleViewController.h */,
 				F5877DA518B4E02B009D4EFE /* WALArticleViewController.m */,
+				F5C9FB5A18BBB8E000083FB3 /* WALBrowserViewController.h */,
+				F5C9FB5B18BBB8E000083FB3 /* WALBrowserViewController.m */,
 				F5DA910518B52002006A0B1A /* WALAddArticleTableViewController.h */,
 				F5DA910618B52002006A0B1A /* WALAddArticleTableViewController.m */,
 				F5DA910218B51FE8006A0B1A /* WALSettingsTableViewController.h */,
@@ -365,6 +370,7 @@
 				F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */,
 				F5DA910718B52002006A0B1A /* WALAddArticleTableViewController.m in Sources */,
 				F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */,
+				F5C9FB5C18BBB8E000083FB3 /* WALBrowserViewController.m in Sources */,
 				F5DA910418B51FE8006A0B1A /* WALSettingsTableViewController.m in Sources */,
 				F5877DA318B4E02B009D4EFE /* WALFeedTableViewController.m in Sources */,
 			);

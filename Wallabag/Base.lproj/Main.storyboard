@@ -1158,32 +1158,47 @@ Public License instead of this License.  But first, please read
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                     </webView>
-                    <toolbarItems>
-                        <barButtonItem systemItem="refresh" id="lkZ-gk-Qmi">
-                            <connections>
-                                <action selector="browserRefreshButton:" destination="Ah7-4n-0Wa" id="NTg-80-XMh"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="xiY-Z0-NET"/>
-                        <barButtonItem title="Star" id="4wE-SY-Wl4">
-                            <connections>
-                                <action selector="starButton:" destination="Ah7-4n-0Wa" id="sJm-Mx-mOO"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem systemItem="action" id="AwG-O8-hpB">
-                            <connections>
-                                <action selector="shareButton:" destination="Ah7-4n-0Wa" id="aGS-5U-K0V"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Article" id="cra-N8-TIN"/>
                     <connections>
                         <outlet property="webView" destination="TeN-MM-sa6" id="bN5-1a-mj7"/>
+                        <segue destination="Lgf-Oj-XH5" kind="push" identifier="PushToBrowser" id="eMN-hd-TOi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="902" y="64"/>
+        </scene>
+        <!--Browser View Controller - Browser-->
+        <scene sceneID="xBb-ZK-hRJ">
+            <objects>
+                <viewController id="Lgf-Oj-XH5" customClass="WALBrowserViewController" sceneMemberID="viewController">
+                    <webView key="view" contentMode="scaleToFill" scalesPageToFit="YES" id="be2-BC-XQt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </webView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="refresh" id="lkZ-gk-Qmi">
+                            <connections>
+                                <action selector="refreshToolbarButtonPushed:" destination="Lgf-Oj-XH5" id="7L0-OE-HlX"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="xiY-Z0-NET"/>
+                        <barButtonItem systemItem="action" id="AwG-O8-hpB">
+                            <connections>
+                                <action selector="shareToolbarButtonPushed:" destination="Lgf-Oj-XH5" id="yS3-2t-XWx"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Browser" id="6wj-Gz-ng9"/>
+                    <connections>
+                        <outlet property="webView" destination="be2-BC-XQt" id="HDe-Sj-q98"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZDU-nF-MtF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1345" y="64"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
