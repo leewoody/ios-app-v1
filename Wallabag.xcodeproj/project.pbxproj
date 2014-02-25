@@ -240,9 +240,7 @@
 			buildPhases = (
 				F5877D8518B4E02B009D4EFE /* Sources */,
 				F5877D8618B4E02B009D4EFE /* Frameworks */,
-				F5F278AE18B7BCE2000725D5 /* ShellScript */,
 				F5877D8718B4E02B009D4EFE /* Resources */,
-				F5F278AF18B7BEF0000725D5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -329,35 +327,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		F5F278AE18B7BCE2000725D5 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Update build number with git hash\nbuildNumber=$(git rev-parse --short HEAD)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
-		};
-		F5F278AF18B7BEF0000725D5 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Reset build number to aviod changes to repository\nbuildNumber=1.0\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F5877D8518B4E02B009D4EFE /* Sources */ = {
@@ -495,11 +464,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wallabag/Wallabag-Prefix.pch";
 				INFOPLIST_FILE = "Wallabag/Wallabag-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9FD68211-7932-4974-9BCF-D7AB813D4A82";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
