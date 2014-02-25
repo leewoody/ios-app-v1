@@ -49,6 +49,8 @@
 		F50B895518B7A2A000AA9A6C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F54E12F118B4EEDB00E89ED1 /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
 		F54E12F218B4EEDB00E89ED1 /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
+		F54F6AA118BCBCE500B434F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		F54F6AA218BCBCE500B434F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F57E644D18BB84AD00587DBD /* article.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = article.html; sourceTree = "<group>"; };
 		F5877D8918B4E02B009D4EFE /* Wallabag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wallabag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5877D8C18B4E02B009D4EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -370,6 +372,7 @@
 				F50B895118B7A28400AA9A6C /* Base */,
 				F50B895318B7A28F00AA9A6C /* de */,
 				F50B895518B7A2A000AA9A6C /* fr */,
+				F54F6AA218BCBCE500B434F9 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				F5877D9F18B4E02B009D4EFE /* Base */,
 				F50B894718B79DF200AA9A6C /* de */,
 				F5C6A3B718BCB55A00534BBD /* fr */,
+				F54F6AA118BCBCE500B434F9 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

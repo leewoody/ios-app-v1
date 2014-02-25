@@ -1,0 +1,93 @@
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "2pz-XF-uhl"; */
+"2pz-XF-uhl.text" = "Title";
+
+/* Class = "IBUILabel"; text = "License"; ObjectID = "443-rL-YtK"; */
+"443-rL-YtK.text" = "License";
+
+/* Class = "IBUILabel"; text = "Host URL"; ObjectID = "5I4-5M-SrY"; */
+"5I4-5M-SrY.text" = "Host URL";
+
+/* Class = "IBUINavigationItem"; title = "Browser"; ObjectID = "6wj-Gz-ng9"; */
+"6wj-Gz-ng9.title" = "Browser";
+
+/* Class = "IBUIViewController"; title = "Detail"; ObjectID = "Ah7-4n-0Wa"; */
+"Ah7-4n-0Wa.title" = "Detail";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Connect to your wallabag"; ObjectID = "EcT-3h-mYI"; */
+"EcT-3h-mYI.headerTitle" = "Connect to your wallabag";
+
+/* Class = "IBUILabel"; text = "API Token"; ObjectID = "Gx2-ee-dPL"; */
+"Gx2-ee-dPL.text" = "API Token";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Don't have a hosted wallabag yet?"; ObjectID = "Ix9-bh-0d5"; */
+"Ix9-bh-0d5.headerTitle" = "Don't have a hosted wallabag yet?";
+
+/* Class = "IBUILabel"; text = "User ID"; ObjectID = "Lfi-2V-yyK"; */
+"Lfi-2V-yyK.text" = "User ID";
+
+/* Class = "IBUINavigationItem"; title = "License"; ObjectID = "QVW-4y-8vx"; */
+"QVW-4y-8vx.title" = "License";
+
+/* Class = "IBUILabel"; text = "Sign up at Framabag"; ObjectID = "RzR-q9-rj1"; */
+"RzR-q9-rj1.text" = "Sign up at Framabag";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Need help?"; ObjectID = "SVh-sw-6kh"; */
+"SVh-sw-6kh.headerTitle" = "Need help?";
+
+/* Class = "IBUILabel"; text = "Install your own wallabag"; ObjectID = "SxO-wU-bxy"; */
+"SxO-wU-bxy.text" = "Install your own wallabag";
+
+/* Class = "IBUILabel"; text = "Where can I find this data?"; ObjectID = "Wak-hG-SUe"; */
+"Wak-hG-SUe.text" = "Where can I find this data?";
+
+/* Class = "IBUILabel"; text = "Use link from clipboard"; ObjectID = "XTW-V1-fQY"; */
+"XTW-V1-fQY.text" = "Use link from clipboard";
+
+/* Class = "IBUITextField"; placeholder = "http://example.com/wallabag"; ObjectID = "XYS-sB-WWu"; */
+"XYS-sB-WWu.placeholder" = "http://example.com/wallabag";
+
+/* Class = "IBUITextField"; placeholder = "1"; ObjectID = "ZUI-D1-IIr"; */
+"ZUI-D1-IIr.placeholder" = "1";
+
+/* Class = "IBUILabel"; text = "Follow us on Twitter"; ObjectID = "ZkY-6O-ahK"; */
+"ZkY-6O-ahK.text" = "Follow us on Twitter";
+
+/* Class = "IBUILabel"; text = "wallabag FAQ"; ObjectID = "a3W-SU-ejD"; */
+"a3W-SU-ejD.text" = "wallabag FAQ";
+
+/* Class = "IBUINavigationItem"; title = "Article"; ObjectID = "cra-N8-TIN"; */
+"cra-N8-TIN.title" = "Article";
+
+/* Class = "IBUILabel"; text = "Like our page on Facebook"; ObjectID = "cxV-eS-fr8"; */
+"cxV-eS-fr8.text" = "Like our page on Facebook";
+
+/* Class = "IBUIBarButtonItem"; title = "Settings"; ObjectID = "fjc-y7-nW0"; */
+"fjc-y7-nW0.title" = "Settings";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "i9S-Mp-8pe"; */
+"i9S-Mp-8pe.text" = "Detail";
+
+/* Class = "IBUITextField"; placeholder = "fd1337/$sdi"; ObjectID = "irP-Tq-7pY"; */
+"irP-Tq-7pY.placeholder" = "fd1337/$sdi";
+
+/* Class = "IBUITextField"; placeholder = "http://example.com/article"; ObjectID = "jZt-7Q-OmB"; */
+"jZt-7Q-OmB.placeholder" = "http://example.com/article";
+
+/* Class = "IBUITableViewSection"; headerTitle = "About this App"; ObjectID = "lY3-eG-B2l"; */
+"lY3-eG-B2l.headerTitle" = "About this App";
+
+/* Class = "IBUILabel"; text = "Send a mail"; ObjectID = "p6U-V1-pxa"; */
+"p6U-V1-pxa.text" = "Send a mail";
+
+/* Class = "IBUITableViewController"; title = "Master"; ObjectID = "pGg-6v-bdr"; */
+"pGg-6v-bdr.title" = "Master";
+
+/* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "peB-a7-fQo"; */
+"peB-a7-fQo.title" = "Settings";
+
+/* Class = "IBUINavigationItem"; title = "Wallabag"; ObjectID = "tQt-TN-PWz"; */
+"tQt-TN-PWz.title" = "Wallabag";
+
+/* Class = "IBUINavigationItem"; title = "Bag it!"; ObjectID = "wiV-oA-MHN"; */
+"wiV-oA-MHN.title" = "Bag it!";
