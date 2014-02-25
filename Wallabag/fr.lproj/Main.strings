@@ -2,11 +2,14 @@
 /* Class = "IBUILabel"; text = "Title"; ObjectID = "2pz-XF-uhl"; */
 "2pz-XF-uhl.text" = "Title";
 
-/* Class = "IBUIBarButtonItem"; title = "Star"; ObjectID = "4wE-SY-Wl4"; */
-"4wE-SY-Wl4.title" = "Star";
+/* Class = "IBUILabel"; text = "License"; ObjectID = "443-rL-YtK"; */
+"443-rL-YtK.text" = "License";
 
 /* Class = "IBUILabel"; text = "Host URL"; ObjectID = "5I4-5M-SrY"; */
 "5I4-5M-SrY.text" = "Host URL";
+
+/* Class = "IBUINavigationItem"; title = "Browser"; ObjectID = "6wj-Gz-ng9"; */
+"6wj-Gz-ng9.title" = "Browser";
 
 /* Class = "IBUIViewController"; title = "Detail"; ObjectID = "Ah7-4n-0Wa"; */
 "Ah7-4n-0Wa.title" = "Detail";
@@ -22,6 +25,9 @@
 
 /* Class = "IBUILabel"; text = "User ID"; ObjectID = "Lfi-2V-yyK"; */
 "Lfi-2V-yyK.text" = "User ID";
+
+/* Class = "IBUINavigationItem"; title = "License"; ObjectID = "QVW-4y-8vx"; */
+"QVW-4y-8vx.title" = "License";
 
 /* Class = "IBUILabel"; text = "Sign up at Framabag"; ObjectID = "RzR-q9-rj1"; */
 "RzR-q9-rj1.text" = "Sign up at Framabag";
@@ -67,6 +73,9 @@
 
 /* Class = "IBUITextField"; placeholder = "http://example.com/article"; ObjectID = "jZt-7Q-OmB"; */
 "jZt-7Q-OmB.placeholder" = "http://example.com/article";
+
+/* Class = "IBUITableViewSection"; headerTitle = "About this App"; ObjectID = "lY3-eG-B2l"; */
+"lY3-eG-B2l.headerTitle" = "About this App";
 
 /* Class = "IBUILabel"; text = "Send a mail"; ObjectID = "p6U-V1-pxa"; */
 "p6U-V1-pxa.text" = "Send a mail";

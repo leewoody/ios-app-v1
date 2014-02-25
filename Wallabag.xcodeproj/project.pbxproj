@@ -44,7 +44,6 @@
 
 /* Begin PBXFileReference section */
 		F50B894718B79DF200AA9A6C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
-		F50B894E18B7A16500AA9A6C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		F50B895118B7A28400AA9A6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F50B895318B7A28F00AA9A6C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F50B895518B7A2A000AA9A6C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -73,6 +72,7 @@
 		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
 		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
 		F5C48A3118B793A100E76807 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		F5C6A3B718BCB55A00534BBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		F5C9FB5A18BBB8E000083FB3 /* WALBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALBrowserViewController.h; sourceTree = "<group>"; };
 		F5C9FB5B18BBB8E000083FB3 /* WALBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALBrowserViewController.m; sourceTree = "<group>"; };
 		F5DA910218B51FE8006A0B1A /* WALSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettingsTableViewController.h; sourceTree = "<group>"; };
@@ -410,7 +410,7 @@
 			children = (
 				F5877D9F18B4E02B009D4EFE /* Base */,
 				F50B894718B79DF200AA9A6C /* de */,
-				F50B894E18B7A16500AA9A6C /* fr */,
+				F5C6A3B718BCB55A00534BBD /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -499,6 +499,7 @@
 				GCC_PREFIX_HEADER = "Wallabag/Wallabag-Prefix.pch";
 				INFOPLIST_FILE = "Wallabag/Wallabag-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9FD68211-7932-4974-9BCF-D7AB813D4A82";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -508,10 +509,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kevin Meyer (XAGFV7YS86)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wallabag/Wallabag-Prefix.pch";
 				INFOPLIST_FILE = "Wallabag/Wallabag-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9FD68211-7932-4974-9BCF-D7AB813D4A82";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -444,7 +444,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <mutableString key="text">Copyright © 2014 Kevin Meyer 
+                        <string key="text">Copyright © 2014 Kevin Meyer 
 wallabag@kevin-meyer.de
 This software is released under GPL.
 
@@ -1124,7 +1124,7 @@ into proprietary programs.  If your program is a subroutine library, you
 may consider it more useful to permit linking proprietary applications with
 the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
-&lt;http://www.gnu.org/philosophy/why-not-lgpl.html&gt;.</mutableString>
+&lt;http://www.gnu.org/philosophy/why-not-lgpl.html&gt;.</string>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>

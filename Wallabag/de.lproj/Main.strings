@@ -82,3 +82,9 @@
 
 /* Class = "IBUINavigationItem"; title = "Bag it!"; ObjectID = "wiV-oA-MHN"; */
 "wiV-oA-MHN.title" = "Bag it!";
+
+/* Class = "IBUILabel"; text = "License"; ObjectID = "443-rL-YtK"; */
+"443-rL-YtK.text" = "Lizenz";
+
+/* Class = "IBUITableViewSection"; headerTitle = "About this App"; ObjectID = "lY3-eG-B2l"; */
+"lY3-eG-B2l.headerTitle" = "Über diese App";
