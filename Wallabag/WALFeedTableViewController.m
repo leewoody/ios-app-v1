@@ -32,7 +32,7 @@
 	[self.refreshControl addTarget:self action:@selector(updateArticles) forControlEvents:UIControlEventValueChanged];
 	[super awakeFromNib];
 	
-	//! Disabled Add Article Button!
+	///! Disabled Add Article Button!
 	self.navigationItem.rightBarButtonItem = nil;
 	
 	[self loadArticles];
@@ -100,8 +100,6 @@
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[self.refreshControl beginRefreshing];
 	
-//	NSString *urlString = [NSString stringWithFormat:@"http://wallabag.scheissimweb.de/?feed&type=home&user_id=2&token=i11FbSBeC34bwTM"];
-
 	NSString *urlString = [NSString stringWithFormat:@"%@/?feed&type=home&user_id=%ld&token=%@", [self.settings.wallabagURL absoluteString], (long) self.settings.userID, self.settings.apiToken];
 	NSURL *url = [NSURL URLWithString:urlString];
 		
@@ -160,7 +158,7 @@
 		self.parser_currentArticle = nil;
 		
 		
-		//! Quick Fix for Memory Errors when parsing too large feeds.
+		///! Quick Fix for Memory Errors when parsing too large feeds.
 		if ([self.articles count] > 50)
 		{
 			[parser abortParsing];

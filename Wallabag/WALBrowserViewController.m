@@ -50,7 +50,7 @@
 
 - (IBAction)shareToolbarButtonPushed:(id)sender
 {
-	//! @todo implement and extend functions
+	///! @todo implement and extend functions
 	
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
 															 delegate:self
