@@ -6,7 +6,12 @@
 //  Copyright (c) 2014 Wallabag. All rights reserved.
 //
 
+#define APP_ID 828331015
+#define APP_STORE_URI @"itms-apps://itunes.apple.com/us/app/wallabag/id828331015"
+#define APP_STORE_URL @"https://itunes.apple.com/us/app/wallabag/id828331015"
+
 #import <sys/utsname.h>
+#import <StoreKit/StoreKit.h>
 #import "WALSettingsTableViewController.h"
 #import "WALSettings.h"
 
@@ -109,6 +114,18 @@
 		else
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/wallabag"]];
 	}
+	else if ([identifier isEqualToString:@"RateApp"])
+	{
+		[self presentAppStoreForID:[NSNumber numberWithInt:APP_ID] withDelegate:nil withURL:[NSURL URLWithString:APP_STORE_URI]];
+	}
+	else if ([identifier isEqualToString:@"TellYourFriends"])
+	{
+		NSArray* dataToShare = @[NSLocalizedString(@"Hey there!\nI'm using the read-it-later app wallabag. You should check it out!", nil), [NSURL URLWithString:APP_STORE_URL]];
+				
+		UIActivityViewController* activityViewController =
+		[[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+		[self presentViewController:activityViewController animated:YES completion:^{}];
+	}
 	
 	[[tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:true];
 }
@@ -175,6 +192,34 @@
 	[textField resignFirstResponder];
 	
 	return YES;
+}
+
+#pragma mark - AppStore
+
+- (void)presentAppStoreForID:(NSNumber *)appStoreID withDelegate:(id<SKStoreProductViewControllerDelegate>)delegate withURL:(NSURL *)appStoreURL
+{
+	if(NSClassFromString(@"SKStoreProductViewController")) // Checks for iOS 6 feature.
+	{
+		
+		SKStoreProductViewController *storeController = [[SKStoreProductViewController alloc] init];
+		storeController.delegate = delegate;
+		
+		NSDictionary *productParameters = @{ SKStoreProductParameterITunesItemIdentifier : appStoreID };
+		
+		[storeController loadProductWithParameters:productParameters completionBlock:^(BOOL result, NSError *error) {
+			if (result)
+				[self presentViewController:storeController animated:YES completion:nil];
+			else
+				[[[UIAlertView alloc] initWithTitle:@"Error" message:@"Could not open AppStore" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil] show];
+			
+		}];
+		
+		
+	}
+	else
+	{
+		[[UIApplication sharedApplication] openURL:appStoreURL];
+    }
 }
 
 #pragma mark - Mail Composer
