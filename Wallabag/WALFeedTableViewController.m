@@ -12,6 +12,7 @@
 #import "WALAddArticleTableViewController.h"
 #import "WALArticle.h"
 #import "WALSettings.h"
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
 
 @interface WALFeedTableViewController ()
 @property (strong) NSMutableArray* articles;
@@ -78,8 +79,6 @@
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
 	cell.textLabel.text = currentArticle.title;
-//	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [currentArticle.link absoluteString]];
-//	cell.detailTextLabel.text = [currentArticle getDateString];
 	cell.detailTextLabel.text = @"";
 	
     return cell;
@@ -98,43 +97,32 @@
 	[self.refreshControl beginRefreshing];
 	
 	NSString *urlString = [NSString stringWithFormat:@"%@/?feed&type=home&user_id=%ld&token=%@", [self.settings.wallabagURL absoluteString], (long) self.settings.userID, self.settings.apiToken];
-	NSURL *url = [NSURL URLWithString:urlString];
-		
-	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:20.0];
 	
-	[NSURLConnection sendAsynchronousRequest:urlRequest
-									   queue:[NSOperationQueue mainQueue]
-						   completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	
+	[manager setResponseSerializer:[AFXMLParserResponseSerializer new]];
+	manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/rss+xml"];
+	
+	manager.securityPolicy.allowInvalidCertificates = YES;
+
+	[manager GET:urlString
+	  parameters:nil
+		 success:^(AFHTTPRequestOperation *operation, id responseObject)
 	{
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 		[self.refreshControl endRefreshing];
-		
-		NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
-		
-		if (!connectionError && [response.MIMEType isEqualToString:@"application/rss+xml"] && httpResponse.statusCode > 199 && httpResponse.statusCode < 300)
-		{
-			[self.articles removeAllObjects];
-			self.parser = [[NSXMLParser alloc] initWithData:data];
-			self.parser.delegate = self;
-
-			[self.parser parse];
-		}
-		else
-		{
-			//NSLog(@"Connection Error: %@", connectionError.description);
-			NSLog(@"Status Code: %ld", (long)httpResponse.statusCode);
-			NSLog(@"MIME Type: %@", [response MIMEType]);
+		[self.articles removeAllObjects];
+		self.parser = responseObject;
+		self.parser.delegate = self;
 			
-			if (connectionError)
-				[self informUserConnectionError:connectionError];
-			
-			else if (httpResponse.statusCode < 200 || httpResponse.statusCode > 299)
-				[self informUserWrongServerAddress];
-			
-			else
-				[self informUserWrongAuthentication];
-		}
-	}];
+		[self.parser parse];
+	
+	}
+		 failure:^(AFHTTPRequestOperation *operation, NSError *error)
+	{
+		[self informUserConnectionError:error];
+	}
+	];
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict

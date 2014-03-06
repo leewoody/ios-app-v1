@@ -126,6 +126,10 @@
 		[[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
 		[self presentViewController:activityViewController animated:YES completion:^{}];
 	}
+	else if ([identifier isEqualToString:@"License"])
+	{
+		[self performSegueWithIdentifier:@"PushToLicense" sender:self];
+	}
 	
 	[[tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:true];
 }
