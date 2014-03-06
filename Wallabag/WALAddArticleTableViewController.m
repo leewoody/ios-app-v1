@@ -11,6 +11,7 @@
 @interface WALAddArticleTableViewController ()
 @property (strong, nonatomic) IBOutlet UITextField *urlTextField;
 - (IBAction)cancelButtonPushed:(id)sender;
+- (IBAction)saveButtonPushed:(id)sender;
 @end
 
 @implementation WALAddArticleTableViewController
@@ -24,6 +25,16 @@
 - (IBAction)cancelButtonPushed:(id)sender
 {
 	[self.delegate callbackFromAddArticleController:self withURL:nil];
+}
+
+- (IBAction)saveButtonPushed:(id)sender
+{
+	NSURL *saveUrl = [NSURL URLWithString:self.urlTextField.text];
+	
+	if (saveUrl)
+	{
+		[self.delegate callbackFromAddArticleController:self withURL:saveUrl];
+	}
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

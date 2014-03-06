@@ -116,7 +116,7 @@
 	}
 	else if ([identifier isEqualToString:@"RateApp"])
 	{
-		[self presentAppStoreForID:[NSNumber numberWithInt:APP_ID] withDelegate:nil withURL:[NSURL URLWithString:APP_STORE_URI]];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_STORE_URI]];
 	}
 	else if ([identifier isEqualToString:@"TellYourFriends"])
 	{
@@ -192,34 +192,6 @@
 	[textField resignFirstResponder];
 	
 	return YES;
-}
-
-#pragma mark - AppStore
-
-- (void)presentAppStoreForID:(NSNumber *)appStoreID withDelegate:(id<SKStoreProductViewControllerDelegate>)delegate withURL:(NSURL *)appStoreURL
-{
-	if(NSClassFromString(@"SKStoreProductViewController")) // Checks for iOS 6 feature.
-	{
-		
-		SKStoreProductViewController *storeController = [[SKStoreProductViewController alloc] init];
-		storeController.delegate = delegate;
-		
-		NSDictionary *productParameters = @{ SKStoreProductParameterITunesItemIdentifier : appStoreID };
-		
-		[storeController loadProductWithParameters:productParameters completionBlock:^(BOOL result, NSError *error) {
-			if (result)
-				[self presentViewController:storeController animated:YES completion:nil];
-			else
-				[[[UIAlertView alloc] initWithTitle:@"Error" message:@"Could not open AppStore" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil] show];
-			
-		}];
-		
-		
-	}
-	else
-	{
-		[[UIApplication sharedApplication] openURL:appStoreURL];
-    }
 }
 
 #pragma mark - Mail Composer

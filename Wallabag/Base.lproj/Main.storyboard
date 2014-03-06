@@ -142,7 +142,11 @@
                                 <action selector="cancelButtonPushed:" destination="g6V-jb-AvQ" id="ac8-uk-ULs"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="kPd-zI-LoK"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="kPd-zI-LoK">
+                            <connections>
+                                <action selector="saveButtonPushed:" destination="g6V-jb-AvQ" id="I2i-Oc-wLf"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="urlTextField" destination="jZt-7Q-OmB" id="G8D-yi-mfV"/>
