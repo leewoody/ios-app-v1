@@ -10,13 +10,6 @@
 
 @implementation WALArticle
 
-- (id) init
-{
-	self = [super init];
-	
-	return self;
-}
-
 - (void) setDateWithString:(NSString*) string
 {
 	NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
@@ -43,6 +36,7 @@
 	[aCoder encodeObject:self.link forKey:@"link"];
 	[aCoder encodeObject:self.date forKey:@"date"];
 	[aCoder encodeObject:self.content forKey:@"content"];
+	[aCoder encodeBool:self.archive forKey:@"archive"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -53,6 +47,7 @@
 		self.link = [aDecoder decodeObjectForKey:@"link"];
 		self.date = [aDecoder decodeObjectForKey:@"date"];
 		self.content = [aDecoder decodeObjectForKey:@"content"];
+		self.archive = [aDecoder decodeBoolForKey:@"archive"];
 	}
 	
 	return self;

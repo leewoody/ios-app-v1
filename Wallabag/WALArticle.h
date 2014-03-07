@@ -17,5 +17,6 @@
 @property (strong) NSURL* link;
 @property (strong) NSDate* date;
 @property (strong) NSString* content;
+@property BOOL archive;
 
 @end

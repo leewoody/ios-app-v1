@@ -11,8 +11,15 @@
 @interface WALBrowserViewController ()
 @property (strong) NSURL *initialUrl;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 - (IBAction)refreshToolbarButtonPushed:(id)sender;
 - (IBAction)shareToolbarButtonPushed:(id)sender;
+- (IBAction)backToolbarButtonPushed:(id)sender;
+- (IBAction)forwardToolbarButtonPushed:(id)sender;
+
+
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *backToolBarButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *forwardToolbarButton;
 @end
 
 @implementation WALBrowserViewController
@@ -24,6 +31,7 @@
 	
 	[self.webView loadRequest:[NSURLRequest requestWithURL:self.initialUrl]];
 	self.title = [self.initialUrl absoluteString];
+	[self updateToolbarButtons];
 }
 
 - (void)setStartURL:(NSURL*) startURL
@@ -43,6 +51,8 @@
 	[self.navigationController setToolbarHidden:true];
 }
 
+#pragma mark - ToolbarButton Actions
+
 - (IBAction)refreshToolbarButtonPushed:(id)sender
 {
 	[self.webView reload];
@@ -52,7 +62,7 @@
 {
 	///! @todo implement and extend functions
 	
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:self.webView.request.mainDocumentURL.absoluteString
 															 delegate:self
 													cancelButtonTitle:NSLocalizedString(@"cancel", nil)
 											   destructiveButtonTitle:nil
@@ -60,6 +70,22 @@
 	actionSheet.tag = 1;
 	
 	[actionSheet showFromToolbar:self.navigationController.toolbar];
+}
+
+- (IBAction)backToolbarButtonPushed:(id)sender
+{
+	[self.webView goBack];
+}
+
+- (IBAction)forwardToolbarButtonPushed:(id)sender
+{
+	[self.webView goForward];
+}
+
+- (void) updateToolbarButtons
+{
+	self.backToolBarButton.enabled = [self.webView canGoBack];
+	self.forwardToolbarButton.enabled = [self.webView canGoForward];
 }
 
 #pragma mark - WebView Delegate
@@ -73,7 +99,7 @@
 {
 	if (navigationType != UIWebViewNavigationTypeOther)
 	{
-		self.title = [request.URL absoluteString];
+		self.title = self.webView.request.mainDocumentURL.absoluteString;
 	}
 	
 	return YES;
@@ -82,13 +108,14 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	
 	self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+	[self updateToolbarButtons];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	[self updateToolbarButtons];
 }
 
 #pragma mark - ActionSheet Delegate
@@ -102,12 +129,12 @@
 		// Open in Safari
 		if (buttonIndex == 0)
 		{
-			[[UIApplication sharedApplication] openURL:self.initialUrl];
+			[[UIApplication sharedApplication] openURL:self.webView.request.mainDocumentURL];
 		}
 		// Share link
 		else if (buttonIndex == 1)
 		{
-			NSArray* dataToShare = @[self.title, self.initialUrl];
+			NSArray* dataToShare = @[self.title, self.webView.request.mainDocumentURL];
 			
 			//! @todo add more custom activities
 			
