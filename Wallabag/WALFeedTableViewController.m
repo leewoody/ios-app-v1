@@ -117,10 +117,10 @@
 	{
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 		[self.refreshControl endRefreshing];
-		[self.articles removeAllObjects];
+		[self prepareArrayForParsing];
 		self.parser = responseObject;
 		self.parser.delegate = self;
-			
+		
 		[self.parser parse];
 	
 	}
@@ -148,7 +148,7 @@
 {
 	if ([elementName isEqualToString:@"item"])
 	{
-		[self.articles addObject:self.parser_currentArticle];
+		[self insertArticleToArray:self.parser_currentArticle];
 		self.parser_currentArticle = nil;
 		
 		
@@ -193,6 +193,7 @@
 	self.parser_currentString = nil;
 	self.parser = nil;
 	
+	[self deleteNotSeenArticlesFromArray];
 	[self afterParsingComplete];
 }
 
@@ -204,6 +205,47 @@
 	if ([self.articles count] == 0)
 	{
 		[self informUserNoArticlesInFeed];
+	}
+}
+
+- (void)insertArticleToArray:(WALArticle*) newArticle
+{
+	if (!newArticle || !self.articles)
+		return;
+	
+	for (WALArticle *correspondingArticle in self.articles)
+	{
+		if ([[correspondingArticle.link absoluteString] isEqualToString:[newArticle.link absoluteString]])
+		{
+			correspondingArticle.seenOnUpdate = YES;
+			correspondingArticle.title = newArticle.title;
+			correspondingArticle.date = newArticle.date;
+			correspondingArticle.content = newArticle.content;
+			newArticle = nil;
+		}
+	}
+	
+	if (newArticle)
+	{
+		newArticle.seenOnUpdate = YES;
+		[self.articles insertObject:newArticle atIndex:0];
+	}
+
+}
+
+- (void)prepareArrayForParsing
+{
+	for (int i = 0; i < [self.articles count]; ++i)
+		((WALArticle*) self.articles[i]).seenOnUpdate = NO;
+}
+
+- (void)deleteNotSeenArticlesFromArray
+{
+	for (int i = 0; i < [self.articles count]; ++i)
+	{
+		WALArticle *currentArticle = self.articles[i];
+		if (!currentArticle.seenOnUpdate)
+			[self.articles removeObjectAtIndex:i];
 	}
 }
 
