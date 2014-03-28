@@ -16,10 +16,12 @@
 
 @interface WALFeedTableViewController ()
 @property (strong) NSMutableArray* articles;
+@property (strong) WALSettings* settings;
+
 @property (strong) NSXMLParser* parser;
+@property (strong) NSMutableArray* parser_articles;
 @property (strong) NSString* parser_currentString;
 @property (strong) WALArticle* parser_currentArticle;
-@property (strong) WALSettings* settings;
 @end
 
 @implementation WALFeedTableViewController
@@ -117,7 +119,7 @@
 	{
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 		[self.refreshControl endRefreshing];
-		[self prepareArrayForParsing];
+		self.parser_articles = [NSMutableArray array];
 		self.parser = responseObject;
 		self.parser.delegate = self;
 		
@@ -148,12 +150,12 @@
 {
 	if ([elementName isEqualToString:@"item"])
 	{
-		[self insertArticleToArray:self.parser_currentArticle];
+		[self addObjectToParserArray:self.parser_currentArticle];
 		self.parser_currentArticle = nil;
 		
 		
 		///! Quick Fix for Memory Errors when parsing too large feeds.
-		if ([self.articles count] > 50)
+		if ([self.parser_articles count] > 50)
 		{
 			[parser abortParsing];
 			[self afterParsingComplete];
@@ -189,16 +191,18 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-	self.parser_currentArticle = nil;
-	self.parser_currentString = nil;
-	self.parser = nil;
-	
-	[self deleteNotSeenArticlesFromArray];
 	[self afterParsingComplete];
 }
 
 - (void) afterParsingComplete
 {
+	self.articles = self.parser_articles;
+	
+	self.parser_articles = nil;
+	self.parser_currentArticle = nil;
+	self.parser_currentString = nil;
+	self.parser = nil;
+
 	[self saveArticles];
 	[self.tableView reloadData];
 	
@@ -208,45 +212,18 @@
 	}
 }
 
-- (void)insertArticleToArray:(WALArticle*) newArticle
+- (void)addObjectToParserArray:(WALArticle*) newArticle
 {
-	if (!newArticle || !self.articles)
-		return;
-	
 	for (WALArticle *correspondingArticle in self.articles)
 	{
 		if ([[correspondingArticle.link absoluteString] isEqualToString:[newArticle.link absoluteString]])
 		{
-			correspondingArticle.seenOnUpdate = YES;
-			correspondingArticle.title = newArticle.title;
-			correspondingArticle.date = newArticle.date;
-			correspondingArticle.content = newArticle.content;
-			newArticle = nil;
+			newArticle.archive = correspondingArticle.archive;
+			break;
 		}
 	}
 	
-	if (newArticle)
-	{
-		newArticle.seenOnUpdate = YES;
-		[self.articles insertObject:newArticle atIndex:0];
-	}
-
-}
-
-- (void)prepareArrayForParsing
-{
-	for (int i = 0; i < [self.articles count]; ++i)
-		((WALArticle*) self.articles[i]).seenOnUpdate = NO;
-}
-
-- (void)deleteNotSeenArticlesFromArray
-{
-	for (int i = 0; i < [self.articles count]; ++i)
-	{
-		WALArticle *currentArticle = self.articles[i];
-		if (!currentArticle.seenOnUpdate)
-			[self.articles removeObjectAtIndex:i];
-	}
+	[self.parser_articles addObject:newArticle];
 }
 
 #pragma mark - Segue

@@ -18,6 +18,5 @@
 @property (strong) NSDate* date;
 @property (strong) NSString* content;
 @property BOOL archive;
-@property BOOL seenOnUpdate;
 
 @end
