@@ -126,6 +126,8 @@
 	}
 		 failure:^(AFHTTPRequestOperation *operation, NSError *error)
 	{
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+		[self.refreshControl endRefreshing];
 		if (userGetsErrors)
 			[self informUserConnectionError:error];
 	}
