@@ -196,7 +196,8 @@
 
 - (void) afterParsingComplete
 {
-	self.articles = self.parser_articles;
+	if (self.parser_articles)
+		self.articles = self.parser_articles;
 	
 	self.parser_articles = nil;
 	self.parser_currentArticle = nil;
