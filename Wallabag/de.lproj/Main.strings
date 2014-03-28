@@ -18,7 +18,7 @@
 "EcT-3h-mYI.headerTitle" = "Verbinde deine wallabag";
 
 /* Class = "IBUILabel"; text = "API Token"; ObjectID = "Gx2-ee-dPL"; */
-"Gx2-ee-dPL.text" = "API Token";
+"Gx2-ee-dPL.text" = "Token";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Don't have a hosted wallabag yet?"; ObjectID = "Ix9-bh-0d5"; */
 "Ix9-bh-0d5.headerTitle" = "Du hast noch keine wallabag?";
