@@ -69,7 +69,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Wallabag" id="tQt-TN-PWz">
-                        <barButtonItem key="leftBarButtonItem" image="NavBarButton-Settings" id="fjc-y7-nW0">
+                        <barButtonItem key="leftBarButtonItem" image="NavBarButton-Settings-filled" id="fjc-y7-nW0">
                             <connections>
                                 <segue destination="b7R-6t-7CM" kind="modal" identifier="ModalToSettings" id="VYX-rk-UHE"/>
                             </connections>
@@ -596,7 +596,7 @@ THE SOFTWARE.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="NavBarButton-Settings" width="22" height="22"/>
+        <image name="NavBarButton-Settings-filled" width="22" height="22"/>
         <image name="ToolBar-Browser-Back" width="12" height="22"/>
         <image name="ToolBar-Browser-Forward" width="12" height="22"/>
     </resources>
