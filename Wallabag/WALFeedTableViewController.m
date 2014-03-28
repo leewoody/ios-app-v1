@@ -30,7 +30,7 @@
 	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavigationBarItem"]];
 	
 	self.refreshControl = [[UIRefreshControl alloc] init];
-	[self.refreshControl addTarget:self action:@selector(updateArticles) forControlEvents:UIControlEventValueChanged];
+	[self.refreshControl addTarget:self action:@selector(triggeredRefreshControl) forControlEvents:UIControlEventValueChanged];
 	[super awakeFromNib];
 	
 	[self loadArticles];
@@ -42,7 +42,7 @@
 	self.settings = [WALSettings settingsFromSavedSettings];
 	
 	if (self.settings)
-		[self updateArticles];
+		[self updateArticlesInformingUser:NO];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -59,6 +59,12 @@
 - (void) didReceiveMemoryWarning
 {
 	[self.parser abortParsing];
+	[self afterParsingComplete];
+}
+
+- (void)triggeredRefreshControl
+{
+	[self updateArticlesInformingUser:YES];
 }
 
 #pragma mark - Table View
@@ -91,7 +97,7 @@
 
 #pragma mark - DataParser
 
-- (void) updateArticles
+- (void) updateArticlesInformingUser:(BOOL) userGetsErrors
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[self.refreshControl beginRefreshing];
@@ -120,7 +126,8 @@
 	}
 		 failure:^(AFHTTPRequestOperation *operation, NSError *error)
 	{
-		[self informUserConnectionError:error];
+		if (userGetsErrors)
+			[self informUserConnectionError:error];
 	}
 	];
 }
@@ -147,6 +154,7 @@
 		if ([self.articles count] > 50)
 		{
 			[parser abortParsing];
+			[self afterParsingComplete];
 		}
 	}
 	else if ([elementName isEqualToString:@"title"])
@@ -228,7 +236,7 @@
 	{
 		self.settings = settings;
 		[settings saveSettings];
-		[self updateArticles];
+		[self updateArticlesInformingUser:YES];
 	}
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];
 }
