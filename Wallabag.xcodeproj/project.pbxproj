@@ -289,6 +289,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Wallabag;
 				TargetAttributes = {
+					F5877D8818B4E02B009D4EFE = {
+						DevelopmentTeam = XAGFV7YS86;
+					};
 					F5877DAC18B4E02B009D4EFE = {
 						TestTargetID = F5877D8818B4E02B009D4EFE;
 					};
@@ -508,6 +511,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wallabag/Wallabag-Prefix.pch";
@@ -525,13 +529,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kevin Meyer (XAGFV7YS86)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wallabag/Wallabag-Prefix.pch";
 				INFOPLIST_FILE = "Wallabag/Wallabag-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9FD68211-7932-4974-9BCF-D7AB813D4A82";
+				PROVISIONING_PROFILE = "4AA19473-B82D-4E1E-9748-ED556140604A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
