@@ -116,6 +116,14 @@
 {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[self updateToolbarButtons];
+	
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+														message:error.localizedDescription
+													   delegate:nil
+											  cancelButtonTitle:@"OK"
+											  otherButtonTitles: nil];
+	[alertView show];
+
 }
 
 #pragma mark - ActionSheet Delegate
