@@ -64,6 +64,7 @@
 	[aCoder encodeObject:self.date forKey:@"date"];
 	[aCoder encodeObject:self.fileUid forKey:@"fileUid"];
 	[aCoder encodeBool:self.archive forKey:@"archive"];
+	[aCoder encodeObject:self.source forKey:@"source"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -76,6 +77,7 @@
 		self.archive = [aDecoder decodeBoolForKey:@"archive"];
 		self.fileUid = [aDecoder decodeObjectForKey:@"fileUid"];
 		self.content = [aDecoder decodeObjectForKey:@"content"];
+		self.source = [aDecoder decodeObjectForKey:@"source"];
 	}
 	
 	return self;

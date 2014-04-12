@@ -177,6 +177,10 @@
 	{
 		self.parser_currentArticle.content = self.parser_currentString;
 	}
+	else if ([elementName isEqualToString:@"source"])
+	{
+		self.parser_currentArticle.source = [NSURL URLWithString:self.parser_currentString];
+	}
 	
 	self.parser_currentString = nil;
 }

@@ -20,6 +20,7 @@
 
 @property (strong) NSString* title;
 @property (strong) NSURL* link;
+@property (strong) NSURL* source;
 @property (strong) NSDate* date;
 @property BOOL archive;
 
