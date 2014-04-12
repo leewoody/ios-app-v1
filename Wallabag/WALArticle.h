@@ -13,10 +13,14 @@
 - (void) setDateWithString:(NSString*) string;
 - (NSString*) getDateString;
 
+- (void) setContent:(NSString*) content;
+- (NSString*) getContent;
+
+- (void) removeArticleFromCache;
+
 @property (strong) NSString* title;
 @property (strong) NSURL* link;
 @property (strong) NSDate* date;
-@property (strong) NSString* content;
 @property BOOL archive;
 
 @end

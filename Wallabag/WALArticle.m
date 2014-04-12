@@ -8,6 +8,10 @@
 
 #import "WALArticle.h"
 
+@interface WALArticle ()
+@property NSString *fileUid;
+@end
+
 @implementation WALArticle
 
 - (void) setDateWithString:(NSString*) string
@@ -28,6 +32,29 @@
 										  timeStyle:NSDateFormatterShortStyle];
 }
 
+#pragma mark - ContentStringCaching
+
+- (void) setContent:(NSString *)content
+{
+	if (!content)
+		return;
+	
+	if (!self.fileUid)
+		self.fileUid = [[NSUUID new] UUIDString];
+
+	[NSKeyedArchiver archiveRootObject:content toFile:[self pathForContentWithUID:self.fileUid]];
+}
+
+- (NSString *)getContent
+{
+	return [NSKeyedUnarchiver unarchiveObjectWithFile:[self pathForContentWithUID:self.fileUid]];
+}
+
+- (void)removeArticleFromCache
+{
+	[[NSFileManager defaultManager] removeItemAtPath:[self pathForContentWithUID:self.fileUid] error:nil];
+}
+
 #pragma mark - Coder
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
@@ -35,7 +62,7 @@
 	[aCoder encodeObject:self.title forKey:@"title"];
 	[aCoder encodeObject:self.link forKey:@"link"];
 	[aCoder encodeObject:self.date forKey:@"date"];
-	[aCoder encodeObject:self.content forKey:@"content"];
+	[aCoder encodeObject:self.fileUid forKey:@"fileUid"];
 	[aCoder encodeBool:self.archive forKey:@"archive"];
 }
 
@@ -46,11 +73,60 @@
 		self.title = [aDecoder decodeObjectForKey:@"title"];
 		self.link = [aDecoder decodeObjectForKey:@"link"];
 		self.date = [aDecoder decodeObjectForKey:@"date"];
-		self.content = [aDecoder decodeObjectForKey:@"content"];
 		self.archive = [aDecoder decodeBoolForKey:@"archive"];
+		self.fileUid = [aDecoder decodeObjectForKey:@"fileUid"];
+		self.content = [aDecoder decodeObjectForKey:@"content"];
 	}
 	
 	return self;
 }
+
+- (NSString*) pathForContentWithUID:(NSString*) uid
+{
+	NSURL *applicationSupportURL = [self applicationDataDirectory];
+	applicationSupportURL = [applicationSupportURL URLByAppendingPathComponent:@"content" isDirectory:YES];
+    
+    if (! [[NSFileManager defaultManager] fileExistsAtPath:[applicationSupportURL path]]){
+		
+        NSError *error = nil;
+        
+        [[NSFileManager defaultManager] createDirectoryAtPath:[applicationSupportURL path]
+                                  withIntermediateDirectories:YES
+                                                   attributes:nil
+                                                        error:&error];
+        
+        if (error){
+            NSLog(@"error creating app support dir: %@", error);
+        }
+        
+    }
+    NSString *path = [[applicationSupportURL path] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", uid]];
+    
+    return path;
+}
+
+
+- (NSURL*)applicationDataDirectory {
+    NSFileManager* sharedFM = [NSFileManager defaultManager];
+    NSArray* possibleURLs = [sharedFM URLsForDirectory:NSApplicationSupportDirectory
+                                             inDomains:NSUserDomainMask];
+    NSURL* appSupportDir = nil;
+    NSURL* appDirectory = nil;
+    
+    if ([possibleURLs count] >= 1) {
+        // Use the first directory (if multiple are returned)
+        appSupportDir = [possibleURLs objectAtIndex:0];
+    }
+    
+    // If a valid app support directory exists, add the
+    // app's bundle ID to it to specify the final directory.
+    if (appSupportDir) {
+        NSString* appBundleID = [[NSBundle mainBundle] bundleIdentifier];
+        appDirectory = [appSupportDir URLByAppendingPathComponent:appBundleID];
+    }
+    
+    return appDirectory;
+}
+
 
 @end

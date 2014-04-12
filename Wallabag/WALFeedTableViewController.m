@@ -197,7 +197,12 @@
 - (void) afterParsingComplete
 {
 	if (self.parser_articles)
+	{
+		for (WALArticle *article in self.articles) {
+			[article removeArticleFromCache];
+		}
 		self.articles = self.parser_articles;
+	}
 	
 	self.parser_articles = nil;
 	self.parser_currentArticle = nil;

@@ -198,6 +198,7 @@
 		F5877D9218B4E02B009D4EFE /* Wallabag */ = {
 			isa = PBXGroup;
 			children = (
+				F5AF8ABC18F949D100652EBE /* ServerDataHandler */,
 				F54E12F018B4EACD00E89ED1 /* Controller */,
 				F54E12EE18B4EAC000E89ED1 /* Model */,
 				F54E12EF18B4EAC700E89ED1 /* View */,
@@ -237,6 +238,13 @@
 				F5877DB618B4E02B009D4EFE /* WallabagTests-Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F5AF8ABC18F949D100652EBE /* ServerDataHandler */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ServerDataHandler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

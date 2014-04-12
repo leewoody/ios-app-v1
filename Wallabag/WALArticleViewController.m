@@ -39,7 +39,7 @@
 	NSURL *ratatatouilleCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ratatouille" ofType:@"css"]];
 	
 	NSString *htmlFormat = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"article" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
-	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, ratatatouilleCSSFile, mainCSSFile, self.article.title, self.article.link, self.article.content];
+	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, ratatatouilleCSSFile, mainCSSFile, self.article.title, self.article.link, [self.article getContent]];
 	
 	[self.webView loadHTMLString:htmlToDisplay baseURL:nil];
 }
