@@ -52,7 +52,6 @@
 		F50B895518B7A2A000AA9A6C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F54E12F118B4EEDB00E89ED1 /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
 		F54E12F218B4EEDB00E89ED1 /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
-		F54F6AA118BCBCE500B434F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F54F6AA218BCBCE500B434F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F57E644D18BB84AD00587DBD /* article.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = article.html; sourceTree = "<group>"; };
 		F5877D8918B4E02B009D4EFE /* Wallabag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wallabag.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +75,7 @@
 		F5877DBA18B4E02B009D4EFE /* WallabagTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallabagTests.m; sourceTree = "<group>"; };
 		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
 		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
+		F5AF8ABE18F9619D00652EBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F5C48A3118B793A100E76807 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F5C6A3B718BCB55A00534BBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		F5C9FB5A18BBB8E000083FB3 /* WALBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALBrowserViewController.h; sourceTree = "<group>"; };
@@ -435,7 +435,7 @@
 				F5877D9F18B4E02B009D4EFE /* Base */,
 				F50B894718B79DF200AA9A6C /* de */,
 				F5C6A3B718BCB55A00534BBD /* fr */,
-				F54F6AA118BCBCE500B434F9 /* en */,
+				F5AF8ABE18F9619D00652EBE /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

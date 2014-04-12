@@ -88,3 +88,9 @@
 
 /* Class = "IBUITableViewSection"; headerTitle = "About this App"; ObjectID = "lY3-eG-B2l"; */
 "lY3-eG-B2l.headerTitle" = "Über diese App";
+
+/* Class = "IBUILabel"; text = "Rate this App"; ObjectID = "nU6-fd-7CX"; */
+"nU6-fd-7CX.text" = "App bewerten";
+
+/* Class = "IBUILabel"; text = "Tell your friends"; ObjectID = "XGM-ea-aah"; */
+"XGM-ea-aah.text" = "App weiterempfehlen";
