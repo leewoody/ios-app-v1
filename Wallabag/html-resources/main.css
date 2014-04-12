@@ -173,21 +173,22 @@ h2:after {
 #links {
   position: fixed;
   top: 0;
-  width: 9em;
+  width: 10em;
   left: 0;
   text-align: right;
   background: #333;
-  padding-top: 9em;
+  padding-top: 9.5em;
   height: 100%;
   box-shadow:inset -4px 0 20px rgba(0,0,0,0.6);
   z-index: 10;
 }
 
 #main {
-  margin-left: 12em;
+  margin-left: 13em;
   position: relative;
   z-index: 10;
   padding-right: 5%;
+  padding-bottom: 1em;
 }
 
   #links a {
@@ -227,7 +228,7 @@ h2:after {
   #links li:last-child {
     position: fixed;
     bottom: 1em;
-    width: 10%;
+    width: 10em;
   }
 
   #links li:last-child a:before {
@@ -235,6 +236,61 @@ h2:after {
     position: relative;
     top: 2px;
   }
+
+
+#sort {
+    padding: 0;
+    list-style-type: none;
+    opacity: 0.5;
+    display: inline-block;
+}
+
+#sort li {
+    display: inline;
+    font-size: 0.9em;
+}
+
+#sort li + li {
+    margin-left: 10px;
+}
+
+#sort a {
+    padding: 2px 2px 0;
+    vertical-align: middle;
+}
+
+#sort img {
+    vertical-align: baseline;
+}
+#sort img:hover {
+    cursor: pointer;
+}
+
+#display-mode {
+  float: right;
+  vertical-align: middle;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+#listmode {
+  width: 16px;
+  display: inline-block;
+  text-decoration: none;
+}
+#listmode a:hover {
+  opacity: 1;
+}
+.tablemode {
+  background-image: url("../img/baggy/table.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+.listmode {
+  background-image: url("../img/baggy/list.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
 
 
 /* ==========================================================================
@@ -248,12 +304,13 @@ h2:after {
 
 footer {
   text-align: right;
-  position: fixed;
+  position: relative;
   bottom: 0;
   right: 5em;
   color: #999;
   font-size: 0.8em;
   font-style: italic;
+  z-index: 20;
 }
 
 footer a {
@@ -263,6 +320,15 @@ footer a {
 
 .list-entries {
   letter-spacing:-5px;
+}
+
+.listmode .entrie {
+  width: 100%!important;
+  margin-left: 0!important;
+}
+
+.listmode .entrie p {
+  display: none;
 }
 
 .list-entries + .results {
@@ -358,6 +424,7 @@ footer a {
     content: none;
   }
 
+
 .entrie h2 a {
   display: block;
   text-decoration: none;
@@ -369,7 +436,7 @@ footer a {
        -o-transition: all 0.5s ease;
           transition: all 0.5s ease;
 }
-
+/*
 .entrie h2 a:after {
   content: "";
   position: absolute;
@@ -378,6 +445,7 @@ footer a {
   height: 100%;
   left: 0;
 }
+*/
 
 .entrie p {
   color: #666;
@@ -441,6 +509,7 @@ footer a {
 
 .pagination {
   text-align: right;
+  margin-bottom:50px;
 }
 
 .nb-results {
@@ -468,16 +537,144 @@ footer a {
 }
 
 /* ==========================================================================
+  2.1 = "save a link" popup div related styles
+  ========================================================================== */
+
+#bagit-form, #search-form {
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  top: 0;
+  left: 10em;
+  z-index: 20;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  margin-top: -30%;
+  padding: 2em;
+  display: none;
+  border-left: 1px #EEE solid;
+}
+
+#bagit-form form, #search-form form {
+  background: #FFF;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  border: 10px solid #000;
+  width: 400px;
+  height: 200px;
+  /* margin: -150px 0 0 -300px; */
+  padding: 2em;
+}
+
+a#bagit-form-close, a#search-form-close {
+  background: #000;
+  color: #FFF;
+  padding: 0.2em 0.5em;
+  text-decoration: none;
+  display: inline-block;
+  float: right;
+  font-size: 0.6em;
+}
+a#bagit-form-close:hover, a#search-form-close:hover {
+  background: #999;
+  color: #000;
+}
+
+.active-current {
+  background-color: #999;
+}
+
+.active-current:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-style: solid;
+  border-width: 10px;
+  border-color:  transparent #EEE transparent transparent;
+  right: 0;
+  top: 50%;
+  margin-top: -10px;
+}
+
+.opacity03 {
+  opacity: 0.3;
+}
+
+.add-to-wallabag-link-after {
+  background-color: #000;
+  color: #fff;
+  padding: 0 3px 2px 3px;
+}
+
+#add-link-result {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* ==========================================================================
+  2.2 = "search for articles" popup div related styles
+  ========================================================================== */
+#search-form {
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  top: 0;
+  left: 10em;
+  z-index: 20;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  margin-top: -30%;
+  padding: 2em;
+  display: none;
+  border-left: 1px #EEE solid;
+}
+
+#search-form form {
+  background: #FFF;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  border: 10px solid #000;
+  width: 400px;
+  height: 200px;
+  /* margin: -150px 0 0 -300px; */
+  padding: 2em;
+}
+
+a#search-form-close {
+  background: #000;
+  color: #FFF;
+  padding: 0.2em 0.5em;
+  text-decoration: none;
+  display: inline-block;
+  float: right;
+  font-size: 1.2em;
+}
+a#search-form-close:hover {
+  background: #999;
+  color: #000;
+}
+
+#submit-search{
+margin-left: 4em;
+margin-top:1em;
+}
+
+/* ==========================================================================
    3 = Pictos
    ========================================================================== */
    
 @font-face {
   font-family: 'icomoon';
-  src:url('../font/icomoon.eot?-s0mcsx');
-  src:url('../font/icomoon.eot?#iefix-s0mcsx') format('embedded-opentype'),
-    url('../font/icomoon.woff?-s0mcsx') format('woff'),
-    url('../font/icomoon.ttf?-s0mcsx') format('truetype'),
-    url('../font/icomoon.svg?-s0mcsx#icomoon') format('svg');
+  src:url('../fonts/icomoon.eot?-s0mcsx');
+  src:url('../fonts/icomoon.eot?#iefix-s0mcsx') format('embedded-opentype'),
+    url('../fonts/icomoon.woff?-s0mcsx') format('woff'),
+    url('../fonts/icomoon.ttf?-s0mcsx') format('truetype'),
+    url('../fonts/icomoon.svg?-s0mcsx#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -563,7 +760,8 @@ footer a {
    ========================================================================== */
 
 .messages {
-  text-align: center;
+  text-align: left;
+  margin-top: 1em;
 }
 
 .messages > * { display: inline-block;}
@@ -581,7 +779,7 @@ footer a {
   }
 
 .warning {
-  font-size: 3em;
+  /* font-size: 3em;
   color: #999;
   font-style: italic;
   position: absolute;
@@ -590,7 +788,10 @@ footer a {
   width: 100%;
   text-align: center;
   padding-right: 5%;
-  margin-top: -2em;
+  margin-top: -2em;*/
+  font-weight: bold;
+  display: block;
+  width: 100%;
 }
 
 /* ==========================================================================
@@ -600,6 +801,7 @@ footer a {
 #article {
   width: 70%;
   margin-bottom: 3em;
+  text-align: justify;
 }
 
 #article .tags {
@@ -729,6 +931,9 @@ blockquote {
     width: 100%;
     margin-left: 0;
   }
+  #display-mode {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -817,5 +1022,13 @@ blockquote {
   }
   #article_toolbar a {
     padding: 0.3em 0.4em 0.2em;
+  }
+  
+  #display-mode {
+    display: none;
+  }
+
+  #bagit-form, #search-form {
+    left: 0;
   }
 }
