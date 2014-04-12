@@ -35,11 +35,13 @@
 
 - (void) configureView
 {
+	NSString *originalTitle = NSLocalizedString(@"Open Original:", nil);
+	
 	NSURL *mainCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"main" ofType:@"css"]];
 	NSURL *ratatatouilleCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ratatouille" ofType:@"css"]];
 	
 	NSString *htmlFormat = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"article" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
-	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, ratatatouilleCSSFile, mainCSSFile, self.article.title, self.article.link, self.article.link,  [self.article getContent]];
+	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, ratatatouilleCSSFile, mainCSSFile, self.article.title, originalTitle, self.article.link, self.article.link.host,  [self.article getContent]];
 	
 	[self.webView loadHTMLString:htmlToDisplay baseURL:nil];
 }
