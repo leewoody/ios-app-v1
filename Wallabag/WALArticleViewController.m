@@ -12,6 +12,9 @@
 
 @interface WALArticleViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *markAsReadButton;
+- (IBAction)markAsReadPushed:(id)sender;
+- (IBAction)sharePushed:(id)sender;
 @property (strong) WALArticle *article;
 @property (strong) NSURL *externalURL;
 @end
@@ -25,18 +28,33 @@
 	[self configureView];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[self.navigationController setToolbarHidden:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	[self.navigationController setToolbarHidden:YES];
+}
+
+- (void) updateButtons
+{
+	if (self.article.archive)
+		self.markAsReadButton.title = @"Mark as unread";
+	else
+		self.markAsReadButton.title = @"Mark as read";
+}
+
 #pragma mark - Managing the detail item
 
 - (void) setDetailArticle:(WALArticle*) article
 {
 	self.article = article;
-	
-	if (self.article.archive)
-		self.title = [NSString stringWithFormat:@"Archive: %@", article.title];
-	else
-		self.title = article.title;
-	
-	self.article.archive = YES;
+	[self updateButtons];
+	self.title = self.article.title;
 }
 
 - (void) configureView
@@ -93,4 +111,20 @@
 	}
 }
 
+- (IBAction)markAsReadPushed:(id)sender
+{
+	self.article.archive = !self.article.archive;
+	[self updateButtons];
+}
+
+- (IBAction)sharePushed:(id)sender
+{
+	NSArray* dataToShare = @[self.title, self.article.link];
+	
+	//! @todo add more custom activities
+	
+	UIActivityViewController* activityViewController =
+	[[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+	[self presentViewController:activityViewController animated:YES completion:^{}];
+}
 @end
