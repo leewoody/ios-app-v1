@@ -139,4 +139,31 @@
 	XCTAssert([expectedResult isEqualToString:resultString], @"Expected: %@ Got: %@", expectedResult, resultString);
 }
 
+- (void)testFavoriteFeedURL_domainWithHTTP_correctFeedURL
+{
+	self.settings.wallabagURL = [NSURL URLWithString:@"http://example.com/"];
+	self.settings.userID = 1;
+	self.settings.apiToken = @"abc123";
+	
+	NSString *expectedResult = @"http://example.com/index.php?feed&type=fav&user_id=1&token=abc123";
+	
+	XCTAssertNotNil([self.settings getFavoriteFeedURL]);
+	
+	NSString *resultString = [self.settings getFavoriteFeedURL].absoluteString;
+	XCTAssert([expectedResult isEqualToString:resultString], @"Expected: %@ Got: %@", expectedResult, resultString);
+}
+
+- (void)testArchiveFeedURL_domainWithHTTP_correctFeedURL
+{
+	self.settings.wallabagURL = [NSURL URLWithString:@"http://example.com/"];
+	self.settings.userID = 1;
+	self.settings.apiToken = @"abc123";
+	
+	NSString *expectedResult = @"http://example.com/index.php?feed&type=archive&user_id=1&token=abc123";
+	
+	XCTAssertNotNil([self.settings getArchiveFeedURL]);
+	
+	NSString *resultString = [self.settings getArchiveFeedURL].absoluteString;
+	XCTAssert([expectedResult isEqualToString:resultString], @"Expected: %@ Got: %@", expectedResult, resultString);
+}
 @end

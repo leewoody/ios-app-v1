@@ -61,15 +61,32 @@
 	return [NSURL URLWithString:self.baseURL.absoluteString];
 }
 
-- (NSURL *)getHomeFeedURL
+#pragma mark - Generate URLs
+
+- (NSURL*) getFeedURLWithFeedName:(NSString*) feedName
 {
-	if (!self.baseURL) {
+	if (!self.baseURL)
 		return nil;
-	}
 	
-	NSURL *resultURL = [NSURL URLWithString:[NSString stringWithFormat:@"index.php?feed&type=home&user_id=%ld&token=%@", (long) self.userID, self.apiToken] relativeToURL:self.baseURL];
+	NSURL *resultURL = [NSURL URLWithString:[NSString stringWithFormat:@"index.php?feed&type=%@&user_id=%ld&token=%@", feedName, (long) self.userID, self.apiToken]
+							  relativeToURL:self.baseURL];
 	
 	return resultURL;
+}
+
+- (NSURL *)getHomeFeedURL
+{
+	return [self getFeedURLWithFeedName:@"home"];
+}
+
+- (NSURL*) getFavoriteFeedURL
+{
+	return [self getFeedURLWithFeedName:@"fav"];
+}
+
+- (NSURL *)getArchiveFeedURL
+{
+	return [self getFeedURLWithFeedName:@"archive"];
 }
 
 - (NSURL *)getURLToAddArticle:(NSURL *)articleURL
@@ -78,7 +95,8 @@
 		return nil;
 	
 	NSString *base64String = [self base64String:[articleURL absoluteString]];
-	NSURL *resultURL = [NSURL URLWithString:[NSString stringWithFormat:@"index.php?action=add&url=%@", base64String] relativeToURL:self.baseURL];
+	NSURL *resultURL = [NSURL URLWithString:[NSString stringWithFormat:@"index.php?action=add&url=%@", base64String]
+							  relativeToURL:self.baseURL];
 	
 	return resultURL;
 }

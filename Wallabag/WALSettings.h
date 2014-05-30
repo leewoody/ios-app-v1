@@ -13,10 +13,12 @@
 + (WALSettings*) settingsFromSavedSettings;
 - (void) saveSettings;
 
-- (NSURL*) getHomeFeedURL;
-
 - (void) setWallabagURL:(NSURL*) url;
 - (NSURL*) getWallabagURL;
+
+- (NSURL*) getHomeFeedURL;
+- (NSURL*) getFavoriteFeedURL;
+- (NSURL*) getArchiveFeedURL;
 
 - (NSURL*) getURLToAddArticle:(NSURL*) articleURL;
 
