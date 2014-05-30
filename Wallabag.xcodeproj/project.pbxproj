@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		27E1E8A6CFAF4E46AF4FDEB0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A4B4E3B48248E3B67A93D8 /* libPods.a */; };
+		F50B3B9B1938F6CA0048EBFD /* WALSettingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F50B3B9A1938F6CA0048EBFD /* WALSettingsTests.m */; };
 		F50B895218B7A28400AA9A6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F50B895018B7A28400AA9A6C /* Localizable.strings */; };
 		F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = F54E12F218B4EEDB00E89ED1 /* WALArticle.m */; };
 		F57E644E18BB84AD00587DBD /* article.html in Resources */ = {isa = PBXBuildFile; fileRef = F57E644D18BB84AD00587DBD /* article.html */; };
@@ -23,7 +24,6 @@
 		F5877DAF18B4E02B009D4EFE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877DAE18B4E02B009D4EFE /* XCTest.framework */; };
 		F5877DB018B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
 		F5877DB118B4E02B009D4EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D9018B4E02B009D4EFE /* UIKit.framework */; };
-		F5877DBB18B4E02B009D4EFE /* WallabagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F5877DBA18B4E02B009D4EFE /* WallabagTests.m */; };
 		F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F59E0CE318B63E2D00744BB1 /* WALSettings.m */; };
 		F5B747581938B87D0071B94C /* WALServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B747571938B87D0071B94C /* WALServerConnection.m */; };
 		F5B7475B1938BAAF0071B94C /* WALArticleList.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B7475A1938BAAF0071B94C /* WALArticleList.m */; };
@@ -48,6 +48,7 @@
 /* Begin PBXFileReference section */
 		44A4B4E3B48248E3B67A93D8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		81FB84A52E0E4BE2ADB2D39A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		F50B3B9A1938F6CA0048EBFD /* WALSettingsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettingsTests.m; sourceTree = "<group>"; };
 		F50B894718B79DF200AA9A6C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		F50B895118B7A28400AA9A6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F50B895318B7A28F00AA9A6C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		F5877DAD18B4E02B009D4EFE /* WallabagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WallabagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5877DAE18B4E02B009D4EFE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F5877DB618B4E02B009D4EFE /* WallabagTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WallabagTests-Info.plist"; sourceTree = "<group>"; };
-		F5877DBA18B4E02B009D4EFE /* WallabagTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallabagTests.m; sourceTree = "<group>"; };
 		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
 		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
 		F5AF8ABE18F9619D00652EBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 		F5877DB418B4E02B009D4EFE /* WallabagTests */ = {
 			isa = PBXGroup;
 			children = (
-				F5877DBA18B4E02B009D4EFE /* WallabagTests.m */,
+				F50B3B9A1938F6CA0048EBFD /* WALSettingsTests.m */,
 				F5877DB518B4E02B009D4EFE /* Supporting Files */,
 			);
 			path = WallabagTests;
@@ -417,7 +417,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5877DBB18B4E02B009D4EFE /* WallabagTests.m in Sources */,
+				F50B3B9B1938F6CA0048EBFD /* WALSettingsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

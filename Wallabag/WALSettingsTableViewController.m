@@ -46,9 +46,9 @@
 {
 	[super viewDidLoad];
 	
-	if (self.currentSettings.wallabagURL && self.currentSettings.apiToken)
+	if ([self.currentSettings getWallabagURL] && self.currentSettings.apiToken)
 	{
-		self.urlTextField.text = [self.currentSettings.wallabagURL absoluteString];
+		self.urlTextField.text = [[self.currentSettings getWallabagURL] absoluteString];
 		self.userIDTextField.text = [NSString stringWithFormat:@"%ld", (long)self.currentSettings.userID];
 		self.apiTokenTextField.text = self.currentSettings.apiToken;
 	}
@@ -211,7 +211,7 @@
 		NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
 		NSString *appBuildVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
 		NSString *deviceModel = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
-		NSString *selectedURL = [self.currentSettings.wallabagURL absoluteString];
+		NSString *selectedURL = [[self.currentSettings getWallabagURL] absoluteString];
 		NSString *seperator = @"--------------------------------";
 		
 		NSString *message = [NSString stringWithFormat:

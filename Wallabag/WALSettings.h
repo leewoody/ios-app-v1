@@ -13,7 +13,11 @@
 + (WALSettings*) settingsFromSavedSettings;
 - (void) saveSettings;
 
-@property (strong) NSURL *wallabagURL;
+- (NSURL*) getHomeFeedURL;
+
+- (void) setWallabagURL:(NSURL*) url;
+- (NSURL*) getWallabagURL;
+
 @property NSInteger userID;
 @property (strong) NSString *apiToken;
 

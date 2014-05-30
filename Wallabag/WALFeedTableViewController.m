@@ -168,7 +168,7 @@
 	if (url)
 	{
 		NSString *base64String = [self base64String:[url absoluteString]];
-		NSURL *myUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/?action=add&url=%@", self.settings.wallabagURL, base64String]];
+		NSURL *myUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/?action=add&url=%@", [self.settings getWallabagURL], base64String]];
 		
 		[[UIApplication sharedApplication] openURL:myUrl];
 	}

@@ -38,7 +38,7 @@
 
 - (void) downloadAndStartParsing
 {
-	NSString *urlString = [NSString stringWithFormat:@"%@/?feed&type=home&user_id=%ld&token=%@", [self.settings.wallabagURL absoluteString], (long) self.settings.userID, self.settings.apiToken];
+	NSString *urlString = [self.settings getHomeFeedURL].absoluteString;
 	
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 	
@@ -74,6 +74,10 @@
 	if ([elementName isEqualToString:@"item"])
 	{
 		self.parser_currentArticle = [[WALArticle alloc] init];
+	}
+	else if ([elementName isEqualToString:@"source"])
+	{
+		NSLog(@"Source Attributes: %@", attributeDict);
 	}
 	
 	self.parser_currentString = nil;
