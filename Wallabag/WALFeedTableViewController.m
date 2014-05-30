@@ -10,19 +10,20 @@
 #import "WALArticleViewController.h"
 #import "WALSettingsTableViewController.h"
 #import "WALAddArticleTableViewController.h"
+
+#import "WALServerConnection.h"
+
 #import "WALArticle.h"
+#import "WALArticleList.h"
 #import "WALSettings.h"
+
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 
 @interface WALFeedTableViewController ()
-@property (strong) NSMutableArray* articles;
-@property (strong) NSMutableArray* unreadArticles;
+
+@property (strong) WALArticleList* articleList;
 @property (strong) WALSettings* settings;
 
-@property (strong) NSXMLParser* parser;
-@property (strong) NSMutableArray* parser_articles;
-@property (strong) NSString* parser_currentString;
-@property (strong) WALArticle* parser_currentArticle;
 @end
 
 @implementation WALFeedTableViewController
@@ -36,16 +37,13 @@
 	[self.refreshControl addTarget:self action:@selector(triggeredRefreshControl) forControlEvents:UIControlEventValueChanged];
 	[super awakeFromNib];
 	
-	[self loadArticles];
-	if (!self.articles)
-	{
-		self.articles = [NSMutableArray array];
-	}
-	
+	self.articleList = [[WALArticleList alloc] init];
+	[self.articleList loadArticlesFromDisk];
 	self.settings = [WALSettings settingsFromSavedSettings];
 	
-	if (self.settings)
-		[self updateArticlesInformingUser:NO];
+	if (self.settings) {
+		[self updateArticleList];
+	}
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -59,15 +57,19 @@
 
 }
 
-- (void) didReceiveMemoryWarning
-{
-	[self.parser abortParsing];
-	[self afterParsingComplete];
-}
-
 - (void)triggeredRefreshControl
 {
-	[self updateArticlesInformingUser:YES];
+	[self updateArticleList];
+}
+
+#pragma mark -
+
+- (void)updateArticleList
+{
+	WALServerConnection *server = [[WALServerConnection alloc] init];
+	[server loadArticlesWithSettings:self.settings OldArticleList:self.articleList delegate:self];
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	[self.refreshControl beginRefreshing];
 }
 
 #pragma mark - Table View
@@ -79,12 +81,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [self.unreadArticles count];
+	return [self.articleList getNumberOfUnreadArticles];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	WALArticle *currentArticle = [self.unreadArticles objectAtIndex:indexPath.row];
+	WALArticle *currentArticle = [self.articleList getUnreadArticleAtIntex:indexPath.row];
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
 	cell.textLabel.text = currentArticle.title;
@@ -100,155 +102,7 @@
 
 #pragma mark - DataParser
 
-- (void) updateArticlesInformingUser:(BOOL) userGetsErrors
-{
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-	[self.refreshControl beginRefreshing];
-	
-	NSString *urlString = [NSString stringWithFormat:@"%@/?feed&type=home&user_id=%ld&token=%@", [self.settings.wallabagURL absoluteString], (long) self.settings.userID, self.settings.apiToken];
-	
-	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-	
-	[manager setResponseSerializer:[AFXMLParserResponseSerializer new]];
-	manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/rss+xml"];
-	
-	manager.securityPolicy.allowInvalidCertificates = YES;
 
-	[manager GET:urlString
-	  parameters:nil
-		 success:^(AFHTTPRequestOperation *operation, id responseObject)
-	{
-		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-		[self.refreshControl endRefreshing];
-		self.parser_articles = [NSMutableArray array];
-		self.parser = responseObject;
-		self.parser.delegate = self;
-		
-		[self.parser parse];
-	
-	}
-		 failure:^(AFHTTPRequestOperation *operation, NSError *error)
-	{
-		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-		[self.refreshControl endRefreshing];
-		if (userGetsErrors)
-			[self informUserConnectionError:error];
-	}
-	];
-}
-
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
-{
-	if ([elementName isEqualToString:@"item"])
-	{
-		self.parser_currentArticle = [[WALArticle alloc] init];
-	}
-	
-	self.parser_currentString = nil;
-}
-
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
-{
-	if ([elementName isEqualToString:@"item"])
-	{
-		[self addObjectToParserArray:self.parser_currentArticle];
-		self.parser_currentArticle = nil;
-		
-		
-		///! Quick Fix for Memory Errors when parsing too large feeds.
-		if ([self.parser_articles count] > 50)
-		{
-			[parser abortParsing];
-			[self afterParsingComplete];
-		}
-	}
-	else if ([elementName isEqualToString:@"title"])
-	{
-		self.parser_currentArticle.title = [self.parser_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];;
-	}
-	else if ([elementName isEqualToString:@"link"])
-	{
-		self.parser_currentArticle.link = [NSURL URLWithString:self.parser_currentString];
-	}
-	else if ([elementName isEqualToString:@"pubDate"])
-	{
-		[self.parser_currentArticle setDateWithString:self.parser_currentString];
-	}
-	else if ([elementName isEqualToString:@"description"])
-	{
-		self.parser_currentArticle.content = self.parser_currentString;
-	}
-	else if ([elementName isEqualToString:@"source"])
-	{
-		self.parser_currentArticle.source = [NSURL URLWithString:self.parser_currentString];
-	}
-	
-	self.parser_currentString = nil;
-}
-
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
-{
-	if (self.parser_currentString != nil)
-		self.parser_currentString = [self.parser_currentString stringByAppendingString:string];
-	else
-		self.parser_currentString = string;
-}
-
-- (void)parserDidEndDocument:(NSXMLParser *)parser
-{
-	[self afterParsingComplete];
-}
-
-- (void) afterParsingComplete
-{
-	if (self.parser_articles)
-	{
-		for (WALArticle *article in self.articles) {
-			[article removeArticleFromCache];
-		}
-		self.articles = self.parser_articles;
-		[self loadUnreadArticlesFormAllArticles];
-	}
-	
-	self.parser_articles = nil;
-	self.parser_currentArticle = nil;
-	self.parser_currentString = nil;
-	self.parser = nil;
-
-	[self saveArticles];
-	[self.tableView reloadData];
-	
-	if ([self.articles count] == 0)
-	{
-		[self informUserNoArticlesInFeed];
-	}
-}
-
-- (void)addObjectToParserArray:(WALArticle*) newArticle
-{
-	for (WALArticle *correspondingArticle in self.articles)
-	{
-		if ([[correspondingArticle.link absoluteString] isEqualToString:[newArticle.link absoluteString]])
-		{
-			newArticle.archive = correspondingArticle.archive;
-			break;
-		}
-	}
-	
-	[self.parser_articles addObject:newArticle];
-}
-
-- (void) loadUnreadArticlesFormAllArticles
-{
-	self.unreadArticles = [NSMutableArray array];
-	
-	for (WALArticle *article in self.articles)
-	{
-		if (!article.archive) {
-			[self.unreadArticles addObject:article];
-		}
-	}
-}
 
 #pragma mark - Segue
 
@@ -257,7 +111,7 @@
     if ([[segue identifier] isEqualToString:@"PushToArticle"])
 	{
 		NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-		[((WALArticleViewController*)segue.destinationViewController) setDetailArticle:self.unreadArticles[indexPath.row]];
+		[((WALArticleViewController*)segue.destinationViewController) setDetailArticle:[self.articleList getUnreadArticleAtIntex:indexPath.row]];
 		[[self.tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:TRUE];
 	}
 	else if ([[segue identifier] isEqualToString:@"ModalToSettings"])
@@ -275,13 +129,34 @@
 
 #pragma mark - Callback Delegates
 
+- (void)serverConnection:(WALServerConnection *)connection didFinishWithArticleList:(WALArticleList *)articleList
+{
+	[self.articleList deleteCachedArticles];
+	self.articleList = articleList;
+	[self.articleList saveArticlesFromDisk];
+	[self.articleList updateUnreadArticles];
+	
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	[self.refreshControl endRefreshing];
+	
+	[self.tableView reloadData];
+}
+
+- (void)serverConnection:(WALServerConnection *)connection didFinishWithError:(NSError *)error
+{
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	[self.refreshControl endRefreshing];
+	
+	[self informUserConnectionError:error];
+}
+
 - (void)callbackFromSettingsController:(WALSettingsTableViewController *)settingsTableViewController withSettings:(WALSettings*)settings
 {
 	if (settings)
 	{
 		self.settings = settings;
 		[settings saveSettings];
-		[self updateArticlesInformingUser:YES];
+		assert(false);
 	}
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];
 }
@@ -341,69 +216,7 @@
 	[alertView show];
 }
 
-- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
-{
-	NSLog(@"Parsing Error: %@", parseError.description);
-	[self afterParsingComplete];
-}
-
 #pragma mark - Save Articles
-
-- (void) saveArticles
-{
-	[NSKeyedArchiver archiveRootObject:self.articles toFile:[self pathToSavedArticles]];
-}
-
-- (void) loadArticles
-{
-	self.articles = [NSKeyedUnarchiver unarchiveObjectWithFile:[self pathToSavedArticles]];
-	[self loadUnreadArticlesFormAllArticles];
-}
-
-- (NSURL*)applicationDataDirectory {
-    NSFileManager* sharedFM = [NSFileManager defaultManager];
-    NSArray* possibleURLs = [sharedFM URLsForDirectory:NSApplicationSupportDirectory
-                                             inDomains:NSUserDomainMask];
-    NSURL* appSupportDir = nil;
-    NSURL* appDirectory = nil;
-    
-    if ([possibleURLs count] >= 1) {
-        // Use the first directory (if multiple are returned)
-        appSupportDir = [possibleURLs objectAtIndex:0];
-    }
-    
-    // If a valid app support directory exists, add the
-    // app's bundle ID to it to specify the final directory.
-    if (appSupportDir) {
-        NSString* appBundleID = [[NSBundle mainBundle] bundleIdentifier];
-        appDirectory = [appSupportDir URLByAppendingPathComponent:appBundleID];
-    }
-    
-    return appDirectory;
-}
-
-- (NSString*) pathToSavedArticles
-{
-	NSURL *applicationSupportURL = [self applicationDataDirectory];
-    
-    if (! [[NSFileManager defaultManager] fileExistsAtPath:[applicationSupportURL path]]){
-		
-        NSError *error = nil;
-        
-        [[NSFileManager defaultManager] createDirectoryAtPath:[applicationSupportURL path]
-                                  withIntermediateDirectories:YES
-                                                   attributes:nil
-                                                        error:&error];
-        
-        if (error){
-            NSLog(@"error creating app support dir: %@", error);
-        }
-        
-    }
-    NSString *path = [[applicationSupportURL path] stringByAppendingPathComponent:@"savedArticles.plist"];
-    
-    return path;
-}
 
 - (NSString *)base64String:(NSString *)str
 {

@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "WALFeedCallbackDelegate.h"
+#import "WALServerConnectionDelegate.h"
 
-@interface WALFeedTableViewController : UITableViewController <NSXMLParserDelegate, WALFeedCallbackDelegate>
+@interface WALFeedTableViewController : UITableViewController <WALFeedCallbackDelegate, WALServerConnectionDelegate>
 
 @end
