@@ -30,7 +30,13 @@
 - (void) setDetailArticle:(WALArticle*) article
 {
 	self.article = article;
-	self.title = article.title;
+	
+	if (self.article.archive)
+		self.title = [NSString stringWithFormat:@"Archive: %@", article.title];
+	else
+		self.title = article.title;
+	
+	self.article.archive = YES;
 }
 
 - (void) configureView

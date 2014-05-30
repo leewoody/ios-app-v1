@@ -16,6 +16,7 @@
 
 @interface WALFeedTableViewController ()
 @property (strong) NSMutableArray* articles;
+@property (strong) NSMutableArray* unreadArticles;
 @property (strong) WALSettings* settings;
 
 @property (strong) NSXMLParser* parser;
@@ -78,12 +79,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [self.articles count];
+	return [self.unreadArticles count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	WALArticle *currentArticle = [self.articles objectAtIndex:indexPath.row];
+	WALArticle *currentArticle = [self.unreadArticles objectAtIndex:indexPath.row];
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
 	cell.textLabel.text = currentArticle.title;
@@ -206,6 +207,7 @@
 			[article removeArticleFromCache];
 		}
 		self.articles = self.parser_articles;
+		[self loadUnreadArticlesFormAllArticles];
 	}
 	
 	self.parser_articles = nil;
@@ -236,6 +238,18 @@
 	[self.parser_articles addObject:newArticle];
 }
 
+- (void) loadUnreadArticlesFormAllArticles
+{
+	self.unreadArticles = [NSMutableArray array];
+	
+	for (WALArticle *article in self.articles)
+	{
+		if (!article.archive) {
+			[self.unreadArticles addObject:article];
+		}
+	}
+}
+
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -243,7 +257,7 @@
     if ([[segue identifier] isEqualToString:@"PushToArticle"])
 	{
 		NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-		[((WALArticleViewController*)segue.destinationViewController) setDetailArticle:self.articles[indexPath.row]];
+		[((WALArticleViewController*)segue.destinationViewController) setDetailArticle:self.unreadArticles[indexPath.row]];
 		[[self.tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:TRUE];
 	}
 	else if ([[segue identifier] isEqualToString:@"ModalToSettings"])
@@ -343,6 +357,7 @@
 - (void) loadArticles
 {
 	self.articles = [NSKeyedUnarchiver unarchiveObjectWithFile:[self pathToSavedArticles]];
+	[self loadUnreadArticlesFormAllArticles];
 }
 
 - (NSURL*)applicationDataDirectory {
