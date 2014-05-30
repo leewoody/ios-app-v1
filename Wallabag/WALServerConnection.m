@@ -43,7 +43,7 @@
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 	
 	[manager setResponseSerializer:[AFXMLParserResponseSerializer new]];
-	manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/rss+xml"];
+	manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/rss+xml", @"application/xml", @"text/xml", nil];
 	
 	manager.securityPolicy.allowInvalidCertificates = YES;
 	
@@ -60,6 +60,7 @@
 	 }
 		 failure:^(AFHTTPRequestOperation *operation, NSError *error)
 	 {
+		 NSLog(@"Loading Error: %@", error.description);
 	 }
 	 ];
 
@@ -87,7 +88,7 @@
 		
 		
 		///! Quick Fix for Memory Errors when parsing too large feeds.
-		if ([self.parser_articleList getNumberOfAllArticles] > 50)
+		if ([self.parser_articleList getNumberOfUnreadArticles] > 50)
 		{
 			[parser abortParsing];
 			[self parsingDone];
@@ -123,6 +124,11 @@
 		self.parser_currentString = [self.parser_currentString stringByAppendingString:string];
 	else
 		self.parser_currentString = string;
+}
+
+- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
+{
+	NSLog(@"Parsing Error: %@", parseError.description);
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
