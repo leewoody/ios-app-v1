@@ -18,6 +18,8 @@
 - (void) setWallabagURL:(NSURL*) url;
 - (NSURL*) getWallabagURL;
 
+- (NSURL*) getURLToAddArticle:(NSURL*) articleURL;
+
 @property NSInteger userID;
 @property (strong) NSString *apiToken;
 
