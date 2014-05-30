@@ -156,7 +156,7 @@
 	{
 		self.settings = settings;
 		[settings saveSettings];
-		assert(false);
+		[self updateArticleList];
 	}
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];
 }

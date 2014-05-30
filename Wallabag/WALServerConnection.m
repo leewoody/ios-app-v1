@@ -61,6 +61,7 @@
 		 failure:^(AFHTTPRequestOperation *operation, NSError *error)
 	 {
 		 NSLog(@"Loading Error: %@", error.description);
+		 [self callbackWithError:error];
 	 }
 	 ];
 
@@ -85,14 +86,6 @@
 		[self mergeArticleWithOldArticles:self.parser_currentArticle];
 		[self.parser_articleList addArticle:self.parser_currentArticle];
 		self.parser_currentArticle = nil;
-		
-		
-		///! Quick Fix for Memory Errors when parsing too large feeds.
-		if ([self.parser_articleList getNumberOfUnreadArticles] > 50)
-		{
-			[parser abortParsing];
-			[self parsingDone];
-		}
 	}
 	else if ([elementName isEqualToString:@"title"])
 	{
@@ -129,20 +122,27 @@
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
 	NSLog(@"Parsing Error: %@", parseError.description);
+	[self callbackWithError:parseError];
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-	[self parsingDone];
+	[self.delegate serverConnection:self didFinishWithArticleList:self.parser_articleList];
+
+	self.parser_articleList = nil;
+	self.oldArticleList = nil;
+	self.delegate = nil;
 }
 
 
 #pragma mark -
 
-- (void)parsingDone
+- (void) callbackWithError:(NSError*) error
 {
-	[self.delegate serverConnection:self didFinishWithArticleList:self.parser_articleList];
+	[self.parser_articleList deleteCachedArticles];
+	[self.delegate serverConnection:self didFinishWithError:error];
 	
+	self.parser_articleList = nil;
 	self.oldArticleList = nil;
 	self.delegate = nil;
 }
