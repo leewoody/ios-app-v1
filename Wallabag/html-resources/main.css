@@ -802,6 +802,7 @@ margin-top:1em;
   width: 70%;
   margin-bottom: 3em;
   text-align: justify;
+  word-wrap: break-word;
 }
 
 #article .tags {
