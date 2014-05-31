@@ -41,14 +41,16 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+	if (self.navigationController.isToolbarHidden)
+		[self.navigationController setToolbarHidden:NO animated:animated];
+	
 	[super viewWillAppear:animated];
-	[self.navigationController setToolbarHidden:FALSE];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+//	[self.navigationController setToolbarHidden:YES animated:animated];
 	[super viewWillDisappear:animated];
-	[self.navigationController setToolbarHidden:true];
 }
 
 #pragma mark - ToolbarButton Actions

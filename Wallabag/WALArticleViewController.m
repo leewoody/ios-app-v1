@@ -17,6 +17,7 @@
 - (IBAction)sharePushed:(id)sender;
 @property (strong) WALArticle *article;
 @property (strong) NSURL *externalURL;
+@property BOOL nextViewIsBrowser;
 @end
 
 @implementation WALArticleViewController
@@ -30,14 +31,19 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+	self.nextViewIsBrowser = NO;
+	if (self.navigationController.isToolbarHidden)
+		[self.navigationController setToolbarHidden:NO animated:animated];
+	
 	[super viewWillAppear:animated];
-	[self.navigationController setToolbarHidden:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+	if (!self.nextViewIsBrowser)
+		[self.navigationController setToolbarHidden:YES animated:animated];
+	
 	[super viewWillDisappear:animated];
-	[self.navigationController setToolbarHidden:YES];
 }
 
 - (void) updateButtons
@@ -107,6 +113,7 @@
 {
 	if ([segue.identifier isEqualToString:@"PushToBrowser"])
 	{
+		self.nextViewIsBrowser = YES;
 		[((WALBrowserViewController*)segue.destinationViewController) setStartURL:self.externalURL];
 	}
 }

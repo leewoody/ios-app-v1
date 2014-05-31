@@ -77,7 +77,7 @@
 	}
 	else if ([elementName isEqualToString:@"source"])
 	{
-		NSLog(@"Source Attributes: %@", attributeDict);
+		//! @todo figure out if source URL is useful to save
 	}
 	
 	self.parser_currentString = nil;
