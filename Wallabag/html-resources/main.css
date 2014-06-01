@@ -937,7 +937,7 @@ blockquote {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 570px) {
   .entrie {
     width: 100%;
     margin-left: 0;
