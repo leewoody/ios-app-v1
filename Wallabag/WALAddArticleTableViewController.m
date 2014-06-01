@@ -24,7 +24,7 @@
 
 - (IBAction)cancelButtonPushed:(id)sender
 {
-	[self.delegate callbackFromAddArticleController:self withURL:nil];
+	[self.delegate addArticleController:self didFinishWithURL:nil];
 }
 
 - (IBAction)saveButtonPushed:(id)sender
@@ -33,7 +33,7 @@
 	
 	if (saveUrl)
 	{
-		[self.delegate callbackFromAddArticleController:self withURL:saveUrl];
+		[self.delegate addArticleController:self didFinishWithURL:saveUrl];
 	}
 }
 

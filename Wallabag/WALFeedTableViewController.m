@@ -100,10 +100,6 @@
 	return 60.0f;
 }
 
-#pragma mark - DataParser
-
-
-
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -150,7 +146,7 @@
 	[self informUserConnectionError:error];
 }
 
-- (void)callbackFromSettingsController:(WALSettingsTableViewController *)settingsTableViewController withSettings:(WALSettings*)settings
+- (void)settingsController:(WALSettingsTableViewController *)settingsTableViewController didFinishWithSettings:(WALSettings*)settings
 {
 	if (settings)
 	{
@@ -161,7 +157,7 @@
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];
 }
 
-- (void)callbackFromAddArticleController:(WALAddArticleTableViewController *)addArticleController withURL:(NSURL *)url
+- (void)addArticleController:(WALAddArticleTableViewController *)addArticleController didFinishWithURL:(NSURL *)url
 {
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];
 	
@@ -214,7 +210,7 @@
 	[alertView show];
 }
 
-#pragma mark - Save Articles
+#pragma mark - Miscellaneous
 
 
 @end

@@ -172,7 +172,7 @@
 
 - (IBAction)cancelButtonPushed:(id)sender
 {
-	[self.delegate callbackFromSettingsController:self withSettings:nil];
+	[self.delegate settingsController:self didFinishWithSettings:nil];
 }
 
 - (IBAction)doneButtonPushed:(id)sender
@@ -181,7 +181,7 @@
 	self.currentSettings.apiToken = self.apiTokenTextField.text;
 	self.currentSettings.userID = [self.userIDTextField.text integerValue];
 	
-	[self.delegate callbackFromSettingsController:self withSettings:self.currentSettings];
+	[self.delegate settingsController:self didFinishWithSettings:self.currentSettings];
 }
 
 - (IBAction)textFieldValueChanged:(id)sender

@@ -14,7 +14,7 @@
 
 @protocol WALFeedCallbackDelegate <NSObject>
 
-- (void) callbackFromSettingsController:(WALSettingsTableViewController*) settingsTableViewController withSettings:(WALSettings*) settings;
-- (void) callbackFromAddArticleController:(WALAddArticleTableViewController*) addArticleController withURL:(NSURL*) url;
+- (void) settingsController:(WALSettingsTableViewController*) settingsTableViewController didFinishWithSettings:(WALSettings*) settings;
+- (void) addArticleController:(WALAddArticleTableViewController*) addArticleController didFinishWithURL:(NSURL*) url;
 
 @end
