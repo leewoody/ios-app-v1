@@ -31,7 +31,10 @@
 - (void)awakeFromNib
 {
 	[self.navigationController setToolbarHidden:true];
-	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavigationBarItem"]];
+	
+	UIColor *titleImageColor = SYSTEM_VERSION_LESS_THAN(@"7.0") ? [UIColor whiteColor] : [UIColor blackColor];
+	
+	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:titleImageColor]];
 	
 	self.refreshControl = [[UIRefreshControl alloc] init];
 	[self.refreshControl addTarget:self action:@selector(triggeredRefreshControl) forControlEvents:UIControlEventValueChanged];
@@ -211,6 +214,26 @@
 }
 
 #pragma mark - Miscellaneous
+
+- (UIImage *)getWallabagTitleImageWithColor:(UIColor*) color
+{
+	return [self ipMaskedImageNamed:@"NavigationBarItem" color:color];
+}
+
+- (UIImage *)ipMaskedImageNamed:(NSString *)name color:(UIColor *)color
+{
+    UIImage *image = [UIImage imageNamed:name];
+    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, image.scale);
+    CGContextRef c = UIGraphicsGetCurrentContext();
+    [image drawInRect:rect];
+    CGContextSetFillColorWithColor(c, [color CGColor]);
+    CGContextSetBlendMode(c, kCGBlendModeSourceAtop);
+    CGContextFillRect(c, rect);
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return result;
+}
 
 
 @end
