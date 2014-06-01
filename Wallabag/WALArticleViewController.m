@@ -9,6 +9,7 @@
 #import "WALArticleViewController.h"
 #import "WALArticle.h"
 #import "WALBrowserViewController.h"
+#import "WALNavigationController.h"
 
 @interface WALArticleViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -120,8 +121,12 @@
 
 - (IBAction)markAsReadPushed:(id)sender
 {
-	self.article.archive = !self.article.archive;
-	[self updateButtons];
+	//! @todo inform user (one time) that this won't affect his online wallabag.
+	
+//	self.article.archive = !self.article.archive;
+//	[self updateButtons];
+	
+	[((WALNavigationController*)self.navigationController) changeTheme];
 }
 
 - (IBAction)sharePushed:(id)sender
