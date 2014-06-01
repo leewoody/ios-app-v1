@@ -130,7 +130,10 @@
 	{
 		[self performSegueWithIdentifier:@"PushToLicense" sender:self];
 	}
-	
+	else if ([identifier isEqualToString:@"IssueOnGitHub"])
+	{
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/wallabag/ios-app/issues?state=open"]];
+	}
 	[[tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:true];
 }
 
