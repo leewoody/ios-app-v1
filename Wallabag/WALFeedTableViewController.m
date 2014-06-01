@@ -33,8 +33,10 @@
 	[self.navigationController setToolbarHidden:true];
 	
 	UIColor *titleImageColor = SYSTEM_VERSION_LESS_THAN(@"7.0") ? [UIColor whiteColor] : [UIColor blackColor];
-	
-	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:titleImageColor]];
+	UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:titleImageColor]];
+	titleImageView.bounds = CGRectInset(titleImageView.frame, 0.0f, 1.0f);
+	titleImageView.contentMode = UIViewContentModeScaleAspectFit;
+	self.navigationItem.titleView = titleImageView;
 	
 	self.refreshControl = [[UIRefreshControl alloc] init];
 	[self.refreshControl addTarget:self action:@selector(triggeredRefreshControl) forControlEvents:UIControlEventValueChanged];
