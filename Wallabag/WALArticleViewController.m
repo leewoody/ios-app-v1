@@ -68,11 +68,11 @@
 {
 	NSString *originalTitle = NSLocalizedString(@"Open Original:", nil);
 	
-	NSURL *mainCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"main" ofType:@"css"]];
+	NSURL *mainCSSFile = [self getPathToMainCSSDependingOnTheme];
 	NSURL *ratatatouilleCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ratatouille" ofType:@"css"]];
 	
 	NSString *htmlFormat = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"article" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
-	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, ratatatouilleCSSFile, mainCSSFile, self.article.title, originalTitle, self.article.link, self.article.link.host,  [self.article getContent]];
+	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, mainCSSFile, ratatatouilleCSSFile,self.article.title, originalTitle, self.article.link, self.article.link.host,  [self.article getContent]];
 	
 	[self.webView loadHTMLString:htmlToDisplay baseURL:nil];
 }
@@ -108,6 +108,21 @@
 	return true;
 }
 
+#pragma mark - Theme Handling
+
+- (NSURL*) getPathToMainCSSDependingOnTheme
+{
+	NSURL *result;
+	WALNavigationController *navigationController = ((WALNavigationController*)self.navigationController);
+
+	if ([navigationController getCurrentTheme] == WALThemeNight)
+		result = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"main-night" ofType:@"css"]];
+	else
+		result = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"main" ofType:@"css"]];
+
+	return result;
+}
+
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -126,7 +141,12 @@
 //	self.article.archive = !self.article.archive;
 //	[self updateButtons];
 	
-	[((WALNavigationController*)self.navigationController) changeTheme];
+	WALNavigationController *navigationController = ((WALNavigationController*)self.navigationController);
+	[navigationController changeTheme];
+	
+	NSURL *mainCSSFile = [self getPathToMainCSSDependingOnTheme];
+	NSString *javaScriptToChangeTheme = [NSString stringWithFormat:@"document.getElementById('main-theme').href='%@';", mainCSSFile];
+	[self.webView stringByEvaluatingJavaScriptFromString:javaScriptToChangeTheme];
 }
 
 - (IBAction)sharePushed:(id)sender

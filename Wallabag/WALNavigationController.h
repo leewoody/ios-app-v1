@@ -15,6 +15,7 @@ typedef enum : NSUInteger {
 
 @interface WALNavigationController : UINavigationController
 
+- (WALTheme) getCurrentTheme;
 - (void) changeTheme;
 
 @end

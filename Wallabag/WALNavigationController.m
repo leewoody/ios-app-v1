@@ -22,6 +22,11 @@
 	[self updateWithTheme];
 }
 
+- (WALTheme)getCurrentTheme
+{
+	return self.theme;
+}
+
 - (void)changeTheme
 {
 	self.theme = self.theme == WALThemeDay ? WALThemeNight : WALThemeDay;
