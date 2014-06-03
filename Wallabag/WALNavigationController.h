@@ -8,14 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum : NSUInteger {
-    WALThemeDay,
-	WALThemeNight
-} WALTheme;
+@class WALTheme;
 
 @interface WALNavigationController : UINavigationController
 
-- (WALTheme) getCurrentTheme;
+- (WALTheme*) getCurrentTheme;
 - (void) changeTheme;
 
 @end

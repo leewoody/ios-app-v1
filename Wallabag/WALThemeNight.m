@@ -40,4 +40,9 @@
 	return [super getPathtoExtraCSSFile];
 }
 
+- (UIStatusBarStyle) getPreferredStatusBarStyle
+{
+	return UIStatusBarStyleBlackOpaque;
+}
+
 @end

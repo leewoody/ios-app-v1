@@ -40,4 +40,9 @@
 	return [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ratatouille" ofType:@"css"]];
 }
 
+- (UIStatusBarStyle) getPreferredStatusBarStyle
+{
+	return UIStatusBarStyleDefault;
+}
+
 @end

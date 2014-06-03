@@ -10,6 +10,7 @@
 #import "WALArticle.h"
 #import "WALBrowserViewController.h"
 #import "WALNavigationController.h"
+#import "WALTheme.h"
 
 @interface WALArticleViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -67,12 +68,13 @@
 - (void) configureView
 {
 	NSString *originalTitle = NSLocalizedString(@"Open Original:", nil);
-	
-	NSURL *mainCSSFile = [self getPathToMainCSSDependingOnTheme];
-	NSURL *ratatatouilleCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ratatouille" ofType:@"css"]];
+
+	WALTheme *currentTheme = [((WALNavigationController*)self.navigationController) getCurrentTheme];
+	NSURL *mainCSSFile = [currentTheme getPathToMainCSSFile];
+	NSURL *extraCSSFile = [currentTheme getPathtoExtraCSSFile];
 	
 	NSString *htmlFormat = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"article" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
-	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, mainCSSFile, ratatatouilleCSSFile,self.article.title, originalTitle, self.article.link, self.article.link.host,  [self.article getContent]];
+	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, mainCSSFile, extraCSSFile, self.article.title, originalTitle, self.article.link, self.article.link.host,  [self.article getContent]];
 	
 	[self.webView loadHTMLString:htmlToDisplay baseURL:nil];
 }
@@ -108,19 +110,16 @@
 	return true;
 }
 
-#pragma mark - Theme Handling
+#pragma mark - Theming
 
-- (NSURL*) getPathToMainCSSDependingOnTheme
+- (void) updateTheme
 {
-	NSURL *result;
-	WALNavigationController *navigationController = ((WALNavigationController*)self.navigationController);
-
-	if ([navigationController getCurrentTheme] == WALThemeNight)
-		result = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"main-night" ofType:@"css"]];
-	else
-		result = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"main" ofType:@"css"]];
-
-	return result;
+	WALTheme *currentTheme = [((WALNavigationController*)self.navigationController) getCurrentTheme];
+	NSURL *mainCSSFile = [currentTheme getPathToMainCSSFile];
+	NSURL *extraCSSFile = [currentTheme getPathtoExtraCSSFile];
+	
+	NSString *javaScriptToChangeTheme = [NSString stringWithFormat:@"document.getElementById('main-theme').href='%@';\ndocument.getElementById('extra-theme').href='%@';", mainCSSFile, extraCSSFile];
+	[self.webView stringByEvaluatingJavaScriptFromString:javaScriptToChangeTheme];
 }
 
 #pragma mark - Segue
@@ -143,10 +142,7 @@
 	
 	WALNavigationController *navigationController = ((WALNavigationController*)self.navigationController);
 	[navigationController changeTheme];
-	
-	NSURL *mainCSSFile = [self getPathToMainCSSDependingOnTheme];
-	NSString *javaScriptToChangeTheme = [NSString stringWithFormat:@"document.getElementById('main-theme').href='%@';", mainCSSFile];
-	[self.webView stringByEvaluatingJavaScriptFromString:javaScriptToChangeTheme];
+	[self updateTheme];
 }
 
 - (IBAction)sharePushed:(id)sender

@@ -10,8 +10,10 @@
 #import "WALArticleViewController.h"
 #import "WALSettingsTableViewController.h"
 #import "WALAddArticleTableViewController.h"
+#import "WALNavigationController.h"
 
 #import "WALServerConnection.h"
+#import "WALTheme.h"
 
 #import "WALArticle.h"
 #import "WALArticleList.h"
@@ -31,7 +33,7 @@
 - (void)awakeFromNib
 {
 	[self.navigationController setToolbarHidden:true];
-	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self ipMaskedImageNamed:@"NavigationBarItem" color:[UIColor whiteColor]]];
+	[self updateWithTheme];
 	
 	self.refreshControl = [[UIRefreshControl alloc] init];
 	[self.refreshControl addTarget:self action:@selector(triggeredRefreshControl) forControlEvents:UIControlEventValueChanged];
@@ -87,9 +89,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	WALArticle *currentArticle = [self.articleList getUnreadArticleAtIntex:indexPath.row];
+	WALTheme *currentTheme = [((WALNavigationController*)self.navigationController) getCurrentTheme];
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
 	cell.textLabel.text = currentArticle.title;
+	cell.textLabel.textColor = [currentTheme getTextColor];
 	cell.detailTextLabel.text = @"";
 	
     return cell;
@@ -100,9 +104,16 @@
 	return 60.0f;
 }
 
-#pragma mark - DataParser
+#pragma mark - Theming
 
+- (void) updateWithTheme
+{
+	WALTheme *currentTheme = [((WALNavigationController*)self.navigationController) getCurrentTheme];
+	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self ipMaskedImageNamed:@"NavigationBarItem" color:[currentTheme getTextColor]]];
+	self.tableView.backgroundColor = [currentTheme getBackgroundColor];
 
+	[self.tableView reloadData];
+}
 
 #pragma mark - Segue
 

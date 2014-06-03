@@ -19,5 +19,6 @@
 - (NSURL*) getPathToMainCSSFile;
 - (NSURL*) getPathtoExtraCSSFile;
 
+- (UIStatusBarStyle) getPreferredStatusBarStyle;
 
 @end
