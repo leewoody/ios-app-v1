@@ -13,6 +13,7 @@
 #import "WALNavigationController.h"
 
 #import "WALServerConnection.h"
+#import "WALThemeOrganizer.h"
 #import "WALTheme.h"
 
 #import "WALArticle.h"
@@ -89,7 +90,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	WALArticle *currentArticle = [self.articleList getUnreadArticleAtIntex:indexPath.row];
-	WALTheme *currentTheme = [((WALNavigationController*)self.navigationController) getCurrentTheme];
+	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
 	cell.textLabel.text = currentArticle.title;
@@ -108,7 +109,7 @@
 
 - (void) updateWithTheme
 {
-	WALTheme *currentTheme = [((WALNavigationController*)self.navigationController) getCurrentTheme];
+	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
 	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self ipMaskedImageNamed:@"NavigationBarItem" color:[currentTheme getTextColor]]];
 	self.tableView.backgroundColor = [currentTheme getBackgroundColor];
 

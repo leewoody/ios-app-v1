@@ -9,9 +9,9 @@
 #import "WALNavigationController.h"
 #import "WALTheme.h"
 #import "WALThemeNight.h"
+#import "WALThemeOrganizer.h"
 
 @interface WALNavigationController ()
-@property WALTheme *currentTheme;
 @end
 
 @implementation WALNavigationController
@@ -19,7 +19,6 @@
 - (void)awakeFromNib
 {
 	[super awakeFromNib];
-	self.currentTheme = [[WALTheme alloc] init];
 }
 
 - (void)viewDidLoad
@@ -28,34 +27,22 @@
 	[self updateWithTheme];
 }
 
-- (WALTheme*)getCurrentTheme
-{
-	return self.currentTheme;
-}
-
-- (void)changeTheme
-{
-	if ([self.currentTheme isMemberOfClass:[WALTheme class]])
-		self.currentTheme = [[WALThemeNight alloc] init];
-	else
-		self.currentTheme = [[WALTheme alloc] init];
-	
-	[self updateWithTheme];
-}
-
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-	return [self.currentTheme getPreferredStatusBarStyle];
+	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
+	return [currentTheme getPreferredStatusBarStyle];
 }
 
 - (void) updateWithTheme
 {
-	[self.navigationBar setBarTintColor:[self.currentTheme getBarColor]];
-	[self.navigationBar setTintColor:[self.currentTheme getTintColor]];
-	[self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [self.currentTheme getTextColor]}];
+	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
 	
-	[self.toolbar setBarTintColor:[self.currentTheme getBarColor]];
-	[self.toolbar setTintColor:[self.currentTheme getTintColor]];
+	[self.navigationBar setBarTintColor:[currentTheme getBarColor]];
+	[self.navigationBar setTintColor:[currentTheme getTintColor]];
+	[self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [currentTheme getTextColor]}];
+	
+	[self.toolbar setBarTintColor:[currentTheme getBarColor]];
+	[self.toolbar setTintColor:[currentTheme getTintColor]];
 	[self setNeedsStatusBarAppearanceUpdate];
 }
 

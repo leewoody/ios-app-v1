@@ -13,6 +13,7 @@
 		F5259672193E4259003E91A7 /* main-night.css in Resources */ = {isa = PBXBuildFile; fileRef = F5259671193E4259003E91A7 /* main-night.css */; };
 		F5259676193E49EE003E91A7 /* WALTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = F5259675193E49EE003E91A7 /* WALTheme.m */; };
 		F5259679193E4BFC003E91A7 /* WALThemeNight.m in Sources */ = {isa = PBXBuildFile; fileRef = F5259678193E4BFC003E91A7 /* WALThemeNight.m */; };
+		F525967C193E58B1003E91A7 /* WALThemeOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F525967B193E58B1003E91A7 /* WALThemeOrganizer.m */; };
 		F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = F54E12F218B4EEDB00E89ED1 /* WALArticle.m */; };
 		F57E644E18BB84AD00587DBD /* article.html in Resources */ = {isa = PBXBuildFile; fileRef = F57E644D18BB84AD00587DBD /* article.html */; };
 		F5877D8D18B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
@@ -63,6 +64,8 @@
 		F5259675193E49EE003E91A7 /* WALTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALTheme.m; sourceTree = "<group>"; };
 		F5259677193E4BFC003E91A7 /* WALThemeNight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALThemeNight.h; sourceTree = "<group>"; };
 		F5259678193E4BFC003E91A7 /* WALThemeNight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALThemeNight.m; sourceTree = "<group>"; };
+		F525967A193E58B1003E91A7 /* WALThemeOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALThemeOrganizer.h; sourceTree = "<group>"; };
+		F525967B193E58B1003E91A7 /* WALThemeOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALThemeOrganizer.m; sourceTree = "<group>"; };
 		F54E12F118B4EEDB00E89ED1 /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
 		F54E12F218B4EEDB00E89ED1 /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
 		F54F6AA218BCBCE500B434F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -139,6 +142,8 @@
 		F5259673193E48FB003E91A7 /* Theming */ = {
 			isa = PBXGroup;
 			children = (
+				F525967A193E58B1003E91A7 /* WALThemeOrganizer.h */,
+				F525967B193E58B1003E91A7 /* WALThemeOrganizer.m */,
 				F5259674193E49EE003E91A7 /* WALTheme.h */,
 				F5259675193E49EE003E91A7 /* WALTheme.m */,
 				F5259677193E4BFC003E91A7 /* WALThemeNight.h */,
@@ -445,6 +450,7 @@
 				F5877DA618B4E02B009D4EFE /* WALArticleViewController.m in Sources */,
 				F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */,
 				F5905330193B6553005E2A00 /* WALNavigationController.m in Sources */,
+				F525967C193E58B1003E91A7 /* WALThemeOrganizer.m in Sources */,
 				F5B7475B1938BAAF0071B94C /* WALArticleList.m in Sources */,
 				F5DA910718B52002006A0B1A /* WALAddArticleTableViewController.m in Sources */,
 				F5B747581938B87D0071B94C /* WALServerConnection.m in Sources */,

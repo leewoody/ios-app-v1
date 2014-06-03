@@ -11,6 +11,7 @@
 #import "WALBrowserViewController.h"
 #import "WALNavigationController.h"
 #import "WALTheme.h"
+#import "WALThemeOrganizer.h"
 
 @interface WALArticleViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -69,7 +70,7 @@
 {
 	NSString *originalTitle = NSLocalizedString(@"Open Original:", nil);
 
-	WALTheme *currentTheme = [((WALNavigationController*)self.navigationController) getCurrentTheme];
+	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
 	NSURL *mainCSSFile = [currentTheme getPathToMainCSSFile];
 	NSURL *extraCSSFile = [currentTheme getPathtoExtraCSSFile];
 	
@@ -114,7 +115,7 @@
 
 - (void) updateTheme
 {
-	WALTheme *currentTheme = [((WALNavigationController*)self.navigationController) getCurrentTheme];
+	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
 	NSURL *mainCSSFile = [currentTheme getPathToMainCSSFile];
 	NSURL *extraCSSFile = [currentTheme getPathtoExtraCSSFile];
 	
@@ -140,8 +141,7 @@
 //	self.article.archive = !self.article.archive;
 //	[self updateButtons];
 	
-	WALNavigationController *navigationController = ((WALNavigationController*)self.navigationController);
-	[navigationController changeTheme];
+	[[WALThemeOrganizer sharedThemeOrganizer] changeTheme];
 	[self updateTheme];
 }
 
