@@ -34,7 +34,8 @@
 - (void)awakeFromNib
 {
 	[self.navigationController setToolbarHidden:true];
-	[self updateWithTheme];
+	[self updateWithTheme:[[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme]];
+	[[WALThemeOrganizer sharedThemeOrganizer] subscribeToThemeChanges:self];
 	
 	self.refreshControl = [[UIRefreshControl alloc] init];
 	[self.refreshControl addTarget:self action:@selector(triggeredRefreshControl) forControlEvents:UIControlEventValueChanged];
@@ -107,13 +108,16 @@
 
 #pragma mark - Theming
 
-- (void) updateWithTheme
+- (void)themeOrganizer:(WALThemeOrganizer *)organizer setNewTheme:(WALTheme *)theme
 {
-	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
-	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self ipMaskedImageNamed:@"NavigationBarItem" color:[currentTheme getTextColor]]];
-	self.tableView.backgroundColor = [currentTheme getBackgroundColor];
-
+	[self updateWithTheme:theme];
 	[self.tableView reloadData];
+}
+
+- (void) updateWithTheme:(WALTheme*) theme
+{
+	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self ipMaskedImageNamed:@"NavigationBarItem" color:[theme getTextColor]]];
+	self.tableView.backgroundColor = [theme getBackgroundColor];
 }
 
 #pragma mark - Segue

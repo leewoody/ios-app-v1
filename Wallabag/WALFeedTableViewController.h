@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "WALFeedCallbackDelegate.h"
 #import "WALServerConnectionDelegate.h"
+#import "WALThemeOrganizerDelegate.h"
 
-@interface WALFeedTableViewController : UITableViewController <WALFeedCallbackDelegate, WALServerConnectionDelegate>
+@interface WALFeedTableViewController : UITableViewController <WALFeedCallbackDelegate, WALServerConnectionDelegate, WALThemeOrganizerDelegate>
 
 @end
