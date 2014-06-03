@@ -122,7 +122,7 @@
 
 - (void) updateWithTheme:(WALTheme*) theme
 {
-	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self ipMaskedImageNamed:@"NavigationBarItem" color:[theme getTextColor]]];
+	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:[theme getTextColor]]];
 	self.tableView.backgroundColor = [theme getBackgroundColor];
 }
 
