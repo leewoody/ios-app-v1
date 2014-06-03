@@ -24,8 +24,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[self updateWithTheme];
-	[[WALThemeOrganizer sharedThemeOrganizer] subscribeToThemeChanges:self];
+	
+	WALThemeOrganizer *organizer = [WALThemeOrganizer sharedThemeOrganizer];
+	[organizer subscribeToThemeChanges:self];
+	[self updateWithTheme:[organizer getCurrentTheme]];
+
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -34,22 +37,23 @@
 	return [currentTheme getPreferredStatusBarStyle];
 }
 
-- (void) updateWithTheme
+- (void) updateWithTheme:(WALTheme*) theme
 {
-	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
+	if (SYSTEM_VERSION_LESS_THAN(@"7.0"))
+		return;
+
+	[self.navigationBar setBarTintColor:[theme getBarColor]];
+	[self.navigationBar setTintColor:[theme getTintColor]];
+	[self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [theme getTextColor]}];
 	
-	[self.navigationBar setBarTintColor:[currentTheme getBarColor]];
-	[self.navigationBar setTintColor:[currentTheme getTintColor]];
-	[self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [currentTheme getTextColor]}];
-	
-	[self.toolbar setBarTintColor:[currentTheme getBarColor]];
-	[self.toolbar setTintColor:[currentTheme getTintColor]];
+	[self.toolbar setBarTintColor:[theme getBarColor]];
+	[self.toolbar setTintColor:[theme getTintColor]];
 	[self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)themeOrganizer:(WALThemeOrganizer *)organizer setNewTheme:(WALTheme *)theme
 {
-	[self updateWithTheme];
+	[self updateWithTheme:theme];
 }
 
 @end
