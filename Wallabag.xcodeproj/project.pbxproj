@@ -11,6 +11,8 @@
 		F50B3B9B1938F6CA0048EBFD /* WALSettingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F50B3B9A1938F6CA0048EBFD /* WALSettingsTests.m */; };
 		F50B895218B7A28400AA9A6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F50B895018B7A28400AA9A6C /* Localizable.strings */; };
 		F5259672193E4259003E91A7 /* main-night.css in Resources */ = {isa = PBXBuildFile; fileRef = F5259671193E4259003E91A7 /* main-night.css */; };
+		F5259676193E49EE003E91A7 /* WALTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = F5259675193E49EE003E91A7 /* WALTheme.m */; };
+		F5259679193E4BFC003E91A7 /* WALThemeNight.m in Sources */ = {isa = PBXBuildFile; fileRef = F5259678193E4BFC003E91A7 /* WALThemeNight.m */; };
 		F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = F54E12F218B4EEDB00E89ED1 /* WALArticle.m */; };
 		F57E644E18BB84AD00587DBD /* article.html in Resources */ = {isa = PBXBuildFile; fileRef = F57E644D18BB84AD00587DBD /* article.html */; };
 		F5877D8D18B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
@@ -57,6 +59,10 @@
 		F50B895318B7A28F00AA9A6C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F50B895518B7A2A000AA9A6C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F5259671193E4259003E91A7 /* main-night.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "main-night.css"; sourceTree = "<group>"; };
+		F5259674193E49EE003E91A7 /* WALTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALTheme.h; sourceTree = "<group>"; };
+		F5259675193E49EE003E91A7 /* WALTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALTheme.m; sourceTree = "<group>"; };
+		F5259677193E4BFC003E91A7 /* WALThemeNight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALThemeNight.h; sourceTree = "<group>"; };
+		F5259678193E4BFC003E91A7 /* WALThemeNight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALThemeNight.m; sourceTree = "<group>"; };
 		F54E12F118B4EEDB00E89ED1 /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
 		F54E12F218B4EEDB00E89ED1 /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
 		F54F6AA218BCBCE500B434F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -130,6 +136,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F5259673193E48FB003E91A7 /* Theming */ = {
+			isa = PBXGroup;
+			children = (
+				F5259674193E49EE003E91A7 /* WALTheme.h */,
+				F5259675193E49EE003E91A7 /* WALTheme.m */,
+				F5259677193E4BFC003E91A7 /* WALThemeNight.h */,
+				F5259678193E4BFC003E91A7 /* WALThemeNight.m */,
+			);
+			name = Theming;
+			sourceTree = "<group>";
+		};
 		F54E12EE18B4EAC000E89ED1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +234,7 @@
 		F5877D9218B4E02B009D4EFE /* Wallabag */ = {
 			isa = PBXGroup;
 			children = (
+				F5259673193E48FB003E91A7 /* Theming */,
 				F5AF8ABC18F949D100652EBE /* ServerDataHandler */,
 				F54E12F018B4EACD00E89ED1 /* Controller */,
 				F54E12EE18B4EAC000E89ED1 /* Model */,
@@ -421,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5259676193E49EE003E91A7 /* WALTheme.m in Sources */,
 				F5877D9918B4E02B009D4EFE /* main.m in Sources */,
 				F5877D9D18B4E02B009D4EFE /* WALAppDelegate.m in Sources */,
 				F5877DA618B4E02B009D4EFE /* WALArticleViewController.m in Sources */,
@@ -430,6 +449,7 @@
 				F5DA910718B52002006A0B1A /* WALAddArticleTableViewController.m in Sources */,
 				F5B747581938B87D0071B94C /* WALServerConnection.m in Sources */,
 				F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */,
+				F5259679193E4BFC003E91A7 /* WALThemeNight.m in Sources */,
 				F5C9FB5C18BBB8E000083FB3 /* WALBrowserViewController.m in Sources */,
 				F5DA910418B51FE8006A0B1A /* WALSettingsTableViewController.m in Sources */,
 				F5905333193B657D005E2A00 /* WALTableViewController.m in Sources */,
