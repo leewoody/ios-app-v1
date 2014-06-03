@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WALThemeOrganizerDelegate.h"
 @class WALArticle;
 
-@interface WALArticleViewController : UIViewController<UIWebViewDelegate>
+@interface WALArticleViewController : UIViewController<UIWebViewDelegate, WALThemeOrganizerDelegate>
 
 - (void) setDetailArticle:(WALArticle*) article;
 

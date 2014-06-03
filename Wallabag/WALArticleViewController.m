@@ -17,7 +17,9 @@
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *markAsReadButton;
 - (IBAction)markAsReadPushed:(id)sender;
+- (IBAction)changeThemePushed:(id)sender;
 - (IBAction)sharePushed:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *changeThemePushed;
 @property (strong) WALArticle *article;
 @property (strong) NSURL *externalURL;
 @property BOOL nextViewIsBrowser;
@@ -30,6 +32,7 @@
 	[super viewDidLoad];
 	self.webView.delegate = self;
 	[self configureView];
+	[[WALThemeOrganizer sharedThemeOrganizer] subscribeToThemeChanges:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -113,11 +116,15 @@
 
 #pragma mark - Theming
 
-- (void) updateTheme
+- (void)themeOrganizer:(WALThemeOrganizer *)organizer setNewTheme:(WALTheme *)theme
 {
-	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
-	NSURL *mainCSSFile = [currentTheme getPathToMainCSSFile];
-	NSURL *extraCSSFile = [currentTheme getPathtoExtraCSSFile];
+	[self updateWithTheme:theme];
+}
+
+- (void) updateWithTheme:(WALTheme*) theme
+{
+	NSURL *mainCSSFile = [theme getPathToMainCSSFile];
+	NSURL *extraCSSFile = [theme getPathtoExtraCSSFile];
 	
 	NSString *javaScriptToChangeTheme = [NSString stringWithFormat:@"document.getElementById('main-theme').href='%@';\ndocument.getElementById('extra-theme').href='%@';", mainCSSFile, extraCSSFile];
 	[self.webView stringByEvaluatingJavaScriptFromString:javaScriptToChangeTheme];
@@ -138,11 +145,13 @@
 {
 	//! @todo inform user (one time) that this won't affect his online wallabag.
 	
-//	self.article.archive = !self.article.archive;
-//	[self updateButtons];
-	
+	self.article.archive = !self.article.archive;
+	[self updateButtons];
+}
+
+- (IBAction)changeThemePushed:(id)sender
+{
 	[[WALThemeOrganizer sharedThemeOrganizer] changeTheme];
-	[self updateTheme];
 }
 
 - (IBAction)sharePushed:(id)sender

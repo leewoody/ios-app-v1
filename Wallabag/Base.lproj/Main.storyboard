@@ -596,6 +596,12 @@ THE SOFTWARE.</string>
                                 <action selector="markAsReadPushed:" destination="Ah7-4n-0Wa" id="Cwy-Ua-4e4"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="2uA-Z6-qDf"/>
+                        <barButtonItem title="Change Theme" id="Wyd-82-bLp">
+                            <connections>
+                                <action selector="changeThemePushed:" destination="Ah7-4n-0Wa" id="dYB-ba-8zJ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="64X-L8-dwn"/>
                         <barButtonItem systemItem="action" id="wzP-sF-dgO">
                             <connections>
