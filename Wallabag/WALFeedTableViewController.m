@@ -10,8 +10,11 @@
 #import "WALArticleViewController.h"
 #import "WALSettingsTableViewController.h"
 #import "WALAddArticleTableViewController.h"
+#import "WALNavigationController.h"
 
 #import "WALServerConnection.h"
+#import "WALThemeOrganizer.h"
+#import "WALTheme.h"
 
 #import "WALArticle.h"
 #import "WALArticleList.h"
@@ -31,6 +34,8 @@
 - (void)awakeFromNib
 {
 	[self.navigationController setToolbarHidden:true];
+	[self updateWithTheme:[[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme]];
+	[[WALThemeOrganizer sharedThemeOrganizer] subscribeToThemeChanges:self];
 	
 	UIColor *titleImageColor = SYSTEM_VERSION_LESS_THAN(@"7.0") ? [UIColor whiteColor] : [UIColor blackColor];
 	UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:titleImageColor]];
@@ -92,9 +97,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	WALArticle *currentArticle = [self.articleList getUnreadArticleAtIntex:indexPath.row];
+	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
 	cell.textLabel.text = currentArticle.title;
+	cell.textLabel.textColor = [currentTheme getTextColor];
 	cell.detailTextLabel.text = @"";
 	
     return cell;
@@ -103,6 +110,20 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	return 60.0f;
+}
+
+#pragma mark - Theming
+
+- (void)themeOrganizer:(WALThemeOrganizer *)organizer setNewTheme:(WALTheme *)theme
+{
+	[self updateWithTheme:theme];
+	[self.tableView reloadData];
+}
+
+- (void) updateWithTheme:(WALTheme*) theme
+{
+	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self ipMaskedImageNamed:@"NavigationBarItem" color:[theme getTextColor]]];
+	self.tableView.backgroundColor = [theme getBackgroundColor];
 }
 
 #pragma mark - Segue

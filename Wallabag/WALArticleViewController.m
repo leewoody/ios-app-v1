@@ -9,6 +9,9 @@
 #import "WALArticleViewController.h"
 #import "WALArticle.h"
 #import "WALBrowserViewController.h"
+#import "WALNavigationController.h"
+#import "WALTheme.h"
+#import "WALThemeOrganizer.h"
 
 @interface WALArticleViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -66,12 +69,13 @@
 - (void) configureView
 {
 	NSString *originalTitle = NSLocalizedString(@"Open Original:", nil);
-	
-	NSURL *mainCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"main" ofType:@"css"]];
-	NSURL *ratatatouilleCSSFile = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ratatouille" ofType:@"css"]];
+
+	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
+	NSURL *mainCSSFile = [currentTheme getPathToMainCSSFile];
+	NSURL *extraCSSFile = [currentTheme getPathtoExtraCSSFile];
 	
 	NSString *htmlFormat = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"article" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
-	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, ratatatouilleCSSFile, mainCSSFile, self.article.title, originalTitle, self.article.link, self.article.link.host,  [self.article getContent]];
+	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, mainCSSFile, extraCSSFile, self.article.title, originalTitle, self.article.link, self.article.link.host,  [self.article getContent]];
 	
 	[self.webView loadHTMLString:htmlToDisplay baseURL:nil];
 }
@@ -107,6 +111,18 @@
 	return true;
 }
 
+#pragma mark - Theming
+
+- (void) updateTheme
+{
+	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
+	NSURL *mainCSSFile = [currentTheme getPathToMainCSSFile];
+	NSURL *extraCSSFile = [currentTheme getPathtoExtraCSSFile];
+	
+	NSString *javaScriptToChangeTheme = [NSString stringWithFormat:@"document.getElementById('main-theme').href='%@';\ndocument.getElementById('extra-theme').href='%@';", mainCSSFile, extraCSSFile];
+	[self.webView stringByEvaluatingJavaScriptFromString:javaScriptToChangeTheme];
+}
+
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -120,8 +136,13 @@
 
 - (IBAction)markAsReadPushed:(id)sender
 {
-	self.article.archive = !self.article.archive;
-	[self updateButtons];
+	//! @todo inform user (one time) that this won't affect his online wallabag.
+	
+//	self.article.archive = !self.article.archive;
+//	[self updateButtons];
+	
+	[[WALThemeOrganizer sharedThemeOrganizer] changeTheme];
+	[self updateTheme];
 }
 
 - (IBAction)sharePushed:(id)sender

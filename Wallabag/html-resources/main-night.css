@@ -15,7 +15,8 @@ html {
 }
 
 body {
-  background: #EEE;
+  color: #FFF;
+  background: #888;
 }
 
 /* ==========================================================================
@@ -33,11 +34,11 @@ h2, h3, h4 {
 }
 
 p, li {
-  color: #666;
+  color: #EEE;
 }
 
 a {
-  color: #000;
+  color: #FFF;
   font-weight: bold;
 }
 
