@@ -240,6 +240,9 @@
 
 - (UIImage *)getWallabagTitleImageWithColor:(UIColor*) color
 {
+	if (SYSTEM_VERSION_LESS_THAN(@"7.0"))
+		return [self ipMaskedImageNamed:@"NavigationBarItem" color:[UIColor whiteColor]];
+	
 	return [self ipMaskedImageNamed:@"NavigationBarItem" color:color];
 }
 
