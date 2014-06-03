@@ -32,6 +32,7 @@
 	[super viewDidLoad];
 	self.webView.delegate = self;
 	[self configureView];
+	self.webView.backgroundColor = [[[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme] getBackgroundColor];
 	[[WALThemeOrganizer sharedThemeOrganizer] subscribeToThemeChanges:self];
 }
 
@@ -127,6 +128,7 @@
 	NSURL *extraCSSFile = [theme getPathtoExtraCSSFile];
 	
 	NSString *javaScriptToChangeTheme = [NSString stringWithFormat:@"document.getElementById('main-theme').href='%@';\ndocument.getElementById('extra-theme').href='%@';", mainCSSFile, extraCSSFile];
+	self.webView.backgroundColor = [theme getBackgroundColor];
 	[self.webView stringByEvaluatingJavaScriptFromString:javaScriptToChangeTheme];
 }
 

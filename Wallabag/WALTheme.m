@@ -17,7 +17,7 @@
 
 - (UIColor*) getBackgroundColor
 {
-	return [UIColor whiteColor];
+	return [UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0f];
 }
 
 - (UIColor*) getTextColor
