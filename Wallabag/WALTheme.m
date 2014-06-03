@@ -27,7 +27,7 @@
 
 - (UIColor*) getTintColor
 {
-	return [UIColor blueColor];
+	return [[[[UIApplication sharedApplication] delegate] window] tintColor];
 }
 
 - (NSURL*) getPathToMainCSSFile
