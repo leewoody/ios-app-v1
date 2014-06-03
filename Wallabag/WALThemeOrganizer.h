@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WALThemeOrganizerDelegate.h"
 
 @class WALTheme;
 
@@ -16,5 +17,8 @@
 
 - (WALTheme*) getCurrentTheme;
 - (void) changeTheme;
+
+- (void) subscribeToThemeChanges:(id<WALThemeOrganizerDelegate>) subscriber;
+- (void) unsubscribeToThemeChanges:(id<WALThemeOrganizerDelegate>) subscriber;
 
 @end

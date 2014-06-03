@@ -25,6 +25,7 @@
 {
     [super viewDidLoad];
 	[self updateWithTheme];
+	[[WALThemeOrganizer sharedThemeOrganizer] subscribeToThemeChanges:self];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -44,6 +45,11 @@
 	[self.toolbar setBarTintColor:[currentTheme getBarColor]];
 	[self.toolbar setTintColor:[currentTheme getTintColor]];
 	[self setNeedsStatusBarAppearanceUpdate];
+}
+
+- (void)themeOrganizer:(WALThemeOrganizer *)organizer setNewTheme:(WALTheme *)theme
+{
+	[self updateWithTheme];
 }
 
 @end

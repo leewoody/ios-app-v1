@@ -9,9 +9,11 @@
 #import "WALThemeOrganizer.h"
 #import "WALTheme.h"
 #import "WALThemeNight.h"
+#import "WALThemeOrganizerDelegate.h"
 
 @interface WALThemeOrganizer ()
-@property (strong)  WALTheme *currentTheme;
+@property (strong) WALTheme *currentTheme;
+@property (strong) NSMutableArray *subscribedVCs;
 @end
 
 @implementation WALThemeOrganizer
@@ -21,6 +23,7 @@
 	if (self = [super init])
 	{
 		self.currentTheme = [[WALTheme alloc] init];
+		self.subscribedVCs = [NSMutableArray array];
 	}
 	return self;
 }
@@ -47,6 +50,25 @@
 		self.currentTheme = [[WALThemeNight alloc] init];
 	else
 		self.currentTheme = [[WALTheme alloc] init];
+	
+	[self notifyViewControllersAboutNewTheme];
+}
+
+- (void) notifyViewControllersAboutNewTheme
+{
+	for (id<WALThemeOrganizerDelegate> subscriber in self.subscribedVCs)
+		[subscriber themeOrganizer:self setNewTheme:self.currentTheme];
+
+}
+
+- (void) subscribeToThemeChanges:(id<WALThemeOrganizerDelegate>) subscriber
+{
+	[self.subscribedVCs addObject:subscriber];
+}
+
+- (void) unsubscribeToThemeChanges:(id<WALThemeOrganizerDelegate>) subscriber
+{
+	[self.subscribedVCs removeObject:subscriber];
 }
 
 @end

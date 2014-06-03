@@ -66,6 +66,7 @@
 		F5259678193E4BFC003E91A7 /* WALThemeNight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALThemeNight.m; sourceTree = "<group>"; };
 		F525967A193E58B1003E91A7 /* WALThemeOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALThemeOrganizer.h; sourceTree = "<group>"; };
 		F525967B193E58B1003E91A7 /* WALThemeOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALThemeOrganizer.m; sourceTree = "<group>"; };
+		F525967D193E5F17003E91A7 /* WALThemeOrganizerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALThemeOrganizerDelegate.h; sourceTree = "<group>"; };
 		F54E12F118B4EEDB00E89ED1 /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
 		F54E12F218B4EEDB00E89ED1 /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
 		F54F6AA218BCBCE500B434F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -142,6 +143,7 @@
 		F5259673193E48FB003E91A7 /* Theming */ = {
 			isa = PBXGroup;
 			children = (
+				F525967D193E5F17003E91A7 /* WALThemeOrganizerDelegate.h */,
 				F525967A193E58B1003E91A7 /* WALThemeOrganizer.h */,
 				F525967B193E58B1003E91A7 /* WALThemeOrganizer.m */,
 				F5259674193E49EE003E91A7 /* WALTheme.h */,

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WALThemeOrganizerDelegate.h"
 
 @class WALTheme;
 
-@interface WALNavigationController : UINavigationController
+@interface WALNavigationController : UINavigationController <WALThemeOrganizerDelegate>
 
 @end
