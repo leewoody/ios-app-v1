@@ -61,7 +61,7 @@
 	return nil;
 }
 
-- (WALArticle *) getUnreadArticleAtIntex:(NSUInteger) index
+- (WALArticle *) getUnreadArticleAtIndex:(NSUInteger) index
 {
 	if (index < self.unreadArticles.count)
 		return self.unreadArticles[index];

@@ -77,10 +77,13 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Yvq-cl-0Q1">
                             <connections>
-                                <segue destination="x0f-vR-CwK" kind="modal" identifier="ModalToAddArticle" id="B73-XP-1nF"/>
+                                <action selector="actionsButtonPushed:" destination="pGg-6v-bdr" id="i5E-aK-Ygq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="x0f-vR-CwK" kind="modal" identifier="ModalToAddArticle" id="haR-ON-3L3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
             </objects>

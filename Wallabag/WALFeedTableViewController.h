@@ -11,6 +11,6 @@
 #import "WALServerConnectionDelegate.h"
 #import "WALThemeOrganizerDelegate.h"
 
-@interface WALFeedTableViewController : UITableViewController <WALFeedCallbackDelegate, WALServerConnectionDelegate, WALThemeOrganizerDelegate>
+@interface WALFeedTableViewController : UITableViewController <WALFeedCallbackDelegate, WALServerConnectionDelegate, WALThemeOrganizerDelegate, UIActionSheetDelegate>
 
 @end

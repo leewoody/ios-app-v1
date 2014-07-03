@@ -26,6 +26,8 @@
 
 @property (strong) WALArticleList* articleList;
 @property (strong) WALSettings* settings;
+@property BOOL showAllArticles;
+- (IBAction)actionsButtonPushed:(id)sender;
 
 @end
 
@@ -33,9 +35,13 @@
 
 - (void)awakeFromNib
 {
+	self.showAllArticles = NO;
+	
 	[self.navigationController setToolbarHidden:true];
-	[self updateWithTheme:[[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme]];
-	[[WALThemeOrganizer sharedThemeOrganizer] subscribeToThemeChanges:self];
+	
+	WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
+	[self updateWithTheme:[themeOrganizer getCurrentTheme]];
+	[themeOrganizer subscribeToThemeChanges:self];
 	
 	UIColor *titleImageColor = SYSTEM_VERSION_LESS_THAN(@"7.0") ? [UIColor whiteColor] : [UIColor blackColor];
 	UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:titleImageColor]];
@@ -91,12 +97,20 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+	if (self.showAllArticles)
+		return [self.articleList getNumberOfAllArticles];
+	
 	return [self.articleList getNumberOfUnreadArticles];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	WALArticle *currentArticle = [self.articleList getUnreadArticleAtIntex:indexPath.row];
+	WALArticle *currentArticle;
+	if (self.showAllArticles)
+		currentArticle = [self.articleList getArticleAtIndex:indexPath.row];
+	else
+		currentArticle = [self.articleList getUnreadArticleAtIndex:indexPath.row];
+	
 	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
@@ -133,7 +147,14 @@
     if ([[segue identifier] isEqualToString:@"PushToArticle"])
 	{
 		NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-		[((WALArticleViewController*)segue.destinationViewController) setDetailArticle:[self.articleList getUnreadArticleAtIntex:indexPath.row]];
+		
+		WALArticle *articleToSet;
+		if (self.showAllArticles)
+			articleToSet = [self.articleList getArticleAtIndex:indexPath.row];
+		else
+			articleToSet = [self.articleList getUnreadArticleAtIndex:indexPath.row];
+		
+		[((WALArticleViewController*)segue.destinationViewController) setDetailArticle:articleToSet];
 		[[self.tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:TRUE];
 	}
 	else if ([[segue identifier] isEqualToString:@"ModalToSettings"])
@@ -146,6 +167,44 @@
 	{
 		WALAddArticleTableViewController *targetViewController = ((WALAddArticleTableViewController*)[segue.destinationViewController viewControllers][0]);
 		targetViewController.delegate = self;
+	}
+}
+
+- (IBAction)actionsButtonPushed:(id)sender
+{
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+	[actionSheet setTitle:@"Actions"];
+	
+	[actionSheet addButtonWithTitle:@"Add Article"];
+	[actionSheet addButtonWithTitle:@"Change to Night Theme"];
+	[actionSheet addButtonWithTitle:@"Show all Articles"];
+	
+	[actionSheet addButtonWithTitle:@"cancel"];
+	
+	[actionSheet setCancelButtonIndex:3];
+	[actionSheet setTag:1];
+	[actionSheet setDelegate:self];
+	[actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if (actionSheet.tag == 1)
+	{
+		if (buttonIndex == 0)
+		{
+			[self performSegueWithIdentifier:@"ModalToAddArticle" sender:self];
+		}
+		else if (buttonIndex == 1)
+		{
+			WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
+			[themeOrganizer changeTheme];
+		}
+		else if (buttonIndex == 2)
+		{
+			self.showAllArticles = self.showAllArticles ? NO : YES;
+			[self.tableView reloadData];
+		}
 	}
 }
 
@@ -260,6 +319,5 @@
     UIGraphicsEndImageContext();
     return result;
 }
-
 
 @end

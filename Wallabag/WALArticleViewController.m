@@ -19,7 +19,6 @@
 - (IBAction)markAsReadPushed:(id)sender;
 - (IBAction)changeThemePushed:(id)sender;
 - (IBAction)sharePushed:(id)sender;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *changeThemePushed;
 @property (strong) WALArticle *article;
 @property (strong) NSURL *externalURL;
 @property BOOL nextViewIsBrowser;
@@ -31,9 +30,11 @@
 {
 	[super viewDidLoad];
 	self.webView.delegate = self;
+	
+	WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
+	
 	[self configureView];
-	self.webView.backgroundColor = [[[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme] getBackgroundColor];
-	[[WALThemeOrganizer sharedThemeOrganizer] subscribeToThemeChanges:self];
+	[themeOrganizer subscribeToThemeChanges:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated

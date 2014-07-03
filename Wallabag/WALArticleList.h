@@ -19,7 +19,7 @@
 - (NSUInteger) getNumberOfUnreadArticles;
 
 - (WALArticle*) getArticleAtIndex:(NSUInteger) index;
-- (WALArticle*) getUnreadArticleAtIntex:(NSUInteger) index;
+- (WALArticle*) getUnreadArticleAtIndex:(NSUInteger) index;
 - (WALArticle*) getArticleWithLink:(NSURL*) link;
 
 - (void) addArticle:(WALArticle*) article;
