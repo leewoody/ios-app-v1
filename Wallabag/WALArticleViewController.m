@@ -12,7 +12,7 @@
 #import "WALNavigationController.h"
 #import "WALTheme.h"
 #import "WALThemeOrganizer.h"
-#import "WallabagIcons.h"
+#import "WALIcons.h"
 
 @interface WALArticleViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -34,7 +34,7 @@
 	self.webView.delegate = self;
 	
 	WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
-	[self.changeThemeButtom setImage:[WallabagIcons imageOfChangeThemeWithFrame:CGRectMake(0, 0, 44, 44)]];
+	[self.changeThemeButtom setImage:[WALIcons imageOfChangeThemeWithFrame:CGRectMake(0, 0, 44, 44)]];
 	
 	[self configureView];
 	[themeOrganizer subscribeToThemeChanges:self];
@@ -57,9 +57,9 @@
 - (void) updateButtons
 {
 	if (self.article.archive)
-		[self.markAsReadButton setImage:[WallabagIcons imageOfToolbarReadWithFrame:CGRectMake(0, 0, 44, 44)]];
+		[self.markAsReadButton setImage:[WALIcons imageOfToolbarReadWithFrame:CGRectMake(0, 0, 44, 44)]];
 	else
-		[self.markAsReadButton setImage:[WallabagIcons imageOfToolbarUnreadWithFrame:CGRectMake(0, 0, 44, 44)]];
+		[self.markAsReadButton setImage:[WALIcons imageOfToolbarUnreadWithFrame:CGRectMake(0, 0, 44, 44)]];
 }
 
 #pragma mark - Managing the detail item

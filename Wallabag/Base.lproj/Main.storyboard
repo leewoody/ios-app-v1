@@ -75,11 +75,6 @@
                                 <segue destination="b7R-6t-7CM" kind="modal" identifier="ModalToSettings" id="VYX-rk-UHE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Yvq-cl-0Q1">
-                            <connections>
-                                <action selector="actionsButtonPushed:" destination="pGg-6v-bdr" id="i5E-aK-Ygq"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="x0f-vR-CwK" kind="modal" identifier="ModalToAddArticle" id="haR-ON-3L3"/>

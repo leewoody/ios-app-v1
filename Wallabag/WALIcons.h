@@ -1,5 +1,5 @@
 //
-//  WallabagIcons.h
+//  WALIcons.h
 //  wallabag for iOS
 //
 //  Created by (null) on 26.07.14.
@@ -12,12 +12,13 @@
 #import <UIKit/UIKit.h>
 
 
-@interface WallabagIcons : NSObject
+@interface WALIcons : NSObject
 
 // iOS Controls Customization Outlets
 @property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* toolbarUnreadTargets;
 @property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* toolbarReadTargets;
 @property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* changeThemeTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* toolbarActionsTargets;
 
 // Colors
 + (UIColor*)tintColor;
@@ -26,5 +27,6 @@
 + (UIImage*)imageOfToolbarUnreadWithFrame: (CGRect)frame;
 + (UIImage*)imageOfToolbarReadWithFrame: (CGRect)frame;
 + (UIImage*)imageOfChangeThemeWithFrame: (CGRect)frame;
++ (UIImage*)imageOfToolbarActions;
 
 @end

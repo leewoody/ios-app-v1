@@ -15,6 +15,7 @@
 #import "WALServerConnection.h"
 #import "WALThemeOrganizer.h"
 #import "WALTheme.h"
+#import "WALIcons.h"
 
 #import "WALArticle.h"
 #import "WALArticleList.h"
@@ -46,7 +47,7 @@
 	titleImageView.bounds = CGRectInset(titleImageView.frame, 0.0f, 1.0f);
 	titleImageView.contentMode = UIViewContentModeScaleAspectFit;
 	self.navigationItem.titleView = titleImageView;
-	
+		
 	self.refreshControl = [[UIRefreshControl alloc] init];
 	[self.refreshControl addTarget:self action:@selector(triggeredRefreshControl) forControlEvents:UIControlEventValueChanged];
 	[super awakeFromNib];
@@ -58,6 +59,15 @@
 	if (self.settings) {
 		[self updateArticleList];
 	}
+}
+
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
+
+	[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[WALIcons imageOfToolbarActions] style:UIBarButtonItemStyleBordered target:self action:@selector(actionsButtonPushed:)]];
+	
+//	[self.actionsButton setImage:[WALIcons imageOfToolbarActions]];
 }
 
 - (void) viewDidAppear:(BOOL)animated
