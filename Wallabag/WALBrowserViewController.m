@@ -119,6 +119,10 @@
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[self updateToolbarButtons];
 	
+	//! Ignore often occuring NSURLError -999
+	if (error.code == NSURLErrorCancelled)
+		return;
+	
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
 														message:error.localizedDescription
 													   delegate:nil
