@@ -37,7 +37,8 @@
 	[self updateWithTheme:themeOrganizer.getCurrentTheme];
 	[self.changeThemeButtom setImage:[WALIcons imageOfChangeThemeWithFrame:CGRectMake(0, 0, 44, 44)]];
 	
-	[self configureView];
+	if (self.article)
+		[self configureView];
 	[themeOrganizer subscribeToThemeChanges:self];
 }
 
