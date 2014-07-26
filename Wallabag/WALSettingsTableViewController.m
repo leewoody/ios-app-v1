@@ -159,7 +159,7 @@
 	if (buttonIndex == 1)
 	{
 		//! @todo use iPhone Docu Link!
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://doc.wallabag.org/doku.php?id=users:android_application"]];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://doc.wallabag.org/doku.php?id=ios"]];
 	}
 	
 }
