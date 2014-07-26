@@ -13,6 +13,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+	
+	UIViewController *rootViewController = self.window.rootViewController;
+	
+	if ([rootViewController isKindOfClass:[UISplitViewController class]])
+	{
+		((UISplitViewController*)rootViewController).delegate = self;
+	}
+	
     return YES;
 }
 							
