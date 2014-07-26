@@ -12,10 +12,12 @@
 #import "WALNavigationController.h"
 #import "WALTheme.h"
 #import "WALThemeOrganizer.h"
+#import "WallabagIcons.h"
 
 @interface WALArticleViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *markAsReadButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *changeThemeButtom;
 - (IBAction)markAsReadPushed:(id)sender;
 - (IBAction)changeThemePushed:(id)sender;
 - (IBAction)sharePushed:(id)sender;
@@ -32,6 +34,7 @@
 	self.webView.delegate = self;
 	
 	WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
+	[self.changeThemeButtom setImage:[WallabagIcons imageOfChangeThemeWithFrame:CGRectMake(0, 0, 44, 44)]];
 	
 	[self configureView];
 	[themeOrganizer subscribeToThemeChanges:self];
@@ -54,9 +57,9 @@
 - (void) updateButtons
 {
 	if (self.article.archive)
-		self.markAsReadButton.title = @"Mark as unread";
+		[self.markAsReadButton setImage:[WallabagIcons imageOfToolbarReadWithFrame:CGRectMake(0, 0, 44, 44)]];
 	else
-		self.markAsReadButton.title = @"Mark as read";
+		[self.markAsReadButton setImage:[WallabagIcons imageOfToolbarUnreadWithFrame:CGRectMake(0, 0, 44, 44)]];
 }
 
 #pragma mark - Managing the detail item

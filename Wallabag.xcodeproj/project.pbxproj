@@ -15,6 +15,7 @@
 		F5259679193E4BFC003E91A7 /* WALThemeNight.m in Sources */ = {isa = PBXBuildFile; fileRef = F5259678193E4BFC003E91A7 /* WALThemeNight.m */; };
 		F525967C193E58B1003E91A7 /* WALThemeOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F525967B193E58B1003E91A7 /* WALThemeOrganizer.m */; };
 		F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = F54E12F218B4EEDB00E89ED1 /* WALArticle.m */; };
+		F56824C91983F34C00B8B009 /* WallabagIcons.m in Sources */ = {isa = PBXBuildFile; fileRef = F56824C81983F34C00B8B009 /* WallabagIcons.m */; };
 		F57E644E18BB84AD00587DBD /* article.html in Resources */ = {isa = PBXBuildFile; fileRef = F57E644D18BB84AD00587DBD /* article.html */; };
 		F5877D8D18B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
 		F5877D8F18B4E02B009D4EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8E18B4E02B009D4EFE /* CoreGraphics.framework */; };
@@ -70,6 +71,8 @@
 		F54E12F118B4EEDB00E89ED1 /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
 		F54E12F218B4EEDB00E89ED1 /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
 		F54F6AA218BCBCE500B434F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F56824C71983F34C00B8B009 /* WallabagIcons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WallabagIcons.h; sourceTree = "<group>"; };
+		F56824C81983F34C00B8B009 /* WallabagIcons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WallabagIcons.m; sourceTree = "<group>"; };
 		F57E644D18BB84AD00587DBD /* article.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = article.html; sourceTree = "<group>"; };
 		F5877D8918B4E02B009D4EFE /* Wallabag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wallabag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5877D8C18B4E02B009D4EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -143,6 +146,8 @@
 		F5259673193E48FB003E91A7 /* Theming */ = {
 			isa = PBXGroup;
 			children = (
+				F56824C71983F34C00B8B009 /* WallabagIcons.h */,
+				F56824C81983F34C00B8B009 /* WallabagIcons.m */,
 				F525967D193E5F17003E91A7 /* WALThemeOrganizerDelegate.h */,
 				F525967A193E58B1003E91A7 /* WALThemeOrganizer.h */,
 				F525967B193E58B1003E91A7 /* WALThemeOrganizer.m */,
@@ -453,6 +458,7 @@
 				F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */,
 				F5905330193B6553005E2A00 /* WALNavigationController.m in Sources */,
 				F525967C193E58B1003E91A7 /* WALThemeOrganizer.m in Sources */,
+				F56824C91983F34C00B8B009 /* WallabagIcons.m in Sources */,
 				F5B7475B1938BAAF0071B94C /* WALArticleList.m in Sources */,
 				F5DA910718B52002006A0B1A /* WALAddArticleTableViewController.m in Sources */,
 				F5B747581938B87D0071B94C /* WALServerConnection.m in Sources */,

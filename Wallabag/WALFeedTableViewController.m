@@ -36,9 +36,7 @@
 - (void)awakeFromNib
 {
 	self.showAllArticles = NO;
-	
-	[self.navigationController setToolbarHidden:true];
-	
+		
 	WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
 	[self updateWithTheme:[themeOrganizer getCurrentTheme]];
 	[themeOrganizer subscribeToThemeChanges:self];
@@ -65,6 +63,7 @@
 - (void) viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
+	[self.navigationController setToolbarHidden:true];
 	
 	if (!self.settings)
 	{
