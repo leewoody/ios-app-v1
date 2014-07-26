@@ -47,10 +47,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated
-{
-	if (!self.nextViewIsBrowser)
-		[self.navigationController setToolbarHidden:YES animated:animated];
-	
+{	
 	[super viewWillDisappear:animated];
 }
 

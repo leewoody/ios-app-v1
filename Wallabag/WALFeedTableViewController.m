@@ -73,6 +73,12 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[self.navigationController setToolbarHidden:animated];
+}
+
 - (void)triggeredRefreshControl
 {
 	[self updateArticleList];
@@ -177,7 +183,11 @@
 	
 	[actionSheet addButtonWithTitle:@"Add Article"];
 	[actionSheet addButtonWithTitle:@"Change to Night Theme"];
-	[actionSheet addButtonWithTitle:@"Show all Articles"];
+
+	if (self.showAllArticles)
+		[actionSheet addButtonWithTitle:@"Show unread Articles"];
+	else
+		[actionSheet addButtonWithTitle:@"Show all Articles"];
 	
 	[actionSheet addButtonWithTitle:@"cancel"];
 	
