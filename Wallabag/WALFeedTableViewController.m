@@ -66,8 +66,6 @@
 	[super viewDidLoad];
 
 	[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[WALIcons imageOfToolbarActions] style:UIBarButtonItemStyleBordered target:self action:@selector(actionsButtonPushed:)]];
-	
-//	[self.actionsButton setImage:[WALIcons imageOfToolbarActions]];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -268,7 +266,8 @@
 	if (url)
 	{
 		NSURL *myUrl = [self.settings getURLToAddArticle:url];
-		[[UIApplication sharedApplication] openURL:myUrl];
+		if ([[UIApplication sharedApplication] canOpenURL:myUrl])
+			[[UIApplication sharedApplication] openURL:myUrl];
 	}
 }
 

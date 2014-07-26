@@ -98,7 +98,7 @@
 	NSURL *resultURL = [NSURL URLWithString:[NSString stringWithFormat:@"index.php?action=add&url=%@", base64String]
 							  relativeToURL:self.baseURL];
 	
-	return resultURL;
+	return [resultURL absoluteURL];
 }
 
 #pragma mark -
