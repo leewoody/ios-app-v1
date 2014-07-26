@@ -7,6 +7,11 @@
 //
 
 #import "WALAppDelegate.h"
+#import "WALArticle.h"
+
+@interface WALAppDelegate ()
+@property (weak, nonatomic) UIBarButtonItem *lastBarButtonItem;
+@end
 
 @implementation WALAppDelegate
 
@@ -49,6 +54,45 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
 	// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - UISplitView Delegate
+
+- (void)splitViewController:(UISplitViewController *)svc
+	 willHideViewController:(UIViewController *)aViewController
+		  withBarButtonItem:(UIBarButtonItem *)barButtonItem
+	   forPopoverController:(UIPopoverController *)pc
+{
+	UINavigationController *navigationVC = svc.viewControllers.lastObject;
+	if (YES)
+	{
+		barButtonItem.title = @"List";
+		((UIViewController*)navigationVC.viewControllers[0]).navigationItem.leftBarButtonItem = barButtonItem;
+	}
+	self.lastBarButtonItem = barButtonItem;
+	pc.delegate = self;
+}
+
+- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+	UINavigationController *navigationVC = svc.viewControllers.lastObject;
+	if (YES)
+	{
+		((UIViewController*)navigationVC.viewControllers[0]).navigationItem.leftBarButtonItem = nil;
+		self.lastBarButtonItem = nil;
+	}
+}
+
+#pragma mark - UIPopoverController
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+	UINavigationController *navigationVC = ((UISplitViewController*)self.window.rootViewController).viewControllers.lastObject;
+	if (YES)
+	{
+		((UIViewController*)navigationVC.viewControllers[0]).navigationItem.leftBarButtonItem = self.lastBarButtonItem;
+	}
+
 }
 
 @end
