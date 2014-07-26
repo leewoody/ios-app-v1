@@ -17,6 +17,7 @@
 		F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = F54E12F218B4EEDB00E89ED1 /* WALArticle.m */; };
 		F56824CC1983FB8000B8B009 /* WALIcons.m in Sources */ = {isa = PBXBuildFile; fileRef = F56824CB1983FB8000B8B009 /* WALIcons.m */; };
 		F56824CF198404C200B8B009 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F56824CE198404C200B8B009 /* Main-iPad.storyboard */; };
+		F56824D61984291A00B8B009 /* WALSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56824D51984291A00B8B009 /* WALSplitViewController.m */; };
 		F57E644E18BB84AD00587DBD /* article.html in Resources */ = {isa = PBXBuildFile; fileRef = F57E644D18BB84AD00587DBD /* article.html */; };
 		F5877D8D18B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
 		F5877D8F18B4E02B009D4EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8E18B4E02B009D4EFE /* CoreGraphics.framework */; };
@@ -75,6 +76,8 @@
 		F56824CA1983FB8000B8B009 /* WALIcons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALIcons.h; sourceTree = "<group>"; };
 		F56824CB1983FB8000B8B009 /* WALIcons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALIcons.m; sourceTree = "<group>"; };
 		F56824CE198404C200B8B009 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
+		F56824D41984291A00B8B009 /* WALSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSplitViewController.h; sourceTree = "<group>"; };
+		F56824D51984291A00B8B009 /* WALSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSplitViewController.m; sourceTree = "<group>"; };
 		F57E644D18BB84AD00587DBD /* article.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = article.html; sourceTree = "<group>"; };
 		F5877D8918B4E02B009D4EFE /* Wallabag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wallabag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5877D8C18B4E02B009D4EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -200,13 +203,6 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
-		F56824CD1984042300B8B009 /* iPad */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = iPad;
-			sourceTree = "<group>";
-		};
 		F57E644C18BB828B00587DBD /* HTML Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,7 +251,6 @@
 		F5877D9218B4E02B009D4EFE /* Wallabag */ = {
 			isa = PBXGroup;
 			children = (
-				F56824CD1984042300B8B009 /* iPad */,
 				F5259673193E48FB003E91A7 /* Theming */,
 				F5AF8ABC18F949D100652EBE /* ServerDataHandler */,
 				F54E12F018B4EACD00E89ED1 /* Controller */,
@@ -307,6 +302,8 @@
 				F590532F193B6553005E2A00 /* WALNavigationController.m */,
 				F5905331193B657D005E2A00 /* WALTableViewController.h */,
 				F5905332193B657D005E2A00 /* WALTableViewController.m */,
+				F56824D41984291A00B8B009 /* WALSplitViewController.h */,
+				F56824D51984291A00B8B009 /* WALSplitViewController.m */,
 			);
 			name = BaseClassVCs;
 			sourceTree = "<group>";
@@ -473,6 +470,7 @@
 				F525967C193E58B1003E91A7 /* WALThemeOrganizer.m in Sources */,
 				F5B7475B1938BAAF0071B94C /* WALArticleList.m in Sources */,
 				F5DA910718B52002006A0B1A /* WALAddArticleTableViewController.m in Sources */,
+				F56824D61984291A00B8B009 /* WALSplitViewController.m in Sources */,
 				F5B747581938B87D0071B94C /* WALServerConnection.m in Sources */,
 				F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */,
 				F5259679193E4BFC003E91A7 /* WALThemeNight.m in Sources */,
