@@ -20,6 +20,7 @@
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *backToolBarButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *forwardToolbarButton;
+@property (strong) UIPopoverController *activityPopover;
 @end
 
 @implementation WALBrowserViewController
@@ -144,13 +145,26 @@
 		// Share link
 		else if (buttonIndex == 1)
 		{
+			if ([self.activityPopover isPopoverVisible])
+			{
+				[self.activityPopover dismissPopoverAnimated:true];
+				return;
+			}
+
 			NSArray* dataToShare = @[self.title, self.webView.request.mainDocumentURL];
-			
 			//! @todo add more custom activities
-			
-			UIActivityViewController* activityViewController =
-			[[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
-			[self presentViewController:activityViewController animated:YES completion:^{}];
+			UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+			activityViewController.excludedActivityTypes = @[UIActivityTypeAirDrop];
+
+			if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+			{
+				self.activityPopover = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+				[self.activityPopover presentPopoverFromBarButtonItem:self.navigationController.toolbar.items[7] permittedArrowDirections:UIPopoverArrowDirectionUp animated:true];
+			}
+			else
+			{
+				[self presentViewController:activityViewController animated:YES completion:^{}];
+			}
 		}
 	}
 }

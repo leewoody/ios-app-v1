@@ -24,6 +24,7 @@
 @property (strong) WALArticle *article;
 @property (strong) NSURL *externalURL;
 @property BOOL nextViewIsBrowser;
+@property (strong) UIPopoverController *activityPopover;
 @end
 
 @implementation WALArticleViewController
@@ -161,12 +162,26 @@
 
 - (IBAction)sharePushed:(id)sender
 {
+	if ([self.activityPopover isPopoverVisible])
+	{
+		[self.activityPopover dismissPopoverAnimated:true];
+		return;
+	}
+
 	NSArray* dataToShare = @[self.title, self.article.link];
-	
 	//! @todo add more custom activities
-	
-	UIActivityViewController* activityViewController =
-	[[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
-	[self presentViewController:activityViewController animated:YES completion:^{}];
+	UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+	activityViewController.excludedActivityTypes = @[UIActivityTypeAirDrop];
+
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+	{
+		self.activityPopover = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+		[self.activityPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:true];
+	}
+	else
+	{
+		[self presentViewController:activityViewController animated:YES completion:^{}];
+	}
+
 }
 @end
