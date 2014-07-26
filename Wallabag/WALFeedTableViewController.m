@@ -167,7 +167,18 @@
 		else
 			articleToSet = [self.articleList getUnreadArticleAtIndex:indexPath.row];
 		
-		[((WALArticleViewController*)segue.destinationViewController) setDetailArticle:articleToSet];
+		WALArticleViewController *articleVC;
+		
+		if ([segue.destinationViewController isKindOfClass:[UINavigationController class]])
+		{
+			UINavigationController *navigationVC = (UINavigationController*) segue.destinationViewController;
+			articleVC = (WALArticleViewController*) navigationVC.viewControllers[0];
+		}
+		else
+			articleVC = (WALArticleViewController*) segue.destinationViewController;
+			
+		[articleVC setDetailArticle:articleToSet];
+		
 		[[self.tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:TRUE];
 	}
 	else if ([[segue identifier] isEqualToString:@"ModalToSettings"])
