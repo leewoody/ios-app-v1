@@ -91,7 +91,7 @@
 	UINavigationController *navigationVC = ((UISplitViewController*)self.window.rootViewController).viewControllers.lastObject;
 	if (YES)
 	{
-		((UIViewController*)navigationVC.viewControllers[0]).navigationItem.leftBarButtonItem = self.lastBarButtonItem;
+		[((UIViewController*)navigationVC.viewControllers[0]).navigationItem setLeftBarButtonItem:self.lastBarButtonItem animated:true];
 	}
 
 }

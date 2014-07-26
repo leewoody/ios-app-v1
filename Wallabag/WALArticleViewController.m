@@ -168,6 +168,9 @@
 		return;
 	}
 
+	if (!self.article)
+		return;
+	
 	NSArray* dataToShare = @[self.title, self.article.link];
 	//! @todo add more custom activities
 	UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
