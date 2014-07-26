@@ -8,6 +8,7 @@
 
 #import "WALAppDelegate.h"
 #import "WALArticle.h"
+#import "WALIcons.h"
 
 @interface WALAppDelegate ()
 @property (weak, nonatomic) UIBarButtonItem *lastBarButtonItem;
@@ -66,7 +67,7 @@
 	UINavigationController *navigationVC = svc.viewControllers.lastObject;
 	if (YES)
 	{
-		barButtonItem.title = @"List";
+		barButtonItem.image = [WALIcons imageOfNavbarList];
 		((UIViewController*)navigationVC.viewControllers[0]).navigationItem.leftBarButtonItem = barButtonItem;
 	}
 	self.lastBarButtonItem = barButtonItem;

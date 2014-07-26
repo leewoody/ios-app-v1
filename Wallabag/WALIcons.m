@@ -17,7 +17,11 @@
 
 static UIColor* _tintColor = nil;
 
+static UIImage* _imageOfToolbarUnread = nil;
+static UIImage* _imageOfToolbarRead = nil;
+static UIImage* _imageOfToolbarChangeTheme = nil;
 static UIImage* _imageOfToolbarActions = nil;
+static UIImage* _imageOfNavbarList = nil;
 
 #pragma mark Initialization
 
@@ -34,11 +38,11 @@ static UIImage* _imageOfToolbarActions = nil;
 
 #pragma mark Drawing Methods
 
-+ (void)drawToolbarUnreadWithFrame: (CGRect)frame;
++ (void)drawToolbarUnread;
 {
 
     //// Oval Drawing
-    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(CGRectGetMinX(frame) + 14, CGRectGetMinY(frame) + 14, CGRectGetWidth(frame) - 28, CGRectGetHeight(frame) - 28)];
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(14, 14, 16, 16)];
     [WALIcons.tintColor setFill];
     [ovalPath fill];
     [WALIcons.tintColor setStroke];
@@ -46,21 +50,21 @@ static UIImage* _imageOfToolbarActions = nil;
     [ovalPath stroke];
 }
 
-+ (void)drawToolbarReadWithFrame: (CGRect)frame;
++ (void)drawToolbarRead;
 {
 
     //// Oval Drawing
-    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(CGRectGetMinX(frame) + 14, CGRectGetMinY(frame) + 14, CGRectGetWidth(frame) - 28, CGRectGetHeight(frame) - 28)];
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(14, 14, 16, 16)];
     [WALIcons.tintColor setStroke];
     ovalPath.lineWidth = 2;
     [ovalPath stroke];
 }
 
-+ (void)drawChangeThemeWithFrame: (CGRect)frame;
++ (void)drawToolbarChangeTheme;
 {
 
     //// Oval Drawing
-    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(CGRectGetMinX(frame) + 10, CGRectGetMinY(frame) + 10, CGRectGetWidth(frame) - 20, CGRectGetHeight(frame) - 20)];
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(10, 10, 24, 24)];
     [WALIcons.tintColor setStroke];
     ovalPath.lineWidth = 2;
     [ovalPath stroke];
@@ -68,11 +72,11 @@ static UIImage* _imageOfToolbarActions = nil;
 
     //// Bezier Drawing
     UIBezierPath* bezierPath = UIBezierPath.bezierPath;
-    [bezierPath moveToPoint: CGPointMake(CGRectGetMinX(frame) + 30.49, CGRectGetMinY(frame) + 13.51)];
-    [bezierPath addCurveToPoint: CGPointMake(CGRectGetMinX(frame) + 30.49, CGRectGetMinY(frame) + 30.49) controlPoint1: CGPointMake(CGRectGetMinX(frame) + 35.17, CGRectGetMinY(frame) + 18.2) controlPoint2: CGPointMake(CGRectGetMinX(frame) + 35.17, CGRectGetMinY(frame) + 25.8)];
-    [bezierPath addCurveToPoint: CGPointMake(CGRectGetMinX(frame) + 22, CGRectGetMinY(frame) + 34) controlPoint1: CGPointMake(CGRectGetMinX(frame) + 28.14, CGRectGetMinY(frame) + 32.83) controlPoint2: CGPointMake(CGRectGetMinX(frame) + 25.07, CGRectGetMinY(frame) + 34)];
-    [bezierPath addCurveToPoint: CGPointMake(CGRectGetMinX(frame) + 22, CGRectGetMinY(frame) + 10) controlPoint1: CGPointMake(CGRectGetMinX(frame) + 22, CGRectGetMinY(frame) + 26.82) controlPoint2: CGPointMake(CGRectGetMinX(frame) + 22, CGRectGetMinY(frame) + 17.18)];
-    [bezierPath addCurveToPoint: CGPointMake(CGRectGetMinX(frame) + 30.49, CGRectGetMinY(frame) + 13.51) controlPoint1: CGPointMake(CGRectGetMinX(frame) + 25.07, CGRectGetMinY(frame) + 10) controlPoint2: CGPointMake(CGRectGetMinX(frame) + 28.14, CGRectGetMinY(frame) + 11.17)];
+    [bezierPath moveToPoint: CGPointMake(30.49, 13.51)];
+    [bezierPath addCurveToPoint: CGPointMake(30.49, 30.49) controlPoint1: CGPointMake(35.17, 18.2) controlPoint2: CGPointMake(35.17, 25.8)];
+    [bezierPath addCurveToPoint: CGPointMake(22, 34) controlPoint1: CGPointMake(28.14, 32.83) controlPoint2: CGPointMake(25.07, 34)];
+    [bezierPath addCurveToPoint: CGPointMake(22, 10) controlPoint1: CGPointMake(22, 26.82) controlPoint2: CGPointMake(22, 17.18)];
+    [bezierPath addCurveToPoint: CGPointMake(30.49, 13.51) controlPoint1: CGPointMake(25.07, 10) controlPoint2: CGPointMake(28.14, 11.17)];
     [bezierPath closePath];
     [WALIcons.tintColor setFill];
     [bezierPath fill];
@@ -99,36 +103,66 @@ static UIImage* _imageOfToolbarActions = nil;
     [oval3Path fill];
 }
 
++ (void)drawNavbarList;
+{
+
+    //// Rectangle Drawing
+    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(8, 12, 28, 4) cornerRadius: 2];
+    [WALIcons.tintColor setFill];
+    [rectanglePath fill];
+
+
+    //// Rectangle 2 Drawing
+    UIBezierPath* rectangle2Path = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(8, 20, 28, 4) cornerRadius: 2];
+    [WALIcons.tintColor setFill];
+    [rectangle2Path fill];
+
+
+    //// Rectangle 3 Drawing
+    UIBezierPath* rectangle3Path = [UIBezierPath bezierPathWithRoundedRect: CGRectMake(8, 28, 28, 4) cornerRadius: 2];
+    [WALIcons.tintColor setFill];
+    [rectangle3Path fill];
+}
+
 #pragma mark Generated Images
 
-+ (UIImage*)imageOfToolbarUnreadWithFrame: (CGRect)frame;
++ (UIImage*)imageOfToolbarUnread;
 {
+    if (_imageOfToolbarUnread)
+        return _imageOfToolbarUnread;
+
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(44, 44), NO, 0.0f);
-    [WALIcons drawToolbarUnreadWithFrame: frame];
-    UIImage* imageOfToolbarUnread = UIGraphicsGetImageFromCurrentImageContext();
+    [WALIcons drawToolbarUnread];
+    _imageOfToolbarUnread = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
-    return imageOfToolbarUnread;
+    return _imageOfToolbarUnread;
 }
 
-+ (UIImage*)imageOfToolbarReadWithFrame: (CGRect)frame;
++ (UIImage*)imageOfToolbarRead;
 {
+    if (_imageOfToolbarRead)
+        return _imageOfToolbarRead;
+
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(44, 44), NO, 0.0f);
-    [WALIcons drawToolbarReadWithFrame: frame];
-    UIImage* imageOfToolbarRead = UIGraphicsGetImageFromCurrentImageContext();
+    [WALIcons drawToolbarRead];
+    _imageOfToolbarRead = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
-    return imageOfToolbarRead;
+    return _imageOfToolbarRead;
 }
 
-+ (UIImage*)imageOfChangeThemeWithFrame: (CGRect)frame;
++ (UIImage*)imageOfToolbarChangeTheme;
 {
+    if (_imageOfToolbarChangeTheme)
+        return _imageOfToolbarChangeTheme;
+
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(44, 44), NO, 0.0f);
-    [WALIcons drawChangeThemeWithFrame: frame];
-    UIImage* imageOfChangeTheme = UIGraphicsGetImageFromCurrentImageContext();
+    [WALIcons drawToolbarChangeTheme];
+    _imageOfToolbarChangeTheme = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
-    return imageOfChangeTheme;
+    return _imageOfToolbarChangeTheme;
 }
 
 + (UIImage*)imageOfToolbarActions;
@@ -144,7 +178,44 @@ static UIImage* _imageOfToolbarActions = nil;
     return _imageOfToolbarActions;
 }
 
++ (UIImage*)imageOfNavbarList;
+{
+    if (_imageOfNavbarList)
+        return _imageOfNavbarList;
+
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(44, 44), NO, 0.0f);
+    [WALIcons drawNavbarList];
+    _imageOfNavbarList = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return _imageOfNavbarList;
+}
+
 #pragma mark Customization Infrastructure
+
+- (void)setToolbarUnreadTargets: (NSArray*)toolbarUnreadTargets
+{
+    _toolbarUnreadTargets = toolbarUnreadTargets;
+
+    for (id target in self.toolbarUnreadTargets)
+        [target setImage: WALIcons.imageOfToolbarUnread];
+}
+
+- (void)setToolbarReadTargets: (NSArray*)toolbarReadTargets
+{
+    _toolbarReadTargets = toolbarReadTargets;
+
+    for (id target in self.toolbarReadTargets)
+        [target setImage: WALIcons.imageOfToolbarRead];
+}
+
+- (void)setToolbarChangeThemeTargets: (NSArray*)toolbarChangeThemeTargets
+{
+    _toolbarChangeThemeTargets = toolbarChangeThemeTargets;
+
+    for (id target in self.toolbarChangeThemeTargets)
+        [target setImage: WALIcons.imageOfToolbarChangeTheme];
+}
 
 - (void)setToolbarActionsTargets: (NSArray*)toolbarActionsTargets
 {
@@ -152,6 +223,14 @@ static UIImage* _imageOfToolbarActions = nil;
 
     for (id target in self.toolbarActionsTargets)
         [target setImage: WALIcons.imageOfToolbarActions];
+}
+
+- (void)setNavbarListTargets: (NSArray*)navbarListTargets
+{
+    _navbarListTargets = navbarListTargets;
+
+    for (id target in self.navbarListTargets)
+        [target setImage: WALIcons.imageOfNavbarList];
 }
 
 

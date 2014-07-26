@@ -36,7 +36,7 @@
 	
 	WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
 	[self updateWithTheme:themeOrganizer.getCurrentTheme];
-	[self.changeThemeButtom setImage:[WALIcons imageOfChangeThemeWithFrame:CGRectMake(0, 0, 44, 44)]];
+	[self.changeThemeButtom setImage:[WALIcons imageOfToolbarChangeTheme]];
 	
 	if (self.article)
 		[self configureView];
@@ -60,9 +60,9 @@
 - (void) updateButtons
 {
 	if (self.article.archive)
-		[self.markAsReadButton setImage:[WALIcons imageOfToolbarReadWithFrame:CGRectMake(0, 0, 44, 44)]];
+		[self.markAsReadButton setImage:[WALIcons imageOfToolbarRead]];
 	else
-		[self.markAsReadButton setImage:[WALIcons imageOfToolbarUnreadWithFrame:CGRectMake(0, 0, 44, 44)]];
+		[self.markAsReadButton setImage:[WALIcons imageOfToolbarUnread]];
 }
 
 #pragma mark - Managing the detail item

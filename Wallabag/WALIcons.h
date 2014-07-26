@@ -17,16 +17,18 @@
 // iOS Controls Customization Outlets
 @property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* toolbarUnreadTargets;
 @property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* toolbarReadTargets;
-@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* changeThemeTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* toolbarChangeThemeTargets;
 @property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* toolbarActionsTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* navbarListTargets;
 
 // Colors
 + (UIColor*)tintColor;
 
 // Generated Images
-+ (UIImage*)imageOfToolbarUnreadWithFrame: (CGRect)frame;
-+ (UIImage*)imageOfToolbarReadWithFrame: (CGRect)frame;
-+ (UIImage*)imageOfChangeThemeWithFrame: (CGRect)frame;
++ (UIImage*)imageOfToolbarUnread;
++ (UIImage*)imageOfToolbarRead;
++ (UIImage*)imageOfToolbarChangeTheme;
 + (UIImage*)imageOfToolbarActions;
++ (UIImage*)imageOfNavbarList;
 
 @end
