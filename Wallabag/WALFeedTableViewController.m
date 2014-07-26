@@ -213,7 +213,7 @@
 	[actionSheet setCancelButtonIndex:3];
 	[actionSheet setTag:1];
 	[actionSheet setDelegate:self];
-	[actionSheet showInView:self.view];
+	[actionSheet showFromBarButtonItem:sender animated:true];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

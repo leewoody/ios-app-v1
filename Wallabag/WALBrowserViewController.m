@@ -71,7 +71,7 @@
 													otherButtonTitles:NSLocalizedString(@"Open in Safari", nil), NSLocalizedString(@"Share link", nil), nil];
 	actionSheet.tag = 1;
 	
-	[actionSheet showFromToolbar:self.navigationController.toolbar];
+	[actionSheet showFromBarButtonItem:sender animated:true];
 }
 
 - (IBAction)backToolbarButtonPushed:(id)sender
