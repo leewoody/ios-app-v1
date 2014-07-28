@@ -75,12 +75,22 @@
                                 <segue destination="b7R-6t-7CM" kind="modal" identifier="ModalToSettings" id="VYX-rk-UHE"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" id="mv6-II-pTS">
+                            <connections>
+                                <action selector="actionsButtonPushed:" destination="pGg-6v-bdr" id="0r0-T5-XSI"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="x0f-vR-CwK" kind="modal" identifier="ModalToAddArticle" id="haR-ON-3L3"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
+                <customObject id="RoL-9C-ADB" customClass="WALIcons">
+                    <connections>
+                        <outletCollection property="toolbarActionsTargets" destination="mv6-II-pTS" id="iHb-OR-5Vf"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="459" y="64"/>
         </scene>
@@ -610,13 +620,17 @@ THE SOFTWARE.</string>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Article" id="cra-N8-TIN"/>
                     <connections>
-                        <outlet property="changeThemeButtom" destination="Wyd-82-bLp" id="TY7-ed-ryL"/>
                         <outlet property="markAsReadButton" destination="IUd-BF-A5b" id="NmF-bZ-4Tz"/>
                         <outlet property="webView" destination="TeN-MM-sa6" id="bN5-1a-mj7"/>
                         <segue destination="Lgf-Oj-XH5" kind="push" identifier="PushToBrowser" id="eMN-hd-TOi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
+                <customObject id="mlt-Yk-DDV" customClass="WALIcons">
+                    <connections>
+                        <outletCollection property="toolbarChangeThemeTargets" destination="Wyd-82-bLp" id="VJJ-OO-Lfs"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="902" y="64"/>
         </scene>

@@ -17,7 +17,6 @@
 @interface WALArticleViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *markAsReadButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *changeThemeButtom;
 - (IBAction)markAsReadPushed:(id)sender;
 - (IBAction)changeThemePushed:(id)sender;
 - (IBAction)sharePushed:(id)sender;
@@ -36,7 +35,6 @@
 	
 	WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
 	[self updateWithTheme:themeOrganizer.getCurrentTheme];
-	[self.changeThemeButtom setImage:[WALIcons imageOfToolbarChangeTheme]];
 	
 	if (self.article)
 		[self configureView];

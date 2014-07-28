@@ -104,12 +104,22 @@
                                 <segue destination="SPQ-Hc-hMy" kind="modal" identifier="ModalToSettings" modalPresentationStyle="formSheet" id="Z3T-dY-AE7"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" id="lhJ-4Q-SoT">
+                            <connections>
+                                <action selector="actionsButtonPushed:" destination="vzf-86-0ad" id="xCf-2a-7G9"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="CGe-jL-kad" kind="modal" identifier="ModalToAddArticle" modalPresentationStyle="formSheet" id="XAB-ty-RaP"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icE-gK-TBD" sceneMemberID="firstResponder"/>
+                <customObject id="vfp-we-WfZ" customClass="WALIcons">
+                    <connections>
+                        <outletCollection property="toolbarActionsTargets" destination="lhJ-4Q-SoT" id="ILr-Zr-nnU"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="969" y="-1483"/>
         </scene>
@@ -145,13 +155,17 @@
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Article" id="lrd-na-gBt"/>
                     <connections>
-                        <outlet property="changeThemeButtom" destination="qes-rD-0bg" id="kEI-2Z-qh7"/>
                         <outlet property="markAsReadButton" destination="bhW-o6-Wch" id="Uqc-tx-iQS"/>
                         <outlet property="webView" destination="pwQ-Qt-hZS" id="aSH-dH-nqi"/>
                         <segue destination="HkT-Mx-DnA" kind="push" identifier="PushToBrowser" id="8CK-x7-RnT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6As-XG-lvp" sceneMemberID="firstResponder"/>
+                <customObject id="kI6-0z-vsp" customClass="WALIcons">
+                    <connections>
+                        <outletCollection property="toolbarChangeThemeTargets" destination="qes-rD-0bg" id="6tl-sf-LSt"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="2374" y="-500"/>
         </scene>
@@ -220,8 +234,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://example.com/wallabag" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="4Vj-Vu-UYd">
-                                                    <rect key="frame" x="100" y="7" width="200" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://example.com/wallabag" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="4Vj-Vu-UYd">
+                                                    <rect key="frame" x="100" y="7" width="420" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" enablesReturnKeyAutomatically="YES"/>
@@ -259,8 +273,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c3B-i0-Zwg">
-                                                    <rect key="frame" x="100" y="7" width="200" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c3B-i0-Zwg">
+                                                    <rect key="frame" x="100" y="7" width="420" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -298,8 +312,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="fd1337/$sdi" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qTB-9I-mWj">
-                                                    <rect key="frame" x="100" y="7" width="200" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="fd1337/$sdi" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qTB-9I-mWj">
+                                                    <rect key="frame" x="100" y="7" width="420" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
@@ -708,6 +722,6 @@ THE SOFTWARE.</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="hcA-ex-z5v"/>
+        <segue reference="CYX-Xl-iRM"/>
     </inferredMetricsTieBreakers>
 </document>

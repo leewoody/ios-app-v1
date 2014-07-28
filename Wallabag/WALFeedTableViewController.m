@@ -61,13 +61,6 @@
 	}
 }
 
-- (void)viewDidLoad
-{
-	[super viewDidLoad];
-
-	[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[WALIcons imageOfToolbarActions] style:UIBarButtonItemStyleBordered target:self action:@selector(actionsButtonPushed:)]];
-}
-
 - (void) viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
