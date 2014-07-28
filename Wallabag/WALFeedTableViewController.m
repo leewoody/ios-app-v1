@@ -191,17 +191,17 @@
 - (IBAction)actionsButtonPushed:(id)sender
 {
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
-	[actionSheet setTitle:@"Actions"];
+	actionSheet.title = NSLocalizedString(@"Actions", nil);
 	
-	[actionSheet addButtonWithTitle:@"Add Article"];
-	[actionSheet addButtonWithTitle:@"Change to Night Theme"];
+	[actionSheet addButtonWithTitle:NSLocalizedString(@"Add Article", nil)];
+	[actionSheet addButtonWithTitle:NSLocalizedString(@"Change Theme", nil)];
 
 	if (self.showAllArticles)
-		[actionSheet addButtonWithTitle:@"Show unread Articles"];
+		[actionSheet addButtonWithTitle:NSLocalizedString(@"Show unread Articles", nil)];
 	else
-		[actionSheet addButtonWithTitle:@"Show all Articles"];
+		[actionSheet addButtonWithTitle:NSLocalizedString(@"Show all Articles", nil)];
 	
-	[actionSheet addButtonWithTitle:@"cancel"];
+	[actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", nil)];
 	
 	[actionSheet setCancelButtonIndex:3];
 	[actionSheet setTag:1];
