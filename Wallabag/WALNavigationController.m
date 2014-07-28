@@ -38,10 +38,7 @@
 }
 
 - (void) updateWithTheme:(WALTheme*) theme
-{
-	if (SYSTEM_VERSION_LESS_THAN(@"7.0"))
-		return;
-
+{		
 	[self.navigationBar setBarTintColor:[theme getBarColor]];
 	[self.navigationBar setTintColor:[theme getTintColor]];
 	[self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [theme getTextColor]}];

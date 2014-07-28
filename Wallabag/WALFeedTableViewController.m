@@ -123,7 +123,7 @@
 	cell.textLabel.text = currentArticle.title;
 	cell.textLabel.textColor = [currentTheme getTextColor];
 	cell.detailTextLabel.text = @"";
-	cell.backgroundColor = [UIColor clearColor];
+	cell.backgroundColor = [currentTheme getBackgroundColor];
 	
     return cell;
 }
