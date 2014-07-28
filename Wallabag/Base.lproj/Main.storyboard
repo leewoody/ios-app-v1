@@ -687,7 +687,6 @@ THE SOFTWARE.</string>
         <image name="ToolBar-Browser-Back" width="12" height="22"/>
         <image name="ToolBar-Browser-Forward" width="12" height="22"/>
     </resources>
-    <color key="tintColor" red="0.0" green="0.58039218187332153" blue="0.9647059440612793" alpha="1" colorSpace="deviceRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
