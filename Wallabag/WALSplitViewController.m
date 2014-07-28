@@ -23,6 +23,9 @@
 	
 	WALThemeOrganizer *organizer = [WALThemeOrganizer sharedThemeOrganizer];
 	[organizer subscribeToThemeChanges:self];
+	
+	if (SYSTEM_VERSION_LESS_THAN(@"7.0"))
+		return;
 	[self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -34,6 +37,9 @@
 
 - (void)themeOrganizer:(WALThemeOrganizer *)organizer setNewTheme:(WALTheme *)theme
 {
+	if (SYSTEM_VERSION_LESS_THAN(@"7.0"))
+		return;
+
 	[self setNeedsStatusBarAppearanceUpdate];
 }
 
