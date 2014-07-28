@@ -16,7 +16,6 @@
 		F525967C193E58B1003E91A7 /* WALThemeOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F525967B193E58B1003E91A7 /* WALThemeOrganizer.m */; };
 		F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = F54E12F218B4EEDB00E89ED1 /* WALArticle.m */; };
 		F56824CC1983FB8000B8B009 /* WALIcons.m in Sources */ = {isa = PBXBuildFile; fileRef = F56824CB1983FB8000B8B009 /* WALIcons.m */; };
-		F56824CF198404C200B8B009 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F56824CE198404C200B8B009 /* Main-iPad.storyboard */; };
 		F56824D61984291A00B8B009 /* WALSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56824D51984291A00B8B009 /* WALSplitViewController.m */; };
 		F57E644E18BB84AD00587DBD /* article.html in Resources */ = {isa = PBXBuildFile; fileRef = F57E644D18BB84AD00587DBD /* article.html */; };
 		F5877D8D18B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
@@ -34,6 +33,7 @@
 		F5905330193B6553005E2A00 /* WALNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F590532F193B6553005E2A00 /* WALNavigationController.m */; };
 		F5905333193B657D005E2A00 /* WALTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5905332193B657D005E2A00 /* WALTableViewController.m */; };
 		F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F59E0CE318B63E2D00744BB1 /* WALSettings.m */; };
+		F5AF3B3C198672BE00226355 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5AF3B3E198672BE00226355 /* Main-iPad.storyboard */; };
 		F5B747581938B87D0071B94C /* WALServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B747571938B87D0071B94C /* WALServerConnection.m */; };
 		F5B7475B1938BAAF0071B94C /* WALArticleList.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B7475A1938BAAF0071B94C /* WALArticleList.m */; };
 		F5C48A3218B793A100E76807 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C48A3118B793A100E76807 /* MessageUI.framework */; };
@@ -72,10 +72,8 @@
 		F525967D193E5F17003E91A7 /* WALThemeOrganizerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALThemeOrganizerDelegate.h; sourceTree = "<group>"; };
 		F54E12F118B4EEDB00E89ED1 /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
 		F54E12F218B4EEDB00E89ED1 /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
-		F54F6AA218BCBCE500B434F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F56824CA1983FB8000B8B009 /* WALIcons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALIcons.h; sourceTree = "<group>"; };
 		F56824CB1983FB8000B8B009 /* WALIcons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALIcons.m; sourceTree = "<group>"; };
-		F56824CE198404C200B8B009 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
 		F56824D41984291A00B8B009 /* WALSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSplitViewController.h; sourceTree = "<group>"; };
 		F56824D51984291A00B8B009 /* WALSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSplitViewController.m; sourceTree = "<group>"; };
 		F57E644D18BB84AD00587DBD /* article.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = article.html; sourceTree = "<group>"; };
@@ -103,6 +101,11 @@
 		F5905332193B657D005E2A00 /* WALTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALTableViewController.m; sourceTree = "<group>"; };
 		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
 		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
+		F5AF3B3B1986706000226355 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F5AF3B3D198672BE00226355 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-iPad.storyboard"; sourceTree = "<group>"; };
+		F5AF3B40198672C600226355 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
+		F5AF3B42198672C600226355 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
+		F5AF3B44198672C700226355 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
 		F5AF8ABE18F9619D00652EBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F5B747561938B87D0071B94C /* WALServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALServerConnection.h; sourceTree = "<group>"; };
 		F5B747571938B87D0071B94C /* WALServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALServerConnection.m; sourceTree = "<group>"; };
@@ -259,7 +262,7 @@
 				F5877D9B18B4E02B009D4EFE /* WALAppDelegate.h */,
 				F5877D9C18B4E02B009D4EFE /* WALAppDelegate.m */,
 				F5877D9E18B4E02B009D4EFE /* Main.storyboard */,
-				F56824CE198404C200B8B009 /* Main-iPad.storyboard */,
+				F5AF3B3E198672BE00226355 /* Main-iPad.storyboard */,
 				F50B895018B7A28400AA9A6C /* Localizable.strings */,
 				F5877DA718B4E02B009D4EFE /* Images.xcassets */,
 				F57E644C18BB828B00587DBD /* HTML Resources */,
@@ -405,7 +408,7 @@
 				F50B895218B7A28400AA9A6C /* Localizable.strings in Resources */,
 				F5DA910A18B56FCE006A0B1A /* main.css in Resources */,
 				F5DA910C18B56FD6006A0B1A /* ratatouille.css in Resources */,
-				F56824CF198404C200B8B009 /* Main-iPad.storyboard in Resources */,
+				F5AF3B3C198672BE00226355 /* Main-iPad.storyboard in Resources */,
 				F5877DA818B4E02B009D4EFE /* Images.xcassets in Resources */,
 				F5877DA018B4E02B009D4EFE /* Main.storyboard in Resources */,
 				F5259672193E4259003E91A7 /* main-night.css in Resources */,
@@ -506,7 +509,7 @@
 				F50B895118B7A28400AA9A6C /* Base */,
 				F50B895318B7A28F00AA9A6C /* de */,
 				F50B895518B7A2A000AA9A6C /* fr */,
-				F54F6AA218BCBCE500B434F9 /* en */,
+				F5AF3B3B1986706000226355 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -520,6 +523,17 @@
 				F5AF8ABE18F9619D00652EBE /* en */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F5AF3B3E198672BE00226355 /* Main-iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5AF3B3D198672BE00226355 /* Base */,
+				F5AF3B40198672C600226355 /* de */,
+				F5AF3B42198672C600226355 /* fr */,
+				F5AF3B44198672C700226355 /* en */,
+			);
+			name = "Main-iPad.storyboard";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

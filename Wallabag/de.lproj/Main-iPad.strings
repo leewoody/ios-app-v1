@@ -1,0 +1,99 @@
+
+/* Class = "IBUILabel"; text = "License"; ObjectID = "0mY-Ze-3S4"; */
+"0mY-Ze-3S4.text" = "Lizenz";
+
+/* Class = "IBUILabel"; text = "Sign up at Framabag"; ObjectID = "1fR-C5-1qp"; */
+"1fR-C5-1qp.text" = "Registriere dich bei Framabag";
+
+/* Class = "IBUINavigationItem"; title = "Browser"; ObjectID = "3ny-s7-7dP"; */
+"3ny-s7-7dP.title" = "Browser";
+
+/* Class = "IBUITextField"; placeholder = "http://example.com/wallabag"; ObjectID = "4Vj-Vu-UYd"; */
+"4Vj-Vu-UYd.placeholder" = "http://example.com/wallabag";
+
+/* Class = "IBUILabel"; text = "wallabag FAQ"; ObjectID = "4r4-xd-HIs"; */
+"4r4-xd-HIs.text" = "wallabag FAQ";
+
+/* Class = "IBUILabel"; text = "User ID"; ObjectID = "4sc-fE-ywC"; */
+"4sc-fE-ywC.text" = "User ID";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "5td-gd-nIr"; */
+"5td-gd-nIr.text" = "Detail";
+
+/* Class = "IBUITextField"; placeholder = "http://example.com/article"; ObjectID = "8CA-4x-jgh"; */
+"8CA-4x-jgh.placeholder" = "http://example.com/article";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "8w3-Fl-fKH"; */
+"8w3-Fl-fKH.text" = "Title";
+
+/* Class = "IBUILabel"; text = "Use link from clipboard"; ObjectID = "ATG-7C-saS"; */
+"ATG-7C-saS.text" = "Aus Zwischenablage";
+
+/* Class = "IBUILabel"; text = "Follow us on Twitter"; ObjectID = "Cqn-8F-3wW"; */
+"Cqn-8F-3wW.text" = "Folge uns bei Twitter";
+
+/* Class = "IBUILabel"; text = "Tell your friends"; ObjectID = "Fqx-Dg-Y0k"; */
+"Fqx-Dg-Y0k.text" = "App weiterempfehlen";
+
+/* Class = "IBUIViewController"; title = "Detail"; ObjectID = "FsK-A1-Bo1"; */
+"FsK-A1-Bo1.title" = "Detail";
+
+/* Class = "IBUILabel"; text = "Token"; ObjectID = "Gzc-LB-mcl"; */
+"Gzc-LB-mcl.text" = "Token";
+
+/* Class = "IBUILabel"; text = "Open an issue on GitHub"; ObjectID = "Je8-TY-IiN"; */
+"Je8-TY-IiN.text" = "Open an issue on GitHub";
+
+/* Class = "IBUILabel"; text = "Host URL"; ObjectID = "Jpt-Up-7xG"; */
+"Jpt-Up-7xG.text" = "Host URL";
+
+/* Class = "IBUITableViewSection"; headerTitle = "About this App"; ObjectID = "Ndf-70-WHn"; */
+"Ndf-70-WHn.headerTitle" = "Über diese App";
+
+/* Class = "IBUINavigationItem"; title = "Bag it!"; ObjectID = "Neg-nZ-Gjn"; */
+"Neg-nZ-Gjn.title" = "Bag it!";
+
+/* Class = "IBUINavigationItem"; title = "Wallabag"; ObjectID = "Qze-uZ-erH"; */
+"Qze-uZ-erH.title" = "Wallabag";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Need help?"; ObjectID = "VrR-RZ-Rdb"; */
+"VrR-RZ-Rdb.headerTitle" = "Du brauchst Hilfe?";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Connect to your wallabag"; ObjectID = "WFx-Q5-wBW"; */
+"WFx-Q5-wBW.headerTitle" = "Verbinde deine wallabag";
+
+/* Class = "IBUILabel"; text = "Send a mail"; ObjectID = "WMD-mR-urd"; */
+"WMD-mR-urd.text" = "Schreibe eine Mail";
+
+/* Class = "IBUINavigationItem"; title = "License"; ObjectID = "ZcX-Sx-98P"; */
+"ZcX-Sx-98P.title" = "Lizenz";
+
+/* Class = "IBUILabel"; text = "Where can I find this data?"; ObjectID = "aaJ-Pj-ptv"; */
+"aaJ-Pj-ptv.text" = "Wo finde ich diese Daten?";
+
+/* Class = "IBUITextField"; placeholder = "1"; ObjectID = "c3B-i0-Zwg"; */
+"c3B-i0-Zwg.placeholder" = "1";
+
+/* Class = "IBUILabel"; text = "Install your own wallabag"; ObjectID = "ct0-Xy-mr0"; */
+"ct0-Xy-mr0.text" = "Installiere deine eigene wallabag";
+
+/* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "dXF-e3-NIf"; */
+"dXF-e3-NIf.title" = "Einstellungen";
+
+/* Class = "IBUILabel"; text = "Like our page on Facebook"; ObjectID = "lgz-UT-uHI"; */
+"lgz-UT-uHI.text" = "Besuche unsere Facebook Seite";
+
+/* Class = "IBUINavigationItem"; title = "Article"; ObjectID = "lrd-na-gBt"; */
+"lrd-na-gBt.title" = "Artikel";
+
+/* Class = "IBUITextField"; placeholder = "fd1337/$sdi"; ObjectID = "qTB-9I-mWj"; */
+"qTB-9I-mWj.placeholder" = "fd1337/$sdi";
+
+/* Class = "IBUILabel"; text = "Rate this App"; ObjectID = "qrF-Wg-16E"; */
+"qrF-Wg-16E.text" = "App bewerten";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Don't have a hosted wallabag yet?"; ObjectID = "rte-lI-6fg"; */
+"rte-lI-6fg.headerTitle" = "Du hast noch keine wallabag?";
+
+/* Class = "IBUITableViewController"; title = "Master"; ObjectID = "vzf-86-0ad"; */
+"vzf-86-0ad.title" = "Master";
