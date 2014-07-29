@@ -183,8 +183,8 @@ header.mbm {
 }
 
 blockquote {
-  border:1px solid #999;
-  background: #FFF;
+  border:1px solid #FFF;
+  background: #AAA;
   padding: 1em;
   margin: 0;
 }
