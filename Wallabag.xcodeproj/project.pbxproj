@@ -58,10 +58,7 @@
 		44A4B4E3B48248E3B67A93D8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		81FB84A52E0E4BE2ADB2D39A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		F50B3B9A1938F6CA0048EBFD /* WALSettingsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettingsTests.m; sourceTree = "<group>"; };
-		F50B894718B79DF200AA9A6C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		F50B895118B7A28400AA9A6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F50B895318B7A28F00AA9A6C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F50B895518B7A2A000AA9A6C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F5259671193E4259003E91A7 /* main-night.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "main-night.css"; sourceTree = "<group>"; };
 		F5259674193E49EE003E91A7 /* WALTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALTheme.h; sourceTree = "<group>"; };
 		F5259675193E49EE003E91A7 /* WALTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALTheme.m; sourceTree = "<group>"; };
@@ -101,19 +98,13 @@
 		F5905332193B657D005E2A00 /* WALTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALTableViewController.m; sourceTree = "<group>"; };
 		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
 		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
-		F5AF3B3B1986706000226355 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F5AF3B3D198672BE00226355 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-iPad.storyboard"; sourceTree = "<group>"; };
-		F5AF3B40198672C600226355 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
-		F5AF3B44198672C700226355 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
-		F5AF3B46198675F400226355 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
-		F5AF8ABE18F9619D00652EBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F5B747561938B87D0071B94C /* WALServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALServerConnection.h; sourceTree = "<group>"; };
 		F5B747571938B87D0071B94C /* WALServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALServerConnection.m; sourceTree = "<group>"; };
 		F5B747591938BAAF0071B94C /* WALArticleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticleList.h; sourceTree = "<group>"; };
 		F5B7475A1938BAAF0071B94C /* WALArticleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticleList.m; sourceTree = "<group>"; };
 		F5B7475C1938C6400071B94C /* WALServerConnectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALServerConnectionDelegate.h; sourceTree = "<group>"; };
 		F5C48A3118B793A100E76807 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		F5C6A3B718BCB55A00534BBD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		F5C9FB5A18BBB8E000083FB3 /* WALBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALBrowserViewController.h; sourceTree = "<group>"; };
 		F5C9FB5B18BBB8E000083FB3 /* WALBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALBrowserViewController.m; sourceTree = "<group>"; };
 		F5DA910218B51FE8006A0B1A /* WALSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettingsTableViewController.h; sourceTree = "<group>"; };
@@ -123,6 +114,12 @@
 		F5DA910818B52680006A0B1A /* WALFeedCallbackDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALFeedCallbackDelegate.h; sourceTree = "<group>"; };
 		F5DA910918B56FCE006A0B1A /* main.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = main.css; sourceTree = "<group>"; };
 		F5DA910B18B56FD6006A0B1A /* ratatouille.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = ratatouille.css; sourceTree = "<group>"; };
+		F5E53A3F1987B5400022B32F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		F5E53A401987B5400022B32F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
+		F5E53A411987B5400022B32F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F5E53A421987B5470022B32F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		F5E53A431987B5470022B32F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
+		F5E53A441987B5470022B32F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -507,9 +504,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F50B895118B7A28400AA9A6C /* Base */,
-				F50B895318B7A28F00AA9A6C /* de */,
-				F50B895518B7A2A000AA9A6C /* fr */,
-				F5AF3B3B1986706000226355 /* en */,
+				F5E53A411987B5400022B32F /* en */,
+				F5E53A441987B5470022B32F /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -518,9 +514,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F5877D9F18B4E02B009D4EFE /* Base */,
-				F50B894718B79DF200AA9A6C /* de */,
-				F5C6A3B718BCB55A00534BBD /* fr */,
-				F5AF8ABE18F9619D00652EBE /* en */,
+				F5E53A3F1987B5400022B32F /* en */,
+				F5E53A421987B5470022B32F /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -529,9 +524,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F5AF3B3D198672BE00226355 /* Base */,
-				F5AF3B40198672C600226355 /* de */,
-				F5AF3B44198672C700226355 /* en */,
-				F5AF3B46198675F400226355 /* fr */,
+				F5E53A401987B5400022B32F /* en */,
+				F5E53A431987B5470022B32F /* de */,
 			);
 			name = "Main-iPad.storyboard";
 			sourceTree = "<group>";

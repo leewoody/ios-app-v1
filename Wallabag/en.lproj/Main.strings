@@ -23,6 +23,9 @@
 /* Class = "IBUITableViewSection"; headerTitle = "Don't have a hosted wallabag yet?"; ObjectID = "Ix9-bh-0d5"; */
 "Ix9-bh-0d5.headerTitle" = "Don't have a hosted wallabag yet?";
 
+/* Class = "IBUILabel"; text = "Open an issue on GitHub"; ObjectID = "L92-AM-fXC"; */
+"L92-AM-fXC.text" = "Open an issue on GitHub";
+
 /* Class = "IBUILabel"; text = "User ID"; ObjectID = "Lfi-2V-yyK"; */
 "Lfi-2V-yyK.text" = "User ID";
 
@@ -64,6 +67,9 @@
 
 /* Class = "IBUILabel"; text = "Like our page on Facebook"; ObjectID = "cxV-eS-fr8"; */
 "cxV-eS-fr8.text" = "Like our page on Facebook";
+
+/* Class = "IBUITextView"; text = "Copyright © 2014 Kevin Meyer \nwallabag@kevin-meyer.de https://github.com/wallabag/ios-app \nArticle Style is based on wallabag's theme \"baggy\" by Thomas LEBEAU.  External Libraries:  AFNetworking:  Copyright (c) 2013 AFNetworking (http://afnetworking.com/)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE."; ObjectID = "hkc-87-IfJ"; */
+"hkc-87-IfJ.text" = "Copyright © 2014 Kevin Meyer \nwallabag@kevin-meyer.de https://github.com/wallabag/ios-app \nArticle Style is based on wallabag's theme \"baggy\" by Thomas LEBEAU.  External Libraries:  AFNetworking:  Copyright (c) 2013 AFNetworking (http://afnetworking.com/)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
 
 /* Class = "IBUILabel"; text = "Detail"; ObjectID = "i9S-Mp-8pe"; */
 "i9S-Mp-8pe.text" = "Detail";
