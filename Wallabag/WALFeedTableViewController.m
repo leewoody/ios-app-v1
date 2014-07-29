@@ -30,6 +30,7 @@
 @property BOOL showAllArticles;
 - (IBAction)actionsButtonPushed:(id)sender;
 
+@property (strong) UIActionSheet* actionSheet;
 @end
 
 @implementation WALFeedTableViewController
@@ -190,23 +191,30 @@
 
 - (IBAction)actionsButtonPushed:(id)sender
 {
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
-	actionSheet.title = NSLocalizedString(@"Actions", nil);
+	if (self.actionSheet)
+	{
+		[self.actionSheet dismissWithClickedButtonIndex:-1 animated:YES];
+		self.actionSheet = nil;
+		return;
+	}
 	
-	[actionSheet addButtonWithTitle:NSLocalizedString(@"Add Article", nil)];
-	[actionSheet addButtonWithTitle:NSLocalizedString(@"Change Theme", nil)];
+	self.actionSheet = [[UIActionSheet alloc] init];
+	self.actionSheet.title = NSLocalizedString(@"Actions", nil);
+	
+	[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Add Article", nil)];
+	[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Change Theme", nil)];
 
 	if (self.showAllArticles)
-		[actionSheet addButtonWithTitle:NSLocalizedString(@"Show unread Articles", nil)];
+		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show unread Articles", nil)];
 	else
-		[actionSheet addButtonWithTitle:NSLocalizedString(@"Show all Articles", nil)];
+		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show all Articles", nil)];
 	
-	[actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", nil)];
+	[self.actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", nil)];
 	
-	[actionSheet setCancelButtonIndex:3];
-	[actionSheet setTag:1];
-	[actionSheet setDelegate:self];
-	[actionSheet showFromBarButtonItem:sender animated:true];
+	[self.actionSheet setCancelButtonIndex:3];
+	[self.actionSheet setTag:1];
+	[self.actionSheet setDelegate:self];
+	[self.actionSheet showFromBarButtonItem:sender animated:true];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -228,6 +236,7 @@
 			[self.tableView reloadData];
 		}
 	}
+	self.actionSheet = nil;
 }
 
 #pragma mark - Callback Delegates

@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *backToolBarButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *forwardToolbarButton;
 @property (strong) UIPopoverController *activityPopover;
+@property (strong) UIActionSheet *actionSheet;
 @end
 
 @implementation WALBrowserViewController
@@ -63,16 +64,22 @@
 
 - (IBAction)shareToolbarButtonPushed:(id)sender
 {
-	///! @todo implement and extend functions
+	if (self.actionSheet)
+	{
+		[self.actionSheet dismissWithClickedButtonIndex:-1 animated:YES];
+		self.actionSheet = nil;
+		return;
+	}
 	
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:self.webView.request.mainDocumentURL.absoluteString
+	///! @todo implement and extend functions
+	self.actionSheet = [[UIActionSheet alloc] initWithTitle:self.webView.request.mainDocumentURL.absoluteString
 															 delegate:self
 													cancelButtonTitle:NSLocalizedString(@"cancel", nil)
 											   destructiveButtonTitle:nil
 													otherButtonTitles:NSLocalizedString(@"Open in Safari", nil), NSLocalizedString(@"Share link", nil), nil];
-	actionSheet.tag = 1;
+	self.actionSheet.tag = 1;
 	
-	[actionSheet showFromBarButtonItem:sender animated:true];
+	[self.actionSheet showFromBarButtonItem:sender animated:true];
 }
 
 - (IBAction)backToolbarButtonPushed:(id)sender
@@ -140,7 +147,10 @@
 		// Open in Safari
 		if (buttonIndex == 0)
 		{
-			[[UIApplication sharedApplication] openURL:self.webView.request.mainDocumentURL];
+			if (self.webView.request.mainDocumentURL)
+				[[UIApplication sharedApplication] openURL:self.webView.request.mainDocumentURL];
+			else
+				[[UIApplication sharedApplication] openURL:self.initialUrl];
 		}
 		// Share link
 		else if (buttonIndex == 1)
@@ -151,7 +161,14 @@
 				return;
 			}
 
-			NSArray* dataToShare = @[self.title, self.webView.request.mainDocumentURL];
+			NSURL *urlToShare;
+			
+			if (self.webView.request.mainDocumentURL)
+				urlToShare = self.webView.request.mainDocumentURL;
+			else
+				urlToShare = self.initialUrl;
+			
+			NSArray* dataToShare = @[self.title, urlToShare];
 			//! @todo add more custom activities
 			UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
 			activityViewController.excludedActivityTypes = @[UIActivityTypeAirDrop];
@@ -167,6 +184,7 @@
 			}
 		}
 	}
+	self.actionSheet = nil;
 }
 
 
