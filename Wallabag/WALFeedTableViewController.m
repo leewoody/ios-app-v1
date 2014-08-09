@@ -56,13 +56,23 @@
 	self.articleList = [[WALArticleList alloc] init];
 	[self.articleList loadArticlesFromDisk];
 	self.settings = [WALSettings settingsFromSavedSettings];
+	[self updateArticleList];
+	
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && [self.articleList getNumberOfUnreadArticles] > 0)
+	{
+		NSIndexPath *firstCellIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+		[self performSegueWithIdentifier:@"PushToArticle" sender:[self.tableView cellForRowAtIndexPath:firstCellIndex]];
+		[self.tableView selectRowAtIndexPath:firstCellIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
+	}
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	[self.navigationController setToolbarHidden:true];
-	[self updateArticleList];
+	
+	if (!self.settings)
+		[self performSegueWithIdentifier:@"ModalToSettings" sender:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -145,6 +155,7 @@
 {
 	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:[theme getTextColor]]];
 	self.tableView.backgroundColor = [theme getBackgroundColor];
+	self.refreshControl.tintColor = [theme getTextColor];
 }
 
 #pragma mark - Segue
