@@ -642,13 +642,21 @@ THE SOFTWARE.</string>
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://example.com/article" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8CA-4x-jgh">
-                                                    <rect key="frame" x="20" y="7" width="280" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://example.com/article" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8CA-4x-jgh">
+                                                    <rect key="frame" x="20" y="7" width="500" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="ecd-Y4-ojg"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL"/>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8CA-4x-jgh" firstAttribute="leading" secondItem="AEJ-iH-eNC" secondAttribute="leading" constant="20" id="Bfa-QD-HkE"/>
+                                                <constraint firstAttribute="trailing" secondItem="8CA-4x-jgh" secondAttribute="trailing" constant="20" id="fTD-NK-yOy"/>
+                                                <constraint firstAttribute="centerY" secondItem="8CA-4x-jgh" secondAttribute="centerY" id="tlZ-hi-1Ma"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>

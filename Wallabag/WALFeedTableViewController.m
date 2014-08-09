@@ -56,22 +56,13 @@
 	self.articleList = [[WALArticleList alloc] init];
 	[self.articleList loadArticlesFromDisk];
 	self.settings = [WALSettings settingsFromSavedSettings];
-	
-	if (self.settings) {
-		[self updateArticleList];
-	}
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	[self.navigationController setToolbarHidden:true];
-	
-	if (!self.settings)
-	{
-		[self performSegueWithIdentifier:@"ModalToSettings" sender:self];
-	}
-
+	[self updateArticleList];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -89,6 +80,14 @@
 
 - (void)updateArticleList
 {
+	if (!self.settings)
+	{
+		[self.refreshControl endRefreshing];
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+		[self performSegueWithIdentifier:@"ModalToSettings" sender:self];
+		return;
+	}
+	
 	WALServerConnection *server = [[WALServerConnection alloc] init];
 	[server loadArticlesWithSettings:self.settings OldArticleList:self.articleList delegate:self];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;

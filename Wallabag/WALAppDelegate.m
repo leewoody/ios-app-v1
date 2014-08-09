@@ -9,6 +9,7 @@
 #import "WALAppDelegate.h"
 #import "WALArticle.h"
 #import "WALIcons.h"
+#import "WALSettings.h"
 
 @interface WALAppDelegate ()
 @property (weak, nonatomic) UIBarButtonItem *lastBarButtonItem;
@@ -84,7 +85,26 @@
 	}
 }
 
+- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
+{
+	if (UIInterfaceOrientationIsLandscape(orientation))
+		return NO;
+	
+	if (![WALSettings settingsFromSavedSettings])
+		return NO;
+	
+	return YES;
+}
+
 #pragma mark - UIPopoverController
+
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
+{
+	if (![WALSettings settingsFromSavedSettings])
+		return NO;
+	
+	return YES;
+}
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
