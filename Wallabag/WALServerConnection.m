@@ -61,7 +61,27 @@
 		 failure:^(AFHTTPRequestOperation *operation, NSError *error)
 	 {
 		 NSLog(@"Loading Error: %@", error.description);
-		 [self callbackWithError:error];
+		 NSHTTPURLResponse *response = operation.response;
+
+		 if (response.statusCode == 200)
+		 {
+			 NSString *responseString = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+
+			 NSLog(@"Got 200, but no XML: %@", operation.responseObject);
+			 NSLog(@"Response String: %@", responseString);
+
+			 responseString = [NSString stringWithFormat:@"Response: %@", responseString];
+			 NSRange stringRange = {0, MIN(responseString.length, 200)};
+			 stringRange = [responseString rangeOfComposedCharacterSequencesForRange:stringRange];
+			 responseString = [responseString substringWithRange:stringRange];
+
+			 NSError *errorWithResponse = [[NSError alloc] initWithDomain:@"WALError"
+																	 code:100
+																 userInfo:@{NSLocalizedDescriptionKey: responseString}];
+			 [self callbackWithError:errorWithResponse];
+		 }
+		 else
+			 [self callbackWithError:error];
 	 }
 	 ];
 
