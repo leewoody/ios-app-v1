@@ -17,13 +17,13 @@
 @interface WALArticleViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *markAsReadButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *changeThemeButtom;
 - (IBAction)markAsReadPushed:(id)sender;
 - (IBAction)changeThemePushed:(id)sender;
 - (IBAction)sharePushed:(id)sender;
 @property (strong) WALArticle *article;
 @property (strong) NSURL *externalURL;
 @property BOOL nextViewIsBrowser;
+@property (strong) UIPopoverController *activityPopover;
 @end
 
 @implementation WALArticleViewController
@@ -35,9 +35,9 @@
 	
 	WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
 	[self updateWithTheme:themeOrganizer.getCurrentTheme];
-	[self.changeThemeButtom setImage:[WALIcons imageOfChangeThemeWithFrame:CGRectMake(0, 0, 44, 44)]];
 	
-	[self configureView];
+	if (self.article)
+		[self configureView];
 	[themeOrganizer subscribeToThemeChanges:self];
 }
 
@@ -58,9 +58,9 @@
 - (void) updateButtons
 {
 	if (self.article.archive)
-		[self.markAsReadButton setImage:[WALIcons imageOfToolbarReadWithFrame:CGRectMake(0, 0, 44, 44)]];
+		[self.markAsReadButton setImage:[WALIcons imageOfToolbarRead]];
 	else
-		[self.markAsReadButton setImage:[WALIcons imageOfToolbarUnreadWithFrame:CGRectMake(0, 0, 44, 44)]];
+		[self.markAsReadButton setImage:[WALIcons imageOfToolbarUnread]];
 }
 
 #pragma mark - Managing the detail item
@@ -160,12 +160,29 @@
 
 - (IBAction)sharePushed:(id)sender
 {
+	if ([self.activityPopover isPopoverVisible])
+	{
+		[self.activityPopover dismissPopoverAnimated:true];
+		return;
+	}
+
+	if (!self.article)
+		return;
+	
 	NSArray* dataToShare = @[self.title, self.article.link];
-	
 	//! @todo add more custom activities
-	
-	UIActivityViewController* activityViewController =
-	[[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
-	[self presentViewController:activityViewController animated:YES completion:^{}];
+	UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+	activityViewController.excludedActivityTypes = @[UIActivityTypeAirDrop];
+
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+	{
+		self.activityPopover = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+		[self.activityPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:true];
+	}
+	else
+	{
+		[self presentViewController:activityViewController animated:YES completion:^{}];
+	}
+
 }
 @end

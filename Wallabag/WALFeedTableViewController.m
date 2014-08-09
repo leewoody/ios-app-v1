@@ -30,6 +30,7 @@
 @property BOOL showAllArticles;
 - (IBAction)actionsButtonPushed:(id)sender;
 
+@property (strong) UIActionSheet* actionSheet;
 @end
 
 @implementation WALFeedTableViewController
@@ -55,17 +56,14 @@
 	self.articleList = [[WALArticleList alloc] init];
 	[self.articleList loadArticlesFromDisk];
 	self.settings = [WALSettings settingsFromSavedSettings];
+	[self updateArticleList];
 	
-	if (self.settings) {
-		[self updateArticleList];
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && [self.articleList getNumberOfUnreadArticles] > 0)
+	{
+		NSIndexPath *firstCellIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+		[self performSegueWithIdentifier:@"PushToArticle" sender:[self.tableView cellForRowAtIndexPath:firstCellIndex]];
+		[self.tableView selectRowAtIndexPath:firstCellIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
 	}
-}
-
-- (void)viewDidLoad
-{
-	[super viewDidLoad];
-
-	[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[WALIcons imageOfToolbarActions] style:UIBarButtonItemStyleBordered target:self action:@selector(actionsButtonPushed:)]];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -74,10 +72,7 @@
 	[self.navigationController setToolbarHidden:true];
 	
 	if (!self.settings)
-	{
 		[self performSegueWithIdentifier:@"ModalToSettings" sender:self];
-	}
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -95,6 +90,14 @@
 
 - (void)updateArticleList
 {
+	if (!self.settings)
+	{
+		[self.refreshControl endRefreshing];
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+		[self performSegueWithIdentifier:@"ModalToSettings" sender:self];
+		return;
+	}
+	
 	WALServerConnection *server = [[WALServerConnection alloc] init];
 	[server loadArticlesWithSettings:self.settings OldArticleList:self.articleList delegate:self];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -130,6 +133,7 @@
 	cell.textLabel.text = currentArticle.title;
 	cell.textLabel.textColor = [currentTheme getTextColor];
 	cell.detailTextLabel.text = @"";
+	cell.backgroundColor = [currentTheme getBackgroundColor];
 	
     return cell;
 }
@@ -151,6 +155,7 @@
 {
 	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:[theme getTextColor]]];
 	self.tableView.backgroundColor = [theme getBackgroundColor];
+	self.refreshControl.tintColor = [theme getTextColor];
 }
 
 #pragma mark - Segue
@@ -167,7 +172,18 @@
 		else
 			articleToSet = [self.articleList getUnreadArticleAtIndex:indexPath.row];
 		
-		[((WALArticleViewController*)segue.destinationViewController) setDetailArticle:articleToSet];
+		WALArticleViewController *articleVC;
+		
+		if ([segue.destinationViewController isKindOfClass:[UINavigationController class]])
+		{
+			UINavigationController *navigationVC = (UINavigationController*) segue.destinationViewController;
+			articleVC = (WALArticleViewController*) navigationVC.viewControllers[0];
+		}
+		else
+			articleVC = (WALArticleViewController*) segue.destinationViewController;
+			
+		[articleVC setDetailArticle:articleToSet];
+		
 		[[self.tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:TRUE];
 	}
 	else if ([[segue identifier] isEqualToString:@"ModalToSettings"])
@@ -185,23 +201,30 @@
 
 - (IBAction)actionsButtonPushed:(id)sender
 {
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
-	[actionSheet setTitle:@"Actions"];
+	if (self.actionSheet)
+	{
+		[self.actionSheet dismissWithClickedButtonIndex:-1 animated:YES];
+		self.actionSheet = nil;
+		return;
+	}
 	
-	[actionSheet addButtonWithTitle:@"Add Article"];
-	[actionSheet addButtonWithTitle:@"Change to Night Theme"];
+	self.actionSheet = [[UIActionSheet alloc] init];
+	self.actionSheet.title = NSLocalizedString(@"Actions", nil);
+	
+	[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Add Article", nil)];
+	[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Change Theme", nil)];
 
 	if (self.showAllArticles)
-		[actionSheet addButtonWithTitle:@"Show unread Articles"];
+		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show unread Articles", nil)];
 	else
-		[actionSheet addButtonWithTitle:@"Show all Articles"];
+		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show all Articles", nil)];
 	
-	[actionSheet addButtonWithTitle:@"cancel"];
+	[self.actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", nil)];
 	
-	[actionSheet setCancelButtonIndex:3];
-	[actionSheet setTag:1];
-	[actionSheet setDelegate:self];
-	[actionSheet showInView:self.view];
+	[self.actionSheet setCancelButtonIndex:3];
+	[self.actionSheet setTag:1];
+	[self.actionSheet setDelegate:self];
+	[self.actionSheet showFromBarButtonItem:sender animated:true];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -223,6 +246,7 @@
 			[self.tableView reloadData];
 		}
 	}
+	self.actionSheet = nil;
 }
 
 #pragma mark - Callback Delegates

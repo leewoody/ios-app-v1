@@ -7,7 +7,7 @@
    4 = Messages
    5 = Article
    6 = Media queries
-   
+
    ========================================================================== */
 
 html {
@@ -23,10 +23,10 @@ body {
    1 = Style Guide
    ========================================================================== */
 
-::selection { 
-  color: #FFF;  
+::selection {
+  color: #FFF;
   background: #000;
-} 
+}
 
 h2, h3, h4 {
   font-family: 'PT Sans', sans-serif;
@@ -137,7 +137,7 @@ h2:after {
 /* ==========================================================================
    2 = Layout
    ========================================================================== */
-   
+
 #content {
   margin-top: 1em;
   min-height: 30em;
@@ -169,7 +169,7 @@ header.mbm {
 
 #article {
   width: 70%;
-  margin-bottom: 3em;
+/*  margin-bottom: 3em; */
   text-align: justify;
   word-wrap: break-word;
 }
@@ -183,8 +183,8 @@ header.mbm {
 }
 
 blockquote {
-  border:1px solid #999;
-  background: #FFF;
+  border:1px solid #FFF;
+  background: #AAA;
   padding: 1em;
   margin: 0;
 }
@@ -201,22 +201,7 @@ blockquote {
    6 = Media Queries
    ========================================================================== */
 
-@media screen and (max-width: 1050px) {
-}
-
-@media screen and (max-width: 900px) {
-  .topPosF {
-    right: 2.5em;
-  }
-}
-
-@media screen and (max-width: 700px) {
-  #display-mode {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 570px) {
+@media screen {
   body > header {
     background: #333;
     position: fixed;

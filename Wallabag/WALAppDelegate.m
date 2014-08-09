@@ -7,12 +7,27 @@
 //
 
 #import "WALAppDelegate.h"
+#import "WALArticle.h"
+#import "WALIcons.h"
+#import "WALSettings.h"
+
+@interface WALAppDelegate ()
+@property (weak, nonatomic) UIBarButtonItem *lastBarButtonItem;
+@end
 
 @implementation WALAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+	
+	UIViewController *rootViewController = self.window.rootViewController;
+	
+	if ([rootViewController isKindOfClass:[UISplitViewController class]])
+	{
+		((UISplitViewController*)rootViewController).delegate = self;
+	}
+	
     return YES;
 }
 							
@@ -41,6 +56,64 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
 	// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - UISplitView Delegate
+
+- (void)splitViewController:(UISplitViewController *)svc
+	 willHideViewController:(UIViewController *)aViewController
+		  withBarButtonItem:(UIBarButtonItem *)barButtonItem
+	   forPopoverController:(UIPopoverController *)pc
+{
+	UINavigationController *navigationVC = svc.viewControllers.lastObject;
+	if (YES)
+	{
+		barButtonItem.image = [WALIcons imageOfNavbarList];
+		((UIViewController*)navigationVC.viewControllers[0]).navigationItem.leftBarButtonItem = barButtonItem;
+	}
+	self.lastBarButtonItem = barButtonItem;
+	pc.delegate = self;
+}
+
+- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+	UINavigationController *navigationVC = svc.viewControllers.lastObject;
+	if (YES)
+	{
+		((UIViewController*)navigationVC.viewControllers[0]).navigationItem.leftBarButtonItem = nil;
+		self.lastBarButtonItem = nil;
+	}
+}
+
+- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
+{
+	if (UIInterfaceOrientationIsLandscape(orientation))
+		return NO;
+	
+	if (![WALSettings settingsFromSavedSettings])
+		return NO;
+	
+	return YES;
+}
+
+#pragma mark - UIPopoverController
+
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
+{
+	if (![WALSettings settingsFromSavedSettings])
+		return NO;
+	
+	return YES;
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+	UINavigationController *navigationVC = ((UISplitViewController*)self.window.rootViewController).viewControllers.lastObject;
+	if (YES)
+	{
+		[((UIViewController*)navigationVC.viewControllers[0]).navigationItem setLeftBarButtonItem:self.lastBarButtonItem animated:true];
+	}
+
 }
 
 @end

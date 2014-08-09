@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WALAppDelegate : UIResponder <UIApplicationDelegate>
+@interface WALAppDelegate : UIResponder <UIApplicationDelegate, UISplitViewControllerDelegate, UIPopoverControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
