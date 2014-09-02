@@ -18,11 +18,14 @@ PODS:
   - AFNetworking/UIKit (2.2.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - TBXML (1.5)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - TBXML (~> 1.5)
 
 SPEC CHECKSUMS:
   AFNetworking: 5f2538aa2d150b71d4e6cca3a420d796e1e1c374
+  TBXML: a279440030ba55c40e1455cafba3b0a44e1963d4
 
 COCOAPODS: 0.33.1
