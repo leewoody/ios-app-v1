@@ -13,7 +13,7 @@
 @class WALArticleList;
 @class WALSettings;
 
-@interface WALServerConnection : NSObject <NSXMLParserDelegate>
+@interface WALServerConnection : NSObject
 
 - (void) loadArticlesWithSettings:(WALSettings*) settings OldArticleList:(WALArticleList*) articleList delegate:(id<WALServerConnectionDelegate>) delegate;
 

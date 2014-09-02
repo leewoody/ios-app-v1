@@ -18,7 +18,7 @@
 @interface WALServerConnection ()
 @property (strong) WALSettings* settings;
 
-@property (strong) NSXMLParser* parser;
+@property (strong) TBXML* parser;
 @property (strong) WALArticleList* parser_articleList;
 @property (strong) NSString* parser_currentString;
 @property (strong) WALArticle* parser_currentArticle;
@@ -70,37 +70,17 @@
 			NSData *data = [NSData dataWithContentsOfURL:filePath ];
 			
 			NSError *parserError;
-			TBXML *parser = [[TBXML alloc] initWithXMLData:data error:&parserError];
+			self.parser = [[TBXML alloc] initWithXMLData:data error:&parserError];
 			
 			if (parserError) {
 				NSLog(@"error: %@", parserError.description);
 				return;
 			}
 			
-			if(parser.rootXMLElement)
-			{
-				NSLog(@"Root Element: %@", [TBXML elementName:parser.rootXMLElement]);
-				TBXMLElement *channel = [TBXML childElementNamed:@"channel" parentElement:parser.rootXMLElement];
-				TBXMLElement *item = [TBXML childElementNamed:@"item" parentElement:channel];
-				
-				self.parser_articleList = [[WALArticleList alloc] init];
-				
-				do {
-					WALArticle *article = [[WALArticle alloc] init];
-					article.title = [self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"title" parentElement:item]]];
-					article.link = [NSURL URLWithString:[self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"link" parentElement:item]]]];
-					[article setDateWithString:[self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"pubDate" parentElement:item]]]];
-					article.content = [self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"description" parentElement:item]]];
-					article.source = [NSURL URLWithString:[self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"source" parentElement:item]]]];
-					
-					[self mergeArticleWithOldArticles:article];
-					[self.parser_articleList addArticle:article];
-					article = nil;
-				} while ((item = item->nextSibling));
-				[self.delegate serverConnection:self didFinishWithArticleList:self.parser_articleList];
-				self.parser_articleList = nil;
-				self.oldArticleList = nil;
-				self.delegate = nil;
+			if(self.parser.rootXMLElement) {
+				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+					[self parseRootElement:self.parser.rootXMLElement];
+				});
 				return;
 			}
 		}
@@ -110,77 +90,36 @@
 	
 }
 
-#pragma mark - XML Parser
+#pragma mark - Parser
 
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
-{
-	if ([elementName isEqualToString:@"item"])
-	{
-		self.parser_currentArticle = [[WALArticle alloc] init];
-	}
-	else if ([elementName isEqualToString:@"source"])
-	{
-		//! @todo figure out if source URL is useful to save
-	}
+- (void) parseRootElement:(TBXMLElement*) root {
 	
-	self.parser_currentString = nil;
-}
-
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
-{
-	if ([elementName isEqualToString:@"item"])
-	{
-		[self mergeArticleWithOldArticles:self.parser_currentArticle];
-		[self.parser_articleList addArticle:self.parser_currentArticle];
-		self.parser_currentArticle = nil;
-	}
-	else if ([elementName isEqualToString:@"title"])
-	{
-		self.parser_currentArticle.title = [self.parser_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];;
-	}
-	else if ([elementName isEqualToString:@"link"])
-	{
-		self.parser_currentArticle.link = [NSURL URLWithString:self.parser_currentString];
-	}
-	else if ([elementName isEqualToString:@"pubDate"])
-	{
-		[self.parser_currentArticle setDateWithString:self.parser_currentString];
-	}
-	else if ([elementName isEqualToString:@"description"])
-	{
-		self.parser_currentArticle.content = self.parser_currentString;
-	}
-	else if ([elementName isEqualToString:@"source"])
-	{
-		self.parser_currentArticle.source = [NSURL URLWithString:self.parser_currentString];
-	}
+	TBXMLElement *channel = [TBXML childElementNamed:@"channel" parentElement:root];
+	TBXMLElement *item = [TBXML childElementNamed:@"item" parentElement:channel];
 	
-	self.parser_currentString = nil;
+	self.parser_articleList = [[WALArticleList alloc] init];
+	
+	do {
+		WALArticle *article = [[WALArticle alloc] init];
+		article.title = [self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"title" parentElement:item]]];
+		article.link = [NSURL URLWithString:[self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"link" parentElement:item]]]];
+		[article setDateWithString:[self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"pubDate" parentElement:item]]]];
+		article.content = [self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"description" parentElement:item]]];
+		article.source = [NSURL URLWithString:[self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"source" parentElement:item]]]];
+		
+		[self mergeArticleWithOldArticles:article];
+		[self.parser_articleList addArticle:article];
+		article = nil;
+	} while ((item = item->nextSibling));
+	
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[self.delegate serverConnection:self didFinishWithArticleList:self.parser_articleList];
+		self.parser_articleList = nil;
+		self.oldArticleList = nil;
+		self.delegate = nil;
+		self.parser = nil;
+	});
 }
-
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
-{
-	if (self.parser_currentString != nil)
-		self.parser_currentString = [self.parser_currentString stringByAppendingString:string];
-	else
-		self.parser_currentString = string;
-}
-
-- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
-{
-	NSLog(@"Parsing Error: %@", parseError.description);
-	[self callbackWithError:parseError];
-}
-
-- (void)parserDidEndDocument:(NSXMLParser *)parser
-{
-	[self.delegate serverConnection:self didFinishWithArticleList:self.parser_articleList];
-
-	self.parser_articleList = nil;
-	self.oldArticleList = nil;
-	self.delegate = nil;
-}
-
 
 #pragma mark -
 
