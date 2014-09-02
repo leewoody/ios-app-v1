@@ -63,28 +63,34 @@
 		return [documentsDirectoryURL URLByAppendingPathComponent:@"feed.xml"];
 	} completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
 		if (error) {
-			NSLog(@"File download error: %@", error.description);
+			[self callbackWithError:error];
 		} else {
-			NSLog(@"File downloaded to: %@", filePath);
-		
-			NSData *data = [NSData dataWithContentsOfURL:filePath ];
 			
+			NSData *data = [NSData dataWithContentsOfURL:filePath ];
 			NSError *parserError;
 			self.parser = [[TBXML alloc] initWithXMLData:data error:&parserError];
-			
-			if (parserError) {
-				NSLog(@"error: %@", parserError.description);
-				return;
-			}
-			
-			if(self.parser.rootXMLElement) {
+						
+			if(!parserError || self.parser.rootXMLElement) {
 				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 					[self parseRootElement:self.parser.rootXMLElement];
 				});
 				return;
+			} else {
+				NSString *textData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+				textData = [NSString stringWithFormat:@"Response: %@", textData];
+				NSRange stringRange = {0, MIN(textData.length, 200)};
+				stringRange = [textData rangeOfComposedCharacterSequencesForRange:stringRange];
+				textData = [textData substringWithRange:stringRange];
+				
+				if (parserError)
+					textData = [NSString stringWithFormat:@"Parser Error: %@\n%@", parserError.localizedDescription, textData];
+				
+				NSError *errorWithResponse = [[NSError alloc] initWithDomain:@"WALError"
+																		code:100
+																	userInfo:@{NSLocalizedDescriptionKey: textData}];
+				[self callbackWithError:errorWithResponse];
 			}
 		}
-		[self.delegate serverConnection:self didFinishWithError:nil];
 	}];
 	[downloadTask resume];
 	
