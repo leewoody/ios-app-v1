@@ -43,6 +43,13 @@
 {
 	NSString *urlString = [self.settings getHomeFeedURL].absoluteString;
 	
+	NSString *tempFile = NSTemporaryDirectory();
+	tempFile = [tempFile stringByAppendingString:@"feed.xml"];
+	
+	if([[NSFileManager defaultManager] fileExistsAtPath:tempFile]) {
+		[[NSFileManager defaultManager] removeItemAtPath:tempFile error:nil];
+	}
+	
 	NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
 	AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
 	
