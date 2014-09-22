@@ -105,7 +105,8 @@
 	
 	self.parser_articleList = [[WALArticleList alloc] init];
 	
-	do {
+	while (item)
+	{
 		WALArticle *article = [[WALArticle alloc] init];
 		article.title = [self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"title" parentElement:item]]];
 		article.link = [NSURL URLWithString:[self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"link" parentElement:item]]]];
@@ -116,7 +117,9 @@
 		[self mergeArticleWithOldArticles:article];
 		[self.parser_articleList addArticle:article];
 		article = nil;
-	} while ((item = item->nextSibling));
+    
+		item = item->nextSibling;
+	}
 	
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[self.delegate serverConnection:self didFinishWithArticleList:self.parser_articleList];
