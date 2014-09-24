@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="kSc-3h-73L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="kSc-3h-73L">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -54,12 +53,12 @@
             </objects>
             <point key="canvasLocation" x="1498" y="-500"/>
         </scene>
-        <!--Feed Table View Controller - Master-->
+        <!--Master-->
         <scene sceneID="OYw-aL-Kg3">
             <objects>
                 <tableViewController title="Master" id="vzf-86-0ad" customClass="WALFeedTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jaU-en-UoL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="308" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -124,7 +123,7 @@
             </objects>
             <point key="canvasLocation" x="969" y="-1483"/>
         </scene>
-        <!--Article View Controller - Detail-->
+        <!--Detail-->
         <scene sceneID="QEf-2X-ToG">
             <objects>
                 <viewController title="Detail" id="FsK-A1-Bo1" customClass="WALArticleViewController" sceneMemberID="viewController">
@@ -170,7 +169,7 @@
             </objects>
             <point key="canvasLocation" x="2374" y="-500"/>
         </scene>
-        <!--Browser View Controller - Browser-->
+        <!--Browser-->
         <scene sceneID="xf6-bs-qxX">
             <objects>
                 <viewController id="HkT-Mx-DnA" customClass="WALBrowserViewController" sceneMemberID="viewController">
@@ -217,7 +216,7 @@
             </objects>
             <point key="canvasLocation" x="3351" y="-500"/>
         </scene>
-        <!--Settings Table View Controller - Settings-->
+        <!--Settings-->
         <scene sceneID="Gtg-jw-PFZ">
             <objects>
                 <tableViewController id="51M-wD-q8G" customClass="WALSettingsTableViewController" sceneMemberID="viewController">
@@ -237,7 +236,6 @@
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://example.com/wallabag" minimumFontSize="10" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4Vj-Vu-UYd">
                                                     <rect key="frame" x="100" y="7" width="420" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
@@ -247,7 +245,6 @@
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpt-Up-7xG">
                                                     <rect key="frame" x="20" y="11" width="72" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="72" id="Wlh-KS-sos"/>
                                                     </constraints>
@@ -276,7 +273,6 @@
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="c3B-i0-Zwg">
                                                     <rect key="frame" x="100" y="7" width="420" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
@@ -286,7 +282,6 @@
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sc-fE-ywC">
                                                     <rect key="frame" x="20" y="11" width="72" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="72" id="lzM-99-RCd"/>
                                                     </constraints>
@@ -315,7 +310,6 @@
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="fd1337/$sdi" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qTB-9I-mWj">
                                                     <rect key="frame" x="100" y="7" width="420" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     <connections>
@@ -325,7 +319,6 @@
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzc-LB-mcl">
                                                     <rect key="frame" x="20" y="11" width="72" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="72" id="Lc8-3F-sBV"/>
                                                     </constraints>
@@ -554,7 +547,7 @@
             </objects>
             <point key="canvasLocation" x="2171" y="-2266"/>
         </scene>
-        <!--View Controller - License-->
+        <!--License-->
         <scene sceneID="PPr-3F-fcK">
             <objects>
                 <viewController id="OF2-5A-bPT" sceneMemberID="viewController">
@@ -607,7 +600,7 @@ THE SOFTWARE.</string>
             </objects>
             <point key="canvasLocation" x="1498" y="-2266"/>
         </scene>
-        <!--Add Article Table View Controller - Bag it!-->
+        <!--Bag it!-->
         <scene sceneID="wAa-zr-qnO">
             <objects>
                 <tableViewController id="Ff3-j5-gf9" customClass="WALAddArticleTableViewController" sceneMemberID="viewController">
@@ -627,7 +620,6 @@ THE SOFTWARE.</string>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://example.com/article" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8CA-4x-jgh">
                                                     <rect key="frame" x="20" y="7" width="500" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="ecd-Y4-ojg"/>
                                                     </constraints>

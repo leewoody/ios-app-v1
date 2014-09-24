@@ -3,12 +3,12 @@
     {
       "idiom" : "iphone",
       "size" : "29x29",
-      "scale" : "1x"
+      "scale" : "2x"
     },
     {
       "idiom" : "iphone",
       "size" : "29x29",
-      "scale" : "2x"
+      "scale" : "3x"
     },
     {
       "idiom" : "iphone",
@@ -16,16 +16,9 @@
       "scale" : "2x"
     },
     {
-      "size" : "57x57",
       "idiom" : "iphone",
-      "filename" : "logo-app-ios-icon-bg-white-57.png",
-      "scale" : "1x"
-    },
-    {
-      "size" : "57x57",
-      "idiom" : "iphone",
-      "filename" : "logo-app-ios-icon-bg-white-114.png",
-      "scale" : "2x"
+      "size" : "40x40",
+      "scale" : "3x"
     },
     {
       "size" : "60x60",
@@ -34,6 +27,12 @@
       "scale" : "2x"
     },
     {
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "logo-app-ios-icon-bg-white-180.png",
+      "scale" : "3x"
+    },
+    {
       "idiom" : "ipad",
       "size" : "29x29",
       "scale" : "1x"
@@ -51,28 +50,6 @@
     {
       "idiom" : "ipad",
       "size" : "40x40",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "ipad",
-      "size" : "50x50",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "ipad",
-      "size" : "50x50",
-      "scale" : "2x"
-    },
-    {
-      "size" : "72x72",
-      "idiom" : "ipad",
-      "filename" : "logo-app-ios-icon-bg-white-72.png",
-      "scale" : "1x"
-    },
-    {
-      "size" : "72x72",
-      "idiom" : "ipad",
-      "filename" : "logo-app-ios-icon-bg-white-144.png",
       "scale" : "2x"
     },
     {
