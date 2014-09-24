@@ -74,7 +74,7 @@
                                 <segue destination="b7R-6t-7CM" kind="modal" identifier="ModalToSettings" id="VYX-rk-UHE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="mv6-II-pTS">
+                        <barButtonItem key="rightBarButtonItem" image="MoreActions" id="mv6-II-pTS">
                             <connections>
                                 <action selector="actionsButtonPushed:" destination="pGg-6v-bdr" id="0r0-T5-XSI"/>
                             </connections>
@@ -85,11 +85,6 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
-                <customObject id="RoL-9C-ADB" customClass="WALIcons">
-                    <connections>
-                        <outletCollection property="toolbarActionsTargets" destination="mv6-II-pTS" id="iHb-OR-5Vf"/>
-                    </connections>
-                </customObject>
             </objects>
             <point key="canvasLocation" x="459" y="64"/>
         </scene>
@@ -658,6 +653,7 @@ THE SOFTWARE.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="MoreActions" width="22" height="22"/>
         <image name="NavBarButton-Settings-filled" width="22" height="22"/>
         <image name="ToolBar-Browser-Back" width="12" height="22"/>
         <image name="ToolBar-Browser-Forward" width="12" height="22"/>
