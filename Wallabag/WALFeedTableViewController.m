@@ -132,7 +132,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
 	cell.textLabel.text = currentArticle.title;
 	cell.textLabel.textColor = [currentTheme getTextColor];
-	cell.detailTextLabel.text = @"";
+	cell.detailTextLabel.text = currentArticle.link.host;
 	cell.backgroundColor = [currentTheme getBackgroundColor];
 	
     return cell;
@@ -140,7 +140,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 60.0f;
+	CGFloat constantHeight = 15.0f + 8.0f;
+	NSString *cellTitle = self.showAllArticles ? [self.articleList getArticleAtIndex:indexPath.row].title : [self.articleList getUnreadArticleAtIndex:indexPath.row].title;
+	CGFloat tableWidth = floor(tableView.bounds.size.width);
+	CGSize maximumLabelSize = CGSizeMake(tableWidth - (15.0f + 35.0f), FLT_MAX);
+	CGRect expectedLabelSize = [cellTitle boundingRectWithSize:maximumLabelSize
+													   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingTruncatesLastVisibleLine
+													attributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody]}
+													   context:nil];
+
+	return constantHeight + ceil(expectedLabelSize.size.height);
 }
 
 #pragma mark - Theming
