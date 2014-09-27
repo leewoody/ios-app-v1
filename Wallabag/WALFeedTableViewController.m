@@ -144,8 +144,12 @@
 	NSString *cellTitle = self.showAllArticles ? [self.articleList getArticleAtIndex:indexPath.row].title : [self.articleList getUnreadArticleAtIndex:indexPath.row].title;
 	CGFloat tableWidth = floor(tableView.bounds.size.width);
 	CGSize maximumLabelSize = CGSizeMake(tableWidth - (15.0f + 35.0f), FLT_MAX);
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		maximumLabelSize = CGSizeMake(tableWidth - (15.0f + 15.0f), FLT_MAX);
+	}
+
 	CGRect expectedLabelSize = [cellTitle boundingRectWithSize:maximumLabelSize
-													   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingTruncatesLastVisibleLine
+													   options:NSStringDrawingUsesLineFragmentOrigin
 													attributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody]}
 													   context:nil];
 
