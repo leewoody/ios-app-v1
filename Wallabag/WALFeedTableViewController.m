@@ -69,7 +69,7 @@
 - (void) viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	[self.navigationController setToolbarHidden:true];
+	[self.navigationController setToolbarHidden:YES];
 	
 	if (!self.settings)
 		[self performSegueWithIdentifier:@"ModalToSettings" sender:self];
@@ -224,7 +224,7 @@
 	[self.actionSheet setCancelButtonIndex:3];
 	[self.actionSheet setTag:1];
 	[self.actionSheet setDelegate:self];
-	[self.actionSheet showFromBarButtonItem:sender animated:true];
+	[self.actionSheet showFromBarButtonItem:sender animated:YES];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -233,7 +233,7 @@
 	{
 		if (buttonIndex == 0)
 		{
-			[self performSegueWithIdentifier:@"ModalToAddArticle" sender:self];
+			[self performSelector:@selector(showAddArticleViewController) withObject:nil afterDelay:0];
 		}
 		else if (buttonIndex == 1)
 		{
@@ -247,6 +247,10 @@
 		}
 	}
 	self.actionSheet = nil;
+}
+
+- (void) showAddArticleViewController {
+	[self performSegueWithIdentifier:@"ModalToAddArticle" sender:self];
 }
 
 #pragma mark - Callback Delegates
