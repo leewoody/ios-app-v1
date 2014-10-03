@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rS3-R9-Ivy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -33,31 +34,46 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ArticleCell" textLabel="2pz-XF-uhl" detailTextLabel="i9S-Mp-8pe" style="IBUITableViewCellStyleSubtitle" id="m0d-ak-lc9">
+                            <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ArticleCell" id="FEc-vZ-iiW" customClass="WALArticleTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m0d-ak-lc9" id="tG8-3i-qdf">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FEc-vZ-iiW" id="6mh-Ms-slq">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2pz-XF-uhl">
-                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i9S-Mp-8pe">
-                                            <rect key="frame" x="15" y="25" width="32" height="15"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdH-qM-AgM">
+                                            <rect key="frame" x="15" y="24" width="257" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="15" id="SQS-Tc-Pew"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpE-Yq-Vnd">
+                                            <rect key="frame" x="15" y="3" width="260" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="UEJ-sr-zjY"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="bdH-qM-AgM" firstAttribute="leading" secondItem="6mh-Ms-slq" secondAttribute="leading" constant="15" id="8xr-Ba-hsl"/>
+                                        <constraint firstAttribute="trailing" secondItem="MpE-Yq-Vnd" secondAttribute="trailing" constant="12" id="BoY-Xx-3MT"/>
+                                        <constraint firstAttribute="bottom" secondItem="bdH-qM-AgM" secondAttribute="bottom" constant="4" id="Z52-gH-3RF"/>
+                                        <constraint firstItem="MpE-Yq-Vnd" firstAttribute="leading" secondItem="6mh-Ms-slq" secondAttribute="leading" constant="15" id="g4s-9h-9k8"/>
+                                        <constraint firstItem="MpE-Yq-Vnd" firstAttribute="top" secondItem="6mh-Ms-slq" secondAttribute="topMargin" constant="-5" id="iF1-Fw-Fif"/>
+                                        <constraint firstAttribute="trailing" secondItem="bdH-qM-AgM" secondAttribute="trailing" constant="15" id="plz-k2-zuv"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="Ah7-4n-0Wa" kind="push" identifier="PushToArticle" id="jUr-3t-vfg"/>
+                                    <outlet property="detailLabel" destination="bdH-qM-AgM" id="J1n-UM-aPm"/>
+                                    <outlet property="titleLabel" destination="MpE-Yq-Vnd" id="2Oc-2o-sVC"/>
+                                    <segue destination="Ah7-4n-0Wa" kind="push" identifier="PushToArticle" id="uZN-wS-V0m"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -654,8 +670,8 @@ THE SOFTWARE.</string>
     <resources>
         <image name="MoreActions" width="22" height="22"/>
         <image name="NavBarButton-Settings-filled" width="22" height="22"/>
-        <image name="ToolBar-Browser-Back" width="12" height="22"/>
-        <image name="ToolBar-Browser-Forward" width="12" height="22"/>
+        <image name="ToolBar-Browser-Back" width="22" height="22"/>
+        <image name="ToolBar-Browser-Forward" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

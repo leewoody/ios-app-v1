@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="kSc-3h-73L">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -62,33 +63,46 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ArticleCell" textLabel="8w3-Fl-fKH" detailTextLabel="5td-gd-nIr" style="IBUITableViewCellStyleSubtitle" id="r7Q-hc-zpc">
+                            <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ArticleCell" id="if8-BL-Abp" customClass="WALArticleTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r7Q-hc-zpc" id="Kto-XZ-NLR">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="if8-BL-Abp" id="ZVh-YP-CZT">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8w3-Fl-fKH">
-                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6DI-z1-1kF">
+                                            <rect key="frame" x="15" y="3" width="278" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="tSw-Lj-3Uu"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5td-gd-nIr">
-                                            <rect key="frame" x="15" y="25" width="32" height="15"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ptm-fw-o9T">
+                                            <rect key="frame" x="15" y="24" width="278" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="15" id="NE7-ka-1pM"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="6DI-z1-1kF" secondAttribute="trailing" constant="15" id="5Cg-c7-EIm"/>
+                                        <constraint firstItem="6DI-z1-1kF" firstAttribute="top" secondItem="ZVh-YP-CZT" secondAttribute="topMargin" constant="-5" id="Art-oD-jiK"/>
+                                        <constraint firstAttribute="bottom" secondItem="Ptm-fw-o9T" secondAttribute="bottom" constant="4" id="Cch-PZ-ltk"/>
+                                        <constraint firstItem="Ptm-fw-o9T" firstAttribute="leading" secondItem="ZVh-YP-CZT" secondAttribute="leading" constant="15" id="WH7-aK-VOV"/>
+                                        <constraint firstAttribute="trailing" secondItem="Ptm-fw-o9T" secondAttribute="trailing" constant="15" id="Zp3-3I-gHn"/>
+                                        <constraint firstItem="6DI-z1-1kF" firstAttribute="leading" secondItem="ZVh-YP-CZT" secondAttribute="leading" constant="15" id="x3c-yO-YQp"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="JvU-cQ-bjm" kind="replace" identifier="PushToArticle" splitViewControllerTargetIndex="1" id="CYX-Xl-iRM"/>
+                                    <outlet property="detailLabel" destination="Ptm-fw-o9T" id="2a1-de-CZs"/>
+                                    <outlet property="titleLabel" destination="6DI-z1-1kF" id="8Tx-Xa-WBQ"/>
+                                    <segue destination="JvU-cQ-bjm" kind="replace" identifier="PushToArticle" splitViewControllerTargetIndex="1" id="1Nc-FY-GDY"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -116,7 +130,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icE-gK-TBD" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="969" y="-1483"/>
+            <point key="canvasLocation" x="969" y="-1479"/>
         </scene>
         <!--Detail-->
         <scene sceneID="QEf-2X-ToG">
@@ -693,8 +707,8 @@ THE SOFTWARE.</string>
     <resources>
         <image name="MoreActions" width="22" height="22"/>
         <image name="NavBarButton-Settings-filled" width="22" height="22"/>
-        <image name="ToolBar-Browser-Back" width="12" height="22"/>
-        <image name="ToolBar-Browser-Forward" width="12" height="22"/>
+        <image name="ToolBar-Browser-Back" width="22" height="22"/>
+        <image name="ToolBar-Browser-Forward" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -702,6 +716,6 @@ THE SOFTWARE.</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="CYX-Xl-iRM"/>
+        <segue reference="1Nc-FY-GDY"/>
     </inferredMetricsTieBreakers>
 </document>

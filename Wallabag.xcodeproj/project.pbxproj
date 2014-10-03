@@ -10,6 +10,7 @@
 		27E1E8A6CFAF4E46AF4FDEB0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A4B4E3B48248E3B67A93D8 /* libPods.a */; };
 		F50B3B9B1938F6CA0048EBFD /* WALSettingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F50B3B9A1938F6CA0048EBFD /* WALSettingsTests.m */; };
 		F50B895218B7A28400AA9A6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F50B895018B7A28400AA9A6C /* Localizable.strings */; };
+		F516683219DF32B5009804B9 /* WALArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F516683119DF32B5009804B9 /* WALArticleTableViewCell.m */; };
 		F51B3532199674C3004634EB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F51B3531199674C3004634EB /* Settings.bundle */; };
 		F5259672193E4259003E91A7 /* main-night.css in Resources */ = {isa = PBXBuildFile; fileRef = F5259671193E4259003E91A7 /* main-night.css */; };
 		F5259676193E49EE003E91A7 /* WALTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = F5259675193E49EE003E91A7 /* WALTheme.m */; };
@@ -60,6 +61,8 @@
 		81FB84A52E0E4BE2ADB2D39A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		F50B3B9A1938F6CA0048EBFD /* WALSettingsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettingsTests.m; sourceTree = "<group>"; };
 		F50B895118B7A28400AA9A6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F516683019DF32B5009804B9 /* WALArticleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticleTableViewCell.h; sourceTree = "<group>"; };
+		F516683119DF32B5009804B9 /* WALArticleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticleTableViewCell.m; sourceTree = "<group>"; };
 		F51B3531199674C3004634EB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F5259671193E4259003E91A7 /* main-night.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "main-night.css"; sourceTree = "<group>"; };
 		F5259674193E49EE003E91A7 /* WALTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALTheme.h; sourceTree = "<group>"; };
@@ -182,6 +185,8 @@
 		F54E12EF18B4EAC700E89ED1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F516683019DF32B5009804B9 /* WALArticleTableViewCell.h */,
+				F516683119DF32B5009804B9 /* WALArticleTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -495,6 +500,7 @@
 				F5C9FB5C18BBB8E000083FB3 /* WALBrowserViewController.m in Sources */,
 				F5DA910418B51FE8006A0B1A /* WALSettingsTableViewController.m in Sources */,
 				F5905333193B657D005E2A00 /* WALTableViewController.m in Sources */,
+				F516683219DF32B5009804B9 /* WALArticleTableViewCell.m in Sources */,
 				F5877DA318B4E02B009D4EFE /* WALFeedTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

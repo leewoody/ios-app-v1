@@ -11,6 +11,7 @@
 #import "WALSettingsTableViewController.h"
 #import "WALAddArticleTableViewController.h"
 #import "WALNavigationController.h"
+#import "WALArticleTableViewCell.h"
 
 #import "WALServerConnection.h"
 #import "WALThemeOrganizer.h"
@@ -129,10 +130,10 @@
 	
 	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
 	
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
-	cell.textLabel.text = currentArticle.title;
-	cell.textLabel.textColor = [currentTheme getTextColor];
-	cell.detailTextLabel.text = currentArticle.link.host;
+    WALArticleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
+	cell.titleLabel.text = currentArticle.title;
+	cell.titleLabel.textColor = [currentTheme getTextColor];
+	cell.detailLabel.text = currentArticle.link.host;
 	cell.backgroundColor = [currentTheme getBackgroundColor];
 	
     return cell;
@@ -143,7 +144,7 @@
 	CGFloat constantHeight = 15.0f + 8.0f;
 	NSString *cellTitle = self.showAllArticles ? [self.articleList getArticleAtIndex:indexPath.row].title : [self.articleList getUnreadArticleAtIndex:indexPath.row].title;
 	CGFloat tableWidth = floor(tableView.bounds.size.width);
-	CGSize maximumLabelSize = CGSizeMake(tableWidth - (15.0f + 35.0f), FLT_MAX);
+	CGSize maximumLabelSize = CGSizeMake(tableWidth - (15.0f + 12.0f + 33.0f), FLT_MAX);
 	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
 		maximumLabelSize = CGSizeMake(tableWidth - (15.0f + 15.0f), FLT_MAX);
 	}
