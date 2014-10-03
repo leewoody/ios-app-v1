@@ -42,7 +42,7 @@
 
 - (UIStatusBarStyle) getPreferredStatusBarStyle
 {
-	return UIStatusBarStyleBlackOpaque;
+	return UIStatusBarStyleLightContent;
 }
 
 @end

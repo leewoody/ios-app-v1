@@ -69,7 +69,7 @@
 - (void) viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	[self.navigationController setToolbarHidden:true];
+	[self.navigationController setToolbarHidden:YES];
 	
 	if (!self.settings)
 		[self performSegueWithIdentifier:@"ModalToSettings" sender:self];
@@ -214,30 +214,58 @@
 
 - (IBAction)actionsButtonPushed:(id)sender
 {
-	if (self.actionSheet)
-	{
-		[self.actionSheet dismissWithClickedButtonIndex:-1 animated:YES];
-		self.actionSheet = nil;
-		return;
+	if (SYSTEM_VERSION_LESS_THAN(@"8.0")) {
+		if (self.actionSheet)
+		{
+			[self.actionSheet dismissWithClickedButtonIndex:-1 animated:YES];
+			self.actionSheet = nil;
+			return;
+		}
+		
+		self.actionSheet = [[UIActionSheet alloc] init];
+		self.actionSheet.title = NSLocalizedString(@"Actions", nil);
+		
+		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Add Article", nil)];
+		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Change Theme", nil)];
+		
+		if (self.showAllArticles)
+			[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show unread Articles", nil)];
+		else
+			[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show all Articles", nil)];
+		
+		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", nil)];
+		
+		[self.actionSheet setCancelButtonIndex:3];
+		[self.actionSheet setTag:1];
+		[self.actionSheet setDelegate:self];
+		[self.actionSheet showFromBarButtonItem:sender animated:YES];
+	} else {
+		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Actions", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+		
+		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Add Article", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			[self actionsAddArticlePushed];
+		}]];
+		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Change Theme", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			[self actionsChangeThemePushed];
+		}]];
+		
+		if (self.showAllArticles)
+			[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Show unread Articles", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+				[self actionsShowArticlesPushed];
+			}]];
+		else
+			[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Show all Articles", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+				[self actionsShowArticlesPushed];
+			}]];
+		
+		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+		
+		UIPopoverPresentationController *popoverController = alertController.popoverPresentationController;
+		popoverController.barButtonItem = self.navigationItem.rightBarButtonItem;
+		popoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+		
+		[self presentViewController:alertController animated:YES completion:nil];
 	}
-	
-	self.actionSheet = [[UIActionSheet alloc] init];
-	self.actionSheet.title = NSLocalizedString(@"Actions", nil);
-	
-	[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Add Article", nil)];
-	[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Change Theme", nil)];
-
-	if (self.showAllArticles)
-		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show unread Articles", nil)];
-	else
-		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show all Articles", nil)];
-	
-	[self.actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", nil)];
-	
-	[self.actionSheet setCancelButtonIndex:3];
-	[self.actionSheet setTag:1];
-	[self.actionSheet setDelegate:self];
-	[self.actionSheet showFromBarButtonItem:sender animated:true];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -246,20 +274,36 @@
 	{
 		if (buttonIndex == 0)
 		{
-			[self performSegueWithIdentifier:@"ModalToAddArticle" sender:self];
+			[self actionsAddArticlePushed];
 		}
 		else if (buttonIndex == 1)
 		{
-			WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
-			[themeOrganizer changeTheme];
+			[self actionsChangeThemePushed];
 		}
 		else if (buttonIndex == 2)
 		{
-			self.showAllArticles = self.showAllArticles ? NO : YES;
-			[self.tableView reloadData];
+			[self actionsShowArticlesPushed];
 		}
 	}
 	self.actionSheet = nil;
+}
+
+- (void) actionsAddArticlePushed {
+	[self performSelector:@selector(showAddArticleViewController) withObject:nil afterDelay:0];
+}
+
+- (void) actionsChangeThemePushed {
+	WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
+	[themeOrganizer changeTheme];
+}
+
+- (void) actionsShowArticlesPushed {
+	self.showAllArticles = !self.showAllArticles;
+	[self.tableView reloadData];
+}
+
+- (void) showAddArticleViewController {
+	[self performSegueWithIdentifier:@"ModalToAddArticle" sender:self];
 }
 
 #pragma mark - Callback Delegates
