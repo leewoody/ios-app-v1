@@ -134,9 +134,10 @@
 	cell.titleLabel.text = currentArticle.title;
 	cell.titleLabel.textColor = [currentTheme getTextColor];
 	cell.detailLabel.text = currentArticle.link.host;
+	cell.detailLabel.textColor = [currentTheme getTintColor];
 	cell.backgroundColor = [currentTheme getBackgroundColor];
 	
-    return cell;
+	return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
