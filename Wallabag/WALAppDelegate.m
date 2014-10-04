@@ -10,6 +10,11 @@
 #import "WALArticle.h"
 #import "WALIcons.h"
 #import "WALSettings.h"
+#import <PLCrashReporter/PLCrashReporter.h>
+#import <PLCrashReporter/PLCrashReport.h>
+#import <PLCrashReporter/PLCrashReportTextFormatter.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 @interface WALAppDelegate ()
 @property (weak, nonatomic) UIBarButtonItem *lastBarButtonItem;
@@ -19,6 +24,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	PLCrashReporter *reporter = [PLCrashReporter sharedReporter];
+	
+	if ([reporter hasPendingCrashReport]) {
+		NSLog(@"Has Crash!");
+		[self handleCrashReport];
+	}
+	
+	NSError *error = nil;
+	if (![reporter enableCrashReporterAndReturnError:&error]) {
+		NSLog(@"Error: %@", error);
+	}
+	
     // Override point for customization after application launch.
 	
 	UIViewController *rootViewController = self.window.rootViewController;
@@ -56,6 +73,37 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
 	// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Crash Reporting
+
+- (void)handleCrashReport {
+	PLCrashReporter *crashReporter = [PLCrashReporter sharedReporter];
+	NSData *crashData;
+	NSError *error;
+	
+	crashData = [crashReporter loadPendingCrashReportDataAndReturnError:&error];
+	if (crashData == nil) {
+		NSLog(@"Couldn't load crash data: %@", error);
+		[crashReporter purgePendingCrashReport];
+		return;
+	}
+	
+	PLCrashReport *crashReport = [[PLCrashReport alloc] initWithData:crashData error:nil];
+	NSString *crashLog = [PLCrashReportTextFormatter stringValueForCrashReport:crashReport withTextFormat:PLCrashReportTextFormatiOS];
+	
+	[self presentEmailSheetWithCrashData:[crashLog dataUsingEncoding:NSUTF8StringEncoding]];
+}
+
+- (void)presentEmailSheetWithCrashData:(NSData*) crashData {
+	if ([MFMailComposeViewController canSendMail]) {
+		MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
+		[mailVC setToRecipients:[NSArray arrayWithObject:@"wallabag@kevin-meyer.de"]];
+		[mailVC setSubject:@"Crash Report wallabag iOS-App"];
+		[mailVC addAttachmentData:crashData mimeType:@"application/crash" fileName:@"wallabag.crash"];
+		
+		[self.window.rootViewController presentViewController:mailVC animated:YES completion:nil];
+	}
 }
 
 #pragma mark - UISplitView Delegate
