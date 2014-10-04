@@ -32,6 +32,7 @@
 		F5877DAF18B4E02B009D4EFE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877DAE18B4E02B009D4EFE /* XCTest.framework */; };
 		F5877DB018B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
 		F5877DB118B4E02B009D4EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D9018B4E02B009D4EFE /* UIKit.framework */; };
+		F58AA2E719E0767B00204C83 /* WALSupportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F58AA2E619E0767B00204C83 /* WALSupportHelper.m */; };
 		F5905330193B6553005E2A00 /* WALNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F590532F193B6553005E2A00 /* WALNavigationController.m */; };
 		F5905333193B657D005E2A00 /* WALTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5905332193B657D005E2A00 /* WALTableViewController.m */; };
 		F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F59E0CE318B63E2D00744BB1 /* WALSettings.m */; };
@@ -97,6 +98,8 @@
 		F5877DAD18B4E02B009D4EFE /* WallabagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WallabagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5877DAE18B4E02B009D4EFE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F5877DB618B4E02B009D4EFE /* WallabagTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WallabagTests-Info.plist"; sourceTree = "<group>"; };
+		F58AA2E519E0767B00204C83 /* WALSupportHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSupportHelper.h; sourceTree = "<group>"; };
+		F58AA2E619E0767B00204C83 /* WALSupportHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSupportHelper.m; sourceTree = "<group>"; };
 		F590532E193B6553005E2A00 /* WALNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALNavigationController.h; sourceTree = "<group>"; };
 		F590532F193B6553005E2A00 /* WALNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALNavigationController.m; sourceTree = "<group>"; };
 		F5905331193B657D005E2A00 /* WALTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALTableViewController.h; sourceTree = "<group>"; };
@@ -261,6 +264,7 @@
 			children = (
 				F5259673193E48FB003E91A7 /* Theming */,
 				F5AF8ABC18F949D100652EBE /* ServerDataHandler */,
+				F58AA2E819E0770400204C83 /* Helper Classes */,
 				F54E12F018B4EACD00E89ED1 /* Controller */,
 				F54E12EE18B4EAC000E89ED1 /* Model */,
 				F54E12EF18B4EAC700E89ED1 /* View */,
@@ -301,6 +305,15 @@
 				F5877DB618B4E02B009D4EFE /* WallabagTests-Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F58AA2E819E0770400204C83 /* Helper Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F58AA2E519E0767B00204C83 /* WALSupportHelper.h */,
+				F58AA2E619E0767B00204C83 /* WALSupportHelper.m */,
+			);
+			name = "Helper Classes";
 			sourceTree = "<group>";
 		};
 		F590532D193B6528005E2A00 /* BaseClassVCs */ = {
@@ -489,6 +502,7 @@
 				F5877DA618B4E02B009D4EFE /* WALArticleViewController.m in Sources */,
 				F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */,
 				F56824CC1983FB8000B8B009 /* WALIcons.m in Sources */,
+				F58AA2E719E0767B00204C83 /* WALSupportHelper.m in Sources */,
 				F5905330193B6553005E2A00 /* WALNavigationController.m in Sources */,
 				F525967C193E58B1003E91A7 /* WALThemeOrganizer.m in Sources */,
 				F5B7475B1938BAAF0071B94C /* WALArticleList.m in Sources */,

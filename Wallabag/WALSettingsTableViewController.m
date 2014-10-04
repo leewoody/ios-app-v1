@@ -10,7 +10,7 @@
 #define APP_STORE_URI @"itms-apps://itunes.apple.com/us/app/wallabag/id828331015"
 #define APP_STORE_URL @"https://itunes.apple.com/us/app/wallabag/id828331015"
 
-#import <sys/utsname.h>
+#import "WALSupportHelper.h"
 #import <StoreKit/StoreKit.h>
 #import "WALSettingsTableViewController.h"
 #import "WALSettings.h"
@@ -207,19 +207,7 @@
 {
 	if ([MFMailComposeViewController canSendMail]) {
 		
-		struct utsname systemInfo;
-		uname(&systemInfo);
-		
-		NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-		NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-		NSString *appBuildVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
-		NSString *deviceModel = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
-		NSString *selectedURL = [[self.currentSettings getWallabagURL] absoluteString];
-		NSString *seperator = @"--------------------------------";
-		
-		NSString *message = [NSString stringWithFormat:
-							 @"\n\n%@\nApp: %@\nVersion: %@ (Build: %@)\nDevice Model: %@\niOS: %@\nSelected URL: %@\n%@\n",
-							 seperator, appName, appVersion, appBuildVersion, deviceModel, [[UIDevice currentDevice] systemVersion], selectedURL, seperator];
+		NSString *message = [WALSupportHelper getBodyForSupportMail];
 		
 		MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
 		mailViewController.mailComposeDelegate = self;

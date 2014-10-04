@@ -10,11 +10,10 @@
 #import "WALArticle.h"
 #import "WALIcons.h"
 #import "WALSettings.h"
+#import "WALSupportHelper.h"
 #import <PLCrashReporter/PLCrashReporter.h>
 #import <PLCrashReporter/PLCrashReport.h>
 #import <PLCrashReporter/PLCrashReportTextFormatter.h>
-#import <MessageUI/MessageUI.h>
-#import <MessageUI/MFMailComposeViewController.h>
 
 @interface WALAppDelegate ()
 @property (weak, nonatomic) UIBarButtonItem *lastBarButtonItem;
@@ -100,10 +99,17 @@
 		MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
 		[mailVC setToRecipients:[NSArray arrayWithObject:@"wallabag@kevin-meyer.de"]];
 		[mailVC setSubject:@"Crash Report wallabag iOS-App"];
+		[mailVC setMessageBody:[WALSupportHelper getBodyForSupportMail] isHTML:NO];
 		[mailVC addAttachmentData:crashData mimeType:@"application/crash" fileName:@"wallabag.crash"];
+		mailVC.mailComposeDelegate = self;
 		
 		[self.window.rootViewController presentViewController:mailVC animated:YES completion:nil];
 	}
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+	[self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UISplitView Delegate
