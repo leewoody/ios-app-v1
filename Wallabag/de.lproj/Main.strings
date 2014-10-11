@@ -80,11 +80,17 @@
 /* Class = "IBUINavigationItem"; title = "Wallabag"; ObjectID = "tQt-TN-PWz"; */
 "tQt-TN-PWz.title" = "wallabag";
 
+/* Class = "IBUISegmentedControl"; rTD-dz-gBw.segmentTitles[0] = "Unread"; ObjectID = "rTD-dz-gBw"; */
+"rTD-dz-gBw.segmentTitles[0]" = "Ungelesen";
+
+/* Class = "IBUISegmentedControl"; rTD-dz-gBw.segmentTitles[1] = "Favorites"; ObjectID = "rTD-dz-gBw"; */
+"rTD-dz-gBw.segmentTitles[1]" = "Favoriten";
+
+/* Class = "IBUISegmentedControl"; rTD-dz-gBw.segmentTitles[2] = "Archive"; ObjectID = "rTD-dz-gBw"; */
+"rTD-dz-gBw.segmentTitles[2]" = "Archiv";
+
 /* Class = "IBUINavigationItem"; title = "Bag it!"; ObjectID = "wiV-oA-MHN"; */
 "wiV-oA-MHN.title" = "Bag it!";
-
-/* Class = "IBUILabel"; text = "License"; ObjectID = "443-rL-YtK"; */
-"443-rL-YtK.text" = "Lizenz";
 
 /* Class = "IBUITableViewSection"; headerTitle = "About this App"; ObjectID = "lY3-eG-B2l"; */
 "lY3-eG-B2l.headerTitle" = "Über diese App";

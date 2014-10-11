@@ -30,18 +30,32 @@
 
 @implementation WALServerConnection
 
-- (void) loadArticlesWithSettings:(WALSettings*) settings OldArticleList:(WALArticleList*) articleList delegate:(id<WALServerConnectionDelegate>) delegate
+- (void) loadArticlesOfListType:(WALArticleListType) listType withSettings:(WALSettings*) settings OldArticleList:(WALArticleList*) articleList delegate:(id<WALServerConnectionDelegate>) delegate
 {
 	self.oldArticleList = articleList;
 	self.delegate = delegate;
 	self.settings = settings;
 	
-	[self downloadAndStartParsing];
+	[self downloadAndStartParsingListType:listType];
 }
 
-- (void) downloadAndStartParsing
+- (void) downloadAndStartParsingListType:(WALArticleListType) listType
 {
-	NSString *urlString = [self.settings getHomeFeedURL].absoluteString;
+	NSString *urlString;
+	
+	switch (listType) {
+		case WALArticleListTypeUnread:
+			urlString = [self.settings getHomeFeedURL].absoluteString;
+			break;
+			
+		case WALArticleListTypeFavorites:
+			urlString = [self.settings getFavoriteFeedURL].absoluteString;
+			break;
+			
+		case WALArticleListTypeArchive:
+			urlString = [self.settings getArchiveFeedURL].absoluteString;
+			break;
+		}
 	
 	NSString *tempFile = NSTemporaryDirectory();
 	tempFile = [tempFile stringByAppendingString:@"feed.xml"];
@@ -72,7 +86,7 @@
 						
 			if(!parserError || self.parser.rootXMLElement) {
 				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-					[self parseRootElement:self.parser.rootXMLElement];
+					[self parseRootElement:self.parser.rootXMLElement ofListWithType:listType];
 				});
 				return;
 			} else {
@@ -98,12 +112,12 @@
 
 #pragma mark - Parser
 
-- (void) parseRootElement:(TBXMLElement*) root {
+- (void) parseRootElement:(TBXMLElement*) root ofListWithType:(WALArticleListType) listType {
 	
 	TBXMLElement *channel = [TBXML childElementNamed:@"channel" parentElement:root];
 	TBXMLElement *item = [TBXML childElementNamed:@"item" parentElement:channel];
 	
-	self.parser_articleList = [[WALArticleList alloc] init];
+	self.parser_articleList = [[WALArticleList alloc] initAsType:listType];
 
 	// RegExp to remove multiple whitespaces (including newline ect.) in title. Otherwise the title displayed in FeedTableVC isn't displayed nicely.
 	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\s+" options:NSRegularExpressionCaseInsensitive error:nil];

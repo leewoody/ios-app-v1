@@ -77,6 +77,15 @@
 /* Class = "IBUILabel"; text = "Install your own wallabag"; ObjectID = "ct0-Xy-mr0"; */
 "ct0-Xy-mr0.text" = "Installiere deine eigene wallabag";
 
+/* Class = "IBUISegmentedControl"; dQM-WB-Snr.segmentTitles[0] = "Unread"; ObjectID = "dQM-WB-Snr"; */
+"dQM-WB-Snr.segmentTitles[0]" = "Ungelesen";
+
+/* Class = "IBUISegmentedControl"; dQM-WB-Snr.segmentTitles[1] = "Favorites"; ObjectID = "dQM-WB-Snr"; */
+"dQM-WB-Snr.segmentTitles[1]" = "Favoriten";
+
+/* Class = "IBUISegmentedControl"; dQM-WB-Snr.segmentTitles[2] = "Archive"; ObjectID = "dQM-WB-Snr"; */
+"dQM-WB-Snr.segmentTitles[2]" = "Archiv";
+
 /* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "dXF-e3-NIf"; */
 "dXF-e3-NIf.title" = "Einstellungen";
 

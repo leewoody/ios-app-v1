@@ -73,6 +73,8 @@
 		F525967A193E58B1003E91A7 /* WALThemeOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALThemeOrganizer.h; sourceTree = "<group>"; };
 		F525967B193E58B1003E91A7 /* WALThemeOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALThemeOrganizer.m; sourceTree = "<group>"; };
 		F525967D193E5F17003E91A7 /* WALThemeOrganizerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALThemeOrganizerDelegate.h; sourceTree = "<group>"; };
+		F54DED9F19E9CE7D00786FDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
+		F54DEDA119E9CE9000786FDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F54E12F118B4EEDB00E89ED1 /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
 		F54E12F218B4EEDB00E89ED1 /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
 		F56824CA1983FB8000B8B009 /* WALIcons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALIcons.h; sourceTree = "<group>"; };
@@ -120,8 +122,6 @@
 		F5DA910818B52680006A0B1A /* WALFeedCallbackDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALFeedCallbackDelegate.h; sourceTree = "<group>"; };
 		F5DA910918B56FCE006A0B1A /* main.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = main.css; sourceTree = "<group>"; };
 		F5DA910B18B56FD6006A0B1A /* ratatouille.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = ratatouille.css; sourceTree = "<group>"; };
-		F5E53A3F1987B5400022B32F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		F5E53A401987B5400022B32F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
 		F5E53A411987B5400022B32F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F5E53A421987B5470022B32F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		F5E53A431987B5470022B32F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
@@ -548,8 +548,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F5877D9F18B4E02B009D4EFE /* Base */,
-				F5E53A3F1987B5400022B32F /* en */,
 				F5E53A421987B5470022B32F /* de */,
+				F54DEDA119E9CE9000786FDB /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -558,8 +558,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F5AF3B3D198672BE00226355 /* Base */,
-				F5E53A401987B5400022B32F /* en */,
 				F5E53A431987B5470022B32F /* de */,
+				F54DED9F19E9CE7D00786FDB /* en */,
 			);
 			name = "Main-iPad.storyboard";
 			sourceTree = "<group>";

@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "WALServerConnectionDelegate.h"
+#import "WALArticleList.h"
 
 @class WALArticle;
-@class WALArticleList;
 @class WALSettings;
 
 @interface WALServerConnection : NSObject
 
-- (void) loadArticlesWithSettings:(WALSettings*) settings OldArticleList:(WALArticleList*) articleList delegate:(id<WALServerConnectionDelegate>) delegate;
+- (void) loadArticlesOfListType:(WALArticleListType) listType withSettings:(WALSettings*) settings OldArticleList:(WALArticleList*) articleList delegate:(id<WALServerConnectionDelegate>) delegate;
 
 @end
