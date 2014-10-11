@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="kSc-3h-73L">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -127,6 +128,9 @@
                                 <segment title="Favorites"/>
                                 <segment title="Archive"/>
                             </segments>
+                            <connections>
+                                <action selector="headerSegmentedControlValueDidChange:" destination="vzf-86-0ad" eventType="valueChanged" id="LNt-uS-v4w"/>
+                            </connections>
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" image="MoreActions" id="lhJ-4Q-SoT">
                             <connections>
@@ -135,6 +139,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="headerSegmentedControl" destination="dQM-WB-Snr" id="kZH-Z5-MyV"/>
                         <segue destination="CGe-jL-kad" kind="modal" identifier="ModalToAddArticle" modalPresentationStyle="formSheet" id="XAB-ty-RaP"/>
                     </connections>
                 </tableViewController>
