@@ -56,10 +56,6 @@
 	
 	self.articleList = [[WALArticleList alloc] initAsType:WALArticleListTypeUnread];
 	[self.articleList loadArticlesFromDisk];
-	
-	self.articleListFavorite = [[WALArticleList alloc] initAsType:WALArticleListTypeFavorites];
-	
-	self.articleListArchive = [[WALArticleList alloc] initAsType:WALArticleListTypeArchive];
 
 	self.settings = [WALSettings settingsFromSavedSettings];
 	[self updateArticleList];
@@ -96,10 +92,21 @@
 
 - (IBAction)headerSegmentedControlValueDidChange:(id)sender {
 	UISegmentedControl *control = (UISegmentedControl*) sender;
-	NSLog(@"Control Value Changed: %ld", (long)control.selectedSegmentIndex);
 
 	WALArticleList *list = [self getCurrentArticleList];
-	[list loadArticlesFromDisk];
+	
+	if (!list) {
+		if (control.selectedSegmentIndex == 1) {
+			self.articleListFavorite = [[WALArticleList alloc] initAsType:WALArticleListTypeFavorites];
+		} else if (control.selectedSegmentIndex == 2) {
+			self.articleListArchive = [[WALArticleList alloc] initAsType:WALArticleListTypeArchive];
+		}
+
+		list = [self getCurrentArticleList];
+		[list loadArticlesFromDisk];
+		[self updateArticleList];
+	}
+	
 	[self.tableView reloadData];
 }
 
