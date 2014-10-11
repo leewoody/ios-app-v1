@@ -104,11 +104,16 @@
 	TBXMLElement *item = [TBXML childElementNamed:@"item" parentElement:channel];
 	
 	self.parser_articleList = [[WALArticleList alloc] init];
+
+	// RegExp to remove multiple whitespaces (including newline ect.) in title. Otherwise the title displayed in FeedTableVC isn't displayed nicely.
+	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\s+" options:NSRegularExpressionCaseInsensitive error:nil];
 	
 	while (item)
 	{
 		WALArticle *article = [[WALArticle alloc] init];
 		article.title = [self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"title" parentElement:item]]];
+		article.title = [regex stringByReplacingMatchesInString:article.title options:0 range:NSMakeRange(0, article.title.length) withTemplate:@" "];
+
 		article.link = [NSURL URLWithString:[self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"link" parentElement:item]]]];
 		[article setDateWithString:[self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"pubDate" parentElement:item]]]];
 		article.content = [self stringByHtmlUnescapingString:[TBXML textForElement:[TBXML childElementNamed:@"description" parentElement:item]]];
