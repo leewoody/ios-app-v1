@@ -112,12 +112,22 @@
                             <outlet property="delegate" destination="vzf-86-0ad" id="pcz-Bx-w12"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Wallabag" id="Qze-uZ-erH">
+                    <navigationItem key="navigationItem" id="Qze-uZ-erH">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="NavBarButton-Settings-filled" id="iDR-iF-wsm">
                             <connections>
                                 <segue destination="SPQ-Hc-hMy" kind="modal" identifier="ModalToSettings" modalPresentationStyle="formSheet" id="Z3T-dY-AE7"/>
                             </connections>
                         </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="dQM-WB-Snr">
+                            <rect key="frame" x="59" y="7" width="190" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Unread"/>
+                                <segment title="Favorites"/>
+                                <segment title="Archive"/>
+                            </segments>
+                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" image="MoreActions" id="lhJ-4Q-SoT">
                             <connections>
                                 <action selector="actionsButtonPushed:" destination="vzf-86-0ad" id="xCf-2a-7G9"/>

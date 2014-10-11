@@ -26,12 +26,18 @@
 
 @interface WALFeedTableViewController ()
 
-@property (strong) WALArticleList* articleList;
+@property (strong) WALArticleList *articleList;
+@property (strong) WALArticleList *articleListFavorite;
+@property (strong) WALArticleList *articleListArchive;
+
 @property (strong) WALSettings* settings;
 @property BOOL showAllArticles;
 - (IBAction)actionsButtonPushed:(id)sender;
 
 @property (strong) UIActionSheet* actionSheet;
+
+@property (weak) IBOutlet UISegmentedControl *headerSegmentedControl;
+- (IBAction)headerSegmentedControlValueDidChange:(id)sender;
 @end
 
 @implementation WALFeedTableViewController
@@ -48,8 +54,13 @@
 	[self.refreshControl addTarget:self action:@selector(triggeredRefreshControl) forControlEvents:UIControlEventValueChanged];
 	[super awakeFromNib];
 	
-	self.articleList = [[WALArticleList alloc] init];
+	self.articleList = [[WALArticleList alloc] initAsType:WALArticleListTypeUnread];
 	[self.articleList loadArticlesFromDisk];
+	
+	self.articleListFavorite = [[WALArticleList alloc] initAsType:WALArticleListTypeFavorites];
+	
+	self.articleListArchive = [[WALArticleList alloc] initAsType:WALArticleListTypeArchive];
+
 	self.settings = [WALSettings settingsFromSavedSettings];
 	[self updateArticleList];
 	
@@ -83,6 +94,25 @@
 
 #pragma mark -
 
+- (IBAction)headerSegmentedControlValueDidChange:(id)sender {
+	UISegmentedControl *control = (UISegmentedControl*) sender;
+	NSLog(@"Control Value Changed: %ld", (long)control.selectedSegmentIndex);
+
+	WALArticleList *list = [self getCurrentArticleList];
+	[list loadArticlesFromDisk];
+	[self.tableView reloadData];
+}
+
+- (WALArticleList*)getCurrentArticleList {
+	if (self.headerSegmentedControl.selectedSegmentIndex == 2) {
+		return self.articleListArchive;
+	} else if (self.headerSegmentedControl.selectedSegmentIndex == 1) {
+		return self.articleListFavorite;
+	}
+	
+	return self.articleList;
+}
+
 - (void)updateArticleList
 {
 	if (!self.settings)
@@ -94,7 +124,8 @@
 	}
 	
 	WALServerConnection *server = [[WALServerConnection alloc] init];
-	[server loadArticlesOfListType:WALArticleListTypeUnread withSettings:self.settings OldArticleList:self.articleList delegate:self];
+	WALArticleList *currentValidArticleList = [self getCurrentArticleList];
+	[server loadArticlesOfListType:[currentValidArticleList getListType] withSettings:self.settings OldArticleList:currentValidArticleList delegate:self];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[self.refreshControl beginRefreshing];
 }
@@ -108,19 +139,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if (self.showAllArticles)
-		return [self.articleList getNumberOfAllArticles];
+	WALArticleList *articleList = [self getCurrentArticleList];
 	
-	return [self.articleList getNumberOfUnreadArticles];
+	if (self.showAllArticles)
+		return [articleList getNumberOfAllArticles];
+	
+	return [articleList getNumberOfUnreadArticles];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	WALArticleList *articleList = [self getCurrentArticleList];
+	
 	WALArticle *currentArticle;
 	if (self.showAllArticles)
-		currentArticle = [self.articleList getArticleAtIndex:indexPath.row];
+		currentArticle = [articleList getArticleAtIndex:indexPath.row];
 	else
-		currentArticle = [self.articleList getUnreadArticleAtIndex:indexPath.row];
+		currentArticle = [articleList getUnreadArticleAtIndex:indexPath.row];
 	
 	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
 	
@@ -136,8 +171,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	WALArticleList *articleList = [self getCurrentArticleList];
+
+	
 	CGFloat constantHeight = 15.0f + 8.0f;
-	NSString *cellTitle = self.showAllArticles ? [self.articleList getArticleAtIndex:indexPath.row].title : [self.articleList getUnreadArticleAtIndex:indexPath.row].title;
+	NSString *cellTitle = self.showAllArticles ? [articleList getArticleAtIndex:indexPath.row].title : [articleList getUnreadArticleAtIndex:indexPath.row].title;
 	CGFloat tableWidth = floor(tableView.bounds.size.width);
 	CGSize maximumLabelSize = CGSizeMake(tableWidth - (15.0f + 12.0f + 33.0f), FLT_MAX);
 	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
@@ -174,12 +212,13 @@
     if ([[segue identifier] isEqualToString:@"PushToArticle"])
 	{
 		NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+		WALArticleList *articleList = [self getCurrentArticleList];
 		
 		WALArticle *articleToSet;
 		if (self.showAllArticles)
-			articleToSet = [self.articleList getArticleAtIndex:indexPath.row];
+			articleToSet = [articleList getArticleAtIndex:indexPath.row];
 		else
-			articleToSet = [self.articleList getUnreadArticleAtIndex:indexPath.row];
+			articleToSet = [articleList getUnreadArticleAtIndex:indexPath.row];
 		
 		WALArticleViewController *articleVC;
 		
@@ -306,10 +345,29 @@
 
 - (void)serverConnection:(WALServerConnection *)connection didFinishWithArticleList:(WALArticleList *)articleList
 {
-	[self.articleList deleteCachedArticles];
-	self.articleList = articleList;
-	[self.articleList saveArticlesFromDisk];
-	[self.articleList updateUnreadArticles];
+	switch ([articleList getListType]) {
+		case WALArticleListTypeUnread:
+			[self.articleList deleteCachedArticles];
+			self.articleList = articleList;
+			[self.articleList saveArticlesFromDisk];
+			[self.articleList updateUnreadArticles];
+			break;
+			
+		case WALArticleListTypeFavorites:
+			[self.articleListFavorite deleteCachedArticles];
+			self.articleListFavorite = articleList;
+			[self.articleListFavorite saveArticlesFromDisk];
+			[self.articleListFavorite updateUnreadArticles];
+			break;
+			
+		case WALArticleListTypeArchive:
+			[self.articleListArchive deleteCachedArticles];
+			self.articleListArchive = articleList;
+			[self.articleListArchive saveArticlesFromDisk];
+			[self.articleListArchive updateUnreadArticles];
+			break;
+	}
+	
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[self.refreshControl endRefreshing];
