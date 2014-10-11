@@ -44,12 +44,6 @@
 	[self updateWithTheme:[themeOrganizer getCurrentTheme]];
 	[themeOrganizer subscribeToThemeChanges:self];
 	
-	UIColor *titleImageColor = SYSTEM_VERSION_LESS_THAN(@"7.0") ? [UIColor whiteColor] : [UIColor blackColor];
-	UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:titleImageColor]];
-	titleImageView.bounds = CGRectInset(titleImageView.frame, 0.0f, 1.0f);
-	titleImageView.contentMode = UIViewContentModeScaleAspectFit;
-	self.navigationItem.titleView = titleImageView;
-		
 	self.refreshControl = [[UIRefreshControl alloc] init];
 	[self.refreshControl addTarget:self action:@selector(triggeredRefreshControl) forControlEvents:UIControlEventValueChanged];
 	[super awakeFromNib];
@@ -100,7 +94,7 @@
 	}
 	
 	WALServerConnection *server = [[WALServerConnection alloc] init];
-	[server loadArticlesWithSettings:self.settings OldArticleList:self.articleList delegate:self];
+	[server loadArticlesOfListType:WALArticleListTypeUnread withSettings:self.settings OldArticleList:self.articleList delegate:self];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[self.refreshControl beginRefreshing];
 }
@@ -168,7 +162,7 @@
 
 - (void) updateWithTheme:(WALTheme*) theme
 {
-	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:[theme getTextColor]]];
+//	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:[theme getTextColor]]];
 	self.tableView.backgroundColor = [theme getBackgroundColor];
 	self.refreshControl.tintColor = [theme getTextColor];
 }

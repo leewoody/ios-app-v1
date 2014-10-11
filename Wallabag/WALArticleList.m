@@ -10,20 +10,33 @@
 #import "WALArticle.h"
 
 @interface WALArticleList ()
+@property WALArticleListType type;
 @property (strong) NSMutableArray* articles;
 @property (strong) NSMutableArray* unreadArticles;
 @end
 
 @implementation WALArticleList
 
-- (id)init
-{
-	if (self = [super init])
-	{
+- (id) init {
+	if (self = [super init]) {
 		self.articles = [NSMutableArray array];
+		self.type = WALArticleListTypeUnread;
 	}
 	
 	return self;
+}
+
+- (id) initAsType:(WALArticleListType) type {
+	if (self = [super init]) {
+		self.articles = [NSMutableArray array];
+		self.type = type;
+	}
+	
+	return self;
+}
+
+- (WALArticleListType) getListType {
+	return self.type;
 }
 
 - (void)loadArticlesFromDisk
@@ -158,7 +171,22 @@
         }
         
     }
-    NSString *path = [[applicationSupportURL path] stringByAppendingPathComponent:@"savedArticles.plist"];
+	
+	NSString *fileName;
+	
+	switch (self.type) {
+		case WALArticleListTypeFavorites:
+			fileName = @"savedArticles-fav.plist";
+			break;
+		case WALArticleListTypeArchive:
+			fileName = @"savedArticles-archive.plist";
+			break;
+		case WALArticleListTypeUnread:
+			fileName = @"savedArticles.plist";
+			break;
+	}
+	
+    NSString *path = [[applicationSupportURL path] stringByAppendingPathComponent:fileName];
     
     return path;
 }

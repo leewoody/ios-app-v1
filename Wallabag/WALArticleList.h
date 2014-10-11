@@ -8,9 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum : NSUInteger {
+	WALArticleListTypeUnread,
+	WALArticleListTypeFavorites,
+	WALArticleListTypeArchive,
+} WALArticleListType;
+
 @class WALArticle;
 
 @interface WALArticleList : NSObject
+
+- (id) initAsType:(WALArticleListType) type;
+- (WALArticleListType) getListType;
 
 - (void) loadArticlesFromDisk;
 - (void) saveArticlesFromDisk;
