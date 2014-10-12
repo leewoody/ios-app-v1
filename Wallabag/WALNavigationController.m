@@ -111,14 +111,10 @@
 }
 
 - (void)presentEmailSheetWithCrashData:(NSData*) crashData {
-	if ([MFMailComposeViewController canSendMail]) {
-		MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
-		[mailVC setToRecipients:[NSArray arrayWithObject:@"wallabag@kevin-meyer.de"]];
-		[mailVC setSubject:@"Crash Report wallabag iOS-App"];
-		[mailVC setMessageBody:[WALSupportHelper getBodyForSupportMail] isHTML:NO];
-		[mailVC addAttachmentData:crashData mimeType:@"application/crash" fileName:@"wallabag.crash"];
+	MFMailComposeViewController *mailVC = [WALSupportHelper getPreparedMailComposeViewController];
+	
+	if (mailVC) {
 		mailVC.mailComposeDelegate = self;
-		
 		[self presentViewController:mailVC animated:YES completion:nil];
 	}
 }

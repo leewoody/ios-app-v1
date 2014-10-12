@@ -29,4 +29,16 @@
 	return message;
 }
 
++ (MFMailComposeViewController *)getPreparedMailComposeViewController {
+	if ([MFMailComposeViewController canSendMail]) {
+		MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
+		[mailVC setToRecipients:[NSArray arrayWithObject:@"wallabag@kevin-meyer.de"]];
+		[mailVC setSubject:@"Crash Report wallabag iOS-App"];
+		[mailVC setMessageBody:[WALSupportHelper getBodyForSupportMail] isHTML:NO];		
+		return mailVC;
+	}
+	
+	return nil;
+}
+
 @end

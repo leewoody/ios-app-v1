@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 @interface WALSupportHelper : NSObject
 
 +(NSString*)getBodyForSupportMail;
++(MFMailComposeViewController*)getPreparedMailComposeViewController;
 
 @end
