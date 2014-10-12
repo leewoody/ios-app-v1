@@ -96,6 +96,8 @@
 	PLCrashReport *crashReport = [[PLCrashReport alloc] initWithData:crashData error:nil];
 	NSString *crashLog = [PLCrashReportTextFormatter stringValueForCrashReport:crashReport withTextFormat:PLCrashReportTextFormatiOS];
 	
+	[crashReporter purgePendingCrashReport];
+	
 	return [crashLog dataUsingEncoding:NSUTF8StringEncoding];
 }
 
