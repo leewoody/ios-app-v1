@@ -27,8 +27,7 @@
 	[super viewDidAppear:animated];
 	
 	if (self.crashData) {
-		[self presentEmailSheetWithCrashData:self.crashData];
-		self.crashData = nil;
+		[self askUserToSendCrashMail];
 	}
 }
 
@@ -73,7 +72,43 @@
 	self.crashData = attachment;
 }
 
+- (void)askUserToSendCrashMail {
+	if (SYSTEM_VERSION_LESS_THAN(@"8.0")) {
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops", nil)
+															message:NSLocalizedString(@"Sorry, but it seems like we crashed. Please support to fix this bug by sending a crash report.", nil)
+														   delegate:self
+												  cancelButtonTitle:NSLocalizedString(@"Don't send", nil)
+												  otherButtonTitles:NSLocalizedString(@"Send report", nil), nil];
+		
+		[alertView show];
+		
+	} else {
+		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Oops", nil)
+																				 message:NSLocalizedString(@"Sorry, but it seems like we crashed. Please support to fix this bug by sending a crash report.", nil)
+																		  preferredStyle:UIAlertControllerStyleAlert];
+		
+		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send report", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			[self presentEmailSheetWithCrashData:self.crashData];
+			self.crashData = nil;
+		}]];
+		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Don't send", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+			self.crashData = nil;
+		}]];
+		
+		[self presentViewController:alertController animated:YES completion:nil];
+	}
+}
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (buttonIndex == 0) {
+		// Canceling Report sending
+		self.crashData = nil;
+	} else if (buttonIndex == 1) {
+		// Send Crash Report
+		[self presentEmailSheetWithCrashData:self.crashData];
+		self.crashData = nil;
+	}
+}
 
 - (void)presentEmailSheetWithCrashData:(NSData*) crashData {
 	if ([MFMailComposeViewController canSendMail]) {

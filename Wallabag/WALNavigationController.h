@@ -13,6 +13,6 @@
 
 @class WALTheme;
 
-@interface WALNavigationController : UINavigationController <WALThemeOrganizerDelegate, WALCrashDataProtocol, MFMailComposeViewControllerDelegate>
+@interface WALNavigationController : UINavigationController <WALThemeOrganizerDelegate, WALCrashDataProtocol, MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
 
 @end
