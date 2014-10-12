@@ -107,6 +107,7 @@
 		[self updateArticleList];
 	}
 	
+	[self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
 	[self.tableView reloadData];
 }
 
