@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMailComposeViewController.h>
 #import "WALThemeOrganizerDelegate.h"
+#import "WALCrashDataProtocol.h"
 
-@interface WALSplitViewController : UISplitViewController <WALThemeOrganizerDelegate>
+@interface WALSplitViewController : UISplitViewController <WALThemeOrganizerDelegate, WALCrashDataProtocol, MFMailComposeViewControllerDelegate>
 
 @end

@@ -20,14 +20,17 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - PLCrashReporter (1.2-rc5)
   - TBXML (1.5)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - PLCrashReporter (= 1.2-rc5)
   - TBXML (~> 1.5)
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  PLCrashReporter: 979cd3c5bda33655f4df58fa6219d067183d7a7e
   TBXML: a279440030ba55c40e1455cafba3b0a44e1963d4
 
 COCOAPODS: 0.34.2
