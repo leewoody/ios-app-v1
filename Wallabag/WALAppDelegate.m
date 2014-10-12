@@ -11,6 +11,7 @@
 #import "WALIcons.h"
 #import "WALSettings.h"
 #import "WALSupportHelper.h"
+#import "WALCrashDataProtocol.h"
 #import <PLCrashReporter/PLCrashReporter.h>
 #import <PLCrashReporter/PLCrashReport.h>
 #import <PLCrashReporter/PLCrashReportTextFormatter.h>
@@ -27,7 +28,11 @@
 	
 	if ([reporter hasPendingCrashReport]) {
 		NSLog(@"Has Crash!");
-		[self handleCrashReport];
+		NSData *crashData = [self handleCrashReport];
+		if (crashData) {
+			id <WALCrashDataProtocol> crashDataHandler = ((id <WALCrashDataProtocol>)self.window.rootViewController);
+			[crashDataHandler setCrashDataToBeSent:crashData];
+		}
 	}
 	
 	NSError *error = nil;
@@ -76,7 +81,7 @@
 
 #pragma mark - Crash Reporting
 
-- (void)handleCrashReport {
+- (NSData*)handleCrashReport {
 	PLCrashReporter *crashReporter = [PLCrashReporter sharedReporter];
 	NSData *crashData;
 	NSError *error;
@@ -85,31 +90,13 @@
 	if (crashData == nil) {
 		NSLog(@"Couldn't load crash data: %@", error);
 		[crashReporter purgePendingCrashReport];
-		return;
+		return nil;
 	}
 	
 	PLCrashReport *crashReport = [[PLCrashReport alloc] initWithData:crashData error:nil];
 	NSString *crashLog = [PLCrashReportTextFormatter stringValueForCrashReport:crashReport withTextFormat:PLCrashReportTextFormatiOS];
 	
-	[self presentEmailSheetWithCrashData:[crashLog dataUsingEncoding:NSUTF8StringEncoding]];
-}
-
-- (void)presentEmailSheetWithCrashData:(NSData*) crashData {
-	if ([MFMailComposeViewController canSendMail]) {
-		MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
-		[mailVC setToRecipients:[NSArray arrayWithObject:@"wallabag@kevin-meyer.de"]];
-		[mailVC setSubject:@"Crash Report wallabag iOS-App"];
-		[mailVC setMessageBody:[WALSupportHelper getBodyForSupportMail] isHTML:NO];
-		[mailVC addAttachmentData:crashData mimeType:@"application/crash" fileName:@"wallabag.crash"];
-		mailVC.mailComposeDelegate = self;
-		
-		[self.window.rootViewController presentViewController:mailVC animated:YES completion:nil];
-	}
-}
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-	[self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+	return [crashLog dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 #pragma mark - UISplitView Delegate

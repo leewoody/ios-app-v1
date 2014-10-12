@@ -59,7 +59,8 @@
 
 /* Begin PBXFileReference section */
 		44A4B4E3B48248E3B67A93D8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		81FB84A52E0E4BE2ADB2D39A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		66DE2B00547A8ADA2030FEF9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		DC9E4BA52AE2A51DCDF99678 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F50B3B9A1938F6CA0048EBFD /* WALSettingsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettingsTests.m; sourceTree = "<group>"; };
 		F50B895118B7A28400AA9A6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F516683019DF32B5009804B9 /* WALArticleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticleTableViewCell.h; sourceTree = "<group>"; };
@@ -106,6 +107,7 @@
 		F5905332193B657D005E2A00 /* WALTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALTableViewController.m; sourceTree = "<group>"; };
 		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
 		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
+		F5AB23A919EA87C40014983F /* WALCrashDataProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALCrashDataProtocol.h; sourceTree = "<group>"; };
 		F5AF3B3D198672BE00226355 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-iPad.storyboard"; sourceTree = "<group>"; };
 		F5B747561938B87D0071B94C /* WALServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALServerConnection.h; sourceTree = "<group>"; };
 		F5B747571938B87D0071B94C /* WALServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALServerConnection.m; sourceTree = "<group>"; };
@@ -156,6 +158,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F3130F41F10896F2656625A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DC9E4BA52AE2A51DCDF99678 /* Pods.debug.xcconfig */,
+				66DE2B00547A8ADA2030FEF9 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F5259673193E48FB003E91A7 /* Theming */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,7 +244,7 @@
 				F5877DB418B4E02B009D4EFE /* WallabagTests */,
 				F5877D8B18B4E02B009D4EFE /* Frameworks */,
 				F5877D8A18B4E02B009D4EFE /* Products */,
-				81FB84A52E0E4BE2ADB2D39A /* Pods.xcconfig */,
+				6F3130F41F10896F2656625A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -270,6 +281,7 @@
 				F54E12EF18B4EAC700E89ED1 /* View */,
 				F5877D9B18B4E02B009D4EFE /* WALAppDelegate.h */,
 				F5877D9C18B4E02B009D4EFE /* WALAppDelegate.m */,
+				F5AB23A919EA87C40014983F /* WALCrashDataProtocol.h */,
 				F5877D9E18B4E02B009D4EFE /* Main.storyboard */,
 				F5AF3B3E198672BE00226355 /* Main-iPad.storyboard */,
 				F50B895018B7A28400AA9A6C /* Localizable.strings */,
@@ -458,7 +470,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F3307068E14F4E5FA8C2F29F /* Check Pods Manifest.lock */ = {
@@ -643,7 +655,7 @@
 		};
 		F5877DBF18B4E02B009D4EFE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81FB84A52E0E4BE2ADB2D39A /* Pods.xcconfig */;
+			baseConfigurationReference = DC9E4BA52AE2A51DCDF99678 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -662,7 +674,7 @@
 		};
 		F5877DC018B4E02B009D4EFE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81FB84A52E0E4BE2ADB2D39A /* Pods.xcconfig */;
+			baseConfigurationReference = 66DE2B00547A8ADA2030FEF9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

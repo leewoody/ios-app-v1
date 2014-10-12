@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMailComposeViewController.h>
 #import "WALThemeOrganizerDelegate.h"
+#import "WALCrashDataProtocol.h"
 
 @class WALTheme;
 
-@interface WALNavigationController : UINavigationController <WALThemeOrganizerDelegate>
+@interface WALNavigationController : UINavigationController <WALThemeOrganizerDelegate, WALCrashDataProtocol, MFMailComposeViewControllerDelegate>
 
 @end
