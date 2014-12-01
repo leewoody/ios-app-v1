@@ -1,11 +1,11 @@
 PODS:
   - AFNetworking (2.4.1):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-    - AFNetworking/UIKit
+    - AFNetworking/NSURLConnection (= 2.4.1)
+    - AFNetworking/NSURLSession (= 2.4.1)
+    - AFNetworking/Reachability (= 2.4.1)
+    - AFNetworking/Security (= 2.4.1)
+    - AFNetworking/Serialization (= 2.4.1)
+    - AFNetworking/UIKit (= 2.4.1)
   - AFNetworking/NSURLConnection (2.4.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
@@ -20,17 +20,23 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - ARChromeActivity (1.0.4)
   - PLCrashReporter (1.2-rc5)
   - TBXML (1.5)
+  - TUSafariActivity (1.0.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - ARChromeActivity (~> 1.0)
   - PLCrashReporter (= 1.2-rc5)
   - TBXML (~> 1.5)
+  - TUSafariActivity (~> 1.0.1)
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  ARChromeActivity: d8471d0f78b7fcc1de57929cfc1751b3a7f58bad
   PLCrashReporter: 979cd3c5bda33655f4df58fa6219d067183d7a7e
   TBXML: a279440030ba55c40e1455cafba3b0a44e1963d4
+  TUSafariActivity: 63c6b0584d1f0a731e955c0e4d9c89cde63bedc2
 
-COCOAPODS: 0.34.2
+COCOAPODS: 0.35.0
