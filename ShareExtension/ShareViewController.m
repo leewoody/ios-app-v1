@@ -13,6 +13,7 @@
 @property (weak) IBOutlet UIWebView *webView;
 @property (strong) WALSettings *settings;
 - (IBAction)cancelPushed:(id)sender;
+@property (strong) NSURL *addUrl;
 @end
 
 @implementation ShareViewController
@@ -31,8 +32,8 @@
 	NSExtensionItem *item = self.extensionContext.inputItems[0];
 	NSItemProvider *provider = item.attachments[0];
 	[provider loadItemForTypeIdentifier:@"public.url" options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
-		NSURL *url = (NSURL*)item;
-		NSURLRequest *request = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:url]];
+		self.addUrl = (NSURL*)item;
+		NSURLRequest *request = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:self.addUrl]];
 		[self.webView loadRequest:request];
 	}];
 }
@@ -53,9 +54,10 @@
 		NSLog(@"Success!");
 		[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 	} else if (![url.pathExtension isEqualToString:@"php"]) {
-		NSError *error = [NSError errorWithDomain:@"wallabag-share" code:111 userInfo:@{NSLocalizedDescriptionKey: @"Error adding Link. Please try again"}];
-		NSLog(@"Couldn't add Link");
-		[self.extensionContext cancelRequestWithError:error];
+		NSLog(@"Didn't add link yet, retrying.");
+		NSURLRequest *nextTryRequest = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:self.addUrl]];
+		[self.webView loadRequest:nextTryRequest];
+		return NO;
 	}
 	return YES;
 }
