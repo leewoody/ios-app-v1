@@ -29,12 +29,13 @@
 	return message;
 }
 
-+ (MFMailComposeViewController *)getPreparedMailComposeViewController {
++ (MFMailComposeViewController *)getPreparedMailComposeVCForCrashReportingWithCrashData:(NSData*) crashData {
 	if ([MFMailComposeViewController canSendMail]) {
 		MFMailComposeViewController *mailVC = [[MFMailComposeViewController alloc] init];
 		[mailVC setToRecipients:[NSArray arrayWithObject:@"wallabag@kevin-meyer.de"]];
 		[mailVC setSubject:@"Crash Report wallabag iOS-App"];
-		[mailVC setMessageBody:[WALSupportHelper getBodyForSupportMail] isHTML:NO];		
+		[mailVC setMessageBody:[WALSupportHelper getBodyForSupportMail] isHTML:NO];
+		[mailVC addAttachmentData:crashData mimeType:@"application/crash" fileName:@"wallabag.crash"];
 		return mailVC;
 	}
 	

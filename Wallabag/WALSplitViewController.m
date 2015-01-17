@@ -96,7 +96,7 @@
 }
 
 - (void)presentEmailSheetWithCrashData:(NSData*) crashData {
-	MFMailComposeViewController *mailVC = [WALSupportHelper getPreparedMailComposeViewController];
+	MFMailComposeViewController *mailVC = [WALSupportHelper getPreparedMailComposeVCForCrashReportingWithCrashData:crashData];
 
 	if (mailVC) {
 		mailVC.mailComposeDelegate = self;

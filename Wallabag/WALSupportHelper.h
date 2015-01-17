@@ -11,7 +11,7 @@
 
 @interface WALSupportHelper : NSObject
 
-+(NSString*)getBodyForSupportMail;
-+(MFMailComposeViewController*)getPreparedMailComposeViewController;
++ (NSString*)getBodyForSupportMail;
++ (MFMailComposeViewController *)getPreparedMailComposeVCForCrashReportingWithCrashData:(NSData*) crashData;
 
 @end
