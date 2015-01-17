@@ -6,40 +6,31 @@
 //  Copyright (c) 2014 Wallabag. All rights reserved.
 //
 
-#import "ShareViewController.h"
+#import "WALShareBrowserViewController.h"
 #import "WALSettings.h"
 
-@interface ShareViewController () <UIWebViewDelegate>
+@interface WALShareBrowserViewController () <UIWebViewDelegate>
 @property (weak) IBOutlet UIWebView *webView;
-@property (strong) WALSettings *settings;
 - (IBAction)cancelPushed:(id)sender;
-@property (strong) NSURL *addUrl;
 @end
 
-@implementation ShareViewController
-
-- (BOOL)isContentValid {
-    // Do validation of contentText and/or NSExtensionContext attachments here
-    return YES;
-}
+@implementation WALShareBrowserViewController
 
 - (void)viewDidLoad {
+	[super viewDidLoad];
+	self.title = @"Please Log in";
 	self.webView.delegate = self;
 	
-	self.settings = [[WALSettings alloc] init];
-	[self.settings setWallabagURL:[NSURL URLWithString:@"https://example.com/"]];
-	
-	NSExtensionItem *item = self.extensionContext.inputItems[0];
-	NSItemProvider *provider = item.attachments[0];
-	[provider loadItemForTypeIdentifier:@"public.url" options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
-		self.addUrl = (NSURL*)item;
+	if (self.addUrl && self.settings) {
 		NSURLRequest *request = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:self.addUrl]];
 		[self.webView loadRequest:request];
-	}];
+	}
 }
 
 - (IBAction)cancelPushed:(id)sender {
-	[self.extensionContext cancelRequestWithError:nil];
+	if (self.delegate) {
+		[self.delegate shareBrowserDidCancel:self];
+	}
 }
 
 
@@ -52,7 +43,11 @@
 	if ([url.query isEqualToString:@"view=home&closewin=true"]) {
 		self.title = @"Success";
 		NSLog(@"Success!");
-		[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
+		
+		if (self.delegate) {
+			[self.delegate shareBrowser:self didAddURL:self.addUrl];
+		}
+		
 	} else if (![url.pathExtension isEqualToString:@"php"]) {
 		NSLog(@"Didn't add link yet, retrying.");
 		NSURLRequest *nextTryRequest = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:self.addUrl]];
@@ -61,6 +56,5 @@
 	}
 	return YES;
 }
-
 
 @end

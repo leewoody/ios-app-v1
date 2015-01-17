@@ -1,29 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7sg-7A-MXs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2aL-NS-KZS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="p71-MF-XKJ">
+        <!--Share Start View Controller-->
+        <scene sceneID="B3Q-cb-LON">
             <objects>
-                <navigationController id="7sg-7A-MXs" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="egS-31-4X8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
+                <viewController id="2aL-NS-KZS" customClass="WALShareStartViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CuI-f4-YAI"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wah-5k-y9s"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FjA-2s-6Px">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2D-Gs-xY1">
+                                <rect key="frame" x="180" y="250" width="240" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="FRd-2X-gz1"/>
+                                    <constraint firstAttribute="height" constant="100" id="ilu-Q8-Enb"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adding Link" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Di5-Uj-h6j">
+                                <rect key="frame" x="254" y="289" width="92" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pOk-0b-pkw">
+                                <rect key="frame" x="354" y="282" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pOk-0b-pkw" firstAttribute="leading" secondItem="Di5-Uj-h6j" secondAttribute="trailing" constant="8" id="5f1-33-tnz"/>
+                            <constraint firstAttribute="centerY" secondItem="p2D-Gs-xY1" secondAttribute="centerY" id="5rx-6o-45v"/>
+                            <constraint firstAttribute="centerX" secondItem="Di5-Uj-h6j" secondAttribute="centerX" id="IIK-7c-1aW"/>
+                            <constraint firstAttribute="centerY" secondItem="Di5-Uj-h6j" secondAttribute="centerY" id="KRj-Fk-Fgw"/>
+                            <constraint firstAttribute="centerY" secondItem="pOk-0b-pkw" secondAttribute="centerY" id="ejm-h4-EnO"/>
+                            <constraint firstAttribute="centerX" secondItem="p2D-Gs-xY1" secondAttribute="centerX" id="iWd-8d-nFR"/>
+                        </constraints>
+                    </view>
                     <connections>
-                        <segue destination="j1y-V4-xli" kind="relationship" relationship="rootViewController" id="QGX-ry-bRq"/>
+                        <outlet property="activityIndicator" destination="pOk-0b-pkw" id="0F6-28-fZ3"/>
+                        <outlet property="statusLabel" destination="Di5-Uj-h6j" id="cAz-k4-BGy"/>
                     </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pwf-zH-Xwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rEf-sZ-gxn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-317" y="149"/>
+            <point key="canvasLocation" x="-1098" y="149"/>
         </scene>
-        <!--Share View Controller-->
+        <!--Share Browser View Controller-->
         <scene sceneID="ceB-am-kn3">
             <objects>
-                <viewController id="j1y-V4-xli" customClass="ShareViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BrowserViewController" id="j1y-V4-xli" customClass="WALShareBrowserViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8bI-gs-bmD"/>
                         <viewControllerLayoutGuide type="bottom" id="d5i-Ba-RvD"/>
@@ -52,13 +86,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="webView" destination="Jab-78-kVL" id="9Yb-tV-5A3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEy-Cv-SGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="539" y="149"/>
+            <point key="canvasLocation" x="-378" y="149"/>
         </scene>
     </scenes>
 </document>
