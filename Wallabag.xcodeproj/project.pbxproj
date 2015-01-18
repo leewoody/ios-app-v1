@@ -103,6 +103,8 @@
 		F525967A193E58B1003E91A7 /* WALThemeOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALThemeOrganizer.h; sourceTree = "<group>"; };
 		F525967B193E58B1003E91A7 /* WALThemeOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALThemeOrganizer.m; sourceTree = "<group>"; };
 		F525967D193E5F17003E91A7 /* WALThemeOrganizerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALThemeOrganizerDelegate.h; sourceTree = "<group>"; };
+		F533CF121A6C1AE4004B91C2 /* Wallabag.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Wallabag.entitlements; sourceTree = "<group>"; };
+		F533CF131A6C1EC8004B91C2 /* ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ShareExtension.entitlements; sourceTree = "<group>"; };
 		F53D8EB119D3291B00F313FE /* ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F53D8EB419D3291B00F313FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F53D8EB519D3291C00F313FE /* WALShareBrowserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALShareBrowserViewController.h; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 		F53D8EB219D3291B00F313FE /* ShareExtension */ = {
 			isa = PBXGroup;
 			children = (
+				F533CF131A6C1EC8004B91C2 /* ShareExtension.entitlements */,
 				F553ED391A6ABD6E00B3B612 /* WALShareStartViewController.h */,
 				F553ED3A1A6ABD6E00B3B612 /* WALShareStartViewController.m */,
 				F53D8EB519D3291C00F313FE /* WALShareBrowserViewController.h */,
@@ -334,6 +337,7 @@
 		F5877D9218B4E02B009D4EFE /* Wallabag */ = {
 			isa = PBXGroup;
 			children = (
+				F533CF121A6C1AE4004B91C2 /* Wallabag.entitlements */,
 				F5259673193E48FB003E91A7 /* Theming */,
 				F5AF8ABC18F949D100652EBE /* ServerDataHandler */,
 				F54E12F018B4EACD00E89ED1 /* Controller */,
@@ -475,9 +479,19 @@
 					F53D8EB019D3291B00F313FE = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = XAGFV7YS86;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					F5877D8818B4E02B009D4EFE = {
 						DevelopmentTeam = XAGFV7YS86;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					F5877DAC18B4E02B009D4EFE = {
 						TestTargetID = F5877D8818B4E02B009D4EFE;
@@ -688,6 +702,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -700,6 +715,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -708,14 +724,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kevin Meyer (XAGFV7YS86)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = ShareExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -796,6 +814,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Wallabag/Wallabag.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -815,14 +834,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Wallabag/Wallabag.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kevin Meyer (XAGFV7YS86)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wallabag/Wallabag-Prefix.pch";
 				INFOPLIST_FILE = "Wallabag/Wallabag-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4AA19473-B82D-4E1E-9748-ED556140604A";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

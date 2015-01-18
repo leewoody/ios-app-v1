@@ -7,6 +7,7 @@
 //
 
 #import "WALSettings.h"
+#define kWallabagAppGroupId @"group.de.Kevin-Meyer.Wallabag"
 
 @interface WALSettings ()
 @property (nonatomic, strong) NSURL *baseURL;
@@ -14,25 +15,40 @@
 
 @implementation WALSettings
 
-+ (WALSettings*) settingsFromSavedSettings
-{
-	WALSettings* settings = [[WALSettings alloc] init];
++ (WALSettings*) settingsFromSavedSettings {
+	return [self settingsFromSavedSettingsOnFallback:NO];
+}
 
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
++ (WALSettings*) settingsFromSavedSettingsOnFallback:(BOOL) fallback {
+	
+	WALSettings* settings = [[WALSettings alloc] init];
+	
+	NSUserDefaults *defaults;
+	if (!fallback) {
+		defaults = [[NSUserDefaults alloc] initWithSuiteName:kWallabagAppGroupId];
+	} else {
+		defaults = [NSUserDefaults standardUserDefaults];
+	}
 	
 	settings.wallabagURL = [defaults URLForKey:@"wallabagURL"];
 	settings.userID = [defaults integerForKey:@"userID"];
 	settings.apiToken = [defaults stringForKey:@"apiToken"];
-
-	if (settings.baseURL == nil || settings.apiToken == nil)
+	
+	if ((settings.baseURL == nil || settings.apiToken == nil) && fallback)
 		return nil;
+	else if (settings.baseURL == nil || settings.apiToken == nil) {
+		settings = [self settingsFromSavedSettingsOnFallback:YES];
+		if (settings) {
+			[settings saveSettings];
+		}
+	}
 	
 	return settings;
 }
 
 - (void) saveSettings
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:kWallabagAppGroupId];
 	
 	[defaults setURL:self.baseURL forKey:@"wallabagURL"];
 	[defaults setInteger:self.userID forKey:@"userID"];

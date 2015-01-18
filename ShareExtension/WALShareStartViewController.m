@@ -35,8 +35,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	self.settings = [[WALSettings alloc] init];
-	[self.settings setWallabagURL:[NSURL URLWithString:@"http://example.com/"]];
+	self.settings = [WALSettings settingsFromSavedSettings];
 
 
 	NSExtensionItem *item = self.extensionContext.inputItems[0];
