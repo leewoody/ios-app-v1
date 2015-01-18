@@ -13,34 +13,55 @@
 
 @interface WALShareStartViewController ()<WALShareBrowserDelegate>
 
+@property (weak) IBOutlet UIView *statusView;
 @property (weak) IBOutlet UILabel *statusLabel;
 @property (weak) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 @property (strong) WALShareBrowserViewController *browserVC;
+@property (strong) NSURL *addUrl;
+@property (strong) WALSettings *settings;
 
 @end
 
 @implementation WALShareStartViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+	[super viewDidLoad];
+
+	self.statusView.layer.cornerRadius = 8;
+	self.statusView.alpha = 0;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
 	
-	WALSettings *settings = [[WALSettings alloc] init];
-	[settings setWallabagURL:[NSURL URLWithString:@"http://example.com/"]];
-	
+	self.settings = [[WALSettings alloc] init];
+	[self.settings setWallabagURL:[NSURL URLWithString:@"http://example.com/"]];
+
 
 	NSExtensionItem *item = self.extensionContext.inputItems[0];
 	NSItemProvider *provider = item.attachments[0];
 	[provider loadItemForTypeIdentifier:@"public.url" options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
-		NSURL* addUrl = (NSURL*)item;
-		self.browserVC = [[UIStoryboard storyboardWithName:@"MainInterface" bundle:nil] instantiateViewControllerWithIdentifier:@"BrowserViewController"];
-		self.browserVC.delegate = self;
-		self.browserVC.addUrl = addUrl;
-		self.browserVC.settings = settings;
-
-		UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:self.browserVC];
-		navC.modalPresentationStyle = UIModalPresentationFormSheet;
-		[self presentViewController:navC animated:YES completion:nil];
+		self.addUrl = (NSURL*)item;
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[UIView animateWithDuration:0.25 animations:^{
+				self.statusView.alpha = 1.0;
+			} completion:^(BOOL finished) {
+				[self startBrowserViewController];
+			}];
+		});
 	}];
+}
+
+- (void)startBrowserViewController {
+	self.browserVC = [[UIStoryboard storyboardWithName:@"MainInterface" bundle:nil] instantiateViewControllerWithIdentifier:@"BrowserViewController"];
+	self.browserVC.delegate = self;
+	self.browserVC.addUrl = self.addUrl;
+	self.browserVC.settings = self.settings;
+	
+	UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:self.browserVC];
+	navC.modalPresentationStyle = UIModalPresentationFormSheet;
+	[self presentViewController:navC animated:YES completion:nil];
 }
 
 #pragma mark - Extension Exit

@@ -18,36 +18,39 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2D-Gs-xY1">
                                 <rect key="frame" x="180" y="250" width="240" height="100"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adding Link" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Di5-Uj-h6j">
+                                        <rect key="frame" x="74" y="40" width="92" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pOk-0b-pkw">
+                                        <rect key="frame" x="191" y="31" width="37" height="37"/>
+                                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </activityIndicatorView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="pOk-0b-pkw" secondAttribute="trailing" constant="12" id="48a-Wf-t1X"/>
+                                    <constraint firstAttribute="centerY" secondItem="pOk-0b-pkw" secondAttribute="centerY" id="6je-Ix-y4h"/>
+                                    <constraint firstAttribute="centerX" secondItem="Di5-Uj-h6j" secondAttribute="centerX" id="7Me-sB-wNX"/>
                                     <constraint firstAttribute="width" constant="240" id="FRd-2X-gz1"/>
                                     <constraint firstAttribute="height" constant="100" id="ilu-Q8-Enb"/>
+                                    <constraint firstAttribute="centerY" secondItem="Di5-Uj-h6j" secondAttribute="centerY" id="ogl-TS-6g9"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adding Link" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Di5-Uj-h6j">
-                                <rect key="frame" x="254" y="289" width="92" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pOk-0b-pkw">
-                                <rect key="frame" x="354" y="282" width="37" height="37"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="pOk-0b-pkw" firstAttribute="leading" secondItem="Di5-Uj-h6j" secondAttribute="trailing" constant="8" id="5f1-33-tnz"/>
                             <constraint firstAttribute="centerY" secondItem="p2D-Gs-xY1" secondAttribute="centerY" id="5rx-6o-45v"/>
-                            <constraint firstAttribute="centerX" secondItem="Di5-Uj-h6j" secondAttribute="centerX" id="IIK-7c-1aW"/>
-                            <constraint firstAttribute="centerY" secondItem="Di5-Uj-h6j" secondAttribute="centerY" id="KRj-Fk-Fgw"/>
-                            <constraint firstAttribute="centerY" secondItem="pOk-0b-pkw" secondAttribute="centerY" id="ejm-h4-EnO"/>
                             <constraint firstAttribute="centerX" secondItem="p2D-Gs-xY1" secondAttribute="centerX" id="iWd-8d-nFR"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="pOk-0b-pkw" id="0F6-28-fZ3"/>
                         <outlet property="statusLabel" destination="Di5-Uj-h6j" id="cAz-k4-BGy"/>
+                        <outlet property="statusView" destination="p2D-Gs-xY1" id="6jv-bd-tBC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rEf-sZ-gxn" userLabel="First Responder" sceneMemberID="firstResponder"/>
