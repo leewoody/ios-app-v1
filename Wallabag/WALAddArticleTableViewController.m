@@ -9,7 +9,7 @@
 #import "WALAddArticleTableViewController.h"
 
 @interface WALAddArticleTableViewController ()
-@property (strong, nonatomic) IBOutlet UITextField *urlTextField;
+@property (weak, nonatomic) IBOutlet UITextField *urlTextField;
 - (IBAction)cancelButtonPushed:(id)sender;
 - (IBAction)saveButtonPushed:(id)sender;
 @end

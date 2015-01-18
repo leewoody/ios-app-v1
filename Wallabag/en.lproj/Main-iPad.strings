@@ -1,7 +1,4 @@
 
-/* Class = "IBUILabel"; text = "License"; ObjectID = "0mY-Ze-3S4"; */
-"0mY-Ze-3S4.text" = "License";
-
 /* Class = "IBUILabel"; text = "Sign up at Framabag"; ObjectID = "1fR-C5-1qp"; */
 "1fR-C5-1qp.text" = "Sign up at Framabag";
 
@@ -17,14 +14,11 @@
 /* Class = "IBUILabel"; text = "User ID"; ObjectID = "4sc-fE-ywC"; */
 "4sc-fE-ywC.text" = "User ID";
 
-/* Class = "IBUILabel"; text = "Detail"; ObjectID = "5td-gd-nIr"; */
-"5td-gd-nIr.text" = "Detail";
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "6DI-z1-1kF"; */
+"6DI-z1-1kF.text" = "Label";
 
 /* Class = "IBUITextField"; placeholder = "http://example.com/article"; ObjectID = "8CA-4x-jgh"; */
 "8CA-4x-jgh.placeholder" = "http://example.com/article";
-
-/* Class = "IBUILabel"; text = "Title"; ObjectID = "8w3-Fl-fKH"; */
-"8w3-Fl-fKH.text" = "Title";
 
 /* Class = "IBUILabel"; text = "Use link from clipboard"; ObjectID = "ATG-7C-saS"; */
 "ATG-7C-saS.text" = "Use link from clipboard";
@@ -53,11 +47,8 @@
 /* Class = "IBUINavigationItem"; title = "Bag it!"; ObjectID = "Neg-nZ-Gjn"; */
 "Neg-nZ-Gjn.title" = "Bag it!";
 
-/* Class = "IBUITextView"; text = "Copyright © 2014 Kevin Meyer \nwallabag@kevin-meyer.de https://github.com/wallabag/ios-app \nArticle Style is based on wallabag's theme \"baggy\" by Thomas LEBEAU.  External Libraries:  AFNetworking:  Copyright (c) 2013 AFNetworking (http://afnetworking.com/)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE."; ObjectID = "Pd9-B4-l8N"; */
-"Pd9-B4-l8N.text" = "Copyright © 2014 Kevin Meyer \nwallabag@kevin-meyer.de https://github.com/wallabag/ios-app \nArticle Style is based on wallabag's theme \"baggy\" by Thomas LEBEAU.  External Libraries:  AFNetworking:  Copyright (c) 2013 AFNetworking (http://afnetworking.com/)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.";
-
-/* Class = "IBUINavigationItem"; title = "Wallabag"; ObjectID = "Qze-uZ-erH"; */
-"Qze-uZ-erH.title" = "Wallabag";
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "Ptm-fw-o9T"; */
+"Ptm-fw-o9T.text" = "Label";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Need help?"; ObjectID = "VrR-RZ-Rdb"; */
 "VrR-RZ-Rdb.headerTitle" = "Need help?";
@@ -68,9 +59,6 @@
 /* Class = "IBUILabel"; text = "Send a mail"; ObjectID = "WMD-mR-urd"; */
 "WMD-mR-urd.text" = "Send a mail";
 
-/* Class = "IBUINavigationItem"; title = "License"; ObjectID = "ZcX-Sx-98P"; */
-"ZcX-Sx-98P.title" = "License";
-
 /* Class = "IBUILabel"; text = "Where can I find this data?"; ObjectID = "aaJ-Pj-ptv"; */
 "aaJ-Pj-ptv.text" = "Where can I find this data?";
 
@@ -79,6 +67,15 @@
 
 /* Class = "IBUILabel"; text = "Install your own wallabag"; ObjectID = "ct0-Xy-mr0"; */
 "ct0-Xy-mr0.text" = "Install your own wallabag";
+
+/* Class = "IBUISegmentedControl"; dQM-WB-Snr.segmentTitles[0] = "Unread"; ObjectID = "dQM-WB-Snr"; */
+"dQM-WB-Snr.segmentTitles[0]" = "Unread";
+
+/* Class = "IBUISegmentedControl"; dQM-WB-Snr.segmentTitles[1] = "Favorites"; ObjectID = "dQM-WB-Snr"; */
+"dQM-WB-Snr.segmentTitles[1]" = "Favorites";
+
+/* Class = "IBUISegmentedControl"; dQM-WB-Snr.segmentTitles[2] = "Archive"; ObjectID = "dQM-WB-Snr"; */
+"dQM-WB-Snr.segmentTitles[2]" = "Archive";
 
 /* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "dXF-e3-NIf"; */
 "dXF-e3-NIf.title" = "Settings";

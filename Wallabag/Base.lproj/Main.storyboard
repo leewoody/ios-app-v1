@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rS3-R9-Ivy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rS3-R9-Ivy">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -33,32 +35,46 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ArticleCell" textLabel="2pz-XF-uhl" detailTextLabel="i9S-Mp-8pe" style="IBUITableViewCellStyleSubtitle" id="m0d-ak-lc9">
+                            <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ArticleCell" id="FEc-vZ-iiW" customClass="WALArticleTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m0d-ak-lc9" id="tG8-3i-qdf">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FEc-vZ-iiW" id="6mh-Ms-slq">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="34" id="2pz-XF-uhl">
-                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i9S-Mp-8pe">
-                                            <rect key="frame" x="15" y="25" width="32" height="15"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdH-qM-AgM">
+                                            <rect key="frame" x="15" y="24" width="257" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="15" id="SQS-Tc-Pew"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpE-Yq-Vnd">
+                                            <rect key="frame" x="15" y="3" width="260" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="UEJ-sr-zjY"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="bdH-qM-AgM" firstAttribute="leading" secondItem="6mh-Ms-slq" secondAttribute="leading" constant="15" id="8xr-Ba-hsl"/>
+                                        <constraint firstAttribute="trailing" secondItem="MpE-Yq-Vnd" secondAttribute="trailing" constant="12" id="BoY-Xx-3MT"/>
+                                        <constraint firstAttribute="bottom" secondItem="bdH-qM-AgM" secondAttribute="bottom" constant="4" id="Z52-gH-3RF"/>
+                                        <constraint firstItem="MpE-Yq-Vnd" firstAttribute="leading" secondItem="6mh-Ms-slq" secondAttribute="leading" constant="15" id="g4s-9h-9k8"/>
+                                        <constraint firstItem="MpE-Yq-Vnd" firstAttribute="top" secondItem="6mh-Ms-slq" secondAttribute="topMargin" constant="-5" id="iF1-Fw-Fif"/>
+                                        <constraint firstAttribute="trailing" secondItem="bdH-qM-AgM" secondAttribute="trailing" constant="15" id="plz-k2-zuv"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="Ah7-4n-0Wa" kind="push" identifier="PushToArticle" id="jUr-3t-vfg"/>
+                                    <outlet property="detailLabel" destination="bdH-qM-AgM" id="J1n-UM-aPm"/>
+                                    <outlet property="titleLabel" destination="MpE-Yq-Vnd" id="2Oc-2o-sVC"/>
+                                    <segue destination="Ah7-4n-0Wa" kind="push" identifier="PushToArticle" id="uZN-wS-V0m"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -68,12 +84,25 @@
                             <outlet property="delegate" destination="pGg-6v-bdr" id="Y6K-Cp-Qkv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Wallabag" id="tQt-TN-PWz">
+                    <navigationItem key="navigationItem" id="tQt-TN-PWz">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="NavBarButton-Settings-filled" id="fjc-y7-nW0">
                             <connections>
                                 <segue destination="b7R-6t-7CM" kind="modal" identifier="ModalToSettings" id="VYX-rk-UHE"/>
                             </connections>
                         </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="rTD-dz-gBw">
+                            <rect key="frame" x="55" y="7" width="210" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Unread"/>
+                                <segment title="Favorites"/>
+                                <segment title="Archive"/>
+                            </segments>
+                            <connections>
+                                <action selector="headerSegmentedControlValueDidChange:" destination="pGg-6v-bdr" eventType="valueChanged" id="7UI-VE-NX0"/>
+                            </connections>
+                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" image="MoreActions" id="mv6-II-pTS">
                             <connections>
                                 <action selector="actionsButtonPushed:" destination="pGg-6v-bdr" id="0r0-T5-XSI"/>
@@ -81,6 +110,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="headerSegmentedControl" destination="rTD-dz-gBw" id="Coh-2I-eIz"/>
                         <segue destination="x0f-vR-CwK" kind="modal" identifier="ModalToAddArticle" id="haR-ON-3L3"/>
                     </connections>
                 </tableViewController>
@@ -498,50 +528,11 @@
                         <outlet property="apiTokenTextField" destination="irP-Tq-7pY" id="fvy-Nb-4qs"/>
                         <outlet property="urlTextField" destination="XYS-sB-WWu" id="M8c-I0-Qoa"/>
                         <outlet property="userIDTextField" destination="ZUI-D1-IIr" id="YlB-nz-yDS"/>
-                        <segue destination="ZGf-qw-xgp" kind="push" identifier="PushToLicense" id="wd9-Xk-bkO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gzG-Am-nTb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1345" y="1456"/>
-        </scene>
-        <!--License-->
-        <scene sceneID="qG7-Tf-0ln">
-            <objects>
-                <viewController id="ZGf-qw-xgp" sceneMemberID="viewController">
-                    <textView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="hkc-87-IfJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <string key="text">Copyright © 2014 Kevin Meyer 
-wallabag@kevin-meyer.de https://github.com/wallabag/ios-app 
-Article Style is based on wallabag's theme "baggy" by Thomas LEBEAU.  External Libraries:  AFNetworking:  Copyright (c) 2013 AFNetworking (http://afnetworking.com/)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.</string>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
-                    <navigationItem key="navigationItem" title="License" id="QVW-4y-8vx"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3vv-61-36s" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1757" y="1456"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8mH-CZ-FYN">
@@ -655,8 +646,8 @@ THE SOFTWARE.</string>
     <resources>
         <image name="MoreActions" width="22" height="22"/>
         <image name="NavBarButton-Settings-filled" width="22" height="22"/>
-        <image name="ToolBar-Browser-Back" width="12" height="22"/>
-        <image name="ToolBar-Browser-Forward" width="12" height="22"/>
+        <image name="ToolBar-Browser-Back" width="22" height="22"/>
+        <image name="ToolBar-Browser-Forward" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

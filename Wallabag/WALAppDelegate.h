@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface WALAppDelegate : UIResponder <UIApplicationDelegate, UISplitViewControllerDelegate, UIPopoverControllerDelegate>
+@interface WALAppDelegate : UIResponder <UIApplicationDelegate, UISplitViewControllerDelegate, UIPopoverControllerDelegate, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

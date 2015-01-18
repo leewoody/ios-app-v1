@@ -13,6 +13,8 @@
 #import "WALTheme.h"
 #import "WALThemeOrganizer.h"
 #import "WALIcons.h"
+#import <ARChromeActivity.h>
+#import <TUSafariActivity.h>
 
 @interface WALArticleViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -169,9 +171,14 @@
 	if (!self.article)
 		return;
 	
-	NSArray* dataToShare = @[self.title, self.article.link];
+	NSArray* dataToShare = @[self.article.title, self.article.link];
 	//! @todo add more custom activities
-	UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+	
+	ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
+	TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
+	NSArray *applicationActivities = @[safariActivity, chromeActivity];
+	
+	UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:applicationActivities];
 	activityViewController.excludedActivityTypes = @[UIActivityTypeAirDrop];
 
 	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)

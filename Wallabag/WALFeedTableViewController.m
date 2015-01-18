@@ -11,6 +11,7 @@
 #import "WALSettingsTableViewController.h"
 #import "WALAddArticleTableViewController.h"
 #import "WALNavigationController.h"
+#import "WALArticleTableViewCell.h"
 
 #import "WALServerConnection.h"
 #import "WALThemeOrganizer.h"
@@ -25,12 +26,18 @@
 
 @interface WALFeedTableViewController ()
 
-@property (strong) WALArticleList* articleList;
+@property (strong) WALArticleList *articleList;
+@property (strong) WALArticleList *articleListFavorite;
+@property (strong) WALArticleList *articleListArchive;
+
 @property (strong) WALSettings* settings;
 @property BOOL showAllArticles;
 - (IBAction)actionsButtonPushed:(id)sender;
 
 @property (strong) UIActionSheet* actionSheet;
+
+@property (weak) IBOutlet UISegmentedControl *headerSegmentedControl;
+- (IBAction)headerSegmentedControlValueDidChange:(id)sender;
 @end
 
 @implementation WALFeedTableViewController
@@ -43,18 +50,13 @@
 	[self updateWithTheme:[themeOrganizer getCurrentTheme]];
 	[themeOrganizer subscribeToThemeChanges:self];
 	
-	UIColor *titleImageColor = SYSTEM_VERSION_LESS_THAN(@"7.0") ? [UIColor whiteColor] : [UIColor blackColor];
-	UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:titleImageColor]];
-	titleImageView.bounds = CGRectInset(titleImageView.frame, 0.0f, 1.0f);
-	titleImageView.contentMode = UIViewContentModeScaleAspectFit;
-	self.navigationItem.titleView = titleImageView;
-		
 	self.refreshControl = [[UIRefreshControl alloc] init];
 	[self.refreshControl addTarget:self action:@selector(triggeredRefreshControl) forControlEvents:UIControlEventValueChanged];
 	[super awakeFromNib];
 	
-	self.articleList = [[WALArticleList alloc] init];
+	self.articleList = [[WALArticleList alloc] initAsType:WALArticleListTypeUnread];
 	[self.articleList loadArticlesFromDisk];
+
 	self.settings = [WALSettings settingsFromSavedSettings];
 	[self updateArticleList];
 	
@@ -69,7 +71,7 @@
 - (void) viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	[self.navigationController setToolbarHidden:true];
+	[self.navigationController setToolbarHidden:YES];
 	
 	if (!self.settings)
 		[self performSegueWithIdentifier:@"ModalToSettings" sender:self];
@@ -88,6 +90,37 @@
 
 #pragma mark -
 
+- (IBAction)headerSegmentedControlValueDidChange:(id)sender {
+	UISegmentedControl *control = (UISegmentedControl*) sender;
+
+	WALArticleList *list = [self getCurrentArticleList];
+	
+	if (!list) {
+		if (control.selectedSegmentIndex == 1) {
+			self.articleListFavorite = [[WALArticleList alloc] initAsType:WALArticleListTypeFavorites];
+		} else if (control.selectedSegmentIndex == 2) {
+			self.articleListArchive = [[WALArticleList alloc] initAsType:WALArticleListTypeArchive];
+		}
+
+		list = [self getCurrentArticleList];
+		[list loadArticlesFromDisk];
+		[self updateArticleList];
+	}
+	
+	[self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+	[self.tableView reloadData];
+}
+
+- (WALArticleList*)getCurrentArticleList {
+	if (self.headerSegmentedControl.selectedSegmentIndex == 2) {
+		return self.articleListArchive;
+	} else if (self.headerSegmentedControl.selectedSegmentIndex == 1) {
+		return self.articleListFavorite;
+	}
+	
+	return self.articleList;
+}
+
 - (void)updateArticleList
 {
 	if (!self.settings)
@@ -99,7 +132,8 @@
 	}
 	
 	WALServerConnection *server = [[WALServerConnection alloc] init];
-	[server loadArticlesWithSettings:self.settings OldArticleList:self.articleList delegate:self];
+	WALArticleList *currentValidArticleList = [self getCurrentArticleList];
+	[server loadArticlesOfListType:[currentValidArticleList getListType] withSettings:self.settings OldArticleList:currentValidArticleList delegate:self];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[self.refreshControl beginRefreshing];
 }
@@ -113,34 +147,55 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if (self.showAllArticles)
-		return [self.articleList getNumberOfAllArticles];
+	WALArticleList *articleList = [self getCurrentArticleList];
 	
-	return [self.articleList getNumberOfUnreadArticles];
+	if (self.showAllArticles)
+		return [articleList getNumberOfAllArticles];
+	
+	return [articleList getNumberOfUnreadArticles];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	WALArticleList *articleList = [self getCurrentArticleList];
+	
 	WALArticle *currentArticle;
 	if (self.showAllArticles)
-		currentArticle = [self.articleList getArticleAtIndex:indexPath.row];
+		currentArticle = [articleList getArticleAtIndex:indexPath.row];
 	else
-		currentArticle = [self.articleList getUnreadArticleAtIndex:indexPath.row];
+		currentArticle = [articleList getUnreadArticleAtIndex:indexPath.row];
 	
 	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
 	
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
-	cell.textLabel.text = currentArticle.title;
-	cell.textLabel.textColor = [currentTheme getTextColor];
-	cell.detailTextLabel.text = @"";
+    WALArticleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
+	cell.titleLabel.text = currentArticle.title;
+	cell.titleLabel.textColor = [currentTheme getTextColor];
+	cell.detailLabel.text = currentArticle.link.host;
+	cell.detailLabel.textColor = [currentTheme getTintColor];
 	cell.backgroundColor = [currentTheme getBackgroundColor];
 	
-    return cell;
+	return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 60.0f;
+	WALArticleList *articleList = [self getCurrentArticleList];
+
+	
+	CGFloat constantHeight = 15.0f + 8.0f;
+	NSString *cellTitle = self.showAllArticles ? [articleList getArticleAtIndex:indexPath.row].title : [articleList getUnreadArticleAtIndex:indexPath.row].title;
+	CGFloat tableWidth = floor(tableView.bounds.size.width);
+	CGSize maximumLabelSize = CGSizeMake(tableWidth - (15.0f + 12.0f + 33.0f), FLT_MAX);
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		maximumLabelSize = CGSizeMake(tableWidth - (15.0f + 15.0f), FLT_MAX);
+	}
+
+	CGRect expectedLabelSize = [cellTitle boundingRectWithSize:maximumLabelSize
+													   options:NSStringDrawingUsesLineFragmentOrigin
+													attributes:@{NSFontAttributeName: [UIFont preferredFontForTextStyle:UIFontTextStyleBody]}
+													   context:nil];
+
+	return constantHeight + ceil(expectedLabelSize.size.height);
 }
 
 #pragma mark - Theming
@@ -153,7 +208,7 @@
 
 - (void) updateWithTheme:(WALTheme*) theme
 {
-	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:[theme getTextColor]]];
+//	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:[theme getTextColor]]];
 	self.tableView.backgroundColor = [theme getBackgroundColor];
 	self.refreshControl.tintColor = [theme getTextColor];
 }
@@ -165,12 +220,13 @@
     if ([[segue identifier] isEqualToString:@"PushToArticle"])
 	{
 		NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+		WALArticleList *articleList = [self getCurrentArticleList];
 		
 		WALArticle *articleToSet;
 		if (self.showAllArticles)
-			articleToSet = [self.articleList getArticleAtIndex:indexPath.row];
+			articleToSet = [articleList getArticleAtIndex:indexPath.row];
 		else
-			articleToSet = [self.articleList getUnreadArticleAtIndex:indexPath.row];
+			articleToSet = [articleList getUnreadArticleAtIndex:indexPath.row];
 		
 		WALArticleViewController *articleVC;
 		
@@ -201,30 +257,58 @@
 
 - (IBAction)actionsButtonPushed:(id)sender
 {
-	if (self.actionSheet)
-	{
-		[self.actionSheet dismissWithClickedButtonIndex:-1 animated:YES];
-		self.actionSheet = nil;
-		return;
+	if (SYSTEM_VERSION_LESS_THAN(@"8.0")) {
+		if (self.actionSheet)
+		{
+			[self.actionSheet dismissWithClickedButtonIndex:-1 animated:YES];
+			self.actionSheet = nil;
+			return;
+		}
+		
+		self.actionSheet = [[UIActionSheet alloc] init];
+		self.actionSheet.title = NSLocalizedString(@"Actions", nil);
+		
+		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Add Article", nil)];
+		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Change Theme", nil)];
+		
+		if (self.showAllArticles)
+			[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show unread Articles", nil)];
+		else
+			[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show all Articles", nil)];
+		
+		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", nil)];
+		
+		[self.actionSheet setCancelButtonIndex:3];
+		[self.actionSheet setTag:1];
+		[self.actionSheet setDelegate:self];
+		[self.actionSheet showFromBarButtonItem:sender animated:YES];
+	} else {
+		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Actions", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+		
+		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Add Article", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			[self actionsAddArticlePushed];
+		}]];
+		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Change Theme", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			[self actionsChangeThemePushed];
+		}]];
+		
+		if (self.showAllArticles)
+			[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Show unread Articles", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+				[self actionsShowArticlesPushed];
+			}]];
+		else
+			[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Show all Articles", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+				[self actionsShowArticlesPushed];
+			}]];
+		
+		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+		
+		UIPopoverPresentationController *popoverController = alertController.popoverPresentationController;
+		popoverController.barButtonItem = self.navigationItem.rightBarButtonItem;
+		popoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+		
+		[self presentViewController:alertController animated:YES completion:nil];
 	}
-	
-	self.actionSheet = [[UIActionSheet alloc] init];
-	self.actionSheet.title = NSLocalizedString(@"Actions", nil);
-	
-	[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Add Article", nil)];
-	[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Change Theme", nil)];
-
-	if (self.showAllArticles)
-		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show unread Articles", nil)];
-	else
-		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show all Articles", nil)];
-	
-	[self.actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", nil)];
-	
-	[self.actionSheet setCancelButtonIndex:3];
-	[self.actionSheet setTag:1];
-	[self.actionSheet setDelegate:self];
-	[self.actionSheet showFromBarButtonItem:sender animated:true];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -233,30 +317,65 @@
 	{
 		if (buttonIndex == 0)
 		{
-			[self performSegueWithIdentifier:@"ModalToAddArticle" sender:self];
+			[self actionsAddArticlePushed];
 		}
 		else if (buttonIndex == 1)
 		{
-			WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
-			[themeOrganizer changeTheme];
+			[self actionsChangeThemePushed];
 		}
 		else if (buttonIndex == 2)
 		{
-			self.showAllArticles = self.showAllArticles ? NO : YES;
-			[self.tableView reloadData];
+			[self actionsShowArticlesPushed];
 		}
 	}
 	self.actionSheet = nil;
+}
+
+- (void) actionsAddArticlePushed {
+	[self performSelector:@selector(showAddArticleViewController) withObject:nil afterDelay:0];
+}
+
+- (void) actionsChangeThemePushed {
+	WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
+	[themeOrganizer changeTheme];
+}
+
+- (void) actionsShowArticlesPushed {
+	self.showAllArticles = !self.showAllArticles;
+	[self.tableView reloadData];
+}
+
+- (void) showAddArticleViewController {
+	[self performSegueWithIdentifier:@"ModalToAddArticle" sender:self];
 }
 
 #pragma mark - Callback Delegates
 
 - (void)serverConnection:(WALServerConnection *)connection didFinishWithArticleList:(WALArticleList *)articleList
 {
-	[self.articleList deleteCachedArticles];
-	self.articleList = articleList;
-	[self.articleList saveArticlesFromDisk];
-	[self.articleList updateUnreadArticles];
+	switch ([articleList getListType]) {
+		case WALArticleListTypeUnread:
+			[self.articleList deleteCachedArticles];
+			self.articleList = articleList;
+			[self.articleList saveArticlesFromDisk];
+			[self.articleList updateUnreadArticles];
+			break;
+			
+		case WALArticleListTypeFavorites:
+			[self.articleListFavorite deleteCachedArticles];
+			self.articleListFavorite = articleList;
+			[self.articleListFavorite saveArticlesFromDisk];
+			[self.articleListFavorite updateUnreadArticles];
+			break;
+			
+		case WALArticleListTypeArchive:
+			[self.articleListArchive deleteCachedArticles];
+			self.articleListArchive = articleList;
+			[self.articleListArchive saveArticlesFromDisk];
+			[self.articleListArchive updateUnreadArticles];
+			break;
+	}
+	
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[self.refreshControl endRefreshing];

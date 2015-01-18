@@ -10,7 +10,11 @@
 #define APP_STORE_URI @"itms-apps://itunes.apple.com/us/app/wallabag/id828331015"
 #define APP_STORE_URL @"https://itunes.apple.com/us/app/wallabag/id828331015"
 
-#import <sys/utsname.h>
+#define DOC_INSTALLATION @"http://doc.wallabag.org/en/Administrator/Download_and_install.html"
+#define DOC_FAQ @"http://www.wallabag.org/"
+#define DOC_IOS_HELP @"http://doc.wallabag.org/"
+
+#import "WALSupportHelper.h"
 #import <StoreKit/StoreKit.h>
 #import "WALSettingsTableViewController.h"
 #import "WALSettings.h"
@@ -76,11 +80,11 @@
 	}
 	else if ([identifier isEqualToString:@"InstallationGuide"])
 	{
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://doc.wallabag.org/doku.php?id=users:begin:install"]];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:DOC_INSTALLATION]];
 	}
 	else if ([identifier isEqualToString:@"WallabagFAQ"])
 	{
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.wallabag.org/frequently-asked-questions/"]];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:DOC_FAQ]];
 	}
 	else if ([identifier isEqualToString:@"SupportMail"])
 	{
@@ -159,7 +163,7 @@
 	if (buttonIndex == 1)
 	{
 		//! @todo use iPhone Docu Link!
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://doc.wallabag.org/doku.php?id=ios"]];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:DOC_IOS_HELP]];
 	}
 	
 }
@@ -207,19 +211,7 @@
 {
 	if ([MFMailComposeViewController canSendMail]) {
 		
-		struct utsname systemInfo;
-		uname(&systemInfo);
-		
-		NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-		NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-		NSString *appBuildVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
-		NSString *deviceModel = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
-		NSString *selectedURL = [[self.currentSettings getWallabagURL] absoluteString];
-		NSString *seperator = @"--------------------------------";
-		
-		NSString *message = [NSString stringWithFormat:
-							 @"\n\n%@\nApp: %@\nVersion: %@ (Build: %@)\nDevice Model: %@\niOS: %@\nSelected URL: %@\n%@\n",
-							 seperator, appName, appVersion, appBuildVersion, deviceModel, [[UIDevice currentDevice] systemVersion], selectedURL, seperator];
+		NSString *message = [WALSupportHelper getBodyForSupportMail];
 		
 		MFMailComposeViewController *mailViewController = [[MFMailComposeViewController alloc] init];
 		mailViewController.mailComposeDelegate = self;

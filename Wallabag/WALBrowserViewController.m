@@ -7,6 +7,8 @@
 //
 
 #import "WALBrowserViewController.h"
+#import <ARChromeActivity.h>
+#import <TUSafariActivity.h>
 
 @interface WALBrowserViewController ()
 @property (strong) NSURL *initialUrl;
@@ -21,7 +23,6 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *backToolBarButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *forwardToolbarButton;
 @property (strong) UIPopoverController *activityPopover;
-@property (strong) UIActionSheet *actionSheet;
 @end
 
 @implementation WALBrowserViewController
@@ -62,24 +63,8 @@
 	[self.webView reload];
 }
 
-- (IBAction)shareToolbarButtonPushed:(id)sender
-{
-	if (self.actionSheet)
-	{
-		[self.actionSheet dismissWithClickedButtonIndex:-1 animated:YES];
-		self.actionSheet = nil;
-		return;
-	}
-	
-	///! @todo implement and extend functions
-	self.actionSheet = [[UIActionSheet alloc] initWithTitle:self.webView.request.mainDocumentURL.absoluteString
-															 delegate:self
-													cancelButtonTitle:NSLocalizedString(@"cancel", nil)
-											   destructiveButtonTitle:nil
-													otherButtonTitles:NSLocalizedString(@"Open in Safari", nil), NSLocalizedString(@"Share link", nil), nil];
-	self.actionSheet.tag = 1;
-	
-	[self.actionSheet showFromBarButtonItem:sender animated:true];
+- (IBAction)shareToolbarButtonPushed:(id)sender {
+	[self openShareAndActionsSheet];
 }
 
 - (IBAction)backToolbarButtonPushed:(id)sender
@@ -140,55 +125,41 @@
 
 }
 
-#pragma mark - ActionSheet Delegate
+#pragma mark - Share and Actions
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if (actionSheet.tag == 1)
+- (void) openShareAndActionsSheet {
+	if ([self.activityPopover isPopoverVisible])
 	{
-		//NSLog(@"Pressed Button: %ld", (long)buttonIndex);
-		
-		// Open in Safari
-		if (buttonIndex == 0)
-		{
-			if (self.webView.request.mainDocumentURL)
-				[[UIApplication sharedApplication] openURL:self.webView.request.mainDocumentURL];
-			else
-				[[UIApplication sharedApplication] openURL:self.initialUrl];
-		}
-		// Share link
-		else if (buttonIndex == 1)
-		{
-			if ([self.activityPopover isPopoverVisible])
-			{
-				[self.activityPopover dismissPopoverAnimated:true];
-				return;
-			}
-
-			NSURL *urlToShare;
-			
-			if (self.webView.request.mainDocumentURL)
-				urlToShare = self.webView.request.mainDocumentURL;
-			else
-				urlToShare = self.initialUrl;
-			
-			NSArray* dataToShare = @[self.title, urlToShare];
-			//! @todo add more custom activities
-			UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
-			activityViewController.excludedActivityTypes = @[UIActivityTypeAirDrop];
-
-			if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
-			{
-				self.activityPopover = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
-				[self.activityPopover presentPopoverFromBarButtonItem:self.navigationController.toolbar.items[7] permittedArrowDirections:UIPopoverArrowDirectionUp animated:true];
-			}
-			else
-			{
-				[self presentViewController:activityViewController animated:YES completion:^{}];
-			}
-		}
+		[self.activityPopover dismissPopoverAnimated:true];
+		return;
 	}
-	self.actionSheet = nil;
+	
+	NSURL *urlToShare;
+	
+	if (self.webView.request.mainDocumentURL)
+		urlToShare = self.webView.request.mainDocumentURL;
+	else
+		urlToShare = self.initialUrl;
+	
+	NSArray* dataToShare = @[self.title, urlToShare];
+	
+	//! @todo add more custom activities
+	ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
+	TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
+	NSArray *applicationActivities = @[safariActivity, chromeActivity];
+	
+	UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:applicationActivities];
+	activityViewController.excludedActivityTypes = @[UIActivityTypeAirDrop];
+	
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+	{
+		self.activityPopover = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+		[self.activityPopover presentPopoverFromBarButtonItem:self.navigationController.toolbar.items[7] permittedArrowDirections:UIPopoverArrowDirectionUp animated:true];
+	}
+	else
+	{
+		[self presentViewController:activityViewController animated:YES completion:^{}];
+	}
 }
 
 
