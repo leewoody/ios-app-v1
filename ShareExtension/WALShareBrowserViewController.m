@@ -27,6 +27,8 @@
 	if (self.addUrl && self.settings) {
 		NSURLRequest *request = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:self.addUrl]];
 		[self.webView loadRequest:request];
+	} else {
+		[self cancelWithError:nil];
 	}
 }
 
@@ -58,7 +60,7 @@
 		NSLog(@"Didn't add link yet, retrying.");
 		NSURLRequest *nextTryRequest = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:self.addUrl]];
 		[self.webView loadRequest:nextTryRequest];
-		return NO;
+		//return NO;
 	}
 	return YES;
 }
@@ -76,6 +78,10 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
 	NSLog(@"WebView Error: %@", error.description);
+	
+	/// Ignore often occuring NSURLError -999
+	if (error.code == NSURLErrorCancelled)
+		return;
 	
 	self.view.hidden = NO;
 	self.navigationController.navigationBarHidden = NO;

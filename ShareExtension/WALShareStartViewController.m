@@ -9,6 +9,8 @@
 #import "WALShareStartViewController.h"
 #import "WALShareBrowserViewController.h"
 
+#import <MobileCoreServices/MobileCoreServices.h>
+
 #import "WALSettings.h"
 
 @interface WALShareStartViewController ()<WALShareBrowserDelegate>
@@ -37,19 +39,26 @@
 	
 	self.settings = [WALSettings settingsFromSavedSettings];
 
-
 	NSExtensionItem *item = self.extensionContext.inputItems[0];
-	NSItemProvider *provider = item.attachments[0];
-	[provider loadItemForTypeIdentifier:@"public.url" options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
-		self.addUrl = (NSURL*)item;
-		dispatch_async(dispatch_get_main_queue(), ^{
-			[UIView animateWithDuration:0.25 animations:^{
-				self.statusView.alpha = 1.0;
-			} completion:^(BOOL finished) {
-				[self startBrowserViewController];
+	
+	for (NSItemProvider *provider in item.attachments) {
+		if ([provider hasItemConformingToTypeIdentifier:(NSString*)kUTTypeURL]) {
+			[provider loadItemForTypeIdentifier:(NSString*)kUTTypeURL options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
+				self.addUrl = (NSURL*)item;
+				dispatch_async(dispatch_get_main_queue(), ^{
+					[UIView animateWithDuration:0.25 animations:^{
+						self.statusView.alpha = 1.0;
+					} completion:^(BOOL finished) {
+						[self startBrowserViewController];
+					}];
+				});
 			}];
-		});
-	}];
+			return;
+		}
+	}
+
+	NSLog(@"Didn't find URL!");
+	[self cancelExtension];
 }
 
 - (void)startBrowserViewController {
@@ -66,11 +75,19 @@
 #pragma mark - Extension Exit
 
 - (void)cancelExtension {
-	[self.extensionContext cancelRequestWithError:nil];
+	[UIView animateWithDuration:0.25 animations:^{
+		self.statusView.alpha = 0;
+	} completion:^(BOOL finished) {
+		[self.extensionContext cancelRequestWithError:nil];
+	}];
 }
 
 - (void)closeExtension {
-	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
+	[UIView animateWithDuration:0.25 animations:^{
+		self.statusView.alpha = 0;
+	} completion:^(BOOL finished) {
+		[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
+	}];
 }
 
 #pragma mark - Browser Delegate
@@ -89,7 +106,7 @@
 
 - (void)shareBrowser:(WALShareBrowserViewController *)browser didCancelWithError:(NSError *)error {
 	[self dismissViewControllerAnimated:YES completion:^{
-		[self performSelector:@selector(cancelExtension) withObject:nil afterDelay:2];
+		[self performSelector:@selector(cancelExtension) withObject:nil afterDelay:1.75];
 	}];
 
 	if (error) {
