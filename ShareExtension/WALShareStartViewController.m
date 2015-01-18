@@ -36,7 +36,9 @@
 		self.browserVC.delegate = self;
 		self.browserVC.addUrl = addUrl;
 		self.browserVC.settings = settings;
+
 		UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:self.browserVC];
+		navC.modalPresentationStyle = UIModalPresentationFormSheet;
 		[self presentViewController:navC animated:YES completion:nil];
 	}];
 }

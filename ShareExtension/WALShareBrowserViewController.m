@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	self.view.hidden = YES;
+	self.navigationController.navigationBarHidden = YES;
 	
 	self.title = @"Please Log in";
 	self.webView.delegate = self;
@@ -62,7 +63,12 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
 	NSURLRequest *request = webView.request;
 	NSLog(@"URL Request:\n\tMethod: %@\n\tURL: %@\n\tBody: %@\n\tPathExtension: %@", request.HTTPMethod, request.URL.absoluteString, request.HTTPBody, request.URL.pathExtension);
+
 	self.view.hidden = NO;
+	self.navigationController.navigationBarHidden = NO;
+	if (self.delegate) {
+		[self.delegate shareBrowserNeedsFurtherActions:self];
+	}
 }
 
 @end
