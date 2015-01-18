@@ -31,11 +31,14 @@
 }
 
 - (IBAction)cancelPushed:(id)sender {
-	if (self.delegate) {
-		[self.delegate shareBrowserDidCancel:self];
-	}
+	[self cancelWithError:nil];
 }
 
+- (void)cancelWithError:(NSError*) error {
+	if (self.delegate) {
+		[self.delegate shareBrowser:self didCancelWithError:error];
+	}
+}
 
 #pragma mark - WebViewDelegate
 
@@ -69,6 +72,22 @@
 	if (self.delegate) {
 		[self.delegate shareBrowserNeedsFurtherActions:self];
 	}
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+	NSLog(@"WebView Error: %@", error.description);
+	
+	self.view.hidden = NO;
+	self.navigationController.navigationBarHidden = NO;
+	if (self.delegate) {
+		[self.delegate shareBrowserNeedsFurtherActions:self];
+	}
+	
+	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+	[alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+		[self cancelWithError:error];
+	}]];
+	[self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

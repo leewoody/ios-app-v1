@@ -87,12 +87,16 @@
 - (void)shareBrowserNeedsFurtherActions:(WALShareBrowserViewController *)browser {
 }
 
-- (void)shareBrowserDidCancel:(WALShareBrowserViewController *)browser {
+- (void)shareBrowser:(WALShareBrowserViewController *)browser didCancelWithError:(NSError *)error {
 	[self dismissViewControllerAnimated:YES completion:^{
 		[self performSelector:@selector(cancelExtension) withObject:nil afterDelay:2];
 	}];
 
-	self.statusLabel.text = @"Canceled!";
+	if (error) {
+		self.statusLabel.text = @"Error adding link!";
+	} else {
+		self.statusLabel.text = @"Canceled!";
+	}
 	[self.activityIndicator stopAnimating];
 }
 

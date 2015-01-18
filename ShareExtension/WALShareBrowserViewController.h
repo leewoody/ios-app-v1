@@ -15,7 +15,7 @@
 
 - (void) shareBrowser:(WALShareBrowserViewController*) browser didAddURL:(NSURL*) url;
 - (void) shareBrowserNeedsFurtherActions:(WALShareBrowserViewController*) browser;
-- (void) shareBrowserDidCancel:(WALShareBrowserViewController*) browser;
+- (void) shareBrowser:(WALShareBrowserViewController*) browser didCancelWithError:(NSError *) error;
 
 @end
 
