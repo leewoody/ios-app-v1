@@ -9,22 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <Social/Social.h>
 
-@class  WALShareBrowserViewController;
-
-@protocol WALShareBrowserDelegate <NSObject>
-
-- (void) shareBrowser:(WALShareBrowserViewController*) browser didAddURL:(NSURL*) url;
-- (void) shareBrowserNeedsFurtherActions:(WALShareBrowserViewController*) browser;
-- (void) shareBrowser:(WALShareBrowserViewController*) browser didCancelWithError:(NSError *) error;
-
-@end
-
+@class WALWebViewHelper;
 @class WALSettings;
 
 @interface WALShareBrowserViewController : UIViewController
 
-@property (weak) id<WALShareBrowserDelegate> delegate;
-@property (strong) WALSettings *settings;
-@property (strong) NSURL *addUrl;
+@property (weak) UIWebView *webView;
+@property (strong) WALWebViewHelper *helper;
 
 @end

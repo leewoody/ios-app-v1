@@ -8,12 +8,16 @@
 
 #import "WALShareStartViewController.h"
 #import "WALShareBrowserViewController.h"
+#import "WALWebViewHelper.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
 #import "WALSettings.h"
 
 @interface WALShareStartViewController ()<WALShareBrowserDelegate>
+
+@property (strong) UIWebView *webView;
+@property (strong) WALWebViewHelper *helper;
 
 @property (weak) IBOutlet UIView *statusView;
 @property (weak) IBOutlet UILabel *statusLabel;
@@ -39,13 +43,7 @@
 	
 	self.settings = [WALSettings settingsFromSavedSettings];
 	if (!self.settings) {
-		UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Warning"
-																	   message:@"In order to use the wallabag extension, you have to configure your account inside the wallabag app first."
-																preferredStyle:UIAlertControllerStyleAlert];
-		[alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-			[self cancelExtension];
-		}]];
-		[self presentViewController:alert animated:YES completion:nil];
+		[self showErrorAndCancelExtension:@"In order to use the wallabag extension, you have to configure your account inside the wallabag app first."];
 		return;
 	}
 	
@@ -72,14 +70,16 @@
 }
 
 - (void)startBrowserViewController {
-	self.browserVC = [[UIStoryboard storyboardWithName:@"MainInterface" bundle:nil] instantiateViewControllerWithIdentifier:@"BrowserViewController"];
-	self.browserVC.delegate = self;
-	self.browserVC.addUrl = self.addUrl;
-	self.browserVC.settings = self.settings;
+	self.webView = [[UIWebView alloc] initWithFrame:self.view.frame];
+	self.webView.hidden = YES;
+
+	WALWebViewHelper *helper = [[WALWebViewHelper alloc] init];
+	helper.delegate = self;
+	helper.addUrl = self.addUrl;
+	helper.settings = self.settings;
+	self.helper = helper;
 	
-	UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:self.browserVC];
-	navC.modalPresentationStyle = UIModalPresentationFormSheet;
-	[self presentViewController:navC animated:YES completion:nil];
+	[self.helper startWithWebView:self.webView];
 }
 
 #pragma mark - Extension Exit
@@ -100,31 +100,51 @@
 	}];
 }
 
+- (void)showErrorAndCancelExtension:(NSString*) errorMessage {
+	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Couldn't add link"
+																   message:errorMessage
+															preferredStyle:UIAlertControllerStyleAlert];
+	[alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+		[self cancelExtension];
+	}]];
+	[self presentViewController:alert animated:YES completion:nil];
+
+}
+
 #pragma mark - Browser Delegate
 
 - (void)shareBrowser:(WALShareBrowserViewController *)browser didAddURL:(NSURL *)url {
-	[self dismissViewControllerAnimated:YES completion:^{
-		[self performSelector:@selector(closeExtension) withObject:nil afterDelay:2];
-	}];
-
-	self.statusLabel.text = @"Successfully added link!";
+	[self dismissViewControllerAnimated:YES completion:nil];
+	[self performSelector:@selector(closeExtension) withObject:nil afterDelay:1.75];
 	[self.activityIndicator stopAnimating];
+	
+	self.statusLabel.text = @"Successfully added link!";
 }
 
 - (void)shareBrowserNeedsFurtherActions:(WALShareBrowserViewController *)browser {
+	NSLog(@"Need futher actions");
+	if (self.presentedViewController == nil) {
+		WALShareBrowserViewController *browser = [[UIStoryboard storyboardWithName:@"MainInterface" bundle:nil] instantiateViewControllerWithIdentifier:@"BrowserViewController"];
+		browser.webView = self.webView;
+		browser.helper = self.helper;
+		
+		UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:browser];
+		nav.modalPresentationStyle = UIModalPresentationFormSheet;
+		[self presentViewController:nav animated:YES completion:nil];
+	}
 }
 
 - (void)shareBrowser:(WALShareBrowserViewController *)browser didCancelWithError:(NSError *)error {
-	[self dismissViewControllerAnimated:YES completion:^{
-		[self performSelector:@selector(cancelExtension) withObject:nil afterDelay:1.75];
-	}];
+	[self dismissViewControllerAnimated:YES completion:nil];
+	[self.activityIndicator stopAnimating];
 
 	if (error) {
 		self.statusLabel.text = @"Error adding link!";
+		[self showErrorAndCancelExtension:error.localizedDescription];
 	} else {
 		self.statusLabel.text = @"Canceled!";
+		[self performSelector:@selector(cancelExtension) withObject:nil afterDelay:1.75];
 	}
-	[self.activityIndicator stopAnimating];
 }
 
 @end
