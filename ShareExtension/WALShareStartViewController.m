@@ -38,7 +38,17 @@
 	[super viewDidAppear:animated];
 	
 	self.settings = [WALSettings settingsFromSavedSettings];
-
+	if (!self.settings) {
+		UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Warning"
+																	   message:@"In order to use the wallabag extension, you have to configure your account inside the wallabag app first."
+																preferredStyle:UIAlertControllerStyleAlert];
+		[alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			[self cancelExtension];
+		}]];
+		[self presentViewController:alert animated:YES completion:nil];
+		return;
+	}
+	
 	NSExtensionItem *item = self.extensionContext.inputItems[0];
 	
 	for (NSItemProvider *provider in item.attachments) {
