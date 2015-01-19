@@ -36,6 +36,8 @@
 
 	self.statusView.layer.cornerRadius = 8;
 	self.statusView.alpha = 0;
+	self.statusView.layer.shadowOpacity = 0.3;
+	self.statusView.layer.shadowOffset = CGSizeMake(3.0, 3.0);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -66,7 +68,7 @@
 	}
 
 	NSLog(@"Didn't find URL!");
-	[self cancelExtension];
+	[self showErrorAndCancelExtension:@"Couldn't find a valid link to add."];
 }
 
 - (void)startBrowserViewController {
@@ -124,7 +126,7 @@
 - (void)shareBrowserNeedsFurtherActions:(WALShareBrowserViewController *)browser {
 	NSLog(@"Need futher actions");
 	if (self.presentedViewController == nil) {
-		WALShareBrowserViewController *browser = [[UIStoryboard storyboardWithName:@"MainInterface" bundle:nil] instantiateViewControllerWithIdentifier:@"BrowserViewController"];
+		WALShareBrowserViewController *browser = [[WALShareBrowserViewController alloc] init];
 		browser.webView = self.webView;
 		browser.helper = self.helper;
 		

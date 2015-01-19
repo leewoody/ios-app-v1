@@ -19,8 +19,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2D-Gs-xY1">
                                 <rect key="frame" x="180" y="250" width="240" height="100"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adding Link" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Di5-Uj-h6j">
-                                        <rect key="frame" x="74" y="40" width="92" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adding Link" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Di5-Uj-h6j">
+                                        <rect key="frame" x="8" y="40" width="175" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -34,10 +34,11 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="pOk-0b-pkw" secondAttribute="trailing" constant="12" id="48a-Wf-t1X"/>
                                     <constraint firstAttribute="centerY" secondItem="pOk-0b-pkw" secondAttribute="centerY" id="6je-Ix-y4h"/>
-                                    <constraint firstAttribute="centerX" secondItem="Di5-Uj-h6j" secondAttribute="centerX" id="7Me-sB-wNX"/>
+                                    <constraint firstItem="Di5-Uj-h6j" firstAttribute="leading" secondItem="p2D-Gs-xY1" secondAttribute="leading" constant="8" id="6oa-kQ-HYP"/>
                                     <constraint firstAttribute="width" constant="240" id="FRd-2X-gz1"/>
                                     <constraint firstAttribute="height" constant="100" id="ilu-Q8-Enb"/>
                                     <constraint firstAttribute="centerY" secondItem="Di5-Uj-h6j" secondAttribute="centerY" id="ogl-TS-6g9"/>
+                                    <constraint firstItem="pOk-0b-pkw" firstAttribute="leading" secondItem="Di5-Uj-h6j" secondAttribute="trailing" constant="8" id="vWV-b9-r6U"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -56,32 +57,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rEf-sZ-gxn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1098" y="149"/>
-        </scene>
-        <!--Share Browser View Controller-->
-        <scene sceneID="ceB-am-kn3">
-            <objects>
-                <viewController storyboardIdentifier="BrowserViewController" id="j1y-V4-xli" customClass="WALShareBrowserViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="8bI-gs-bmD"/>
-                        <viewControllerLayoutGuide type="bottom" id="d5i-Ba-RvD"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" contentMode="scaleToFill" id="wbc-yd-nQP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Lva-Rl-h2t">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Cjh-QL-Cfp">
-                            <connections>
-                                <action selector="cancelPushed:" destination="j1y-V4-xli" id="iit-Uq-K06"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CEy-Cv-SGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-378" y="149"/>
         </scene>
     </scenes>
 </document>

@@ -11,7 +11,6 @@
 #import "WALWebViewHelper.h"
 
 @interface WALShareBrowserViewController () <UIWebViewDelegate>
-- (IBAction)cancelPushed:(id)sender;
 @end
 
 @implementation WALShareBrowserViewController
@@ -19,7 +18,9 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	self.title = @"Please Log in";
+	self.title = @"Please Log In";
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPushed:)];
+	
 	self.view = self.webView;
 	self.view.hidden = NO;
 }
