@@ -21,6 +21,8 @@
 
 @property (weak) IBOutlet UIView *statusView;
 @property (weak) IBOutlet UILabel *statusLabel;
+@property (weak) IBOutlet UILabel *statusDone;
+@property (weak) IBOutlet UILabel *statusError;
 @property (weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (strong) WALShareBrowserViewController *browserVC;
@@ -118,9 +120,11 @@
 - (void)shareBrowser:(WALShareBrowserViewController *)browser didAddURL:(NSURL *)url {
 	[self dismissViewControllerAnimated:YES completion:nil];
 	[self performSelector:@selector(closeExtension) withObject:nil afterDelay:1.75];
+
 	[self.activityIndicator stopAnimating];
-	
-	self.statusLabel.text = @"Successfully added link!";
+	self.statusLabel.text = @"Added link.";
+	self.statusDone.hidden = NO;
+	self.statusError.hidden = YES;
 }
 
 - (void)shareBrowserNeedsFurtherActions:(WALShareBrowserViewController *)browser {
@@ -139,6 +143,8 @@
 - (void)shareBrowser:(WALShareBrowserViewController *)browser didCancelWithError:(NSError *)error {
 	[self dismissViewControllerAnimated:YES completion:nil];
 	[self.activityIndicator stopAnimating];
+	self.statusDone.hidden = YES;
+	self.statusError.hidden = NO;
 
 	if (error) {
 		self.statusLabel.text = @"Error adding link!";

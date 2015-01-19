@@ -29,13 +29,37 @@
                                         <rect key="frame" x="191" y="31" width="37" height="37"/>
                                         <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </activityIndicatorView>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Avx-zH-N5R">
+                                        <rect key="frame" x="191" y="32" width="37" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="37" id="StF-cR-z1I"/>
+                                            <constraint firstAttribute="width" constant="37" id="lB5-RT-h0q"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                        <color key="textColor" red="0.46274513010000001" green="0.6784313917" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✗" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uxc-L5-aUd">
+                                        <rect key="frame" x="191" y="32" width="37" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="37" id="Iie-tZ-XjS"/>
+                                            <constraint firstAttribute="width" constant="37" id="bwW-D6-GPJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                        <color key="textColor" red="0.75984534439999996" green="0.0" blue="0.0082450866469999991" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="pOk-0b-pkw" secondAttribute="trailing" constant="12" id="48a-Wf-t1X"/>
+                                    <constraint firstAttribute="centerY" secondItem="Avx-zH-N5R" secondAttribute="centerY" id="5bO-uT-Th4"/>
                                     <constraint firstAttribute="centerY" secondItem="pOk-0b-pkw" secondAttribute="centerY" id="6je-Ix-y4h"/>
                                     <constraint firstItem="Di5-Uj-h6j" firstAttribute="leading" secondItem="p2D-Gs-xY1" secondAttribute="leading" constant="8" id="6oa-kQ-HYP"/>
                                     <constraint firstAttribute="width" constant="240" id="FRd-2X-gz1"/>
+                                    <constraint firstAttribute="trailing" secondItem="Avx-zH-N5R" secondAttribute="trailing" constant="12" id="Ihx-2R-YJi"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uxc-L5-aUd" secondAttribute="trailing" constant="12" id="O6J-3h-6Kn"/>
+                                    <constraint firstAttribute="centerY" secondItem="Uxc-L5-aUd" secondAttribute="centerY" id="Yrs-Vx-qls"/>
                                     <constraint firstAttribute="height" constant="100" id="ilu-Q8-Enb"/>
                                     <constraint firstAttribute="centerY" secondItem="Di5-Uj-h6j" secondAttribute="centerY" id="ogl-TS-6g9"/>
                                     <constraint firstItem="pOk-0b-pkw" firstAttribute="leading" secondItem="Di5-Uj-h6j" secondAttribute="trailing" constant="8" id="vWV-b9-r6U"/>
@@ -50,6 +74,8 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="pOk-0b-pkw" id="0F6-28-fZ3"/>
+                        <outlet property="statusDone" destination="Avx-zH-N5R" id="puj-zz-wqT"/>
+                        <outlet property="statusError" destination="Uxc-L5-aUd" id="g9Z-dA-mYM"/>
                         <outlet property="statusLabel" destination="Di5-Uj-h6j" id="cAz-k4-BGy"/>
                         <outlet property="statusView" destination="p2D-Gs-xY1" id="6jv-bd-tBC"/>
                     </connections>
