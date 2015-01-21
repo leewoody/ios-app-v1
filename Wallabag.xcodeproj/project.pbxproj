@@ -24,6 +24,7 @@
 		F553ED3B1A6ABD6E00B3B612 /* WALShareStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F553ED3A1A6ABD6E00B3B612 /* WALShareStartViewController.m */; };
 		F55546901A6C41970067A310 /* WALArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F555468C1A6C41970067A310 /* WALArticleTableViewCell.m */; };
 		F55546911A6C41970067A310 /* WALSupportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F555468F1A6C41970067A310 /* WALSupportHelper.m */; };
+		F55ED0751A6FF62E00821062 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F55ED0771A6FF62E00821062 /* Localizable.strings */; };
 		F56824CC1983FB8000B8B009 /* WALIcons.m in Sources */ = {isa = PBXBuildFile; fileRef = F56824CB1983FB8000B8B009 /* WALIcons.m */; };
 		F56824D61984291A00B8B009 /* WALSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56824D51984291A00B8B009 /* WALSplitViewController.m */; };
 		F57E644E18BB84AD00587DBD /* article.html in Resources */ = {isa = PBXBuildFile; fileRef = F57E644D18BB84AD00587DBD /* article.html */; };
@@ -124,6 +125,9 @@
 		F555468D1A6C41970067A310 /* WALCrashDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALCrashDataProtocol.h; sourceTree = "<group>"; };
 		F555468E1A6C41970067A310 /* WALSupportHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSupportHelper.h; sourceTree = "<group>"; };
 		F555468F1A6C41970067A310 /* WALSupportHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSupportHelper.m; sourceTree = "<group>"; };
+		F55ED0761A6FF62E00821062 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F55ED0791A6FF65A00821062 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F55ED07A1A6FF7E400821062 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F56824CA1983FB8000B8B009 /* WALIcons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALIcons.h; sourceTree = "<group>"; };
 		F56824CB1983FB8000B8B009 /* WALIcons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALIcons.m; sourceTree = "<group>"; };
 		F56824D41984291A00B8B009 /* WALSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSplitViewController.h; sourceTree = "<group>"; };
@@ -243,10 +247,11 @@
 				F553ED3A1A6ABD6E00B3B612 /* WALShareStartViewController.m */,
 				F53D8EB519D3291C00F313FE /* WALShareBrowserViewController.h */,
 				F53D8EB619D3291C00F313FE /* WALShareBrowserViewController.m */,
-				F53D8EB819D3291C00F313FE /* MainInterface.storyboard */,
-				F53D8EB319D3291B00F313FE /* Supporting Files */,
 				F533CF141A6C33CD004B91C2 /* WALWebViewHelper.h */,
 				F533CF151A6C33CD004B91C2 /* WALWebViewHelper.m */,
+				F53D8EB819D3291C00F313FE /* MainInterface.storyboard */,
+				F53D8EB319D3291B00F313FE /* Supporting Files */,
+				F55ED0771A6FF62E00821062 /* Localizable.strings */,
 			);
 			path = ShareExtension;
 			sourceTree = "<group>";
@@ -551,6 +556,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F53D8EB919D3291C00F313FE /* MainInterface.storyboard in Resources */,
+				F55ED0751A6FF62E00821062 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +705,16 @@
 				F50B895118B7A28400AA9A6C /* Base */,
 				F5E53A411987B5400022B32F /* en */,
 				F5E53A441987B5470022B32F /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F55ED0771A6FF62E00821062 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F55ED0761A6FF62E00821062 /* Base */,
+				F55ED0791A6FF65A00821062 /* de */,
+				F55ED07A1A6FF7E400821062 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

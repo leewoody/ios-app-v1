@@ -35,6 +35,8 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	self.statusLabel.text = NSLocalizedString(@"Adding Link", nil);
 
 	self.statusView.layer.cornerRadius = 8;
 	self.statusView.alpha = 0;
@@ -47,7 +49,7 @@
 	
 	self.settings = [WALSettings settingsFromSavedSettings];
 	if (!self.settings) {
-		[self showErrorAndCancelExtension:@"In order to use the wallabag extension, you have to configure your account inside the wallabag app first."];
+		[self showErrorAndCancelExtension:NSLocalizedString(@"In order to use the wallabag extension, you have to configure your account inside the wallabag app first.", nil)];
 		return;
 	}
 	
@@ -70,7 +72,7 @@
 	}
 
 	NSLog(@"Didn't find URL!");
-	[self showErrorAndCancelExtension:@"Couldn't find a valid link to add."];
+	[self showErrorAndCancelExtension:NSLocalizedString(@"Couldn't find a valid link to add.", nil)];
 }
 
 - (void)startBrowserViewController {
@@ -105,10 +107,10 @@
 }
 
 - (void)showErrorAndCancelExtension:(NSString*) errorMessage {
-	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Couldn't add link"
+	UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Couldn't add link", nil)
 																   message:errorMessage
 															preferredStyle:UIAlertControllerStyleAlert];
-	[alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+	[alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
 		[self cancelExtension];
 	}]];
 	[self presentViewController:alert animated:YES completion:nil];
@@ -122,7 +124,7 @@
 	[self performSelector:@selector(closeExtension) withObject:nil afterDelay:1.75];
 
 	[self.activityIndicator stopAnimating];
-	self.statusLabel.text = @"Added link.";
+	self.statusLabel.text = NSLocalizedString(@"Added link.", nil);
 	self.statusDone.hidden = NO;
 	self.statusError.hidden = YES;
 }
@@ -147,10 +149,10 @@
 	self.statusError.hidden = NO;
 
 	if (error) {
-		self.statusLabel.text = @"Error adding link!";
+		self.statusLabel.text = NSLocalizedString(@"Error adding link!", nil);
 		[self showErrorAndCancelExtension:error.localizedDescription];
 	} else {
-		self.statusLabel.text = @"Canceled!";
+		self.statusLabel.text = NSLocalizedString(@"Canceled!", nil);
 		[self performSelector:@selector(cancelExtension) withObject:nil afterDelay:1.75];
 	}
 }

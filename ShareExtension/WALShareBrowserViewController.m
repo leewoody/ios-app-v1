@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	self.title = @"Please Log In";
+	self.title = NSLocalizedString(@"Please Log In", nil);
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPushed:)];
 	
 	self.view = self.webView;
