@@ -9,9 +9,16 @@
 #import "WALWebViewHelper.h"
 #import "WALSettings.h"
 
+@interface WALWebViewHelper	()
+
+@property unsigned int numberOfTries;
+
+@end
+
 @implementation WALWebViewHelper
 
 - (void)startWithWebView:(UIWebView*) webView {
+	self.numberOfTries = 0;
 	self.webView = webView;
 	self.webView.delegate = self;
 	
@@ -43,10 +50,14 @@
 		}
 		
 	} else if (![url.pathExtension isEqualToString:@"php"]) {
-		NSLog(@"Didn't add link yet, retrying.");
-		NSURLRequest *nextTryRequest = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:self.addUrl]];
-		[self.webView loadRequest:nextTryRequest];
-		//return NO;
+		if (self.numberOfTries++ < 5) {
+			NSLog(@"Didn't add link yet, retrying.");
+			NSURLRequest *nextTryRequest = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:self.addUrl]];
+			[self.webView loadRequest:nextTryRequest];
+		} else {
+			NSLog(@"Too many retrys");
+			[self cancel];
+		}
 	}
 	return YES;
 }
