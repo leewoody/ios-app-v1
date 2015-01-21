@@ -10,9 +10,9 @@
 #define APP_STORE_URI @"itms-apps://itunes.apple.com/us/app/wallabag/id828331015"
 #define APP_STORE_URL @"https://itunes.apple.com/us/app/wallabag/id828331015"
 
-#define DOC_INSTALLATION @"http://doc.wallabag.org/en/Administrator/Download_and_install.html"
-#define DOC_FAQ @"http://www.wallabag.org/"
-#define DOC_IOS_HELP @"http://doc.wallabag.org/"
+#define DOC_INSTALLATION @"http://tiny.cc/wbg-ios-install"
+#define DOC_FAQ @"http://tiny.cc/wbg-ios-faq"
+#define DOC_IOS_HELP @"http://tiny.cc/wbg-ios-conf"
 
 #import "WALSupportHelper.h"
 #import <StoreKit/StoreKit.h>
