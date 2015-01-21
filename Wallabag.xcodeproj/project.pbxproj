@@ -10,13 +10,20 @@
 		27E1E8A6CFAF4E46AF4FDEB0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A4B4E3B48248E3B67A93D8 /* libPods.a */; };
 		F50B3B9B1938F6CA0048EBFD /* WALSettingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F50B3B9A1938F6CA0048EBFD /* WALSettingsTests.m */; };
 		F50B895218B7A28400AA9A6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F50B895018B7A28400AA9A6C /* Localizable.strings */; };
-		F516683219DF32B5009804B9 /* WALArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F516683119DF32B5009804B9 /* WALArticleTableViewCell.m */; };
 		F51B3532199674C3004634EB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F51B3531199674C3004634EB /* Settings.bundle */; };
 		F5259672193E4259003E91A7 /* main-night.css in Resources */ = {isa = PBXBuildFile; fileRef = F5259671193E4259003E91A7 /* main-night.css */; };
 		F5259676193E49EE003E91A7 /* WALTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = F5259675193E49EE003E91A7 /* WALTheme.m */; };
 		F5259679193E4BFC003E91A7 /* WALThemeNight.m in Sources */ = {isa = PBXBuildFile; fileRef = F5259678193E4BFC003E91A7 /* WALThemeNight.m */; };
 		F525967C193E58B1003E91A7 /* WALThemeOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F525967B193E58B1003E91A7 /* WALThemeOrganizer.m */; };
+		F533CF161A6C33CD004B91C2 /* WALWebViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F533CF151A6C33CD004B91C2 /* WALWebViewHelper.m */; };
+		F53D8EB719D3291C00F313FE /* WALShareBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F53D8EB619D3291C00F313FE /* WALShareBrowserViewController.m */; };
+		F53D8EB919D3291C00F313FE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F53D8EB819D3291C00F313FE /* MainInterface.storyboard */; };
+		F53D8EBC19D3291C00F313FE /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F53D8EB119D3291B00F313FE /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F53D8EC319D32D5D00F313FE /* WALSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F59E0CE318B63E2D00744BB1 /* WALSettings.m */; };
 		F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = F54E12F218B4EEDB00E89ED1 /* WALArticle.m */; };
+		F553ED3B1A6ABD6E00B3B612 /* WALShareStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F553ED3A1A6ABD6E00B3B612 /* WALShareStartViewController.m */; };
+		F55546901A6C41970067A310 /* WALArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F555468C1A6C41970067A310 /* WALArticleTableViewCell.m */; };
+		F55546911A6C41970067A310 /* WALSupportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F555468F1A6C41970067A310 /* WALSupportHelper.m */; };
 		F56824CC1983FB8000B8B009 /* WALIcons.m in Sources */ = {isa = PBXBuildFile; fileRef = F56824CB1983FB8000B8B009 /* WALIcons.m */; };
 		F56824D61984291A00B8B009 /* WALSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56824D51984291A00B8B009 /* WALSplitViewController.m */; };
 		F57E644E18BB84AD00587DBD /* article.html in Resources */ = {isa = PBXBuildFile; fileRef = F57E644D18BB84AD00587DBD /* article.html */; };
@@ -32,7 +39,6 @@
 		F5877DAF18B4E02B009D4EFE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877DAE18B4E02B009D4EFE /* XCTest.framework */; };
 		F5877DB018B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
 		F5877DB118B4E02B009D4EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D9018B4E02B009D4EFE /* UIKit.framework */; };
-		F58AA2E719E0767B00204C83 /* WALSupportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F58AA2E619E0767B00204C83 /* WALSupportHelper.m */; };
 		F5905330193B6553005E2A00 /* WALNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F590532F193B6553005E2A00 /* WALNavigationController.m */; };
 		F5905333193B657D005E2A00 /* WALTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5905332193B657D005E2A00 /* WALTableViewController.m */; };
 		F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F59E0CE318B63E2D00744BB1 /* WALSettings.m */; };
@@ -48,6 +54,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F53D8EBA19D3291C00F313FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5877D8118B4E02B009D4EFE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F53D8EB019D3291B00F313FE;
+			remoteInfo = ShareExtension;
+		};
+		F53D8EBD19D3291C00F313FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5877D8118B4E02B009D4EFE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F53D8EB019D3291B00F313FE;
+			remoteInfo = ShareExtension;
+		};
 		F5877DB218B4E02B009D4EFE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F5877D8118B4E02B009D4EFE /* Project object */;
@@ -57,14 +77,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		F53D8EC219D3291C00F313FE /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F53D8EBC19D3291C00F313FE /* ShareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		44A4B4E3B48248E3B67A93D8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		66DE2B00547A8ADA2030FEF9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		90DA96C116713ED6693B7DE3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		5CC61A292E7D53B694EA9156 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		BCDAA79BC97C9DEA5B37C2B1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F50B3B9A1938F6CA0048EBFD /* WALSettingsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettingsTests.m; sourceTree = "<group>"; };
 		F50B895118B7A28400AA9A6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F516683019DF32B5009804B9 /* WALArticleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticleTableViewCell.h; sourceTree = "<group>"; };
-		F516683119DF32B5009804B9 /* WALArticleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticleTableViewCell.m; sourceTree = "<group>"; };
 		F51B3531199674C3004634EB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F5259671193E4259003E91A7 /* main-night.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "main-night.css"; sourceTree = "<group>"; };
 		F5259674193E49EE003E91A7 /* WALTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALTheme.h; sourceTree = "<group>"; };
@@ -74,10 +106,24 @@
 		F525967A193E58B1003E91A7 /* WALThemeOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALThemeOrganizer.h; sourceTree = "<group>"; };
 		F525967B193E58B1003E91A7 /* WALThemeOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALThemeOrganizer.m; sourceTree = "<group>"; };
 		F525967D193E5F17003E91A7 /* WALThemeOrganizerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALThemeOrganizerDelegate.h; sourceTree = "<group>"; };
-		F54DED9F19E9CE7D00786FDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
-		F54DEDA119E9CE9000786FDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		F533CF121A6C1AE4004B91C2 /* Wallabag.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Wallabag.entitlements; sourceTree = "<group>"; };
+		F533CF131A6C1EC8004B91C2 /* ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ShareExtension.entitlements; sourceTree = "<group>"; };
+		F533CF141A6C33CD004B91C2 /* WALWebViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALWebViewHelper.h; sourceTree = "<group>"; };
+		F533CF151A6C33CD004B91C2 /* WALWebViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALWebViewHelper.m; sourceTree = "<group>"; };
+		F53D8EB119D3291B00F313FE /* ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F53D8EB419D3291B00F313FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F53D8EB519D3291C00F313FE /* WALShareBrowserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALShareBrowserViewController.h; sourceTree = "<group>"; };
+		F53D8EB619D3291C00F313FE /* WALShareBrowserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WALShareBrowserViewController.m; sourceTree = "<group>"; };
+		F53D8EB819D3291C00F313FE /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		F54E12F118B4EEDB00E89ED1 /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
 		F54E12F218B4EEDB00E89ED1 /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
+		F553ED391A6ABD6E00B3B612 /* WALShareStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALShareStartViewController.h; sourceTree = "<group>"; };
+		F553ED3A1A6ABD6E00B3B612 /* WALShareStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALShareStartViewController.m; sourceTree = "<group>"; };
+		F555468B1A6C41970067A310 /* WALArticleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticleTableViewCell.h; sourceTree = "<group>"; };
+		F555468C1A6C41970067A310 /* WALArticleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticleTableViewCell.m; sourceTree = "<group>"; };
+		F555468D1A6C41970067A310 /* WALCrashDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALCrashDataProtocol.h; sourceTree = "<group>"; };
+		F555468E1A6C41970067A310 /* WALSupportHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSupportHelper.h; sourceTree = "<group>"; };
+		F555468F1A6C41970067A310 /* WALSupportHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSupportHelper.m; sourceTree = "<group>"; };
 		F56824CA1983FB8000B8B009 /* WALIcons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALIcons.h; sourceTree = "<group>"; };
 		F56824CB1983FB8000B8B009 /* WALIcons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALIcons.m; sourceTree = "<group>"; };
 		F56824D41984291A00B8B009 /* WALSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSplitViewController.h; sourceTree = "<group>"; };
@@ -101,15 +147,12 @@
 		F5877DAD18B4E02B009D4EFE /* WallabagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WallabagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5877DAE18B4E02B009D4EFE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F5877DB618B4E02B009D4EFE /* WallabagTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WallabagTests-Info.plist"; sourceTree = "<group>"; };
-		F58AA2E519E0767B00204C83 /* WALSupportHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSupportHelper.h; sourceTree = "<group>"; };
-		F58AA2E619E0767B00204C83 /* WALSupportHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSupportHelper.m; sourceTree = "<group>"; };
 		F590532E193B6553005E2A00 /* WALNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALNavigationController.h; sourceTree = "<group>"; };
 		F590532F193B6553005E2A00 /* WALNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALNavigationController.m; sourceTree = "<group>"; };
 		F5905331193B657D005E2A00 /* WALTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALTableViewController.h; sourceTree = "<group>"; };
 		F5905332193B657D005E2A00 /* WALTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALTableViewController.m; sourceTree = "<group>"; };
 		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
 		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
-		F5AB23A919EA87C40014983F /* WALCrashDataProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALCrashDataProtocol.h; sourceTree = "<group>"; };
 		F5AF3B3D198672BE00226355 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-iPad.storyboard"; sourceTree = "<group>"; };
 		F5B747561938B87D0071B94C /* WALServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALServerConnection.h; sourceTree = "<group>"; };
 		F5B747571938B87D0071B94C /* WALServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALServerConnection.m; sourceTree = "<group>"; };
@@ -126,6 +169,8 @@
 		F5DA910818B52680006A0B1A /* WALFeedCallbackDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALFeedCallbackDelegate.h; sourceTree = "<group>"; };
 		F5DA910918B56FCE006A0B1A /* main.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = main.css; sourceTree = "<group>"; };
 		F5DA910B18B56FD6006A0B1A /* ratatouille.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = ratatouille.css; sourceTree = "<group>"; };
+		F5E53A3F1987B5400022B32F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		F5E53A401987B5400022B32F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
 		F5E53A411987B5400022B32F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F5E53A421987B5470022B32F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		F5E53A431987B5470022B32F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
@@ -133,6 +178,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F53D8EAE19D3291B00F313FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5877D8618B4E02B009D4EFE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -158,11 +210,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6F3130F41F10896F2656625A /* Pods */ = {
+		08ACA7C86089AC09AC00B56F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				66DE2B00547A8ADA2030FEF9 /* Pods.release.xcconfig */,
-				90DA96C116713ED6693B7DE3 /* Pods.debug.xcconfig */,
+				BCDAA79BC97C9DEA5B37C2B1 /* Pods.debug.xcconfig */,
+				5CC61A292E7D53B694EA9156 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -183,6 +235,30 @@
 			name = Theming;
 			sourceTree = "<group>";
 		};
+		F53D8EB219D3291B00F313FE /* ShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F533CF131A6C1EC8004B91C2 /* ShareExtension.entitlements */,
+				F553ED391A6ABD6E00B3B612 /* WALShareStartViewController.h */,
+				F553ED3A1A6ABD6E00B3B612 /* WALShareStartViewController.m */,
+				F53D8EB519D3291C00F313FE /* WALShareBrowserViewController.h */,
+				F53D8EB619D3291C00F313FE /* WALShareBrowserViewController.m */,
+				F53D8EB819D3291C00F313FE /* MainInterface.storyboard */,
+				F53D8EB319D3291B00F313FE /* Supporting Files */,
+				F533CF141A6C33CD004B91C2 /* WALWebViewHelper.h */,
+				F533CF151A6C33CD004B91C2 /* WALWebViewHelper.m */,
+			);
+			path = ShareExtension;
+			sourceTree = "<group>";
+		};
+		F53D8EB319D3291B00F313FE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F53D8EB419D3291B00F313FE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		F54E12EE18B4EAC000E89ED1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,8 +275,8 @@
 		F54E12EF18B4EAC700E89ED1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F516683019DF32B5009804B9 /* WALArticleTableViewCell.h */,
-				F516683119DF32B5009804B9 /* WALArticleTableViewCell.m */,
+				F555468B1A6C41970067A310 /* WALArticleTableViewCell.h */,
+				F555468C1A6C41970067A310 /* WALArticleTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -224,6 +300,15 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		F55546921A6C41E70067A310 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F555468E1A6C41970067A310 /* WALSupportHelper.h */,
+				F555468F1A6C41970067A310 /* WALSupportHelper.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		F57E644C18BB828B00587DBD /* HTML Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,9 +327,10 @@
 				F5877D9218B4E02B009D4EFE /* Wallabag */,
 				F51B3531199674C3004634EB /* Settings.bundle */,
 				F5877DB418B4E02B009D4EFE /* WallabagTests */,
+				F53D8EB219D3291B00F313FE /* ShareExtension */,
 				F5877D8B18B4E02B009D4EFE /* Frameworks */,
 				F5877D8A18B4E02B009D4EFE /* Products */,
-				6F3130F41F10896F2656625A /* Pods */,
+				08ACA7C86089AC09AC00B56F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -253,6 +339,7 @@
 			children = (
 				F5877D8918B4E02B009D4EFE /* Wallabag.app */,
 				F5877DAD18B4E02B009D4EFE /* WallabagTests.xctest */,
+				F53D8EB119D3291B00F313FE /* ShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,15 +360,16 @@
 		F5877D9218B4E02B009D4EFE /* Wallabag */ = {
 			isa = PBXGroup;
 			children = (
+				F533CF121A6C1AE4004B91C2 /* Wallabag.entitlements */,
+				F55546921A6C41E70067A310 /* Helpers */,
 				F5259673193E48FB003E91A7 /* Theming */,
 				F5AF8ABC18F949D100652EBE /* ServerDataHandler */,
-				F58AA2E819E0770400204C83 /* Helper Classes */,
 				F54E12F018B4EACD00E89ED1 /* Controller */,
 				F54E12EE18B4EAC000E89ED1 /* Model */,
 				F54E12EF18B4EAC700E89ED1 /* View */,
 				F5877D9B18B4E02B009D4EFE /* WALAppDelegate.h */,
 				F5877D9C18B4E02B009D4EFE /* WALAppDelegate.m */,
-				F5AB23A919EA87C40014983F /* WALCrashDataProtocol.h */,
+				F555468D1A6C41970067A310 /* WALCrashDataProtocol.h */,
 				F5877D9E18B4E02B009D4EFE /* Main.storyboard */,
 				F5AF3B3E198672BE00226355 /* Main-iPad.storyboard */,
 				F50B895018B7A28400AA9A6C /* Localizable.strings */,
@@ -319,15 +407,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F58AA2E819E0770400204C83 /* Helper Classes */ = {
-			isa = PBXGroup;
-			children = (
-				F58AA2E519E0767B00204C83 /* WALSupportHelper.h */,
-				F58AA2E619E0767B00204C83 /* WALSupportHelper.m */,
-			);
-			name = "Helper Classes";
-			sourceTree = "<group>";
-		};
 		F590532D193B6528005E2A00 /* BaseClassVCs */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +433,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F53D8EB019D3291B00F313FE /* ShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F53D8EC119D3291C00F313FE /* Build configuration list for PBXNativeTarget "ShareExtension" */;
+			buildPhases = (
+				F53D8EAD19D3291B00F313FE /* Sources */,
+				F53D8EAE19D3291B00F313FE /* Frameworks */,
+				F53D8EAF19D3291B00F313FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShareExtension;
+			productName = ShareExtension;
+			productReference = F53D8EB119D3291B00F313FE /* ShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		F5877D8818B4E02B009D4EFE /* Wallabag */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5877DBE18B4E02B009D4EFE /* Build configuration list for PBXNativeTarget "Wallabag" */;
@@ -364,10 +460,13 @@
 				F5877D8718B4E02B009D4EFE /* Resources */,
 				4559023BD29346DFB89A8D47 /* Copy Pods Resources */,
 				F571E6D019D2FBF800973E2E /* ShellScript */,
+				F53D8EC219D3291C00F313FE /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F53D8EBB19D3291C00F313FE /* PBXTargetDependency */,
+				F53D8EBE19D3291C00F313FE /* PBXTargetDependency */,
 			);
 			name = Wallabag;
 			productName = Wallabag;
@@ -402,8 +501,22 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Wallabag;
 				TargetAttributes = {
+					F53D8EB019D3291B00F313FE = {
+						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = XAGFV7YS86;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					F5877D8818B4E02B009D4EFE = {
 						DevelopmentTeam = XAGFV7YS86;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					F5877DAC18B4E02B009D4EFE = {
 						TestTargetID = F5877D8818B4E02B009D4EFE;
@@ -427,11 +540,20 @@
 			targets = (
 				F5877D8818B4E02B009D4EFE /* Wallabag */,
 				F5877DAC18B4E02B009D4EFE /* WallabagTests */,
+				F53D8EB019D3291B00F313FE /* ShareExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F53D8EAF19D3291B00F313FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F53D8EB919D3291C00F313FE /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5877D8718B4E02B009D4EFE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -504,6 +626,17 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F53D8EAD19D3291B00F313FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F53D8EB719D3291C00F313FE /* WALShareBrowserViewController.m in Sources */,
+				F53D8EC319D32D5D00F313FE /* WALSettings.m in Sources */,
+				F533CF161A6C33CD004B91C2 /* WALWebViewHelper.m in Sources */,
+				F553ED3B1A6ABD6E00B3B612 /* WALShareStartViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5877D8518B4E02B009D4EFE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -514,7 +647,7 @@
 				F5877DA618B4E02B009D4EFE /* WALArticleViewController.m in Sources */,
 				F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */,
 				F56824CC1983FB8000B8B009 /* WALIcons.m in Sources */,
-				F58AA2E719E0767B00204C83 /* WALSupportHelper.m in Sources */,
+				F55546911A6C41970067A310 /* WALSupportHelper.m in Sources */,
 				F5905330193B6553005E2A00 /* WALNavigationController.m in Sources */,
 				F525967C193E58B1003E91A7 /* WALThemeOrganizer.m in Sources */,
 				F5B7475B1938BAAF0071B94C /* WALArticleList.m in Sources */,
@@ -526,7 +659,7 @@
 				F5C9FB5C18BBB8E000083FB3 /* WALBrowserViewController.m in Sources */,
 				F5DA910418B51FE8006A0B1A /* WALSettingsTableViewController.m in Sources */,
 				F5905333193B657D005E2A00 /* WALTableViewController.m in Sources */,
-				F516683219DF32B5009804B9 /* WALArticleTableViewCell.m in Sources */,
+				F55546901A6C41970067A310 /* WALArticleTableViewCell.m in Sources */,
 				F5877DA318B4E02B009D4EFE /* WALFeedTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,6 +675,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F53D8EBB19D3291C00F313FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F53D8EB019D3291B00F313FE /* ShareExtension */;
+			targetProxy = F53D8EBA19D3291C00F313FE /* PBXContainerItemProxy */;
+		};
+		F53D8EBE19D3291C00F313FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F53D8EB019D3291B00F313FE /* ShareExtension */;
+			targetProxy = F53D8EBD19D3291C00F313FE /* PBXContainerItemProxy */;
+		};
 		F5877DB318B4E02B009D4EFE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F5877D8818B4E02B009D4EFE /* Wallabag */;
@@ -564,8 +707,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F5877D9F18B4E02B009D4EFE /* Base */,
+				F5E53A3F1987B5400022B32F /* en */,
 				F5E53A421987B5470022B32F /* de */,
-				F54DEDA119E9CE9000786FDB /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -574,8 +717,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F5AF3B3D198672BE00226355 /* Base */,
+				F5E53A401987B5400022B32F /* en */,
 				F5E53A431987B5470022B32F /* de */,
-				F54DED9F19E9CE7D00786FDB /* en */,
 			);
 			name = "Main-iPad.storyboard";
 			sourceTree = "<group>";
@@ -583,6 +726,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		F53D8EBF19D3291C00F313FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		F53D8EC019D3291C00F313FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		F5877DBC18B4E02B009D4EFE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -655,10 +838,11 @@
 		};
 		F5877DBF18B4E02B009D4EFE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 90DA96C116713ED6693B7DE3 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = BCDAA79BC97C9DEA5B37C2B1 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Wallabag/Wallabag.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -674,10 +858,11 @@
 		};
 		F5877DC018B4E02B009D4EFE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66DE2B00547A8ADA2030FEF9 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 5CC61A292E7D53B694EA9156 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Wallabag/Wallabag.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -734,6 +919,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F53D8EC119D3291C00F313FE /* Build configuration list for PBXNativeTarget "ShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F53D8EBF19D3291C00F313FE /* Debug */,
+				F53D8EC019D3291C00F313FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F5877D8418B4E02B009D4EFE /* Build configuration list for PBXProject "Wallabag" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
