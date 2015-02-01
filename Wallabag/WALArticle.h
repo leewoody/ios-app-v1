@@ -1,27 +1,25 @@
 //
-//  WALArticle.h
+//  Wallabag.h
 //  Wallabag
 //
-//  Created by Kevin Meyer on 19.02.14.
-//  Copyright (c) 2014 Wallabag. All rights reserved.
+//  Created by Kevin Meyer on 31/01/15.
+//  Copyright (c) 2015 Wallabag. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#import <RestKit/RestKit.h>
 
-@interface WALArticle : NSObject <NSCoding>
+@interface WALArticle : NSManagedObject
 
-- (void) setDateWithString:(NSString*) string;
-- (NSString*) getDateString;
+@property (nonatomic, retain) NSNumber * articleID;
+@property (nonatomic, retain) NSString * content;
+@property (nonatomic, retain) NSNumber * isFavorite;
+@property (nonatomic, retain) NSNumber * isRead;
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * url;
 
-- (void) setContent:(NSString*) content;
-- (NSString*) getContent;
-
-- (void) removeArticleFromCache;
-
-@property (strong) NSString* title;
-@property (strong) NSURL* link;
-@property (strong) NSURL* source;
-@property (strong) NSDate* date;
-@property BOOL archive;
++ (RKEntityMapping*)responseEntityMappingInManagedObjectStore:(RKManagedObjectStore*) managedObjectStore;
++ (RKEntityMapping*)requestEntityMappingForPOSTInManagedObjectStore:(RKManagedObjectStore*) managedObjectStore;
 
 @end

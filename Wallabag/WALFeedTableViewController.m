@@ -13,25 +13,16 @@
 #import "WALNavigationController.h"
 #import "WALArticleTableViewCell.h"
 
-#import "WALServerConnection.h"
 #import "WALThemeOrganizer.h"
 #import "WALTheme.h"
 #import "WALIcons.h"
 
 #import "WALArticle.h"
-#import "WALArticleList.h"
 #import "WALSettings.h"
-
-#import <AFNetworking/AFHTTPRequestOperationManager.h>
 
 @interface WALFeedTableViewController ()
 
-@property (strong) WALArticleList *articleList;
-@property (strong) WALArticleList *articleListFavorite;
-@property (strong) WALArticleList *articleListArchive;
-
 @property (strong) WALSettings* settings;
-@property BOOL showAllArticles;
 - (IBAction)actionsButtonPushed:(id)sender;
 
 @property (strong) UIActionSheet* actionSheet;
@@ -42,10 +33,11 @@
 
 @implementation WALFeedTableViewController
 
-- (void)awakeFromNib
-{
-	self.showAllArticles = NO;
-		
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	
+	self.managedObjectContext = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
+	
 	WALThemeOrganizer *themeOrganizer = [WALThemeOrganizer sharedThemeOrganizer];
 	[self updateWithTheme:[themeOrganizer getCurrentTheme]];
 	[themeOrganizer subscribeToThemeChanges:self];
@@ -54,18 +46,14 @@
 	[self.refreshControl addTarget:self action:@selector(triggeredRefreshControl) forControlEvents:UIControlEventValueChanged];
 	[super awakeFromNib];
 	
-	self.articleList = [[WALArticleList alloc] initAsType:WALArticleListTypeUnread];
-	[self.articleList loadArticlesFromDisk];
-
 	self.settings = [WALSettings settingsFromSavedSettings];
-	[self updateArticleList];
 	
-	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && [self.articleList getNumberOfUnreadArticles] > 0)
-	{
-		NSIndexPath *firstCellIndex = [NSIndexPath indexPathForRow:0 inSection:0];
-		[self performSegueWithIdentifier:@"PushToArticle" sender:[self.tableView cellForRowAtIndexPath:firstCellIndex]];
-		[self.tableView selectRowAtIndexPath:firstCellIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
-	}
+//	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && [self.articleList getNumberOfUnreadArticles] > 0)
+//	{
+//		NSIndexPath *firstCellIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+//		[self performSegueWithIdentifier:@"PushToArticle" sender:[self.tableView cellForRowAtIndexPath:firstCellIndex]];
+//		[self.tableView selectRowAtIndexPath:firstCellIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
+//	}
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -83,9 +71,8 @@
 	[self.navigationController setToolbarHidden:animated];
 }
 
-- (void)triggeredRefreshControl
-{
-	[self updateArticleList];
+- (void)triggeredRefreshControl {
+	[self updateFeedFromServer:nil];
 }
 
 #pragma mark -
@@ -93,97 +80,72 @@
 - (IBAction)headerSegmentedControlValueDidChange:(id)sender {
 	UISegmentedControl *control = (UISegmentedControl*) sender;
 
-	WALArticleList *list = [self getCurrentArticleList];
-	
-	if (!list) {
-		if (control.selectedSegmentIndex == 1) {
-			self.articleListFavorite = [[WALArticleList alloc] initAsType:WALArticleListTypeFavorites];
-		} else if (control.selectedSegmentIndex == 2) {
-			self.articleListArchive = [[WALArticleList alloc] initAsType:WALArticleListTypeArchive];
-		}
-
-		list = [self getCurrentArticleList];
-		[list loadArticlesFromDisk];
-		[self updateArticleList];
-	}
+//	WALArticleList *list = [self getCurrentArticleList];
+//	
+//	if (!list) {
+//		if (control.selectedSegmentIndex == 1) {
+//			self.articleListFavorite = [[WALArticleList alloc] initAsType:WALArticleListTypeFavorites];
+//		} else if (control.selectedSegmentIndex == 2) {
+//			self.articleListArchive = [[WALArticleList alloc] initAsType:WALArticleListTypeArchive];
+//		}
+//
+//		list = [self getCurrentArticleList];
+//		[list loadArticlesFromDisk];
+//		[self updateArticleList];
+//	}
 	
 	[self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
 	[self.tableView reloadData];
 }
 
-- (WALArticleList*)getCurrentArticleList {
-	if (self.headerSegmentedControl.selectedSegmentIndex == 2) {
-		return self.articleListArchive;
-	} else if (self.headerSegmentedControl.selectedSegmentIndex == 1) {
-		return self.articleListFavorite;
+- (void)updateFeedFromServer:(id)sender {
+	if (!self.refreshControl.isRefreshing) {
+		[self.refreshControl beginRefreshing];
 	}
 	
-	return self.articleList;
-}
-
-- (void)updateArticleList
-{
-	if (!self.settings)
-	{
+	[[RKObjectManager sharedManager] getObjectsAtPathForRouteNamed:@"articles" object:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+		NSError *error;
+		if (![[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext saveToPersistentStore:nil]) {
+			NSLog(@"Error storing: %@", error);
+		}
 		[self.refreshControl endRefreshing];
-		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-		[self performSegueWithIdentifier:@"ModalToSettings" sender:self];
-		return;
-	}
-	
-	WALServerConnection *server = [[WALServerConnection alloc] init];
-	WALArticleList *currentValidArticleList = [self getCurrentArticleList];
-	[server loadArticlesOfListType:[currentValidArticleList getListType] withSettings:self.settings OldArticleList:currentValidArticleList delegate:self];
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-	[self.refreshControl beginRefreshing];
+	} failure:^(RKObjectRequestOperation *operation, NSError *error) {
+		[self informUserConnectionError:error];
+		[self.refreshControl endRefreshing];
+	}];
 }
 
 #pragma mark - Table View
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-	return 1;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	return [[self.fetchedResultsController sections] count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-	WALArticleList *articleList = [self getCurrentArticleList];
-	
-	if (self.showAllArticles)
-		return [articleList getNumberOfAllArticles];
-	
-	return [articleList getNumberOfUnreadArticles];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+	return [sectionInfo numberOfObjects];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	WALArticleList *articleList = [self getCurrentArticleList];
-	
-	WALArticle *currentArticle;
-	if (self.showAllArticles)
-		currentArticle = [articleList getArticleAtIndex:indexPath.row];
-	else
-		currentArticle = [articleList getUnreadArticleAtIndex:indexPath.row];
-	
-	WALTheme *currentTheme = [[WALThemeOrganizer sharedThemeOrganizer] getCurrentTheme];
-	
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WALArticleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleCell" forIndexPath:indexPath];
-	cell.titleLabel.text = currentArticle.title;
-	cell.titleLabel.textColor = [currentTheme getTextColor];
-	cell.detailLabel.text = currentArticle.link.host;
-	cell.detailLabel.textColor = [currentTheme getTintColor];
-	cell.backgroundColor = [currentTheme getBackgroundColor];
-	
+	[self configureCell:cell atIndexPath:indexPath];
 	return cell;
+}
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+	WALArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	
+	WALArticleTableViewCell *articleCell = (WALArticleTableViewCell*)cell;
+	articleCell.titleLabel.text = article.title;
+	articleCell.detailLabel.text = article.url;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	WALArticleList *articleList = [self getCurrentArticleList];
+	WALArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
-	
 	CGFloat constantHeight = 15.0f + 8.0f;
-	NSString *cellTitle = self.showAllArticles ? [articleList getArticleAtIndex:indexPath.row].title : [articleList getUnreadArticleAtIndex:indexPath.row].title;
+	NSString *cellTitle = article.title;
 	CGFloat tableWidth = floor(tableView.bounds.size.width);
 	CGSize maximumLabelSize = CGSizeMake(tableWidth - (15.0f + 12.0f + 33.0f), FLT_MAX);
 	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
@@ -196,6 +158,101 @@
 													   context:nil];
 
 	return constantHeight + ceil(expectedLabelSize.size.height);
+}
+
+#pragma mark - CoreData
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+	if (_fetchedResultsController != nil) {
+		return _fetchedResultsController;
+	}
+	
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	// Edit the entity name as appropriate.
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Article" inManagedObjectContext:self.managedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	// Set the batch size to a suitable number.
+	[fetchRequest setFetchBatchSize:20];
+	
+	// Set Unread
+	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(isRead = NO)"];
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"articleID" ascending:YES];
+	NSArray *sortDescriptors = @[sortDescriptor];
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+	// Edit the section name key path and cache name if appropriate.
+	// nil for section name key path means "no sections".
+	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
+	aFetchedResultsController.delegate = self;
+	self.fetchedResultsController = aFetchedResultsController;
+	
+	NSError *error = nil;
+	if (![self.fetchedResultsController performFetch:&error]) {
+		// Replace this implementation with code to handle the error appropriately.
+		// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+	}
+	
+	return _fetchedResultsController;
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+	[self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+		   atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+	switch(type) {
+		case NSFetchedResultsChangeInsert:
+			[self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+			
+		case NSFetchedResultsChangeDelete:
+			[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+			
+		default:
+			return;
+	}
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+	   atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+	  newIndexPath:(NSIndexPath *)newIndexPath
+{
+	UITableView *tableView = self.tableView;
+	
+	switch(type) {
+		case NSFetchedResultsChangeInsert:
+			[tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+			
+		case NSFetchedResultsChangeDelete:
+			[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+			
+		case NSFetchedResultsChangeUpdate:
+			[self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+			break;
+			
+		case NSFetchedResultsChangeMove:
+			[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			[tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+	}
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+	[self.tableView endUpdates];
 }
 
 #pragma mark - Theming
@@ -220,14 +277,8 @@
     if ([[segue identifier] isEqualToString:@"PushToArticle"])
 	{
 		NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-		WALArticleList *articleList = [self getCurrentArticleList];
-		
-		WALArticle *articleToSet;
-		if (self.showAllArticles)
-			articleToSet = [articleList getArticleAtIndex:indexPath.row];
-		else
-			articleToSet = [articleList getUnreadArticleAtIndex:indexPath.row];
-		
+
+		WALArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
 		WALArticleViewController *articleVC;
 		
 		if ([segue.destinationViewController isKindOfClass:[UINavigationController class]])
@@ -238,7 +289,7 @@
 		else
 			articleVC = (WALArticleViewController*) segue.destinationViewController;
 			
-		[articleVC setDetailArticle:articleToSet];
+		[articleVC setDetailArticle:article];
 		
 		[[self.tableView cellForRowAtIndexPath:indexPath] setSelected:false animated:TRUE];
 	}
@@ -270,12 +321,6 @@
 		
 		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Add Article", nil)];
 		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Change Theme", nil)];
-		
-		if (self.showAllArticles)
-			[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show unread Articles", nil)];
-		else
-			[self.actionSheet addButtonWithTitle:NSLocalizedString(@"Show all Articles", nil)];
-		
 		[self.actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", nil)];
 		
 		[self.actionSheet setCancelButtonIndex:3];
@@ -292,15 +337,6 @@
 			[self actionsChangeThemePushed];
 		}]];
 		
-		if (self.showAllArticles)
-			[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Show unread Articles", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-				[self actionsShowArticlesPushed];
-			}]];
-		else
-			[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Show all Articles", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-				[self actionsShowArticlesPushed];
-			}]];
-		
 		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
 		
 		UIPopoverPresentationController *popoverController = alertController.popoverPresentationController;
@@ -313,19 +349,12 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if (actionSheet.tag == 1)
-	{
-		if (buttonIndex == 0)
-		{
+	if (actionSheet.tag == 1) {
+		if (buttonIndex == 0) {
 			[self actionsAddArticlePushed];
 		}
-		else if (buttonIndex == 1)
-		{
+		else if (buttonIndex == 1) {
 			[self actionsChangeThemePushed];
-		}
-		else if (buttonIndex == 2)
-		{
-			[self actionsShowArticlesPushed];
 		}
 	}
 	self.actionSheet = nil;
@@ -340,56 +369,11 @@
 	[themeOrganizer changeTheme];
 }
 
-- (void) actionsShowArticlesPushed {
-	self.showAllArticles = !self.showAllArticles;
-	[self.tableView reloadData];
-}
-
 - (void) showAddArticleViewController {
 	[self performSegueWithIdentifier:@"ModalToAddArticle" sender:self];
 }
 
 #pragma mark - Callback Delegates
-
-- (void)serverConnection:(WALServerConnection *)connection didFinishWithArticleList:(WALArticleList *)articleList
-{
-	switch ([articleList getListType]) {
-		case WALArticleListTypeUnread:
-			[self.articleList deleteCachedArticles];
-			self.articleList = articleList;
-			[self.articleList saveArticlesFromDisk];
-			[self.articleList updateUnreadArticles];
-			break;
-			
-		case WALArticleListTypeFavorites:
-			[self.articleListFavorite deleteCachedArticles];
-			self.articleListFavorite = articleList;
-			[self.articleListFavorite saveArticlesFromDisk];
-			[self.articleListFavorite updateUnreadArticles];
-			break;
-			
-		case WALArticleListTypeArchive:
-			[self.articleListArchive deleteCachedArticles];
-			self.articleListArchive = articleList;
-			[self.articleListArchive saveArticlesFromDisk];
-			[self.articleListArchive updateUnreadArticles];
-			break;
-	}
-	
-	
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	[self.refreshControl endRefreshing];
-	
-	[self.tableView reloadData];
-}
-
-- (void)serverConnection:(WALServerConnection *)connection didFinishWithError:(NSError *)error
-{
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	[self.refreshControl endRefreshing];
-	
-	[self informUserConnectionError:error];
-}
 
 - (void)settingsController:(WALSettingsTableViewController *)settingsTableViewController didFinishWithSettings:(WALSettings*)settings
 {
@@ -397,7 +381,7 @@
 	{
 		self.settings = settings;
 		[settings saveSettings];
-		[self updateArticleList];
+//		[self updateArticleList];
 	}
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];
 }
@@ -405,80 +389,29 @@
 - (void)addArticleController:(WALAddArticleTableViewController *)addArticleController didFinishWithURL:(NSURL *)url
 {
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];
-	
-	if (url)
-	{
-		NSURL *myUrl = [self.settings getURLToAddArticle:url];
-		if ([[UIApplication sharedApplication] canOpenURL:myUrl])
-			[[UIApplication sharedApplication] openURL:myUrl];
+	if (url){
+		NSEntityDescription *entity = [NSEntityDescription entityForName:@"Article" inManagedObjectContext:self.managedObjectContext];
+		WALArticle *newArticle = [[WALArticle alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
+		newArticle.url = url.absoluteString;
+		
+		[[RKObjectManager sharedManager] postObject:newArticle path:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+			NSLog(@"Added Article");
+		} failure:^(RKObjectRequestOperation *operation, NSError *error) {
+			NSLog(@"Error adding Article: %@", error);
+			[self informUserConnectionError:error];
+		}];
 	}
 }
 
 #pragma mark - Error Handling
 
-- (void) informUserConnectionError:(NSError*) error
-{
+- (void) informUserConnectionError:(NSError*) error {
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
 														message:error.localizedDescription
 													   delegate:nil
 											  cancelButtonTitle:@"OK"
 											  otherButtonTitles: nil];
 	[alertView show];
-}
-
-- (void) informUserWrongServerAddress
-{
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-														message:NSLocalizedString(@"Could not connect to server. Maybe wrong URL?", @"error description: HTTP Status Code not 2xx")
-													   delegate:nil
-											  cancelButtonTitle:@"OK"
-											  otherButtonTitles: nil];
-	[alertView show];
-}
-
-- (void) informUserWrongAuthentication
-{
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-														message:NSLocalizedString(@"Could load feed. Maybe wrong user credentials?", @"error description: response is not a rss feed")
-													   delegate:nil
-											  cancelButtonTitle:@"OK"
-											  otherButtonTitles: nil];
-	[alertView show];
-}
-
-- (void) informUserNoArticlesInFeed
-{
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-														message:NSLocalizedString(@"No unread article in Feed. Get started by adding links to your wallabag.", @"error description: No article in home-feed")
-													   delegate:nil
-											  cancelButtonTitle:@"OK"
-											  otherButtonTitles: nil];
-	[alertView show];
-}
-
-#pragma mark - Miscellaneous
-
-- (UIImage *)getWallabagTitleImageWithColor:(UIColor*) color
-{
-	if (SYSTEM_VERSION_LESS_THAN(@"7.0"))
-		return [self ipMaskedImageNamed:@"NavigationBarItem" color:[UIColor whiteColor]];
-	
-	return [self ipMaskedImageNamed:@"NavigationBarItem" color:color];
-}
-
-- (UIImage *)ipMaskedImageNamed:(NSString *)name color:(UIColor *)color
-{
-    UIImage *image = [UIImage imageNamed:name];
-    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
-    UIGraphicsBeginImageContextWithOptions(rect.size, NO, image.scale);
-    CGContextRef c = UIGraphicsGetCurrentContext();
-    [image drawInRect:rect];
-    CGContextSetFillColorWithColor(c, [color CGColor]);
-    CGContextSetBlendMode(c, kCGBlendModeSourceAtop);
-    CGContextFillRect(c, rect);
-    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return result;
 }
 
 @end

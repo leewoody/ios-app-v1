@@ -20,11 +20,12 @@
 		F53D8EB919D3291C00F313FE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F53D8EB819D3291C00F313FE /* MainInterface.storyboard */; };
 		F53D8EBC19D3291C00F313FE /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F53D8EB119D3291B00F313FE /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F53D8EC319D32D5D00F313FE /* WALSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F59E0CE318B63E2D00744BB1 /* WALSettings.m */; };
-		F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = F54E12F218B4EEDB00E89ED1 /* WALArticle.m */; };
 		F553ED3B1A6ABD6E00B3B612 /* WALShareStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F553ED3A1A6ABD6E00B3B612 /* WALShareStartViewController.m */; };
 		F55546901A6C41970067A310 /* WALArticleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F555468C1A6C41970067A310 /* WALArticleTableViewCell.m */; };
 		F55546911A6C41970067A310 /* WALSupportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F555468F1A6C41970067A310 /* WALSupportHelper.m */; };
 		F55ED0751A6FF62E00821062 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F55ED0771A6FF62E00821062 /* Localizable.strings */; };
+		F55EED4C1A7D8C700005E19D /* wallabag.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = F55EED4B1A7D8C700005E19D /* wallabag.xcdatamodel */; };
+		F55EED521A7D90480005E19D /* WALArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = F55EED511A7D90480005E19D /* WALArticle.m */; };
 		F56824CC1983FB8000B8B009 /* WALIcons.m in Sources */ = {isa = PBXBuildFile; fileRef = F56824CB1983FB8000B8B009 /* WALIcons.m */; };
 		F56824D61984291A00B8B009 /* WALSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56824D51984291A00B8B009 /* WALSplitViewController.m */; };
 		F57E644E18BB84AD00587DBD /* article.html in Resources */ = {isa = PBXBuildFile; fileRef = F57E644D18BB84AD00587DBD /* article.html */; };
@@ -44,8 +45,6 @@
 		F5905333193B657D005E2A00 /* WALTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5905332193B657D005E2A00 /* WALTableViewController.m */; };
 		F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F59E0CE318B63E2D00744BB1 /* WALSettings.m */; };
 		F5AF3B3C198672BE00226355 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5AF3B3E198672BE00226355 /* Main-iPad.storyboard */; };
-		F5B747581938B87D0071B94C /* WALServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B747571938B87D0071B94C /* WALServerConnection.m */; };
-		F5B7475B1938BAAF0071B94C /* WALArticleList.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B7475A1938BAAF0071B94C /* WALArticleList.m */; };
 		F5C48A3218B793A100E76807 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C48A3118B793A100E76807 /* MessageUI.framework */; };
 		F5C9FB5C18BBB8E000083FB3 /* WALBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C9FB5B18BBB8E000083FB3 /* WALBrowserViewController.m */; };
 		F5DA910418B51FE8006A0B1A /* WALSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DA910318B51FE8006A0B1A /* WALSettingsTableViewController.m */; };
@@ -116,8 +115,6 @@
 		F53D8EB519D3291C00F313FE /* WALShareBrowserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALShareBrowserViewController.h; sourceTree = "<group>"; };
 		F53D8EB619D3291C00F313FE /* WALShareBrowserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WALShareBrowserViewController.m; sourceTree = "<group>"; };
 		F53D8EB819D3291C00F313FE /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
-		F54E12F118B4EEDB00E89ED1 /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
-		F54E12F218B4EEDB00E89ED1 /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
 		F553ED391A6ABD6E00B3B612 /* WALShareStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALShareStartViewController.h; sourceTree = "<group>"; };
 		F553ED3A1A6ABD6E00B3B612 /* WALShareStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALShareStartViewController.m; sourceTree = "<group>"; };
 		F555468B1A6C41970067A310 /* WALArticleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticleTableViewCell.h; sourceTree = "<group>"; };
@@ -128,6 +125,9 @@
 		F55ED0761A6FF62E00821062 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F55ED0791A6FF65A00821062 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F55ED07A1A6FF7E400821062 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F55EED4B1A7D8C700005E19D /* wallabag.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = wallabag.xcdatamodel; sourceTree = "<group>"; };
+		F55EED501A7D90480005E19D /* WALArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticle.h; sourceTree = "<group>"; };
+		F55EED511A7D90480005E19D /* WALArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticle.m; sourceTree = "<group>"; };
 		F56824CA1983FB8000B8B009 /* WALIcons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALIcons.h; sourceTree = "<group>"; };
 		F56824CB1983FB8000B8B009 /* WALIcons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALIcons.m; sourceTree = "<group>"; };
 		F56824D41984291A00B8B009 /* WALSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSplitViewController.h; sourceTree = "<group>"; };
@@ -158,11 +158,6 @@
 		F59E0CE218B63E2D00744BB1 /* WALSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettings.h; sourceTree = "<group>"; };
 		F59E0CE318B63E2D00744BB1 /* WALSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettings.m; sourceTree = "<group>"; };
 		F5AF3B3D198672BE00226355 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-iPad.storyboard"; sourceTree = "<group>"; };
-		F5B747561938B87D0071B94C /* WALServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALServerConnection.h; sourceTree = "<group>"; };
-		F5B747571938B87D0071B94C /* WALServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALServerConnection.m; sourceTree = "<group>"; };
-		F5B747591938BAAF0071B94C /* WALArticleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALArticleList.h; sourceTree = "<group>"; };
-		F5B7475A1938BAAF0071B94C /* WALArticleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALArticleList.m; sourceTree = "<group>"; };
-		F5B7475C1938C6400071B94C /* WALServerConnectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WALServerConnectionDelegate.h; sourceTree = "<group>"; };
 		F5C48A3118B793A100E76807 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F5C9FB5A18BBB8E000083FB3 /* WALBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALBrowserViewController.h; sourceTree = "<group>"; };
 		F5C9FB5B18BBB8E000083FB3 /* WALBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALBrowserViewController.m; sourceTree = "<group>"; };
@@ -267,12 +262,11 @@
 		F54E12EE18B4EAC000E89ED1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F5B747591938BAAF0071B94C /* WALArticleList.h */,
-				F5B7475A1938BAAF0071B94C /* WALArticleList.m */,
-				F54E12F118B4EEDB00E89ED1 /* WALArticle.h */,
-				F54E12F218B4EEDB00E89ED1 /* WALArticle.m */,
+				F55EED4B1A7D8C700005E19D /* wallabag.xcdatamodel */,
 				F59E0CE218B63E2D00744BB1 /* WALSettings.h */,
 				F59E0CE318B63E2D00744BB1 /* WALSettings.m */,
+				F55EED501A7D90480005E19D /* WALArticle.h */,
+				F55EED511A7D90480005E19D /* WALArticle.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -368,7 +362,6 @@
 				F533CF121A6C1AE4004B91C2 /* Wallabag.entitlements */,
 				F55546921A6C41E70067A310 /* Helpers */,
 				F5259673193E48FB003E91A7 /* Theming */,
-				F5AF8ABC18F949D100652EBE /* ServerDataHandler */,
 				F54E12F018B4EACD00E89ED1 /* Controller */,
 				F54E12EE18B4EAC000E89ED1 /* Model */,
 				F54E12EF18B4EAC700E89ED1 /* View */,
@@ -423,16 +416,6 @@
 				F56824D51984291A00B8B009 /* WALSplitViewController.m */,
 			);
 			name = BaseClassVCs;
-			sourceTree = "<group>";
-		};
-		F5AF8ABC18F949D100652EBE /* ServerDataHandler */ = {
-			isa = PBXGroup;
-			children = (
-				F5B747561938B87D0071B94C /* WALServerConnection.h */,
-				F5B747571938B87D0071B94C /* WALServerConnection.m */,
-				F5B7475C1938C6400071B94C /* WALServerConnectionDelegate.h */,
-			);
-			name = ServerDataHandler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -648,23 +631,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5259676193E49EE003E91A7 /* WALTheme.m in Sources */,
+				F55EED4C1A7D8C700005E19D /* wallabag.xcdatamodel in Sources */,
 				F5877D9918B4E02B009D4EFE /* main.m in Sources */,
 				F5877D9D18B4E02B009D4EFE /* WALAppDelegate.m in Sources */,
 				F5877DA618B4E02B009D4EFE /* WALArticleViewController.m in Sources */,
-				F54E12F318B4EEDB00E89ED1 /* WALArticle.m in Sources */,
 				F56824CC1983FB8000B8B009 /* WALIcons.m in Sources */,
 				F55546911A6C41970067A310 /* WALSupportHelper.m in Sources */,
 				F5905330193B6553005E2A00 /* WALNavigationController.m in Sources */,
 				F525967C193E58B1003E91A7 /* WALThemeOrganizer.m in Sources */,
-				F5B7475B1938BAAF0071B94C /* WALArticleList.m in Sources */,
 				F5DA910718B52002006A0B1A /* WALAddArticleTableViewController.m in Sources */,
 				F56824D61984291A00B8B009 /* WALSplitViewController.m in Sources */,
-				F5B747581938B87D0071B94C /* WALServerConnection.m in Sources */,
 				F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */,
 				F5259679193E4BFC003E91A7 /* WALThemeNight.m in Sources */,
 				F5C9FB5C18BBB8E000083FB3 /* WALBrowserViewController.m in Sources */,
 				F5DA910418B51FE8006A0B1A /* WALSettingsTableViewController.m in Sources */,
 				F5905333193B657D005E2A00 /* WALTableViewController.m in Sources */,
+				F55EED521A7D90480005E19D /* WALArticle.m in Sources */,
 				F55546901A6C41970067A310 /* WALArticleTableViewCell.m in Sources */,
 				F5877DA318B4E02B009D4EFE /* WALFeedTableViewController.m in Sources */,
 			);

@@ -59,7 +59,7 @@
 
 - (void) updateButtons
 {
-	if (self.article.archive)
+	if (self.article.isRead)
 		[self.markAsReadButton setImage:[WALIcons imageOfToolbarRead]];
 	else
 		[self.markAsReadButton setImage:[WALIcons imageOfToolbarUnread]];
@@ -83,7 +83,7 @@
 	NSURL *extraCSSFile = [currentTheme getPathtoExtraCSSFile];
 	
 	NSString *htmlFormat = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"article" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
-	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, mainCSSFile, extraCSSFile, self.article.title, originalTitle, self.article.link, self.article.link.host,  [self.article getContent]];
+	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, mainCSSFile, extraCSSFile, self.article.title, originalTitle, self.article.url, self.article.url,  self.article.content];
 	
 	[self.webView loadHTMLString:htmlToDisplay baseURL:nil];
 }
@@ -151,7 +151,7 @@
 {
 	//! @todo inform user (one time) that this won't affect his online wallabag.
 	
-	self.article.archive = !self.article.archive;
+	self.article.isRead = [NSNumber numberWithBool:![self.article.isRead boolValue]];
 	[self updateButtons];
 }
 
@@ -171,7 +171,7 @@
 	if (!self.article)
 		return;
 	
-	NSArray* dataToShare = @[self.article.title, self.article.link];
+	NSArray* dataToShare = @[self.article.title, self.article.url];
 	//! @todo add more custom activities
 	
 	ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];

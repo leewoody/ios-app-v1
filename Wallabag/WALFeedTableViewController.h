@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 #import "WALFeedCallbackDelegate.h"
-#import "WALServerConnectionDelegate.h"
 #import "WALThemeOrganizerDelegate.h"
 
-@interface WALFeedTableViewController : UITableViewController <WALFeedCallbackDelegate, WALServerConnectionDelegate, WALThemeOrganizerDelegate, UIActionSheetDelegate>
+@interface WALFeedTableViewController : UITableViewController <WALFeedCallbackDelegate, WALThemeOrganizerDelegate, UIActionSheetDelegate, NSFetchedResultsControllerDelegate>
+
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

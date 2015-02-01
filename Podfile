@@ -1,6 +1,5 @@
 platform :ios, '7.0'
-pod 'AFNetworking', '~> 2.0'
-pod 'TBXML', '~> 1.5'
+pod 'RestKit', '~> 0.20.0'
 pod 'PLCrashReporter', '1.2-rc5'
 pod 'ARChromeActivity', '~> 1.0'
 pod 'TUSafariActivity', '~> 1.0.1'
