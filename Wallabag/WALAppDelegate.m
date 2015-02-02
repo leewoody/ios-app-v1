@@ -30,6 +30,7 @@
 	//RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
 	
 	[self initializeCoreDataAndRestKit];
+	[self updateRestKitWithNewSettings];
 	
 	PLCrashReporter *reporter = [PLCrashReporter sharedReporter];
 	if ([reporter hasPendingCrashReport]) {
@@ -102,15 +103,20 @@
 	
 	// Set the default store shared instance
 	[RKManagedObjectStore setDefaultStore:managedObjectStore];
-	
-	[self initializeSharedObjectManager];
 }
 
-- (void)initializeSharedObjectManager {
+- (void)updateRestKitWithNewSettings {
+	WALSettings *settings = [WALSettings settingsFromSavedSettings];
+	if (settings && [settings getWallabagURL]) {
+		[self initializeSharedObjectManagerWithWallabagBaseURL:[settings getWallabagURL]];
+	}
+}
+
+- (void)initializeSharedObjectManagerWithWallabagBaseURL:(NSURL*) wallabagURL {
 	RKManagedObjectStore *managedObjectStore = [RKManagedObjectStore defaultStore];
 	
 	// Configure the object manager
-	RKObjectManager *objectManager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:@"http://v2.wallabag.org/"]];
+	RKObjectManager *objectManager = [RKObjectManager managerWithBaseURL:wallabagURL];
 	objectManager.managedObjectStore = managedObjectStore;
 	objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
 	[RKObjectManager setSharedManager:objectManager];

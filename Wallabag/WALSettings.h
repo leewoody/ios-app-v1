@@ -16,13 +16,4 @@
 - (void) setWallabagURL:(NSURL*) url;
 - (NSURL*) getWallabagURL;
 
-- (NSURL*) getHomeFeedURL;
-- (NSURL*) getFavoriteFeedURL;
-- (NSURL*) getArchiveFeedURL;
-
-- (NSURL*) getURLToAddArticle:(NSURL*) articleURL;
-
-@property NSInteger userID;
-@property (strong) NSString *apiToken;
-
 @end

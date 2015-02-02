@@ -13,5 +13,6 @@
 @interface WALAppDelegate : UIResponder <UIApplicationDelegate, UISplitViewControllerDelegate, UIPopoverControllerDelegate, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+- (void)updateRestKitWithNewSettings;
 
 @end

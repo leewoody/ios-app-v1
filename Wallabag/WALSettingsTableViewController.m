@@ -50,11 +50,9 @@
 {
 	[super viewDidLoad];
 	
-	if ([self.currentSettings getWallabagURL] && self.currentSettings.apiToken)
+	if ([self.currentSettings getWallabagURL])
 	{
 		self.urlTextField.text = [[self.currentSettings getWallabagURL] absoluteString];
-		self.userIDTextField.text = [NSString stringWithFormat:@"%ld", (long)self.currentSettings.userID];
-		self.apiTokenTextField.text = self.currentSettings.apiToken;
 	}
 	[self updateDoneButton];
 }
@@ -172,7 +170,7 @@
 
 - (void) updateDoneButton
 {
-	BOOL disabled = [self.urlTextField.text isEqualToString:@""] || [self.apiTokenTextField.text isEqualToString:@""] || [self.urlTextField.text isEqualToString:@""];
+	BOOL disabled = [self.urlTextField.text isEqualToString:@""] || [NSURL URLWithString:self.urlTextField.text] == nil;
 	
 	[self.navigationItem.rightBarButtonItem setEnabled:!disabled];
 }
@@ -185,8 +183,6 @@
 - (IBAction)doneButtonPushed:(id)sender
 {
 	self.currentSettings.wallabagURL = [NSURL URLWithString:self.urlTextField.text];
-	self.currentSettings.apiToken = self.apiTokenTextField.text;
-	self.currentSettings.userID = [self.userIDTextField.text integerValue];
 	
 	[self.delegate settingsController:self didFinishWithSettings:self.currentSettings];
 }

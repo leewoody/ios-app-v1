@@ -22,8 +22,8 @@
 	self.webView = webView;
 	self.webView.delegate = self;
 	
-	NSURLRequest *nextTryRequest = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:self.addUrl]];
-	[self.webView loadRequest:nextTryRequest];	
+//	NSURLRequest *nextTryRequest = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:self.addUrl]];
+//	[self.webView loadRequest:nextTryRequest];	
 }
 
 - (void)cancelWithError:(NSError*) error {
@@ -52,8 +52,8 @@
 	} else if (![url.pathExtension isEqualToString:@"php"]) {
 		if (self.numberOfTries++ < 5) {
 			NSLog(@"Didn't add link yet, retrying.");
-			NSURLRequest *nextTryRequest = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:self.addUrl]];
-			[self.webView loadRequest:nextTryRequest];
+//			NSURLRequest *nextTryRequest = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:self.addUrl]];
+//			[self.webView loadRequest:nextTryRequest];
 		} else {
 			NSLog(@"Too many retrys");
 			[self cancel];

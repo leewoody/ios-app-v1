@@ -12,6 +12,7 @@
 #import "WALAddArticleTableViewController.h"
 #import "WALNavigationController.h"
 #import "WALArticleTableViewCell.h"
+#import "WALAppDelegate.h"
 
 #import "WALThemeOrganizer.h"
 #import "WALTheme.h"
@@ -72,7 +73,7 @@
 }
 
 - (void)triggeredRefreshControl {
-	[self updateFeedFromServer:nil];
+	[self updateFeedFromServer];
 }
 
 #pragma mark -
@@ -98,7 +99,7 @@
 	[self.tableView reloadData];
 }
 
-- (void)updateFeedFromServer:(id)sender {
+- (void)updateFeedFromServer {
 	if (!self.refreshControl.isRefreshing) {
 		[self.refreshControl beginRefreshing];
 	}
@@ -377,11 +378,11 @@
 
 - (void)settingsController:(WALSettingsTableViewController *)settingsTableViewController didFinishWithSettings:(WALSettings*)settings
 {
-	if (settings)
-	{
+	if (settings) {
 		self.settings = settings;
 		[settings saveSettings];
-//		[self updateArticleList];
+		[((WALAppDelegate *)[UIApplication sharedApplication].delegate) updateRestKitWithNewSettings];
+		[self updateFeedFromServer];
 	}
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];
 }
