@@ -1,5 +1,7 @@
 platform :ios, '7.0'
 pod 'RestKit', '~> 0.20.0'
+pod 'RKTBXMLSerialization', :path => './RKTBXMLSerialization/'
+
 pod 'PLCrashReporter', '1.2-rc5'
 pod 'ARChromeActivity', '~> 1.0'
 pod 'TUSafariActivity', '~> 1.0.1'

@@ -17,7 +17,13 @@ PODS:
   - RestKit/ObjectMapping (0.20.3)
   - RestKit/Support (0.20.3):
     - TransitionKit (= 1.1.1)
+  - RKTBXMLSerialization (0.20.0):
+    - RestKit (>= 0.20.0dev)
+    - TBXML+NSDictionary (>= 0.0.1)
   - SOCKit (1.1)
+  - TBXML (1.5)
+  - TBXML+NSDictionary (0.0.1):
+    - TBXML (~> 1.5.0)
   - TransitionKit (1.1.1)
   - TUSafariActivity (1.0.2)
 
@@ -25,14 +31,22 @@ DEPENDENCIES:
   - ARChromeActivity (~> 1.0)
   - PLCrashReporter (= 1.2-rc5)
   - RestKit (~> 0.20.0)
+  - RKTBXMLSerialization (from `./RKTBXMLSerialization/`)
   - TUSafariActivity (~> 1.0.1)
+
+EXTERNAL SOURCES:
+  RKTBXMLSerialization:
+    :path: ./RKTBXMLSerialization/
 
 SPEC CHECKSUMS:
   AFNetworking: 80c4e0652b08eb34e25b9c0ff3c82556fe5967b4
   ARChromeActivity: d8471d0f78b7fcc1de57929cfc1751b3a7f58bad
   PLCrashReporter: 979cd3c5bda33655f4df58fa6219d067183d7a7e
   RestKit: 7f9490e709ee745e166c4d2aa7a8d132831275b0
+  RKTBXMLSerialization: 630c9e05ea07dc8f57526982babb9994b26dd100
   SOCKit: d8d0dd3688ae1026c12367570da8fa8e1a6980fb
+  TBXML: a279440030ba55c40e1455cafba3b0a44e1963d4
+  TBXML+NSDictionary: 6aa4eaaa1bf1c5b817f1b3d0420c87d5a659551d
   TransitionKit: b573f93c422f6aedf7d40e93e7c2f202d1295063
   TUSafariActivity: 63c6b0584d1f0a731e955c0e4d9c89cde63bedc2
 
