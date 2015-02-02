@@ -121,16 +121,14 @@
 	objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
 	[RKObjectManager setSharedManager:objectManager];
 	
-	
-	RKResponseDescriptor *responseDescriptorList = [RKResponseDescriptor responseDescriptorWithMapping:[WALArticle responseEntityMappingInManagedObjectStore:managedObjectStore] method:RKRequestMethodGET | RKRequestMethodPOST pathPattern:@"api/entries" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-	[objectManager addResponseDescriptor:responseDescriptorList];
-	
-	RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:[WALArticle responseEntityMappingInManagedObjectStore:managedObjectStore] method:RKRequestMethodGET | RKRequestMethodPATCH pathPattern:@"api/entries/:articleID" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-	[objectManager addResponseDescriptor:responseDescriptor];
-	
-	RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[WALArticle requestEntityMappingForPOSTInManagedObjectStore:managedObjectStore] objectClass:[WALArticle class] rootKeyPath:nil method:RKRequestMethodPOST];
-	[objectManager addRequestDescriptor:requestDescriptor];
-	
+	// WALArticle Response Descriptors
+	[objectManager addResponseDescriptor:[RKResponseDescriptor responseDescriptorWithMapping:[WALArticle responseEntityMappingInManagedObjectStore:managedObjectStore] method:RKRequestMethodGET | RKRequestMethodPOST pathPattern:@"api/entries" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)]];
+	[objectManager addResponseDescriptor:[RKResponseDescriptor responseDescriptorWithMapping:[WALArticle responseEntityMappingInManagedObjectStore:managedObjectStore] method:RKRequestMethodGET | RKRequestMethodPATCH pathPattern:@"api/entries/:articleID" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)]];
+
+	// WALArticle Request Descriptors
+	[objectManager addRequestDescriptor:[RKRequestDescriptor requestDescriptorWithMapping:[WALArticle requestMappingForPOST] objectClass:[WALArticle class] rootKeyPath:nil method:RKRequestMethodPOST]];
+	[objectManager addRequestDescriptor:[RKRequestDescriptor requestDescriptorWithMapping:[WALArticle requestMappingForPATCH] objectClass:[WALArticle class] rootKeyPath:nil method:RKRequestMethodPATCH]];
+
 	[objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[WALArticle class] pathPattern:@"api/entries/:articleID" method:RKRequestMethodGET]];
 	[objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[WALArticle class] pathPattern:@"api/entries" method:RKRequestMethodPOST]];
 	[objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[WALArticle class] pathPattern:@"api/entries/:articleID" method:RKRequestMethodPATCH]];

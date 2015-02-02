@@ -18,26 +18,29 @@
 @dynamic title;
 @dynamic url;
 
-#pragma mark - RestKit EntityMapping
+#pragma mark - RestKit Mappings
 
 + (RKEntityMapping *)responseEntityMappingInManagedObjectStore:(RKManagedObjectStore *)managedObjectStore {
 	RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:@"Article" inManagedObjectStore:managedObjectStore];
-	[entityMapping addAttributeMappingsFromDictionary:@{
-														@"id":             @"articleID",
-														@"title":          @"title",
-														@"url":            @"url",
-														@"is_read":		   @"isRead",
-														@"is_fav":         @"isFavorite",
-														@"content":        @"content"}];
+	[entityMapping addAttributeMappingsFromDictionary:@{@"id":		@"articleID",
+														@"title":	@"title",
+														@"url":		@"url",
+														@"is_read": @"isRead",
+														@"is_fav":	@"isFavorite",
+														@"content": @"content"}];
 	entityMapping.identificationAttributes = @[@"articleID"];
 	return entityMapping;
 }
 
-+ (RKEntityMapping *)requestEntityMappingForPOSTInManagedObjectStore:(RKManagedObjectStore *)managedObjectStore {
-	NSArray *postParameters = @[@"url", @"title"];
-	RKEntityMapping *entityMapping = [[self responseEntityMappingInManagedObjectStore:managedObjectStore] inverseMappingWithPropertyMappingsPassingTest:^BOOL(RKPropertyMapping *propertyMapping) {
-		return [postParameters indexOfObject:propertyMapping.sourceKeyPath] != NSNotFound;
-	}];
++ (RKObjectMapping *)requestMappingForPOST {
+	RKObjectMapping *entityMapping = [RKObjectMapping requestMapping];
+	[entityMapping addAttributeMappingsFromArray:@[@"url", @"title"]];
+	return entityMapping;
+}
+
++ (RKObjectMapping *)requestMappingForPATCH {
+	RKObjectMapping *entityMapping = [RKObjectMapping requestMapping];
+	[entityMapping addAttributeMappingsFromDictionary:@{@"isRead": @"is_read", @"isFavorite": @"is_fav"}];
 	return entityMapping;
 }
 

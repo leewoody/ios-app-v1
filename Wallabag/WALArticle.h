@@ -19,7 +19,8 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * url;
 
-+ (RKEntityMapping*)responseEntityMappingInManagedObjectStore:(RKManagedObjectStore*) managedObjectStore;
-+ (RKEntityMapping*)requestEntityMappingForPOSTInManagedObjectStore:(RKManagedObjectStore*) managedObjectStore;
++ (RKEntityMapping *)responseEntityMappingInManagedObjectStore:(RKManagedObjectStore *) managedObjectStore;
++ (RKObjectMapping *)requestMappingForPOST;
++ (RKObjectMapping *)requestMappingForPATCH;
 
 @end
