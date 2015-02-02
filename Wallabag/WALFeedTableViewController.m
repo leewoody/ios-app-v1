@@ -80,23 +80,7 @@
 
 - (IBAction)headerSegmentedControlValueDidChange:(id)sender {
 	UISegmentedControl *control = (UISegmentedControl*) sender;
-
-//	WALArticleList *list = [self getCurrentArticleList];
-//	
-//	if (!list) {
-//		if (control.selectedSegmentIndex == 1) {
-//			self.articleListFavorite = [[WALArticleList alloc] initAsType:WALArticleListTypeFavorites];
-//		} else if (control.selectedSegmentIndex == 2) {
-//			self.articleListArchive = [[WALArticleList alloc] initAsType:WALArticleListTypeArchive];
-//		}
-//
-//		list = [self getCurrentArticleList];
-//		[list loadArticlesFromDisk];
-//		[self updateArticleList];
-//	}
-	
-	[self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-	[self.tableView reloadData];
+	[self updateFetchRequestWithFeedNumber:control.selectedSegmentIndex];
 }
 
 - (void)updateFeedFromServer {
@@ -161,7 +145,7 @@
 	return constantHeight + ceil(expectedLabelSize.size.height);
 }
 
-#pragma mark - CoreData
+#pragma mark - Core Data: FetchedResultsController
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
@@ -177,11 +161,11 @@
 	// Set the batch size to a suitable number.
 	[fetchRequest setFetchBatchSize:20];
 	
-	// Set Unread
-	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(isRead = NO)"];
+	// Set Predicate
+	fetchRequest.predicate = [self getPredicateForFeedWithNumber:0];
 	
 	// Edit the sort key as appropriate.
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"articleID" ascending:YES];
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"articleID" ascending:NO];
 	NSArray *sortDescriptors = @[sortDescriptor];
 	
 	[fetchRequest setSortDescriptors:sortDescriptors];
@@ -199,8 +183,36 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}
-	
 	return _fetchedResultsController;
+}
+
+- (void)updateFetchRequestWithFeedNumber:(NSInteger) feedNumber {
+	[NSFetchedResultsController deleteCacheWithName:self.fetchedResultsController.cacheName];
+	self.fetchedResultsController.fetchRequest.predicate = [self getPredicateForFeedWithNumber:feedNumber];
+
+	NSError *error = nil;
+	if (![self.fetchedResultsController performFetch:&error]) {
+		// Replace this implementation with code to handle the error appropriately.
+		// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+	}
+	[self.tableView reloadData];
+}
+
+- (NSPredicate *)getPredicateForFeedWithNumber:(NSInteger) feedNumber {
+	NSPredicate *feedPredicate = nil;
+	if (feedNumber == 1) {
+		// Feed: Faved
+		feedPredicate = [NSPredicate predicateWithFormat:@"(isFavorite = YES)"];
+	} else if (feedNumber == 2) {
+		// Feed: Archive
+		feedPredicate = [NSPredicate predicateWithFormat:@"(isRead = YES)"];
+	} else {
+		// Feed: Unread
+		feedPredicate = [NSPredicate predicateWithFormat:@"(isRead = NO)"];
+	}
+	return feedPredicate;
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
@@ -394,6 +406,7 @@
 		NSEntityDescription *entity = [NSEntityDescription entityForName:@"Article" inManagedObjectContext:self.managedObjectContext];
 		WALArticle *newArticle = [[WALArticle alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
 		newArticle.url = url.absoluteString;
+		newArticle.title = @"Adding Article";
 		
 		[[RKObjectManager sharedManager] postObject:newArticle path:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
 			NSLog(@"Added Article");
