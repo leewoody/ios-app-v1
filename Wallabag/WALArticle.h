@@ -23,4 +23,6 @@
 + (RKObjectMapping *)requestMappingForPOST;
 + (RKObjectMapping *)requestMappingForPATCH;
 
++ (RKEntityMapping *)responseEntityMappingForXMLFeedInManagedObjectStore:(RKManagedObjectStore *) managedObjectStore;
+
 @end

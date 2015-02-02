@@ -1,5 +1,6 @@
 platform :ios, '7.0'
-pod 'RestKit', '~> 0.20.0'
+pod 'RestKit', '~> 0.24'
+
 pod 'RKTBXMLSerialization', :path => './RKTBXMLSerialization/'
 
 pod 'PLCrashReporter', '1.2-rc5'

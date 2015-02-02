@@ -47,6 +47,7 @@
 		F5AF3B3C198672BE00226355 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5AF3B3E198672BE00226355 /* Main-iPad.storyboard */; };
 		F5C48A3218B793A100E76807 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C48A3118B793A100E76807 /* MessageUI.framework */; };
 		F5C9FB5C18BBB8E000083FB3 /* WALBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C9FB5B18BBB8E000083FB3 /* WALBrowserViewController.m */; };
+		F5D24D721A801F300071F35D /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D24D711A801F300071F35D /* NSString+HTML.m */; };
 		F5DA910418B51FE8006A0B1A /* WALSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DA910318B51FE8006A0B1A /* WALSettingsTableViewController.m */; };
 		F5DA910718B52002006A0B1A /* WALAddArticleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DA910618B52002006A0B1A /* WALAddArticleTableViewController.m */; };
 		F5DA910A18B56FCE006A0B1A /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = F5DA910918B56FCE006A0B1A /* main.css */; };
@@ -161,6 +162,8 @@
 		F5C48A3118B793A100E76807 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F5C9FB5A18BBB8E000083FB3 /* WALBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALBrowserViewController.h; sourceTree = "<group>"; };
 		F5C9FB5B18BBB8E000083FB3 /* WALBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALBrowserViewController.m; sourceTree = "<group>"; };
+		F5D24D701A801F300071F35D /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		F5D24D711A801F300071F35D /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
 		F5DA910218B51FE8006A0B1A /* WALSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALSettingsTableViewController.h; sourceTree = "<group>"; };
 		F5DA910318B51FE8006A0B1A /* WALSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSettingsTableViewController.m; sourceTree = "<group>"; };
 		F5DA910518B52002006A0B1A /* WALAddArticleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALAddArticleTableViewController.h; sourceTree = "<group>"; };
@@ -304,6 +307,8 @@
 			children = (
 				F555468E1A6C41970067A310 /* WALSupportHelper.h */,
 				F555468F1A6C41970067A310 /* WALSupportHelper.m */,
+				F5D24D701A801F300071F35D /* NSString+HTML.h */,
+				F5D24D711A801F300071F35D /* NSString+HTML.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -632,6 +637,7 @@
 			files = (
 				F5259676193E49EE003E91A7 /* WALTheme.m in Sources */,
 				F55EED4C1A7D8C700005E19D /* wallabag.xcdatamodel in Sources */,
+				F5D24D721A801F300071F35D /* NSString+HTML.m in Sources */,
 				F5877D9918B4E02B009D4EFE /* main.m in Sources */,
 				F5877D9D18B4E02B009D4EFE /* WALAppDelegate.m in Sources */,
 				F5877DA618B4E02B009D4EFE /* WALArticleViewController.m in Sources */,

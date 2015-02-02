@@ -88,9 +88,9 @@
 		[self.refreshControl beginRefreshing];
 	}
 	
-	[[RKObjectManager sharedManager] getObjectsAtPathForRouteNamed:@"articles" object:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+	[[RKObjectManager sharedManager] getObjectsAtPath:@"" parameters:@{@"feed": [NSNull null], @"type": @"home", @"user_id": @"2", @"token": @"i11FbSBeC34bwTM"} success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
 		NSError *error;
-		if (![[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext saveToPersistentStore:nil]) {
+		if (![[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext saveToPersistentStore:&error]) {
 			NSLog(@"Error storing: %@", error);
 		}
 		[self.refreshControl endRefreshing];

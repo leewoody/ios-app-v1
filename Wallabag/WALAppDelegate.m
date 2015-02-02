@@ -14,6 +14,7 @@
 #import "WALCrashDataProtocol.h"
 
 #import <RestKit/RestKit.h>
+#import <RKTBXMLSerialization/RKTBXMLSerialization.h>
 
 #import <PLCrashReporter/PLCrashReporter.h>
 #import <PLCrashReporter/PLCrashReport.h>
@@ -103,6 +104,10 @@
 	
 	// Set the default store shared instance
 	[RKManagedObjectStore setDefaultStore:managedObjectStore];
+	
+	// Register TBXML Support
+	[RKMIMETypeSerialization registerClass:[RKTBXMLSerialization class] forMIMEType:@"application/xml"];
+	[RKMIMETypeSerialization registerClass:[RKTBXMLSerialization class] forMIMEType:@"text/xml"];
 }
 
 - (void)updateRestKitWithNewSettings {
@@ -136,6 +141,8 @@
 	
 	[objectManager.router.routeSet addRoute:[RKRoute routeWithName:@"articles" pathPattern:@"api/entries" method:RKRequestMethodGET]];
 	[objectManager addFetchRequestBlock:^NSFetchRequest *(NSURL *URL) {
+		return nil;
+		
 		RKPathMatcher *pathMatcher = [RKPathMatcher pathMatcherWithPattern:@"api/entries"];
 		
 		NSDictionary *argsDict = nil;
@@ -149,6 +156,8 @@
 		
 		return nil;
 	}];
+	
+	[objectManager addResponseDescriptor:[RKResponseDescriptor responseDescriptorWithMapping:[WALArticle responseEntityMappingForXMLFeedInManagedObjectStore:managedObjectStore] method:RKRequestMethodAny pathPattern:nil keyPath:@"rss.channel.item" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)]];
 }
 
 - (NSURL *)applicationDocumentsDirectory {
