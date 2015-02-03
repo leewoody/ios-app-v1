@@ -122,7 +122,7 @@
 	
 	WALArticleTableViewCell *articleCell = (WALArticleTableViewCell*)cell;
 	articleCell.titleLabel.text = article.title;
-	articleCell.detailLabel.text = article.url;
+	articleCell.detailLabel.text = article.url.host;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -405,7 +405,7 @@
 	if (url){
 		NSEntityDescription *entity = [NSEntityDescription entityForName:@"Article" inManagedObjectContext:self.managedObjectContext];
 		WALArticle *newArticle = [[WALArticle alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
-		newArticle.url = url.absoluteString;
+		newArticle.url = url;
 		newArticle.title = @"Adding Article";
 		
 		[[RKObjectManager sharedManager] postObject:newArticle path:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {

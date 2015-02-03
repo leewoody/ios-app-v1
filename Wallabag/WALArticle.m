@@ -18,6 +18,22 @@
 @dynamic title;
 @dynamic url;
 
+#pragma mark -
+
+- (NSURL *)url {
+	[self willAccessValueForKey:@"url"];
+	NSString *urlString = [self primitiveValueForKey:@"url"];
+	[self didAccessValueForKey:@"url"];
+
+	return [NSURL URLWithString:urlString];
+}
+
+- (void)setUrl:(NSURL *)url {
+	[self willChangeValueForKey:@"url"];
+	[self setPrimitiveValue:url.absoluteString forKey:@"url"];
+	[self didChangeValueForKey:@"url"];
+}
+
 #pragma mark - RestKit Mappings
 
 + (RKEntityMapping *)responseEntityMappingInManagedObjectStore:(RKManagedObjectStore *)managedObjectStore {
@@ -46,7 +62,7 @@
 
 + (RKEntityMapping *)responseEntityMappingForXMLFeedInManagedObjectStore:(RKManagedObjectStore *)managedObjectStore {
 	RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:@"Article" inManagedObjectStore:managedObjectStore];
-	[entityMapping addAttributeMappingsFromDictionary:@{@"link": @"url",
+	[entityMapping addAttributeMappingsFromDictionary:@{
 														//@"@metadata.mapping.collectionIndex": @"articleID"
 														}];
 
@@ -57,6 +73,18 @@
 		RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSString class], error);
 
 		*outputValue = [(NSString *)inputValue stringByHtmlUnescapingString];
+		return YES;
+	}];
+
+	RKValueTransformer *unescapeURLTransformer = [RKBlockValueTransformer valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass, __unsafe_unretained Class outputValueClass) {
+		return ([inputValueClass isSubclassOfClass:[NSString class]] && [outputValueClass isSubclassOfClass:[NSURL class]]);
+	} transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue, __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+		RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSString class], error);
+		RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSURL class], error);
+		
+		NSString *urlString = [(NSString *)inputValue stringByHtmlUnescapingString];
+		*outputValue = [NSURL URLWithString:urlString];
+
 		return YES;
 	}];
 	
@@ -88,11 +116,14 @@
 	RKAttributeMapping *contentMapping = [RKAttributeMapping attributeMappingFromKeyPath:@"description" toKeyPath:@"content"];
 	contentMapping.valueTransformer = unescapeStringTransformer;
 	
+	RKAttributeMapping *urlMapping = [RKAttributeMapping attributeMappingFromKeyPath:@"link" toKeyPath:@"url"];
+	urlMapping.valueTransformer = unescapeURLTransformer;
+	
 	RKAttributeMapping *articleIDMapping = [RKAttributeMapping attributeMappingFromKeyPath:@"source.url" toKeyPath:@"articleID"];
 	articleIDMapping.valueTransformer = extractIDFromURL;
 	
-	[entityMapping addAttributeMappingsFromArray:@[titleMapping, contentMapping, articleIDMapping]];
-	entityMapping.identificationAttributes = @[@"url"];
+	[entityMapping addAttributeMappingsFromArray:@[titleMapping, urlMapping, contentMapping, articleIDMapping]];
+	entityMapping.identificationAttributes = @[@"articleID"];
 	return entityMapping;
 }
 

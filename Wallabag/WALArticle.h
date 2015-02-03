@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSNumber * isFavorite;
 @property (nonatomic, retain) NSNumber * isRead;
 @property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSString * url;
+@property (nonatomic, strong) NSURL * url;
 
 + (RKEntityMapping *)responseEntityMappingInManagedObjectStore:(RKManagedObjectStore *) managedObjectStore;
 + (RKObjectMapping *)requestMappingForPOST;

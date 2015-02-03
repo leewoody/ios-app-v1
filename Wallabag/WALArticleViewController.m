@@ -83,7 +83,7 @@
 	NSURL *extraCSSFile = [currentTheme getPathtoExtraCSSFile];
 	
 	NSString *htmlFormat = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"article" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
-	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, mainCSSFile, extraCSSFile, self.article.title, originalTitle, self.article.url, self.article.url,  self.article.content];
+	NSString *htmlToDisplay = [NSString stringWithFormat:htmlFormat, mainCSSFile, extraCSSFile, self.article.title, originalTitle, self.article.url, self.article.url.host,  self.article.content];
 	
 	[self.webView loadHTMLString:htmlToDisplay baseURL:nil];
 }
