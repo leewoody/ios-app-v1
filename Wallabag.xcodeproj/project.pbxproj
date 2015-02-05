@@ -29,6 +29,7 @@
 		F56824CC1983FB8000B8B009 /* WALIcons.m in Sources */ = {isa = PBXBuildFile; fileRef = F56824CB1983FB8000B8B009 /* WALIcons.m */; };
 		F56824D61984291A00B8B009 /* WALSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56824D51984291A00B8B009 /* WALSplitViewController.m */; };
 		F57193661A83EA1A004C0CE8 /* WALStorageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F57193651A83EA1A004C0CE8 /* WALStorageHelper.m */; };
+		F57193691A840991004C0CE8 /* WALUpdateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F57193681A840991004C0CE8 /* WALUpdateHelper.m */; };
 		F57E644E18BB84AD00587DBD /* article.html in Resources */ = {isa = PBXBuildFile; fileRef = F57E644D18BB84AD00587DBD /* article.html */; };
 		F5877D8D18B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
 		F5877D8F18B4E02B009D4EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8E18B4E02B009D4EFE /* CoreGraphics.framework */; };
@@ -136,6 +137,8 @@
 		F56824D51984291A00B8B009 /* WALSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALSplitViewController.m; sourceTree = "<group>"; };
 		F57193641A83EA1A004C0CE8 /* WALStorageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALStorageHelper.h; sourceTree = "<group>"; };
 		F57193651A83EA1A004C0CE8 /* WALStorageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALStorageHelper.m; sourceTree = "<group>"; };
+		F57193671A840991004C0CE8 /* WALUpdateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALUpdateHelper.h; sourceTree = "<group>"; };
+		F57193681A840991004C0CE8 /* WALUpdateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALUpdateHelper.m; sourceTree = "<group>"; };
 		F57E644D18BB84AD00587DBD /* article.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = article.html; sourceTree = "<group>"; };
 		F5877D8918B4E02B009D4EFE /* Wallabag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wallabag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5877D8C18B4E02B009D4EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -314,6 +317,8 @@
 				F57193651A83EA1A004C0CE8 /* WALStorageHelper.m */,
 				F555468E1A6C41970067A310 /* WALSupportHelper.h */,
 				F555468F1A6C41970067A310 /* WALSupportHelper.m */,
+				F57193671A840991004C0CE8 /* WALUpdateHelper.h */,
+				F57193681A840991004C0CE8 /* WALUpdateHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -655,6 +660,7 @@
 				F56824D61984291A00B8B009 /* WALSplitViewController.m in Sources */,
 				F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */,
 				F5259679193E4BFC003E91A7 /* WALThemeNight.m in Sources */,
+				F57193691A840991004C0CE8 /* WALUpdateHelper.m in Sources */,
 				F5C9FB5C18BBB8E000083FB3 /* WALBrowserViewController.m in Sources */,
 				F5DA910418B51FE8006A0B1A /* WALSettingsTableViewController.m in Sources */,
 				F5905333193B657D005E2A00 /* WALTableViewController.m in Sources */,

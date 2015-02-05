@@ -103,6 +103,7 @@
 
 + (void)setUpObjectManagerForV1:(RKObjectManager *) objectManager inManagedObjectStore:(RKManagedObjectStore *) managedObjectStore {
 	[objectManager addResponseDescriptor:[RKResponseDescriptor responseDescriptorWithMapping:[WALArticle responseEntityMappingForXMLFeedInManagedObjectStore:managedObjectStore] method:RKRequestMethodAny pathPattern:nil keyPath:@"rss.channel.item" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)]];
+	[objectManager.router.routeSet addRoute:[RKRoute routeWithName:@"articles" pathPattern:@"" method:RKRequestMethodGET]];
 }
 
 + (NSURL *)applicationDocumentsDirectory {

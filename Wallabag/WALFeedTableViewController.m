@@ -14,6 +14,7 @@
 #import "WALArticleTableViewCell.h"
 #import "WALAppDelegate.h"
 #import "WALStorageHelper.h"
+#import "WALUpdateHelper.h"
 
 #import "WALThemeOrganizer.h"
 #import "WALTheme.h"
@@ -89,7 +90,7 @@
 		[self.refreshControl beginRefreshing];
 	}
 	
-	[[RKObjectManager sharedManager] getObjectsAtPath:@"" parameters:@{@"feed": [NSNull null], @"type": @"home", @"user_id": @"2", @"token": @"i11FbSBeC34bwTM"} success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+	[[RKObjectManager sharedManager] getObjectsAtPathForRouteNamed:@"articles" object:nil parameters:[WALUpdateHelper parametersForGetArticlesWithSettings:self.settings] success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
 		NSError *error;
 		if (![[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext saveToPersistentStore:&error]) {
 			NSLog(@"Error storing: %@", error);
