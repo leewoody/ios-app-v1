@@ -92,8 +92,7 @@
 		if (match) {
 			// @todo use parsed Dict in predicate
 			NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Article"];
-			//fetchRequest.predicate = [NSPredicate predicateWithFormat:@"(isRead = NO)"];
-			fetchRequest.sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"articleID" ascending:YES] ];
+			fetchRequest.sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO] ];
 			return fetchRequest;
 		}
 		

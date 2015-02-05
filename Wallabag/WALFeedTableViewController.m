@@ -180,8 +180,9 @@
 	fetchRequest.predicate = [self getPredicateForFeedWithNumber:0];
 	
 	// Edit the sort key as appropriate.
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"articleID" ascending:NO];
-	NSArray *sortDescriptors = @[sortDescriptor];
+	NSSortDescriptor *sortByDate = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
+	NSSortDescriptor *sortById = [[NSSortDescriptor alloc] initWithKey:@"articleID" ascending:NO];
+	NSArray *sortDescriptors = @[sortByDate, sortById];
 	
 	[fetchRequest setSortDescriptors:sortDescriptors];
 	
@@ -422,7 +423,8 @@
 		WALArticle *newArticle = [[WALArticle alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
 		newArticle.url = url;
 		newArticle.title = @"Adding Article";
-		
+		newArticle.createdAt = [NSDate date];
+
 		[[RKObjectManager sharedManager] postObject:newArticle path:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
 			NSLog(@"Added Article");
 		} failure:^(RKObjectRequestOperation *operation, NSError *error) {
