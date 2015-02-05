@@ -50,7 +50,7 @@
 
 + (RKObjectMapping *)requestMappingForPOST {
 	RKObjectMapping *entityMapping = [RKObjectMapping requestMapping];
-	[entityMapping addAttributeMappingsFromArray:@[@"url", @"title"]];
+	[entityMapping addAttributeMappingsFromDictionary:@{@"url.absoluteString": @"url"}];
 	return entityMapping;
 }
 

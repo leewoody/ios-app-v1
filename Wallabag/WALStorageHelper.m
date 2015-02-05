@@ -72,21 +72,21 @@
 + (void)setUpObjectManagerForV2:(RKObjectManager *) objectManager inManagedObjectStore:(RKManagedObjectStore *) managedObjectStore {
 
 	// WALArticle Response Descriptors
-	[objectManager addResponseDescriptor:[RKResponseDescriptor responseDescriptorWithMapping:[WALArticle responseEntityMappingInManagedObjectStore:managedObjectStore] method:RKRequestMethodGET | RKRequestMethodPOST pathPattern:@"api/entries" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)]];
-	[objectManager addResponseDescriptor:[RKResponseDescriptor responseDescriptorWithMapping:[WALArticle responseEntityMappingInManagedObjectStore:managedObjectStore] method:RKRequestMethodGET | RKRequestMethodPATCH pathPattern:@"api/entries/:articleID" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)]];
+	[objectManager addResponseDescriptor:[RKResponseDescriptor responseDescriptorWithMapping:[WALArticle responseEntityMappingInManagedObjectStore:managedObjectStore] method:RKRequestMethodGET | RKRequestMethodPOST pathPattern:@"api/entries.json" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)]];
+	[objectManager addResponseDescriptor:[RKResponseDescriptor responseDescriptorWithMapping:[WALArticle responseEntityMappingInManagedObjectStore:managedObjectStore] method:RKRequestMethodGET | RKRequestMethodPATCH pathPattern:@"api/entries/:articleID\\.json" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)]];
 	
 	// WALArticle Request Descriptors
 	[objectManager addRequestDescriptor:[RKRequestDescriptor requestDescriptorWithMapping:[WALArticle requestMappingForPOST] objectClass:[WALArticle class] rootKeyPath:nil method:RKRequestMethodPOST]];
 	[objectManager addRequestDescriptor:[RKRequestDescriptor requestDescriptorWithMapping:[WALArticle requestMappingForPATCH] objectClass:[WALArticle class] rootKeyPath:nil method:RKRequestMethodPATCH]];
 	
-	[objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[WALArticle class] pathPattern:@"api/entries/:articleID" method:RKRequestMethodGET]];
-	[objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[WALArticle class] pathPattern:@"api/entries" method:RKRequestMethodPOST]];
-	[objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[WALArticle class] pathPattern:@"api/entries/:articleID" method:RKRequestMethodPATCH]];
-	[objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[WALArticle class] pathPattern:@"api/entries/:articleID" method:RKRequestMethodDELETE]];
+	[objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[WALArticle class] pathPattern:@"api/entries/:articleID\\.json" method:RKRequestMethodGET]];
+	[objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[WALArticle class] pathPattern:@"api/entries.json" method:RKRequestMethodPOST]];
+	[objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[WALArticle class] pathPattern:@"api/entries/:articleID\\.json" method:RKRequestMethodPATCH]];
+	[objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[WALArticle class] pathPattern:@"api/entries/:articleID\\.json" method:RKRequestMethodDELETE]];
 	
-	[objectManager.router.routeSet addRoute:[RKRoute routeWithName:@"articles" pathPattern:@"api/entries" method:RKRequestMethodGET]];
+	[objectManager.router.routeSet addRoute:[RKRoute routeWithName:@"articles" pathPattern:@"api/entries.json" method:RKRequestMethodGET]];
 	[objectManager addFetchRequestBlock:^NSFetchRequest *(NSURL *URL) {
-		RKPathMatcher *pathMatcher = [RKPathMatcher pathMatcherWithPattern:@"api/entries"];
+		RKPathMatcher *pathMatcher = [RKPathMatcher pathMatcherWithPattern:@"api/entries.json"];
 		NSDictionary *argsDict = nil;
 		BOOL match = [pathMatcher matchesPath:[URL relativePath] tokenizeQueryStrings:NO parsedArguments:&argsDict];
 		if (match) {
