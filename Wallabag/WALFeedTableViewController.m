@@ -205,13 +205,13 @@
 	NSPredicate *feedPredicate = nil;
 	if (feedNumber == 1) {
 		// Feed: Faved
-		feedPredicate = [NSPredicate predicateWithFormat:@"(isFavorite = YES)"];
+		feedPredicate = [NSPredicate predicateWithFormat:@"(starred = YES)"];
 	} else if (feedNumber == 2) {
 		// Feed: Archive
-		feedPredicate = [NSPredicate predicateWithFormat:@"(isRead = YES)"];
+		feedPredicate = [NSPredicate predicateWithFormat:@"(read = YES)"];
 	} else {
 		// Feed: Unread
-		feedPredicate = [NSPredicate predicateWithFormat:@"(isRead = NO)"];
+		feedPredicate = [NSPredicate predicateWithFormat:@"(read = NO)"];
 	}
 	return feedPredicate;
 }

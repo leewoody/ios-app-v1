@@ -14,8 +14,8 @@
 
 @property (nonatomic, retain) NSNumber * articleID;
 @property (nonatomic, retain) NSString * content;
-@property (nonatomic, retain) NSNumber * isFavorite;
-@property (nonatomic, retain) NSNumber * isRead;
+@property (nonatomic, assign) BOOL starred;
+@property (nonatomic, assign) BOOL read;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, strong) NSURL * url;
 

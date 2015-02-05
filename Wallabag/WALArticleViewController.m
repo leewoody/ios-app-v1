@@ -59,7 +59,7 @@
 
 - (void) updateButtons
 {
-	if (self.article.isRead)
+	if (self.article.read)
 		[self.markAsReadButton setImage:[WALIcons imageOfToolbarRead]];
 	else
 		[self.markAsReadButton setImage:[WALIcons imageOfToolbarUnread]];
@@ -151,7 +151,7 @@
 {
 	//! @todo inform user (one time) that this won't affect his online wallabag.
 	
-	self.article.isRead = [NSNumber numberWithBool:![self.article.isRead boolValue]];
+	self.article.read = !self.article.read;
 	[self updateButtons];
 }
 
