@@ -70,14 +70,19 @@
 }
 
 - (BOOL)isVersionV2 {
+	if (!self.wallabagVersion) {
+		return NO;
+	}
 	return [self.wallabagVersion isEqualToString:@"v2"];
 }
 
 #pragma mark - URL Handling
 
 - (void)setWallabagURL:(NSURL *)url {
-	if (!url)
+	if (!url || [url.absoluteString isEqualToString:@""]) {
+		_wallabagURL = nil;
 		return;
+	}
 	
 	if (![url.absoluteString hasSuffix:@"/"])
 		url = [NSURL URLWithString:[url.absoluteString stringByAppendingString:@"/"]];
@@ -102,7 +107,7 @@
 	if ([self isVersionV2]) {
 		return self.wallabagURL != nil;
 	} else {
-		return self.wallabagURL != nil && self.apiToken != nil;
+		return self.wallabagURL != nil && self.apiToken != nil && ![self.apiToken isEqualToString:@""];
 	}
 }
 

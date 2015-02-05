@@ -25,8 +25,9 @@
 
 - (IBAction)cancelButtonPushed:(id)sender;
 - (IBAction)doneButtonPushed:(id)sender;
-- (IBAction)textFieldValueChanged:(id)sender;
+- (IBAction)userInputValueChanged:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *versionControl;
 @property (weak, nonatomic) IBOutlet UITextField *urlTextField;
 @property (weak, nonatomic) IBOutlet UITextField *userIDTextField;
 @property (weak, nonatomic) IBOutlet UITextField *apiTokenTextField;
@@ -52,9 +53,12 @@
 	
 	if ([self.currentSettings getWallabagURL])
 	{
-		self.urlTextField.text = [[self.currentSettings getWallabagURL] absoluteString];
+		self.urlTextField.text = self.currentSettings.wallabagURL.absoluteString;
+		self.apiTokenTextField.text = self.currentSettings.apiToken;
+		self.userIDTextField.text = [NSString stringWithFormat:@"%ld", (long) self.currentSettings.userID];
+		self.versionControl.selectedSegmentIndex = self.currentSettings.isVersionV2 ? 1 : 0;
 	}
-	[self updateDoneButton];
+	[self updateView];
 }
 
 #pragma mark - TableView
@@ -175,9 +179,10 @@
 	self.currentSettings.wallabagURL = [NSURL URLWithString:self.urlTextField.text];
 	self.currentSettings.apiToken = self.apiTokenTextField.text;
 	self.currentSettings.userID = [self.userIDTextField.text integerValue];
+	[self.currentSettings setVersionV2:(self.versionControl.selectedSegmentIndex == 1)];
 }
 
-- (void) updateDoneButton
+- (void) updateView
 {
 	[self updateCurrentSettingsFromUserInput];
 	[self.navigationItem.rightBarButtonItem setEnabled:self.currentSettings.isValid];
@@ -194,9 +199,9 @@
 	[self.delegate settingsController:self didFinishWithSettings:self.currentSettings];
 }
 
-- (IBAction)textFieldValueChanged:(id)sender
+- (IBAction)userInputValueChanged:(id)sender
 {
-	[self updateDoneButton];
+	[self updateView];
 }
 
 #pragma mark - TextField Delegate
