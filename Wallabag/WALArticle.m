@@ -17,6 +17,8 @@
 @dynamic read;
 @dynamic title;
 @dynamic url;
+@dynamic createdAt;
+@dynamic updatedAt;
 
 #pragma mark -
 
@@ -39,11 +41,9 @@
 + (RKEntityMapping *)responseEntityMappingInManagedObjectStore:(RKManagedObjectStore *)managedObjectStore {
 	RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:@"Article" inManagedObjectStore:managedObjectStore];
 	[entityMapping addAttributeMappingsFromDictionary:@{@"id"		: @"articleID",
-														@"title"	: @"title",
-														@"url"		: @"url",
 														@"isRead"	: @"read",
-														@"isFav"	: @"starred",
-														@"content"	: @"content"}];
+														@"isFav"	: @"starred"}];
+	[entityMapping addAttributeMappingsFromArray:@[@"title", @"url", @"content", @"createdAt", @"updatedAt"]];
 	entityMapping.identificationAttributes = @[@"articleID"];
 	return entityMapping;
 }

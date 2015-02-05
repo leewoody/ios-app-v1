@@ -12,5 +12,6 @@
 
 @property (weak) IBOutlet UILabel *titleLabel;
 @property (weak) IBOutlet UILabel *detailLabel;
+@property (weak) IBOutlet UILabel *dateLabel;
 
 @end

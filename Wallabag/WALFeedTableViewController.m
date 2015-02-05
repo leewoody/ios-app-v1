@@ -121,10 +121,23 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 	WALArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	static NSDateFormatter *formatter;
+	if (!formatter) {
+		formatter = [[NSDateFormatter alloc] init];
+		formatter.dateStyle = NSDateFormatterShortStyle;
+		formatter.timeStyle = NSDateFormatterShortStyle;
+		formatter.doesRelativeDateFormatting = YES;
+	}
+	
+	NSString *relativeDate = @"";
+	if (article.createdAt) {
+		relativeDate = [formatter stringFromDate:article.createdAt];
+	}
 	
 	WALArticleTableViewCell *articleCell = (WALArticleTableViewCell*)cell;
 	articleCell.titleLabel.text = article.title;
 	articleCell.detailLabel.text = article.url.host;
+	articleCell.dateLabel.text = relativeDate;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

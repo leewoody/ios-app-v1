@@ -43,9 +43,18 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdH-qM-AgM">
-                                            <rect key="frame" x="15" y="24" width="257" height="15"/>
+                                            <rect key="frame" x="15" y="24" width="31" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="SQS-Tc-Pew"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYg-y0-gZP">
+                                            <rect key="frame" x="256" y="24" width="31" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="15" id="rB7-HN-noO"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -62,16 +71,19 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="OYg-y0-gZP" secondAttribute="trailing" constant="-8" id="65A-7i-T1g"/>
                                         <constraint firstItem="bdH-qM-AgM" firstAttribute="leading" secondItem="6mh-Ms-slq" secondAttribute="leading" constant="15" id="8xr-Ba-hsl"/>
                                         <constraint firstAttribute="trailing" secondItem="MpE-Yq-Vnd" secondAttribute="trailing" constant="12" id="BoY-Xx-3MT"/>
+                                        <constraint firstItem="OYg-y0-gZP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bdH-qM-AgM" secondAttribute="trailing" constant="4" id="Xrc-HT-9gO"/>
                                         <constraint firstAttribute="bottom" secondItem="bdH-qM-AgM" secondAttribute="bottom" constant="4" id="Z52-gH-3RF"/>
                                         <constraint firstItem="MpE-Yq-Vnd" firstAttribute="leading" secondItem="6mh-Ms-slq" secondAttribute="leading" constant="15" id="g4s-9h-9k8"/>
                                         <constraint firstItem="MpE-Yq-Vnd" firstAttribute="top" secondItem="6mh-Ms-slq" secondAttribute="topMargin" constant="-5" id="iF1-Fw-Fif"/>
-                                        <constraint firstAttribute="trailing" secondItem="bdH-qM-AgM" secondAttribute="trailing" constant="15" id="plz-k2-zuv"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="OYg-y0-gZP" secondAttribute="bottom" constant="-4" id="pjF-BU-HFy"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <outlet property="dateLabel" destination="OYg-y0-gZP" id="ZnU-Gh-Sv0"/>
                                     <outlet property="detailLabel" destination="bdH-qM-AgM" id="J1n-UM-aPm"/>
                                     <outlet property="titleLabel" destination="MpE-Yq-Vnd" id="2Oc-2o-sVC"/>
                                     <segue destination="Ah7-4n-0Wa" kind="push" identifier="PushToArticle" id="uZN-wS-V0m"/>
