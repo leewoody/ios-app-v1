@@ -38,12 +38,12 @@
 
 + (RKEntityMapping *)responseEntityMappingInManagedObjectStore:(RKManagedObjectStore *)managedObjectStore {
 	RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:@"Article" inManagedObjectStore:managedObjectStore];
-	[entityMapping addAttributeMappingsFromDictionary:@{@"id":			@"articleID",
-														@"title":		@"title",
-														@"url":			@"url",
-														@"is_read":		@"read",
-														@"is_fav":		@"starred",
-														@"content":		@"content"}];
+	[entityMapping addAttributeMappingsFromDictionary:@{@"id"		: @"articleID",
+														@"title"	: @"title",
+														@"url"		: @"url",
+														@"isRead"	: @"read",
+														@"isFav"	: @"starred",
+														@"content"	: @"content"}];
 	entityMapping.identificationAttributes = @[@"articleID"];
 	return entityMapping;
 }
@@ -56,7 +56,7 @@
 
 + (RKObjectMapping *)requestMappingForPATCH {
 	RKObjectMapping *entityMapping = [RKObjectMapping requestMapping];
-	[entityMapping addAttributeMappingsFromDictionary:@{@"read": @"is_read", @"starred": @"is_fav"}];
+	[entityMapping addAttributeMappingsFromDictionary:@{@"read": @"archive", @"starred": @"star"}];
 	return entityMapping;
 }
 
