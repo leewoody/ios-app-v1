@@ -66,7 +66,20 @@
 														//@"@metadata.mapping.collectionIndex": @"articleID"
 														}];
 
-	RKValueTransformer *unescapeStringTransformer = [RKBlockValueTransformer valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass, __unsafe_unretained Class outputValueClass) {
+	RKValueTransformer *unescapeTitleTransformer = [RKBlockValueTransformer valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass, __unsafe_unretained Class outputValueClass) {
+		return ([inputValueClass isSubclassOfClass:[NSString class]] && [outputValueClass isSubclassOfClass:[NSString class]]);
+	} transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue, __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+		RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSString class], error);
+		RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSString class], error);
+		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\s+" options:NSRegularExpressionCaseInsensitive error:nil];
+		
+		NSString *title = [(NSString *)inputValue stringByHtmlUnescapingString];
+		title = [regex stringByReplacingMatchesInString:title options:0 range:NSMakeRange(0, title.length) withTemplate:@" "];
+		*outputValue = title;
+		return YES;
+	}];
+	
+	RKValueTransformer *unescapeContentTransformer = [RKBlockValueTransformer valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass, __unsafe_unretained Class outputValueClass) {
 		return ([inputValueClass isSubclassOfClass:[NSString class]] && [outputValueClass isSubclassOfClass:[NSString class]]);
 	} transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue, __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
 		RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSString class], error);
@@ -111,10 +124,10 @@
 
 	
 	RKAttributeMapping *titleMapping = [RKAttributeMapping attributeMappingFromKeyPath:@"title" toKeyPath:@"title"];
-	titleMapping.valueTransformer = unescapeStringTransformer;
+	titleMapping.valueTransformer = unescapeTitleTransformer;
 
 	RKAttributeMapping *contentMapping = [RKAttributeMapping attributeMappingFromKeyPath:@"description" toKeyPath:@"content"];
-	contentMapping.valueTransformer = unescapeStringTransformer;
+	contentMapping.valueTransformer = unescapeContentTransformer;
 	
 	RKAttributeMapping *urlMapping = [RKAttributeMapping attributeMappingFromKeyPath:@"link" toKeyPath:@"url"];
 	urlMapping.valueTransformer = unescapeURLTransformer;
