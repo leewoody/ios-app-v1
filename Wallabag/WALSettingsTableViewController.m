@@ -63,6 +63,18 @@
 
 #pragma mark - TableView
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	if (section != 0) {
+		return [super tableView:tableView numberOfRowsInSection:section];
+	}
+
+	if (self.versionControl.selectedSegmentIndex == 0) {
+		return 5;
+	} else {
+		return 2;
+	}
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSString* identifier = [[tableView cellForRowAtIndexPath:indexPath] reuseIdentifier];
@@ -184,7 +196,6 @@
 
 - (void) updateView
 {
-	[self updateCurrentSettingsFromUserInput];
 	[self.navigationItem.rightBarButtonItem setEnabled:self.currentSettings.isValid];
 }
 
@@ -201,7 +212,11 @@
 
 - (IBAction)userInputValueChanged:(id)sender
 {
+	[self updateCurrentSettingsFromUserInput];
 	[self updateView];
+	if ([sender isKindOfClass:[UISegmentedControl class]]) {
+		[self.tableView reloadData];
+	}
 }
 
 #pragma mark - TextField Delegate
