@@ -13,6 +13,7 @@
 #import "WALNavigationController.h"
 #import "WALArticleTableViewCell.h"
 #import "WALAppDelegate.h"
+#import "WALStorageHelper.h"
 
 #import "WALThemeOrganizer.h"
 #import "WALTheme.h"
@@ -393,7 +394,7 @@
 	if (settings) {
 		self.settings = settings;
 		[settings saveSettings];
-		[((WALAppDelegate *)[UIApplication sharedApplication].delegate) updateRestKitWithNewSettings];
+		[WALStorageHelper updateRestKitWithNewSettings];
 		[self updateFeedFromServer];
 	}
 	[self.navigationController dismissViewControllerAnimated:true completion:nil];
