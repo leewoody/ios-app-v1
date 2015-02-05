@@ -168,11 +168,19 @@
 
 #pragma mark - Button Actions
 
+- (void)updateCurrentSettingsFromUserInput {
+	if (!self.currentSettings) {
+		self.currentSettings = [[WALSettings alloc] init];
+	}
+	self.currentSettings.wallabagURL = [NSURL URLWithString:self.urlTextField.text];
+	self.currentSettings.apiToken = self.apiTokenTextField.text;
+	self.currentSettings.userID = [self.userIDTextField.text integerValue];
+}
+
 - (void) updateDoneButton
 {
-	BOOL disabled = [self.urlTextField.text isEqualToString:@""] || [NSURL URLWithString:self.urlTextField.text] == nil;
-	
-	[self.navigationItem.rightBarButtonItem setEnabled:!disabled];
+	[self updateCurrentSettingsFromUserInput];
+	[self.navigationItem.rightBarButtonItem setEnabled:self.currentSettings.isValid];
 }
 
 - (IBAction)cancelButtonPushed:(id)sender
@@ -182,8 +190,7 @@
 
 - (IBAction)doneButtonPushed:(id)sender
 {
-	self.currentSettings.wallabagURL = [NSURL URLWithString:self.urlTextField.text];
-	
+	[self updateCurrentSettingsFromUserInput];
 	[self.delegate settingsController:self didFinishWithSettings:self.currentSettings];
 }
 

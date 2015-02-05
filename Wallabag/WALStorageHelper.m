@@ -46,8 +46,10 @@
 
 + (void)updateRestKitWithNewSettings {
 	WALSettings *settings = [WALSettings settingsFromSavedSettings];
-	if (settings && [settings getWallabagURL]) {
-		[self initializeSharedObjectManagerWithWallabagBaseURL:[settings getWallabagURL] andIsWallabagV2:false];
+	if (settings && settings.isValid) {
+		[self initializeSharedObjectManagerWithWallabagBaseURL:[settings getWallabagURL] andIsWallabagV2:settings.isVersionV2];
+	} else {
+		NSLog(@"Settings invalid! Incomplete RestKit setup!");
 	}
 }
 

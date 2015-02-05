@@ -63,7 +63,7 @@
 	[super viewDidAppear:animated];
 	[self.navigationController setToolbarHidden:YES];
 	
-	if (!self.settings)
+	if (!self.settings || !self.settings.isValid)
 		[self performSegueWithIdentifier:@"ModalToSettings" sender:self];
 }
 

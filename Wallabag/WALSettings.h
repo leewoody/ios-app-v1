@@ -9,11 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @interface WALSettings : NSObject
+@property NSInteger userID;
+@property (strong) NSString *apiToken;
+@property (nonatomic, strong, getter=getWallabagURL) NSURL *wallabagURL;
 
 + (WALSettings*) settingsFromSavedSettings;
 - (void) saveSettings;
 
-- (void) setWallabagURL:(NSURL*) url;
-- (NSURL*) getWallabagURL;
+- (void) setVersionV2:(BOOL) isV2;
+- (BOOL) isVersionV2;
+
+- (BOOL) isValid;
 
 @end
