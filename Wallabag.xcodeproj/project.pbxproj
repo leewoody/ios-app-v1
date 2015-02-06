@@ -331,8 +331,8 @@
 			children = (
 				F5877D9218B4E02B009D4EFE /* Wallabag */,
 				F51B3531199674C3004634EB /* Settings.bundle */,
-				F5877DB418B4E02B009D4EFE /* WallabagTests */,
 				F53D8EB219D3291B00F313FE /* ShareExtension */,
+				F5877DB418B4E02B009D4EFE /* WallabagTests */,
 				F5877D8B18B4E02B009D4EFE /* Frameworks */,
 				F5877D8A18B4E02B009D4EFE /* Products */,
 				08ACA7C86089AC09AC00B56F /* Pods */,

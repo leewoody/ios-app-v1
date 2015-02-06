@@ -42,7 +42,7 @@
 	//NSLog(@"URL Request:\n\tMethod: %@\n\tURL: %@\n\tBody: %@\n\tPathExtension: %@", request.HTTPMethod, request.URL.absoluteString, request.HTTPBody, request.URL.pathExtension);
 	NSURL *url = request.URL;
 	
-	if ([url.query isEqualToString:@"view=home&closewin=true"]) {
+	if ([url.query containsString:@"view=home"]) {
 		NSLog(@"Success!");
 		
 		if (self.delegate) {
