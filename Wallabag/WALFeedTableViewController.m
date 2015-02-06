@@ -208,7 +208,6 @@
 
 - (void) updateWithTheme:(WALTheme*) theme
 {
-//	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self getWallabagTitleImageWithColor:[theme getTextColor]]];
 	self.tableView.backgroundColor = [theme getBackgroundColor];
 	self.refreshControl.tintColor = [theme getTextColor];
 }
@@ -454,31 +453,6 @@
 											  cancelButtonTitle:@"OK"
 											  otherButtonTitles: nil];
 	[alertView show];
-}
-
-#pragma mark - Miscellaneous
-
-- (UIImage *)getWallabagTitleImageWithColor:(UIColor*) color
-{
-	if (SYSTEM_VERSION_LESS_THAN(@"7.0"))
-		return [self ipMaskedImageNamed:@"NavigationBarItem" color:[UIColor whiteColor]];
-	
-	return [self ipMaskedImageNamed:@"NavigationBarItem" color:color];
-}
-
-- (UIImage *)ipMaskedImageNamed:(NSString *)name color:(UIColor *)color
-{
-    UIImage *image = [UIImage imageNamed:name];
-    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
-    UIGraphicsBeginImageContextWithOptions(rect.size, NO, image.scale);
-    CGContextRef c = UIGraphicsGetCurrentContext();
-    [image drawInRect:rect];
-    CGContextSetFillColorWithColor(c, [color CGColor]);
-    CGContextSetBlendMode(c, kCGBlendModeSourceAtop);
-    CGContextFillRect(c, rect);
-    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return result;
 }
 
 @end
