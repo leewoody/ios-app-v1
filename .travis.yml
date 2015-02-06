@@ -1,0 +1,10 @@
+before_install:
+  - gem install cocoapods -v '0.35'
+  - export LANG=en_US.UTF-8
+  - brew update
+  - brew upgrade xctool
+
+language: objective-c
+xcode_workspace: Wallabag.xcworkspace
+xcode_scheme: WallabagTests
+xcode_sdk: iphonesimulator
