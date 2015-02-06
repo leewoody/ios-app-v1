@@ -417,42 +417,28 @@
 
 - (void) informUserConnectionError:(NSError*) error
 {
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-														message:error.localizedDescription
-													   delegate:nil
-											  cancelButtonTitle:@"OK"
-											  otherButtonTitles: nil];
-	[alertView show];
+	[self showMessageWithTitle:NSLocalizedString(@"Error", nil) andMessage:error.localizedDescription];
 }
 
 - (void) informUserWrongServerAddress
 {
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-														message:NSLocalizedString(@"Could not connect to server. Maybe wrong URL?", @"error description: HTTP Status Code not 2xx")
-													   delegate:nil
-											  cancelButtonTitle:@"OK"
-											  otherButtonTitles: nil];
-	[alertView show];
+	[self showMessageWithTitle:NSLocalizedString(@"Error", nil) andMessage:NSLocalizedString(@"Could not connect to server. Maybe wrong URL?", @"error description: HTTP Status Code not 2xx")];
 }
 
 - (void) informUserWrongAuthentication
 {
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-														message:NSLocalizedString(@"Could load feed. Maybe wrong user credentials?", @"error description: response is not a rss feed")
-													   delegate:nil
-											  cancelButtonTitle:@"OK"
-											  otherButtonTitles: nil];
-	[alertView show];
+	[self showMessageWithTitle:NSLocalizedString(@"Error", nil) andMessage:NSLocalizedString(@"Could load feed. Maybe wrong user credentials?", @"error description: response is not a rss feed")];
 }
 
 - (void) informUserNoArticlesInFeed
 {
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-														message:NSLocalizedString(@"No unread article in Feed. Get started by adding links to your wallabag.", @"error description: No article in home-feed")
-													   delegate:nil
-											  cancelButtonTitle:@"OK"
-											  otherButtonTitles: nil];
+	[self showMessageWithTitle:NSLocalizedString(@"Error", nil) andMessage:NSLocalizedString(@"No unread article in Feed. Get started by adding links to your wallabag.", @"error description: No article in home-feed")];
+}
+
+- (void)showMessageWithTitle:(NSString *) title andMessage:(NSString *) message {
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
 	[alertView show];
+
 }
 
 @end
