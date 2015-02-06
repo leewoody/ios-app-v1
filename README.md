@@ -1,4 +1,5 @@
-# wallabag for iOS
+# wallabag for iOS  
+[![Build Status](https://travis-ci.org/wallabag/ios-app.svg)](https://travis-ci.org/kevmeyer/test-ci)
 
 Developed by Kevin Meyer (mail: *wallabag-at-kevin-meyer.de*)
 
