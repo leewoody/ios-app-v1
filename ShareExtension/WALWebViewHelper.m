@@ -12,6 +12,7 @@
 @interface WALWebViewHelper	()
 
 @property unsigned int numberOfTries;
+@property BOOL succeeded;
 
 @end
 
@@ -19,6 +20,7 @@
 
 - (void)startWithWebView:(UIWebView*) webView {
 	self.numberOfTries = 0;
+	self.succeeded = NO;
 	self.webView = webView;
 	self.webView.delegate = self;
 	
@@ -44,6 +46,7 @@
 	
 	if ([url.query containsString:@"view=home"]) {
 		NSLog(@"Success!");
+		self.succeeded = YES;
 		
 		if (self.delegate) {
 			[self.delegate shareBrowser:nil didAddURL:self.addUrl];
@@ -66,7 +69,7 @@
 	NSURLRequest *request = webView.request;
 	NSLog(@"URL Request:\n\tMethod: %@\n\tURL: %@\n\tBody: %@\n\tPathExtension: %@", request.HTTPMethod, request.URL.absoluteString, request.HTTPBody, request.URL.pathExtension);
 	
-	if (self.delegate) {
+	if (self.delegate && !self.succeeded) {
 		[self.delegate shareBrowserNeedsFurtherActions:nil];
 	}
 }
