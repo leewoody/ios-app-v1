@@ -9,10 +9,13 @@
 #import "WALWebViewHelper.h"
 #import "WALSettings.h"
 
-@interface WALWebViewHelper	()
+@interface WALWebViewHelper	() <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 
 @property unsigned int numberOfTries;
 @property BOOL succeeded;
+@property BOOL authenticated;
+
+@property (strong) NSURLRequest *currentRequest;
 
 @end
 
@@ -21,11 +24,16 @@
 - (void)startWithWebView:(UIWebView*) webView {
 	self.numberOfTries = 0;
 	self.succeeded = NO;
+	self.authenticated = NO;
 	self.webView = webView;
 	self.webView.delegate = self;
 	
 	NSURLRequest *nextTryRequest = [NSURLRequest requestWithURL:[self.settings getURLToAddArticle:self.addUrl]];
-	[self.webView loadRequest:nextTryRequest];	
+	[self.webView loadRequest:nextTryRequest];
+	
+	if ([[self.settings getWallabagURL].scheme isEqualToString:@"http"]) {
+		self.authenticated = YES;
+	}
 }
 
 - (void)cancelWithError:(NSError*) error {
@@ -43,6 +51,13 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 	//NSLog(@"URL Request:\n\tMethod: %@\n\tURL: %@\n\tBody: %@\n\tPathExtension: %@", request.HTTPMethod, request.URL.absoluteString, request.HTTPBody, request.URL.pathExtension);
 	NSURL *url = request.URL;
+	
+	if (!self.authenticated) {
+		self.currentRequest = request;
+		[[NSURLConnection connectionWithRequest:request delegate:self] start];
+		
+		return NO;
+	}
 	
 	if ([url.query containsString:@"view=home"]) {
 		NSLog(@"Success!");
@@ -82,6 +97,25 @@
 		return;
 	
 	[self cancelWithError:error];
+}
+
+#pragma mark - NSURLConnection
+
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+	
+	if (challenge.previousFailureCount < 1) {
+		self.authenticated = YES;
+		NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+		[challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+	} else {
+		[challenge.sender cancelAuthenticationChallenge:challenge];
+	}
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+	self.authenticated = YES;
+	[self.webView loadRequest:self.currentRequest];
+	[connection cancel];
 }
 
 @end
