@@ -51,12 +51,14 @@
 	
 	self.settings = [WALSettings settingsFromSavedSettings];
 	
-//	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && [self.articleList getNumberOfUnreadArticles] > 0)
-//	{
-//		NSIndexPath *firstCellIndex = [NSIndexPath indexPathForRow:0 inSection:0];
-//		[self performSegueWithIdentifier:@"PushToArticle" sender:[self.tableView cellForRowAtIndexPath:firstCellIndex]];
-//		[self.tableView selectRowAtIndexPath:firstCellIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
-//	}
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad
+		&& self.fetchedResultsController.sections.count > 0
+		&& [((id<NSFetchedResultsSectionInfo>)self.fetchedResultsController.sections[0]) numberOfObjects] > 0)
+	{
+		NSIndexPath *firstCellIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+		[self performSegueWithIdentifier:@"PushToArticle" sender:[self.tableView cellForRowAtIndexPath:firstCellIndex]];
+		[self.tableView selectRowAtIndexPath:firstCellIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
+	}
 }
 
 - (void) viewDidAppear:(BOOL)animated
