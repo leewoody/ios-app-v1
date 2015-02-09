@@ -23,7 +23,9 @@
 #import "WALArticle.h"
 #import "WALSettings.h"
 
-@interface WALFeedTableViewController ()
+#import <MGSwipeTableCell/MGSwipeButton.h>
+
+@interface WALFeedTableViewController () <MGSwipeTableCellDelegate>
 
 @property (strong) WALSettings* settings;
 - (IBAction)actionsButtonPushed:(id)sender;
@@ -140,6 +142,8 @@
 	articleCell.titleLabel.text = article.title;
 	articleCell.detailLabel.text = article.url.host;
 	articleCell.dateLabel.text = relativeDate;
+	
+	articleCell.delegate = self;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -160,6 +164,52 @@
 													   context:nil];
 
 	return constantHeight + ceil(expectedLabelSize.size.height);
+}
+
+#pragma mark - SwipeCells
+
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell canSwipe:(MGSwipeDirection)direction {
+	return [self.settings isVersionV2];
+}
+
+- (NSArray *)swipeTableCell:(MGSwipeTableCell *)cell swipeButtonsForDirection:(MGSwipeDirection)direction
+			  swipeSettings:(MGSwipeSettings *)swipeSettings expansionSettings:(MGSwipeExpansionSettings *)expansionSettings {
+	
+	NSArray *buttons;
+	if (direction == MGSwipeDirectionRightToLeft) {
+		buttons = @[[MGSwipeButton buttonWithTitle:@"read" backgroundColor:[UIColor blueColor]],
+					[MGSwipeButton buttonWithTitle:@"star" backgroundColor:[UIColor yellowColor]]];
+		swipeSettings.transition = MGSwipeTransitionClipCenter;
+		expansionSettings.fillOnTrigger = YES;
+		expansionSettings.buttonIndex = 0;
+	}
+	
+	return buttons;
+}
+
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger)index
+			 direction:(MGSwipeDirection)direction fromExpansion:(BOOL)fromExpansion {
+
+	NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+	WALArticle *article = (WALArticle *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+	if (direction == MGSwipeDirectionRightToLeft && index == 0) {
+		// Read
+		article.read = !article.read;
+	} else if (direction == MGSwipeDirectionRightToLeft && index == 1) {
+		// Star
+		article.starred = !article.starred;
+	}
+	
+	[[RKObjectManager sharedManager] patchObject:article path:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+		NSLog(@"Patched Object!");
+		NSError *error;
+		if (![[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext saveToPersistentStore:&error]) {
+			NSLog(@"Error storing: %@", error);
+		}
+	} failure:^(RKObjectRequestOperation *operation, NSError *error) {
+		NSLog(@"Error patching Object: %@", error);
+	}];
+	return YES;
 }
 
 #pragma mark - Core Data: FetchedResultsController

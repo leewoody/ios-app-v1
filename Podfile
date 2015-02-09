@@ -3,6 +3,7 @@ pod 'RestKit', '~> 0.24'
 
 pod 'RKTBXMLSerialization', :path => './RKTBXMLSerialization/'
 
+pod 'MGSwipeTableCell', '~> 1.3'
 pod 'PLCrashReporter', '1.2-rc5'
 pod 'ARChromeActivity', '~> 1.0'
 pod 'TUSafariActivity', '~> 1.0.1'

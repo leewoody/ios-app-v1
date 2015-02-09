@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MGSwipeTableCell/MGSwipeTableCell.h>
 
-@interface WALArticleTableViewCell : UITableViewCell
+@interface WALArticleTableViewCell : MGSwipeTableCell
 
 @property (weak) IBOutlet UILabel *titleLabel;
 @property (weak) IBOutlet UILabel *detailLabel;
