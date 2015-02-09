@@ -40,9 +40,9 @@
 
 + (RKEntityMapping *)responseEntityMappingInManagedObjectStore:(RKManagedObjectStore *)managedObjectStore {
 	RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:@"Article" inManagedObjectStore:managedObjectStore];
-	[entityMapping addAttributeMappingsFromDictionary:@{@"id"		: @"articleID",
-														@"isRead"	: @"read",
-														@"isFav"	: @"starred"}];
+	[entityMapping addAttributeMappingsFromDictionary:@{@"id"			: @"articleID",
+														@"isArchived"	: @"read",
+														@"isStarred"	: @"starred"}];
 	[entityMapping addAttributeMappingsFromArray:@[@"title", @"url", @"content", @"createdAt", @"updatedAt"]];
 	entityMapping.identificationAttributes = @[@"articleID"];
 	return entityMapping;
