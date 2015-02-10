@@ -41,6 +41,17 @@
 	return self;
 }
 
+- (void)setPassword:(NSString *) cleanPassword withSalt:(NSString *)salt {
+	self.passwordHashed = [WALUser generatePasswordHashWithPassword:cleanPassword andUsername:self.username andSalt:salt];
+}
+
+#pragma mark -
+
++ (NSString *)generatePasswordHashWithPassword:(NSString *) cleanPassword andUsername:(NSString *)username andSalt:(NSString *) salt {
+	NSString *combined = [NSString stringWithFormat:@"%@%@%@", cleanPassword, username, salt];
+	return [combined stringByHashingWithSHA1];
+}
+
 #pragma mark - WSSE
 
 - (void)generateWSSE {

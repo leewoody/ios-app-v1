@@ -159,4 +159,18 @@
 	XCTAssertEqualObjects(@"X-WSSE", [user wsseHeaderKey]);
 }
 
+- (void)testPasswordHashing {
+	WALUser *user = [[WALUser alloc] init];
+	NSString *username = @"wallabag";
+	NSString *password = @"wallabag";
+	NSString *salt = @"a7bdce59b6077a014d22c6f749e681f7";
+	NSString *expected = @"49e5b5e8469bc313f78df0640a61d374dea8e4d8";
+	
+	user.username = username;
+	[user setPassword:password withSalt:salt];
+	
+	XCTAssertNotNil(user.passwordHashed);
+	XCTAssertEqualObjects(user.passwordHashed, expected);
+}
+
 @end
