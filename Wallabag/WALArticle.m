@@ -42,8 +42,10 @@
 	RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:@"Article" inManagedObjectStore:managedObjectStore];
 	[entityMapping addAttributeMappingsFromDictionary:@{@"id"			: @"articleID",
 														@"is_archived"	: @"read",
-														@"is_starred"	: @"starred"}];
-	[entityMapping addAttributeMappingsFromArray:@[@"title", @"url", @"content", @"createdAt", @"updatedAt"]];
+														@"is_starred"	: @"starred",
+														@"created_at"	: @"createdAt",
+														@"updated_at"	: @"updatedAt"}];
+	[entityMapping addAttributeMappingsFromArray:@[@"title", @"url", @"content"]];
 	entityMapping.identificationAttributes = @[@"articleID"];
 	return entityMapping;
 }
