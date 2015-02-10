@@ -422,8 +422,8 @@
 			children = (
 				F50B3B9A1938F6CA0048EBFD /* WALSettingsTests.m */,
 				F58FC5C81A8A4FEF003F7EDC /* WALUserTests.m */,
-				F5877DB518B4E02B009D4EFE /* Supporting Files */,
 				F58FC5CA1A8A5727003F7EDC /* NSString+HashesTests.m */,
+				F5877DB518B4E02B009D4EFE /* Supporting Files */,
 			);
 			path = WallabagTests;
 			sourceTree = "<group>";
