@@ -37,15 +37,17 @@
 }
 
 #pragma mark - RestKit Mappings
+#pragma mark v2 Mappings
 
 + (RKEntityMapping *)responseEntityMappingInManagedObjectStore:(RKManagedObjectStore *)managedObjectStore {
 	RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:@"Article" inManagedObjectStore:managedObjectStore];
 	[entityMapping addAttributeMappingsFromDictionary:@{@"id"			: @"articleID",
+														@"url"			: @"url",
 														@"is_archived"	: @"read",
 														@"is_starred"	: @"starred",
+														@"content"		: @"content",
 														@"created_at"	: @"createdAt",
 														@"updated_at"	: @"updatedAt"}];
-	[entityMapping addAttributeMappingsFromArray:@[@"url", @"content"]];
 	
 	RKAttributeMapping *titleMapping = [RKAttributeMapping attributeMappingFromKeyPath:@"title" toKeyPath:@"title"];
 	titleMapping.valueTransformer = [self trimWhitespaceTransformer];
@@ -67,10 +69,12 @@
 	return entityMapping;
 }
 
+#pragma mark v1 Mapping
+
 + (RKEntityMapping *)responseEntityMappingForXMLFeedInManagedObjectStore:(RKManagedObjectStore *)managedObjectStore {
 	RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:@"Article" inManagedObjectStore:managedObjectStore];
 	[entityMapping addAttributeMappingsFromDictionary:@{
-														//@"@metadata.mapping.collectionIndex": @"articleID"
+														//@"@metadata.mapping.collectionIndex": @"articleID" // This would use the index in result array as ID.
 														}];
 
 	RKValueTransformer *unescapeTitleTransformer = [RKBlockValueTransformer valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass, __unsafe_unretained Class outputValueClass) {
@@ -147,7 +151,7 @@
 	return entityMapping;
 }
 
-#pragma mark - Value Transformers
+#pragma mark Value Transformers
 
 + (RKValueTransformer *)trimWhitespaceTransformer {
 	RKValueTransformer *transformer = [RKBlockValueTransformer valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass, __unsafe_unretained Class outputValueClass) {
