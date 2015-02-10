@@ -45,7 +45,12 @@
 														@"is_starred"	: @"starred",
 														@"created_at"	: @"createdAt",
 														@"updated_at"	: @"updatedAt"}];
-	[entityMapping addAttributeMappingsFromArray:@[@"title", @"url", @"content"]];
+	[entityMapping addAttributeMappingsFromArray:@[@"url", @"content"]];
+	
+	RKAttributeMapping *titleMapping = [RKAttributeMapping attributeMappingFromKeyPath:@"title" toKeyPath:@"title"];
+	titleMapping.valueTransformer = [self trimWhitespaceTransformer];
+	[entityMapping addAttributeMappingsFromArray:@[titleMapping]];
+	
 	entityMapping.identificationAttributes = @[@"articleID"];
 	return entityMapping;
 }
@@ -140,6 +145,26 @@
 	[entityMapping addAttributeMappingsFromArray:@[titleMapping, urlMapping, contentMapping, articleIDMapping]];
 	entityMapping.identificationAttributes = @[@"articleID"];
 	return entityMapping;
+}
+
+#pragma mark - Value Transformers
+
++ (RKValueTransformer *)trimWhitespaceTransformer {
+	RKValueTransformer *transformer = [RKBlockValueTransformer valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class inputValueClass, __unsafe_unretained Class outputValueClass) {
+		return ([inputValueClass isSubclassOfClass:[NSString class]] && [outputValueClass isSubclassOfClass:[NSString class]]);
+	} transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue, __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+		RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSString class], error);
+		RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputClass, [NSString class], error);
+		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\s+" options:NSRegularExpressionCaseInsensitive error:nil];
+		
+		NSString *title = (NSString *)inputValue;
+		title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		title = [regex stringByReplacingMatchesInString:title options:0 range:NSMakeRange(0, title.length) withTemplate:@" "];
+		*outputValue = title;
+		return YES;
+	}];
+	
+	return transformer;
 }
 
 @end
