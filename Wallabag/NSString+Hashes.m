@@ -12,21 +12,19 @@
 @implementation NSString (Hashes)
 
 - (NSString *)stringByHashingWithSHA1 {
-	NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-	uint8_t digest[CC_SHA1_DIGEST_LENGTH];
-	
-	CC_SHA1(data.bytes, (unsigned int) data.length, digest);
+	NSData *data = [self dataByHashingWithSHA1];
+	const unsigned char *dataBuffer = data.bytes;
 	
 	NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
 	for (int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++) {
-		[output appendFormat:@"%02x", digest[i]];
+		[output appendFormat:@"%02x", dataBuffer[i]];
 	}
  
 	return output;
 }
 
 - (NSData *)dataByHashingWithSHA1 {
-	NSData *data = [self dataUsingEncoding:NSASCIIStringEncoding];
+	NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
 	uint8_t digest[CC_SHA1_DIGEST_LENGTH];
 	
 	CC_SHA1(data.bytes, (unsigned int) data.length, digest);

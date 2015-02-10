@@ -15,6 +15,9 @@
 
 - (instancetype)initWithUsername:(NSString *)username andHashedPassword:(NSString *)passwordHashed;
 
+- (void)generateWSSE;
+- (void)generateWSSEWithNonce:(NSString *)nonce andTimestamp:(NSString *)timestamp;
+
 - (NSString *)wsseHeaderKey;
 - (NSString *)wsseHeaderValue;
 

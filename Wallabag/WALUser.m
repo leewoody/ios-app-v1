@@ -15,6 +15,8 @@
 @property (readwrite, strong) NSString *passwordHashed;
 @property (strong) NSDateFormatter *dateFormatter;
 
+@property (strong) NSString *nonce;
+@property (strong) NSString *timestamp;
 @end
 
 @implementation WALUser
@@ -39,6 +41,18 @@
 	return self;
 }
 
+#pragma mark - WSSE
+
+- (void)generateWSSE {
+	self.timestamp = [self generateTimestamp];
+	self.nonce = [self generateNonce];
+}
+
+- (void)generateWSSEWithNonce:(NSString *)nonce andTimestamp:(NSString *)timestamp {
+	self.nonce = nonce ? : [self generateNonce];
+	self.timestamp = timestamp ? : [self generateTimestamp];
+}
+
 #pragma mark - WSSE HTTP Header
 
 - (NSString *)wsseHeaderKey {
@@ -46,17 +60,17 @@
 }
 
 - (NSString *)wsseHeaderValue {
-	NSString *nonce = [self generateNonce];
-	NSString *timestamp = [self generateTimestamp];
-	
-	NSString *digest64 = [self generateDigestWithNonce:nonce andTimestamp:timestamp];
+	if (!self.nonce || !self.timestamp) {
+		[self generateWSSE];
+	}
+
+	NSString *digest64 = [self generateDigestWithNonce:self.nonce andTimestamp:self.timestamp];
 	
 	NSMutableString *headerValue = [NSMutableString string];
 	[headerValue appendFormat:@"UsernameToken Username=\"%@\", ", self.username];
 	[headerValue appendFormat:@"PasswordDigest=\"%@\", ", digest64];
-	[headerValue appendFormat:@"Nonce=\"%@\", ", [nonce stringByEncodingBase64]];
-	[headerValue appendFormat:@"Created=\"%@\"", timestamp];
-	
+	[headerValue appendFormat:@"Nonce=\"%@\", ", [self.nonce stringByEncodingBase64]];
+	[headerValue appendFormat:@"Created=\"%@\"", self.timestamp];
 	
 	return headerValue;
 }
@@ -68,18 +82,15 @@
 	
 	NSString *combined = [NSString stringWithFormat:@"%@%@%@", nonce, timestamp, password];
 	NSData *data = [combined dataByHashingWithSHA1];
-
 	return [data base64EncodedStringWithOptions:0];
 }
 
 - (NSString *)generateNonce {
-	return @"6aeb4b45173fd2bf";
 	// Using UUID as secure random
 	return [[NSUUID UUID] UUIDString];
 }
 
 - (NSString *)generateTimestamp {
-	return @"2015-02-10T16:54:57Z";
 	return [self.dateFormatter stringFromDate:[NSDate date]];
 }
 
