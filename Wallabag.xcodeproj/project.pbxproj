@@ -43,10 +43,10 @@
 		F5877DAF18B4E02B009D4EFE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877DAE18B4E02B009D4EFE /* XCTest.framework */; };
 		F5877DB018B4E02B009D4EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D8C18B4E02B009D4EFE /* Foundation.framework */; };
 		F5877DB118B4E02B009D4EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5877D9018B4E02B009D4EFE /* UIKit.framework */; };
-		F58FC5C41A8A44AB003F7EDC /* WALUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F58FC5C31A8A44AB003F7EDC /* WALUser.m */; };
-		F58FC5C71A8A497D003F7EDC /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = F58FC5C61A8A497D003F7EDC /* NSString+Hashes.m */; };
-		F58FC5C91A8A4FEF003F7EDC /* WALUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F58FC5C81A8A4FEF003F7EDC /* WALUserTests.m */; };
-		F58FC5CB1A8A5727003F7EDC /* NSString+HashesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F58FC5CA1A8A5727003F7EDC /* NSString+HashesTests.m */; };
+		F58FC5CE1A8AB684003F7EDC /* WALUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F58FC5CD1A8AB684003F7EDC /* WALUser.m */; };
+		F58FC5D11A8AB692003F7EDC /* NSString+Hashes.m in Sources */ = {isa = PBXBuildFile; fileRef = F58FC5D01A8AB692003F7EDC /* NSString+Hashes.m */; };
+		F58FC5D41A8AB6AE003F7EDC /* NSString+HashesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F58FC5D21A8AB6AE003F7EDC /* NSString+HashesTests.m */; };
+		F58FC5D51A8AB6AE003F7EDC /* WALUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F58FC5D31A8AB6AE003F7EDC /* WALUserTests.m */; };
 		F5905330193B6553005E2A00 /* WALNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F590532F193B6553005E2A00 /* WALNavigationController.m */; };
 		F5905333193B657D005E2A00 /* WALTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5905332193B657D005E2A00 /* WALTableViewController.m */; };
 		F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F59E0CE318B63E2D00744BB1 /* WALSettings.m */; };
@@ -162,12 +162,12 @@
 		F5877DAD18B4E02B009D4EFE /* WallabagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WallabagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5877DAE18B4E02B009D4EFE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F5877DB618B4E02B009D4EFE /* WallabagTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WallabagTests-Info.plist"; sourceTree = "<group>"; };
-		F58FC5C21A8A44AB003F7EDC /* WALUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALUser.h; sourceTree = "<group>"; };
-		F58FC5C31A8A44AB003F7EDC /* WALUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALUser.m; sourceTree = "<group>"; };
-		F58FC5C51A8A497D003F7EDC /* NSString+Hashes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hashes.h"; sourceTree = "<group>"; };
-		F58FC5C61A8A497D003F7EDC /* NSString+Hashes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hashes.m"; sourceTree = "<group>"; };
-		F58FC5C81A8A4FEF003F7EDC /* WALUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALUserTests.m; sourceTree = "<group>"; };
-		F58FC5CA1A8A5727003F7EDC /* NSString+HashesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HashesTests.m"; sourceTree = "<group>"; };
+		F58FC5CC1A8AB684003F7EDC /* WALUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALUser.h; sourceTree = "<group>"; };
+		F58FC5CD1A8AB684003F7EDC /* WALUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALUser.m; sourceTree = "<group>"; };
+		F58FC5CF1A8AB692003F7EDC /* NSString+Hashes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hashes.h"; sourceTree = "<group>"; };
+		F58FC5D01A8AB692003F7EDC /* NSString+Hashes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hashes.m"; sourceTree = "<group>"; };
+		F58FC5D21A8AB6AE003F7EDC /* NSString+HashesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HashesTests.m"; sourceTree = "<group>"; };
+		F58FC5D31A8AB6AE003F7EDC /* WALUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALUserTests.m; sourceTree = "<group>"; };
 		F590532E193B6553005E2A00 /* WALNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALNavigationController.h; sourceTree = "<group>"; };
 		F590532F193B6553005E2A00 /* WALNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALNavigationController.m; sourceTree = "<group>"; };
 		F5905331193B657D005E2A00 /* WALTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALTableViewController.h; sourceTree = "<group>"; };
@@ -283,10 +283,10 @@
 			children = (
 				F55EED501A7D90480005E19D /* WALArticle.h */,
 				F55EED511A7D90480005E19D /* WALArticle.m */,
+				F58FC5CC1A8AB684003F7EDC /* WALUser.h */,
+				F58FC5CD1A8AB684003F7EDC /* WALUser.m */,
 				F59E0CE218B63E2D00744BB1 /* WALSettings.h */,
 				F59E0CE318B63E2D00744BB1 /* WALSettings.m */,
-				F58FC5C21A8A44AB003F7EDC /* WALUser.h */,
-				F58FC5C31A8A44AB003F7EDC /* WALUser.m */,
 				F55EED4B1A7D8C700005E19D /* wallabag.xcdatamodel */,
 			);
 			name = Model;
@@ -323,8 +323,8 @@
 		F55546921A6C41E70067A310 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				F58FC5C51A8A497D003F7EDC /* NSString+Hashes.h */,
-				F58FC5C61A8A497D003F7EDC /* NSString+Hashes.m */,
+				F58FC5CF1A8AB692003F7EDC /* NSString+Hashes.h */,
+				F58FC5D01A8AB692003F7EDC /* NSString+Hashes.m */,
 				F5D24D701A801F300071F35D /* NSString+HTML.h */,
 				F5D24D711A801F300071F35D /* NSString+HTML.m */,
 				F57193641A83EA1A004C0CE8 /* WALStorageHelper.h */,
@@ -420,9 +420,9 @@
 		F5877DB418B4E02B009D4EFE /* WallabagTests */ = {
 			isa = PBXGroup;
 			children = (
+				F58FC5D21A8AB6AE003F7EDC /* NSString+HashesTests.m */,
+				F58FC5D31A8AB6AE003F7EDC /* WALUserTests.m */,
 				F50B3B9A1938F6CA0048EBFD /* WALSettingsTests.m */,
-				F58FC5C81A8A4FEF003F7EDC /* WALUserTests.m */,
-				F58FC5CA1A8A5727003F7EDC /* NSString+HashesTests.m */,
 				F5877DB518B4E02B009D4EFE /* Supporting Files */,
 			);
 			path = WallabagTests;
@@ -672,11 +672,11 @@
 				F55546911A6C41970067A310 /* WALSupportHelper.m in Sources */,
 				F5905330193B6553005E2A00 /* WALNavigationController.m in Sources */,
 				F525967C193E58B1003E91A7 /* WALThemeOrganizer.m in Sources */,
-				F58FC5C71A8A497D003F7EDC /* NSString+Hashes.m in Sources */,
+				F58FC5D11A8AB692003F7EDC /* NSString+Hashes.m in Sources */,
 				F5DA910718B52002006A0B1A /* WALAddArticleTableViewController.m in Sources */,
 				F56824D61984291A00B8B009 /* WALSplitViewController.m in Sources */,
 				F59E0CE418B63E2D00744BB1 /* WALSettings.m in Sources */,
-				F58FC5C41A8A44AB003F7EDC /* WALUser.m in Sources */,
+				F58FC5CE1A8AB684003F7EDC /* WALUser.m in Sources */,
 				F5259679193E4BFC003E91A7 /* WALThemeNight.m in Sources */,
 				F57193691A840991004C0CE8 /* WALUpdateHelper.m in Sources */,
 				F5C9FB5C18BBB8E000083FB3 /* WALBrowserViewController.m in Sources */,
@@ -693,8 +693,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F50B3B9B1938F6CA0048EBFD /* WALSettingsTests.m in Sources */,
-				F58FC5C91A8A4FEF003F7EDC /* WALUserTests.m in Sources */,
-				F58FC5CB1A8A5727003F7EDC /* NSString+HashesTests.m in Sources */,
+				F58FC5D51A8AB6AE003F7EDC /* WALUserTests.m in Sources */,
+				F58FC5D41A8AB6AE003F7EDC /* NSString+HashesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
