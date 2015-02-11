@@ -31,6 +31,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *urlTextField;
 @property (weak, nonatomic) IBOutlet UITextField *userIDTextField;
 @property (weak, nonatomic) IBOutlet UITextField *apiTokenTextField;
+
+@property (weak, nonatomic) IBOutlet UILabel *loginStatusLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loginActivityIndicator;
 @end
 
 @implementation WALSettingsTableViewController
@@ -68,18 +71,25 @@
 		return [super tableView:tableView numberOfRowsInSection:section];
 	}
 
-	if (self.versionControl.selectedSegmentIndex == 0) {
-		return 5;
-	} else {
-		return 2;
+	return 5;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section != 0 || indexPath.row < 2 || self.versionControl.selectedSegmentIndex != 1) {
+		return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 	}
+	
+	return [super tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:(indexPath.row + 3) inSection:0]];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSString* identifier = [[tableView cellForRowAtIndexPath:indexPath] reuseIdentifier];
 	
-	if ([identifier isEqualToString:@"FindData"])
+	if ([identifier isEqualToString:@"LoginCell"]) {
+		self.loginActivityIndicator.isAnimating ? [self.loginActivityIndicator stopAnimating] : [self.loginActivityIndicator startAnimating];
+	}
+	else if ([identifier isEqualToString:@"FindData"])
 	{
 		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Help", @"Alert view title: Where can I find user data")
 															message:NSLocalizedString(@"Login to your Wallabag and browse to the configuration.\nFind the \"Feeds\" section together with your user-ID and token.\nYou may have to click \"generate token\" first, if the token is missing.", @"Alert view Info text: where can i find user data")
@@ -215,7 +225,16 @@
 	[self updateCurrentSettingsFromUserInput];
 	[self updateView];
 	if ([sender isKindOfClass:[UISegmentedControl class]]) {
-		[self.tableView reloadData];
+		[self.tableView beginUpdates];
+		
+		NSArray *updatePaths = @[[NSIndexPath indexPathForRow:2 inSection:0], [NSIndexPath indexPathForRow:3 inSection:0], [NSIndexPath indexPathForRow:4 inSection:0]];
+		if (self.versionControl.selectedSegmentIndex == 1) {
+			[self.tableView reloadRowsAtIndexPaths:updatePaths withRowAnimation:UITableViewRowAnimationAutomatic];
+		} else {
+			[self.tableView reloadRowsAtIndexPaths:updatePaths withRowAnimation:UITableViewRowAnimationAutomatic];
+		}
+		
+		[self.tableView endUpdates];
 	}
 }
 
