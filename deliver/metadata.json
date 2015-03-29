@@ -1,0 +1,43 @@
+{
+  "de-DE": {
+    "title": "wallabag",
+    "description": "wallabag (früher poche) ist eine selbstgehostete Später-Lesen Anwendung. Sie ist - nicht wie andere - frei, kostenlos und Open Source.\n\nFunktionen der iPhone App:\n\n- lese die gespeicherten Artikel aus deiner wallabag\n- gesicherte Artikel offline lesen\n- Artikel mithilfe der Teilen-Erweiterung in deine wallabag speichern\n\nDu brauchst eine eigene Instanz der wallabag Software, um diese App sinnvoll nutzen zu können. Du sie dir selber auf deinem eigenen Server/Webspace installieren oder dich bei framabag.org kostenlos registrieren, so musst du dich um nichts weiter kümmern.",
+    "software_url": "https://www.wallabag.org",
+    "support_url": "http://support.wallabag.org/",
+    "privacy_url": "http://doc.wallabag.org/doku.php?id=ios:privacy_policy",
+    "keywords": [
+      "wallabag",
+      "poche",
+      "read",
+      "it",
+      "later",
+      "instapaper",
+      "readability",
+      "open",
+      "source",
+      "später",
+      "lesen",
+      "speichern",
+      "links"
+    ]
+  },
+  "en-US": {
+    "title": "wallabag",
+    "description": "wallabag (formerly poche) is a self hostable application for saving web pages. Unlike other services, wallabag is free (as in freedom) and open source.\n\nFeatures of the iPhone client for your self hosted wallabag:\n\n- read all your articles from your wallabag\n- offline reading functionality\n- add articles via Share-Extension\n\nIn order to use this app, you need a hosted wallabag instance. You can either install wallabag on your server/webspace or you can register at framabag.org (for free).",
+    "software_url": "https://www.wallabag.org",
+    "support_url": "http://support.wallabag.org",
+    "privacy_url": "http://doc.wallabag.org/doku.php?id=ios:privacy_policy",
+    "keywords": [
+      "wallabag",
+      "poche",
+      "read",
+      "it",
+      "later",
+      "instapaper",
+      "news",
+      "readability",
+      "open",
+      "source"
+    ]
+  }
+}
