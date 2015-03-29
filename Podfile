@@ -1,7 +1,7 @@
 platform :ios, '7.0'
 pod 'RestKit', '~> 0.24'
 
-pod 'RKTBXMLSerialization', :path => './RKTBXMLSerialization/'
+pod 'RKTBXMLSerialization', :git => 'https://github.com/blakewatters/RKTBXMLSerialization.git'
 
 pod 'PLCrashReporter', '1.2-rc5'
 pod 'ARChromeActivity', '~> 1.0'

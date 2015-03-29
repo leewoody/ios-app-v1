@@ -38,25 +38,30 @@ DEPENDENCIES:
   - ARChromeActivity (~> 1.0)
   - PLCrashReporter (= 1.2-rc5)
   - RestKit (~> 0.24)
-  - RKTBXMLSerialization (from `./RKTBXMLSerialization/`)
+  - RKTBXMLSerialization (from `https://github.com/blakewatters/RKTBXMLSerialization.git`)
   - TUSafariActivity (~> 1.0.1)
 
 EXTERNAL SOURCES:
   RKTBXMLSerialization:
-    :path: ./RKTBXMLSerialization/
+    :git: https://github.com/blakewatters/RKTBXMLSerialization.git
+
+CHECKOUT OPTIONS:
+  RKTBXMLSerialization:
+    :commit: 05b651384e56b80dd8d5a21d5ec395b436811a35
+    :git: https://github.com/blakewatters/RKTBXMLSerialization.git
 
 SPEC CHECKSUMS:
-  AFNetworking: 80c4e0652b08eb34e25b9c0ff3c82556fe5967b4
-  ARChromeActivity: d8471d0f78b7fcc1de57929cfc1751b3a7f58bad
-  ISO8601DateFormatterValueTransformer: a705384ea6531255258e25b6480ba1180db703a0
-  PLCrashReporter: 979cd3c5bda33655f4df58fa6219d067183d7a7e
-  RestKit: 8e301e50e1d25ce427215539f4fd72463f4a2a58
-  RKTBXMLSerialization: 630c9e05ea07dc8f57526982babb9994b26dd100
-  RKValueTransformers: 67b4ea3eb6a1c1a0b8c3c37eb4e4c05e4febeba2
-  SOCKit: d8d0dd3688ae1026c12367570da8fa8e1a6980fb
-  TBXML: a279440030ba55c40e1455cafba3b0a44e1963d4
-  TBXML+NSDictionary: 6aa4eaaa1bf1c5b817f1b3d0420c87d5a659551d
-  TransitionKit: 6a6f3ddda38ae758778aa889dcb930e4f8d64edc
-  TUSafariActivity: 63c6b0584d1f0a731e955c0e4d9c89cde63bedc2
+  AFNetworking: cf8e418e16f0c9c7e5c3150d019a3c679d015018
+  ARChromeActivity: 9064d94803338d3377f3e1013a8e8f4821d7daf1
+  ISO8601DateFormatterValueTransformer: 3ac3a721381697cab4e792d8049ce2f2e9ad3036
+  PLCrashReporter: 655201ef69223866e230a25c973c8f39bcc4b722
+  RestKit: 34ba15ca955f7d5436a4120b7f19884f3df056a8
+  RKTBXMLSerialization: c41e69a0232f0055ec0ba421ed9b74deb14980b1
+  RKValueTransformers: d016f1967ae67997e492520fd0f9c512ccf168ae
+  SOCKit: c7376ac262bea9115b8f749358f762522a47d392
+  TBXML: 9f9dadb239f2f2af1dadb87fe43a0ce6e479379a
+  TBXML+NSDictionary: ada3e12f1fd87255d90b307e7d7d072cf5f486b3
+  TransitionKit: bc306605fb5e05a743c18d42239dc0e211619547
+  TUSafariActivity: 32e3e5dc9123e5533a42d41e1c3246d12911a4a2
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.1
