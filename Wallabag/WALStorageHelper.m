@@ -14,6 +14,7 @@
 
 #import "WALSettings.h"
 #import "WALArticle.h"
+#import "WALLoginSalt.h"
 
 @implementation WALStorageHelper
 
@@ -107,6 +108,25 @@
 
 + (NSURL *)applicationDocumentsDirectory {
 	return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma mark -
+
++ (RKObjectManager *)loginObjectManagerWithBaseURL:(NSURL *)baseURL {
+	if (!baseURL) {
+		return nil;
+	}
+	
+	RKObjectManager *objectManager = [RKObjectManager managerWithBaseURL:baseURL];
+	
+	RKObjectMapping *saltMapping = [RKObjectMapping mappingForClass:[WALLoginSalt class]];
+	[saltMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:nil toKeyPath:@"salt"]];
+	
+	[objectManager addResponseDescriptor:[RKResponseDescriptor responseDescriptorWithMapping:saltMapping method:RKRequestMethodGET pathPattern:@"api/salts/:username\\.json" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)]];
+	
+	[objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[WALLoginSalt class] pathPattern:@"api/salts/:username\\.json" method:RKRequestMethodGET]];
+	
+	return objectManager;
 }
 
 @end

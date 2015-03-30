@@ -19,6 +19,10 @@
 #import "WALSettingsTableViewController.h"
 #import "WALSettings.h"
 
+#import "WALStorageHelper.h"
+#import "WALLoginSalt.h"
+#import "WALUser.h"
+
 @interface WALSettingsTableViewController ()
 
 @property (strong) WALSettings* currentSettings;
@@ -31,6 +35,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *urlTextField;
 @property (weak, nonatomic) IBOutlet UITextField *userIDTextField;
 @property (weak, nonatomic) IBOutlet UITextField *apiTokenTextField;
+
+@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
 @property (weak, nonatomic) IBOutlet UILabel *loginStatusLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loginActivityIndicator;
@@ -60,6 +67,11 @@
 		self.apiTokenTextField.text = self.currentSettings.apiToken;
 		self.userIDTextField.text = [NSString stringWithFormat:@"%ld", (long) self.currentSettings.userID];
 		self.versionControl.selectedSegmentIndex = self.currentSettings.isVersionV2 ? 1 : 0;
+
+		if (self.currentSettings.user) {
+			self.usernameTextField.text = self.currentSettings.user.username;
+			self.passwordTextField.text = @"some stars";
+		}
 	}
 	[self updateView];
 }
@@ -87,7 +99,35 @@
 	NSString* identifier = [[tableView cellForRowAtIndexPath:indexPath] reuseIdentifier];
 	
 	if ([identifier isEqualToString:@"LoginCell"]) {
-		self.loginActivityIndicator.isAnimating ? [self.loginActivityIndicator stopAnimating] : [self.loginActivityIndicator startAnimating];
+		[self.loginActivityIndicator startAnimating];
+		[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]].accessoryType = UITableViewCellAccessoryNone;
+		[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]].accessoryType = UITableViewCellAccessoryNone;
+
+
+		NSURL *url = [NSURL URLWithString:self.urlTextField.text];
+		NSString *username = self.usernameTextField.text;
+		NSString *password = self.passwordTextField.text;
+		
+		NSString *path = [NSString stringWithFormat:@"api/salts/%@.json", username];
+		
+		RKObjectManager *objectManager = [WALStorageHelper loginObjectManagerWithBaseURL:url];
+		[objectManager getObject:nil path:path parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+			NSString *salt = ((WALLoginSalt *)mappingResult.array.firstObject).salt;
+			NSLog(@"User: %@ has salt: %@", username, salt);
+
+			WALUser *user = [[WALUser alloc] initWithUsername:username clearPassword:password andSalt:salt];
+			NSLog(@"User: %@ hashedPassword: %@", user.username, user.passwordHashed);
+
+			self.currentSettings.user = user;
+
+			[self.loginActivityIndicator stopAnimating];
+			[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]].accessoryType = UITableViewCellAccessoryCheckmark;
+			[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]].accessoryType = UITableViewCellAccessoryCheckmark;
+		} failure:^(RKObjectRequestOperation *operation, NSError *error) {
+			[self.loginActivityIndicator stopAnimating];
+			NSLog(@"Couldn't get salt!");
+		}];
+		
 	}
 	else if ([identifier isEqualToString:@"FindData"])
 	{

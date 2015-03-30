@@ -22,6 +22,7 @@
 
 #import "WALArticle.h"
 #import "WALSettings.h"
+#import "WALUser.h"
 
 @interface WALFeedTableViewController ()
 
@@ -91,7 +92,12 @@
 	if (!self.refreshControl.isRefreshing) {
 		[self.refreshControl beginRefreshing];
 	}
-	
+
+	if (self.settings.isVersionV2 && self.settings.user) {
+		[self.settings.user generateWSSE];
+		[[RKObjectManager sharedManager].HTTPClient setDefaultHeader:@"Authorization" value:@"WSSE profile=\"UsernameToken\""];
+		[[RKObjectManager sharedManager].HTTPClient setDefaultHeader:self.settings.user.wsseHeaderKey value:self.settings.user.wsseHeaderValue];
+	}
 	[[RKObjectManager sharedManager] getObjectsAtPathForRouteNamed:@"articles" object:nil parameters:[WALUpdateHelper parametersForGetArticlesWithSettings:self.settings] success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
 		NSError *error;
 		if (![[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext saveToPersistentStore:&error]) {

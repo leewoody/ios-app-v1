@@ -35,7 +35,14 @@
 	settings.wallabagVersion = [defaults stringForKey:@"wallabagVersion"];
 	settings.userID = [defaults integerForKey:@"userID"];
 	settings.apiToken = [defaults stringForKey:@"apiToken"];
-	
+
+	NSString *username = [defaults objectForKey:@"v2-username"];
+	NSString *password = [defaults objectForKey:@"v2-password"];
+
+	if (username && password) {
+		settings.user = [[WALUser alloc] initWithUsername:username andHashedPassword:password];
+	}
+
 	if (!settings.isValid && fallback)
 		return nil;
 	else if (!settings.isValid) {
@@ -56,6 +63,14 @@
 	[defaults setObject:self.wallabagVersion forKey:@"wallabagVersion"];
 	[defaults setInteger:self.userID forKey:@"userID"];
 	[defaults setObject:self.apiToken forKey:@"apiToken"];
+
+	if (self.user) {
+		[defaults setObject:self.user.username forKey:@"v2-username"];
+		[defaults setObject:self.user.passwordHashed forKey:@"v2-password"];
+	} else {
+		[defaults removeObjectForKey:@"v2-username"];
+		[defaults removeObjectForKey:@"v2-password"];
+	}
 	[defaults synchronize];
 }
 

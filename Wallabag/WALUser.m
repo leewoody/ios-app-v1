@@ -41,6 +41,14 @@
 	return self;
 }
 
+- (instancetype)initWithUsername:(NSString *)username clearPassword:(NSString *)password andSalt:(NSString *)salt {
+	if (self = [self init]) {
+		self.username = username;
+		[self setPassword:password withSalt:salt];
+	}
+	return self;
+}
+
 - (void)setPassword:(NSString *) cleanPassword withSalt:(NSString *)salt {
 	self.passwordHashed = [WALUser generatePasswordHashWithPassword:cleanPassword andUsername:self.username andSalt:salt];
 }

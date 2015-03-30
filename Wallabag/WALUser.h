@@ -14,6 +14,7 @@
 @property (readonly, strong) NSString *passwordHashed;
 
 - (instancetype)initWithUsername:(NSString *)username andHashedPassword:(NSString *)passwordHashed;
+- (instancetype)initWithUsername:(NSString *)username clearPassword:(NSString *)password andSalt:(NSString *)salt;
 
 - (void)setPassword:(NSString *) cleanPassword withSalt:(NSString *)salt;
 + (NSString *)generatePasswordHashWithPassword:(NSString *) cleanPassword andUsername:(NSString *)username andSalt:(NSString *) salt;

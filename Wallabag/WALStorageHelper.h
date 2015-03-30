@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <RestKit/RestKit.h>
 
 @interface WALStorageHelper : NSObject
 
 + (void)initializeCoreDataAndRestKit;
 + (void)updateRestKitWithNewSettings;
+
++ (RKObjectManager *)loginObjectManagerWithBaseURL:(NSURL *) baseURL;
 
 @end

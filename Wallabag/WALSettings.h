@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WALUser.h"
 
 @interface WALSettings : NSObject
 @property NSInteger userID;
 @property (strong) NSString *apiToken;
 @property (nonatomic, strong, getter=getWallabagURL) NSURL *wallabagURL;
+@property (strong) WALUser *user;
 
 + (WALSettings*) settingsFromSavedSettings;
 - (void) saveSettings;

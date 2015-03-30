@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		27E1E8A6CFAF4E46AF4FDEB0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A4B4E3B48248E3B67A93D8 /* libPods.a */; };
+		F500A9101AC8B84F00094F44 /* WALUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F58FC5CD1A8AB684003F7EDC /* WALUser.m */; };
 		F50B3B9B1938F6CA0048EBFD /* WALSettingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F50B3B9A1938F6CA0048EBFD /* WALSettingsTests.m */; };
 		F50B895218B7A28400AA9A6C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F50B895018B7A28400AA9A6C /* Localizable.strings */; };
 		F51B3532199674C3004634EB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F51B3531199674C3004634EB /* Settings.bundle */; };
@@ -58,6 +59,7 @@
 		F5DA910718B52002006A0B1A /* WALAddArticleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DA910618B52002006A0B1A /* WALAddArticleTableViewController.m */; };
 		F5DA910A18B56FCE006A0B1A /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = F5DA910918B56FCE006A0B1A /* main.css */; };
 		F5DA910C18B56FD6006A0B1A /* ratatouille.css in Resources */ = {isa = PBXBuildFile; fileRef = F5DA910B18B56FD6006A0B1A /* ratatouille.css */; };
+		F5EC62861A8BF36E00D3DD19 /* WALLoginSalt.m in Sources */ = {isa = PBXBuildFile; fileRef = F5EC62851A8BF36E00D3DD19 /* WALLoginSalt.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +195,8 @@
 		F5E53A421987B5470022B32F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		F5E53A431987B5470022B32F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/Main-iPad.strings"; sourceTree = "<group>"; };
 		F5E53A441987B5470022B32F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F5EC62841A8BF36E00D3DD19 /* WALLoginSalt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALLoginSalt.h; sourceTree = "<group>"; };
+		F5EC62851A8BF36E00D3DD19 /* WALLoginSalt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALLoginSalt.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +291,8 @@
 				F58FC5CD1A8AB684003F7EDC /* WALUser.m */,
 				F59E0CE218B63E2D00744BB1 /* WALSettings.h */,
 				F59E0CE318B63E2D00744BB1 /* WALSettings.m */,
+				F5EC62841A8BF36E00D3DD19 /* WALLoginSalt.h */,
+				F5EC62851A8BF36E00D3DD19 /* WALLoginSalt.m */,
 				F55EED4B1A7D8C700005E19D /* wallabag.xcdatamodel */,
 			);
 			name = Model;
@@ -653,6 +659,7 @@
 				F53D8EB719D3291C00F313FE /* WALShareBrowserViewController.m in Sources */,
 				F53D8EC319D32D5D00F313FE /* WALSettings.m in Sources */,
 				F533CF161A6C33CD004B91C2 /* WALWebViewHelper.m in Sources */,
+				F500A9101AC8B84F00094F44 /* WALUser.m in Sources */,
 				F553ED3B1A6ABD6E00B3B612 /* WALShareStartViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -667,6 +674,7 @@
 				F5D24D721A801F300071F35D /* NSString+HTML.m in Sources */,
 				F5877D9918B4E02B009D4EFE /* main.m in Sources */,
 				F5877D9D18B4E02B009D4EFE /* WALAppDelegate.m in Sources */,
+				F5EC62861A8BF36E00D3DD19 /* WALLoginSalt.m in Sources */,
 				F5877DA618B4E02B009D4EFE /* WALArticleViewController.m in Sources */,
 				F56824CC1983FB8000B8B009 /* WALIcons.m in Sources */,
 				F55546911A6C41970067A310 /* WALSupportHelper.m in Sources */,
