@@ -1,3 +1,5 @@
+# This repository is no more maintained. The iOS repository is here https://github.com/wallabag/ios-app
+
 # wallabag for iOS  
 [![Build Status](https://travis-ci.org/wallabag/ios-app.svg)](https://travis-ci.org/kevmeyer/test-ci)
 
